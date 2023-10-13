@@ -28,24 +28,3 @@ var fileOfCardsK = []charSetStructK{
 }
 
 var aCard = charSetStructK{}
-
-// The structure of a single 'card' (aCard.) from fileOfCards
-/*
-type charSetStruct struct {
-	Kata   string
-	Hira   string
-	Romaji string
-
-	HiraHint   string
-	KataHint   string
-	TT_Hint    string
-	SansR_Hint string
-}
-*/
-
-// Constants:
-const colorReset = "\033[0m"
-const colorRed = "\033[31m"
-const colorGreen = "\033[32m"
-const colorCyan = "\033[36m"
-const colorPurple = "\033[35m"

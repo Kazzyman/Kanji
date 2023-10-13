@@ -7,7 +7,7 @@ import "time"
 
 var include_Extended_kata_deck = false
 
-// var randomfileOfCardsK int
+var randomFileOfCards int
 
 var total_prompts int
 
@@ -20,7 +20,7 @@ var game_loop_counter int
 
 var whichDeck int
 
-var foundElement *charSetStructK
+var foundElement *charSetStruct
 
 var game_duration = 998
 

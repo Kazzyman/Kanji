@@ -43,3 +43,81 @@ func read_map_of_needWorkOn() { //     - -
 	}
 	fmt.Println("")
 }
+
+// Only used in check_it_for_needing_more_practice() // ... abandoned
+func find_this_card_to_practice(promptField_found_in_map, currently_known_typeOf_objective string) { // - -
+	if whichDeck == 1 {
+		if currently_known_typeOf_objective == "Hira" {
+			for _, card := range fileOfCards {
+				if card.Hira == promptField_found_in_map {
+					foundElement = &card  // foundElement is a global var and contains all the fields of a card
+					aCard = *foundElement // aCard is also a global var
+					break
+				}
+			}
+			if foundElement == nil {
+				fmt.Println("Hira type card not found in: fileOfCards")
+			}
+		} else if currently_known_typeOf_objective == "Romaji" {
+			for _, card := range fileOfCards {
+				if card.Hira == promptField_found_in_map {
+					foundElement = &card  // foundElement is a global var and contains all the fields of a card
+					aCard = *foundElement // aCard is also a global var
+					break
+				}
+			}
+			if foundElement == nil {
+				fmt.Println("Romaji type card not found in: fileOfCards")
+			}
+		}
+	} else if whichDeck == 2 {
+		if currently_known_typeOf_objective == "Hira" {
+			for _, card := range fileOfCardsS {
+				if card.Hira == promptField_found_in_map {
+					foundElement = &card  // foundElement is a global var and contains all the fields of a card
+					aCard = *foundElement // aCard is also a global var
+					break
+				}
+			}
+			if foundElement == nil {
+				fmt.Println("Hira type card not found in: fileOfCardsS")
+			}
+		} else if currently_known_typeOf_objective == "Romaji" {
+			for _, card := range fileOfCardsS {
+				if card.Hira == promptField_found_in_map {
+					foundElement = &card  // foundElement is a global var and contains all the fields of a card
+					aCard = *foundElement // aCard is also a global var
+					break
+				}
+			}
+			if foundElement == nil {
+				fmt.Println("Romaji type card not found in: fileOfCardsS")
+			}
+		}
+	} else if whichDeck == 3 {
+		if currently_known_typeOf_objective == "Hira" {
+			for _, card := range fileOfCardsMostDifficult {
+				if card.Hira == promptField_found_in_map {
+					foundElement = &card  // foundElement is a global var and contains all the fields of a card
+					aCard = *foundElement // aCard is also a global var
+					break
+				}
+			}
+			if foundElement == nil {
+				fmt.Println("Hira type card not found in: fileOfCardsMostDifficult")
+			}
+		} else if currently_known_typeOf_objective == "Romaji" {
+			for _, card := range fileOfCardsMostDifficult {
+				if card.Hira == promptField_found_in_map {
+					fmt.Printf("I found your card from the deck, prompt was %s \n", promptField_found_in_map)
+					foundElement = &card  // foundElement is a global var and contains all the fields of a card
+					aCard = *foundElement // aCard is also a global var
+					break
+				}
+			}
+			if foundElement == nil {
+				fmt.Println("Romaji type card not found in: fileOfCardsMostDifficult")
+			}
+		}
+	}
+}

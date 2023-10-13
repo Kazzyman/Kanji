@@ -1,3 +1,3 @@
-module Kanji
+module Jap2
 
 go 1.17

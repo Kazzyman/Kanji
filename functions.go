@@ -10,6 +10,15 @@ import (
 
 // DIRECTIVES : --------------------------------------------------------------------------------------------
 //
+func handle_doubleQuestMark_directive(objective_kind string) { //        - -
+	var Hira_or_Romaji_input_sameAsPrompt_toFindHelpOn string
+	//
+	fmt.Printf("\n  -- Type either a Hiragana or Romaji prompt you need help with:> ")
+	_, _ = fmt.Scan(&Hira_or_Romaji_input_sameAsPrompt_toFindHelpOn)
+	//
+	locateCardAndDisplayHelpFieldsContainedInIt(Hira_or_Romaji_input_sameAsPrompt_toFindHelpOn, objective_kind)
+	fmt.Println("")
+}
 
 // Handles the Directive 'set'
 func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objective_kind string) { //  - -
@@ -44,16 +53,16 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 		silentlyLocateCard(theHiraganaOfCardToSilentlyLocate) // Set the Convenience-global: foundElement
 		aCard = *foundElement                                 // Set the global var-object 'aCard'
 		// new_prompt, new_objective, new_objective_kind
-		prompt = aCard.Kanji
-		objective = aCard.Onyomi
+		prompt = aCard.Hira
+		objective = aCard.Romaji
 		objective_kind = "Romaji"
 		fmt.Println("")
 	} else {
 		// Confidently, go-looking for user's input: locate matching 'aCard'
 		silentlyLocateCard(theHiraganaOfCardToSilentlyLocate) // Set the Convenience-global: foundElement
 		aCard = *foundElement                                 // Set the global var-object 'aCard'
-		prompt = aCard.Kanji
-		objective = aCard.Onyomi
+		prompt = aCard.Hira
+		objective = aCard.Romaji
 		objective_kind = "Romaji"
 		fmt.Println("")
 	}
@@ -72,10 +81,12 @@ func check_error(e error) { //    - -
 func testForDirective(in string) (result bool) { // - -
 	if in == "set" ||
 		in == "?" || // <-- If it IS a directive
+		in == "??" ||
 		in == "reset" ||
 		in == "stat" ||
 		in == "st" ||
 		in == "dir" ||
+		in == "notes" ||
 		in == "quit" ||
 		in == "q" ||
 		in == "exit" ||
@@ -84,7 +95,10 @@ func testForDirective(in string) (result bool) { // - -
 		in == "rm" ||
 		in == "gameon" ||
 		in == "gameoff" ||
-		in == "gamed" {
+		in == "about" ||
+		in == "gamed" ||
+		in == "extended" ||
+		in == "extended_off" {
 		// Then:
 		result = true
 	}
@@ -143,6 +157,19 @@ func game_off() (game string) { // - -
 func respond_to_UserSuppliedDirective(in, objective_kind string) (prompt, objective, kind string) { // - -
 	var count int
 	switch in {
+	case "about":
+		fmt.Printf("\n" +
+			"This app consists of the following files and lines of code:\n\n" +
+			"1701 constants.go ~ 35\n" +
+			"343 functions.go ~ 300\n" +
+			"157 locateCard.go ~ 80\n" +
+			"357 main.go ~ 320\n" +
+			"127 memoryFunctions.go ~ 45\n" +
+			"133 objectsAndMethods.go ~ 40\n" +
+			"82 prompts&directions.go ~ 75\n" +
+			"145 statsFunctions.go ~ 125 \n\n" +
+			"3045 lines of code (SOC) \n" +
+			"or, about 1,020 functional lines of code \n\n")
 	case "gamed":
 		fmt.Println("Enter a number for how many prompts there will be in the game")
 		_, _ = fmt.Scan(&count)
@@ -175,8 +202,10 @@ func respond_to_UserSuppliedDirective(in, objective_kind string) (prompt, object
 		os.Exit(1)
 	case "ex":
 		os.Exit(1)
+	case "??": // Directives follow:
+		handle_doubleQuestMark_directive(objective_kind)
 	case "?":
-		fmt.Printf("\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning)
+		fmt.Printf("\n%s\n%s\n%s\n\n", aCard.HiraHint, aCard.KataHint, aCard.TT_Hint)
 	case "set":
 		prompt, objective, kind = reSet_aCard_andThereBy_reSet_thePromptString()
 	case "stat":
@@ -185,36 +214,173 @@ func respond_to_UserSuppliedDirective(in, objective_kind string) (prompt, object
 		hits()
 	case "stats":
 		hits()
+	case "notes":
+		//goland:noinspection ALL  **do-this**
+		fmt.Println("\nIn the traditional Hepburn romanization system, the sound じ in hiragana is romanized as \"ji\" \n" +
+			"and the katakana ジ is also romanized as \"ji\" \n\n" +
+			"However, in some other romanization systems like the Nihon-shiki and Kunrei-shiki, the sound じ is romanized as\n" +
+			" \"zi\" instead of \"ji\"\n\n" +
+			"The sound gi:ぎ in hiragana is romanized as \"gi\" and the katakana ギ is also romanized as \"gi\"\n")
+		//goland:noinspection ALL  **do-this**
+		fmt.Println("゜is called \"handakuten\" 半濁点 translates to \"half-voicing mark\" or \"semi-voiced mark\"\n" +
+			"゛is called \"dakuten\" 濁点 meaning 'voiced mark' or 'voicing mark'")
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
 		re_display_List_of_Directives()
 	case "rm":
 		read_map_of_fineOn()
 		read_map_of_needWorkOn()
+	case "extended":
+		include_Extended_kata_deck = true
+		fmt.Println("Extended Kata deck has been loaded")
+	case "extended_off":
+		include_Extended_kata_deck = false
+		fmt.Println("Extended Kata deck has been un-loaded")
 	default:
 		// fmt.Println("Directive not found") // Does not work because only existent cases are passed to the switch
 	}
 	return prompt, objective, kind
 }
 
-func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind string) { // - -
-	/*
-		Kanji   string
-		Meaning string
-		Onyomi  string aCard.Onyomi done
-		Kunyomi string
-		Vocab   string
+/*
+// This func, sans "_Extended" at the end of its name, becomes a testing version of pick_RandomCard_Assign_fields()
+// ... for fileOfCardsE : the deck of Extended Kata
+func pick_RandomCard_Assign_fields_Extended() (promptField, objective, objective_kind string) { // - -
+	randIndexE := rand.Intn(len(fileOfCardsE))
+	aCard = fileOfCardsE[randIndexE] // Randomly pick a 'card' from a 'deck' and store it in a global var
+	promptField = aCard.Kata
+	objective = aCard.Romaji
+	objective_kind = "Extended_Romaji" // Used to set a special prompt for Extended Kata
+	whichDeck = 4
+	return promptField, objective, objective_kind
+}
+*/
 
-		Kata   string
-		Hira   string
-		Romaji string
-		HiraHint string
-		KataHint string
-	*/
-	randIndex := rand.Intn(len(fileOfCardsK))
-	aCard = fileOfCardsK[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-	promptField = aCard.Kanji
-	objective = aCard.Meaning
+/*
+// Drop "_Test", at the end of its name, & this func becomes a short testing version of pick_RandomCard_Assign_fields()
+func pick_RandomCard_Assign_fields_Test() (promptField, objective, objective_kind string) { // - -
+	randIndex := rand.Intn(len(fileOfCardsMostDifficult))
+	aCard = fileOfCardsMostDifficult[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+	promptField = aCard.Hira
+	objective = aCard.Romaji
 	objective_kind = "Romaji"
+	whichDeck = 3
+	return promptField, objective, objective_kind
+}
+*/
 
+func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind string) { // - -
+	randIndex := rand.Intn(len(fileOfCards))
+	randIndexS := rand.Intn(len(fileOfCardsS))
+	randIndexD := rand.Intn(len(fileOfCardsMostDifficult))
+	randIndexE := rand.Intn(len(fileOfCardsE))
+
+	if include_Extended_kata_deck {
+		randomFileOfCards = rand.Intn(13)
+	} else {
+		randomFileOfCards = rand.Intn(12)
+	}
+
+	// Hira prompting, Romaji objective:
+	if randomFileOfCards == 0 {
+		aCard = fileOfCards[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Hira
+		objective = aCard.Romaji
+		objective_kind = "Romaji"
+		whichDeck = 1
+	}
+	if randomFileOfCards == 1 {
+		aCard = fileOfCardsS[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Hira
+		objective = aCard.Romaji
+		objective_kind = "Romaji"
+		whichDeck = 2
+	}
+	if randomFileOfCards == 2 {
+		aCard = fileOfCardsMostDifficult[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Hira
+		objective = aCard.Romaji
+		objective_kind = "Romaji"
+		whichDeck = 3
+	}
+
+	// Kata prompting, Romaji objective: (plus an option for including Extended Kata)
+	if include_Extended_kata_deck { //              ^ ^                 v v v ^ ^ ^
+		if randomFileOfCards == 12 {
+			aCard = fileOfCardsE[randIndexE] // Randomly pick a 'card' from a 'deck' and store it in a global var
+			promptField = aCard.Kata
+			objective = aCard.Romaji
+			objective_kind = "Extended_Romaji" // Used to set a special prompt for Extended Kata
+			whichDeck = 4
+		}
+	}
+
+	if randomFileOfCards == 3 {
+		aCard = fileOfCards[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kata
+		objective = aCard.Romaji
+		objective_kind = "Romaji"
+		whichDeck = 1
+	}
+	if randomFileOfCards == 4 {
+		aCard = fileOfCardsS[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kata
+		objective = aCard.Romaji
+		objective_kind = "Romaji"
+		whichDeck = 2
+	}
+	if randomFileOfCards == 5 {
+		aCard = fileOfCardsMostDifficult[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kata
+		objective = aCard.Romaji
+		objective_kind = "Romaji"
+		whichDeck = 3
+	}
+
+	// Romaji prompting, Hira objective:
+	if randomFileOfCards == 6 {
+		aCard = fileOfCards[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Romaji
+		objective = aCard.Hira
+		objective_kind = "Hira"
+		whichDeck = 1
+
+	}
+	if randomFileOfCards == 7 {
+		aCard = fileOfCardsS[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Romaji
+		objective = aCard.Hira
+		objective_kind = "Hira"
+		whichDeck = 2
+	}
+	if randomFileOfCards == 8 {
+		aCard = fileOfCardsMostDifficult[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Romaji
+		objective = aCard.Hira
+		objective_kind = "Hira"
+		whichDeck = 3
+	}
+
+	// Kata prompting, Hira objective:
+	if randomFileOfCards == 9 {
+		aCard = fileOfCards[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kata
+		objective = aCard.Hira
+		objective_kind = "Hira"
+		whichDeck = 1
+	}
+	if randomFileOfCards == 10 {
+		aCard = fileOfCardsS[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kata
+		objective = aCard.Hira
+		objective_kind = "Hira"
+		whichDeck = 2
+	}
+	if randomFileOfCards == 11 {
+		aCard = fileOfCardsMostDifficult[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kata
+		objective = aCard.Hira
+		objective_kind = "Hira"
+		whichDeck = 3
+	}
 	return promptField, objective, objective_kind
 }
