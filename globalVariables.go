@@ -4,13 +4,10 @@ import "time"
 
 // All global vars NOT located in the constants.go file :
 // ... Or/and, NOT located in the objectsAndMethods.go file ::
-
-var include_Extended_kata_deck = false
-
 var randomFileOfCards int
 
 var total_prompts int
-
+var index int // Is sometimes used to do sequential prompting - -
 var game string
 var gameOn bool
 var startBeforeCall = time.Now()
@@ -18,9 +15,7 @@ var TimeOfStartFromTop = time.Now()
 
 var game_loop_counter int
 
-var whichDeck int
-
-var foundElement *charSetStruct
+var foundElement *charSetStructK
 
 var game_duration = 998
 

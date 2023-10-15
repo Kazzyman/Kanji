@@ -13,26 +13,7 @@ func promptForRomaji(promptField string) (usersGuessOrOptionDirective string) { 
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective
 }
-func promptForHira(promptField string) (usersGuessOrOptionDirective string) { //  - -
-	fmt.Printf("%s", promptField)
-	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Hiragana input-mode expected,\n Here:> ")
-	fmt.Printf("%s", colorReset)
-	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
-	return usersGuessOrOptionDirective
-}
 
-// Standard prompts for use when NOT soliciting second, or final, guesses
-func promptForHiraWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
-	fmt.Printf("%s", prompt)
-	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Hiragana input-mode expected, or '?' for help with: %s \n", prompt)
-	fmt.Printf(" or, type '??' for help with something else ... \n")
-	fmt.Printf(" Here:> ")
-	fmt.Printf("%s", colorReset)
-	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
-	return usersGuessOrOptionDirective
-}
 func promptForRomajiWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf("%s", prompt)
 	fmt.Printf("%s", colorCyan)
@@ -43,29 +24,6 @@ func promptForRomajiWithDir(prompt string) (usersGuessOrOptionDirective string) 
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective
 }
-
-// Special prompts for Extended Kata, if|when deployed **********************
-// ... Standard: used when NOT soliciting second, or final, guesses ***
-func promptForRomajiWithDirE(prompt string) (usersGuessOrOptionDirective string) { // - -
-	fmt.Printf("%s", prompt)
-	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" E-Romaji input-mode expected, or '?' for help with: %s \n", prompt)
-	fmt.Printf(" or, type '??' for help with something else ... \n")
-	fmt.Printf(" Here:> ")
-	fmt.Printf("%s", colorReset)
-	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
-	return usersGuessOrOptionDirective
-}
-
-// ... Special: used when soliciting second, or final, guesses ***
-func promptForRomajiE(prompt string) (usersGuessOrOptionDirective string) { // - -
-	fmt.Printf("%s", prompt)
-	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" E-Romaji input-mode expected, or '?' for help with: %s \n Here:> ", prompt)
-	fmt.Printf("%s", colorReset)
-	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
-	return usersGuessOrOptionDirective
-} // ***********************************************************************
 
 // 'Directive Menu' ; displays only at inception
 func display_List_of_Directives() { // (unique)     - -
@@ -86,28 +44,22 @@ func display_List_of_Directives() { // (unique)     - -
 		}
 	}
 	fmt.Printf("\n\n\n\n\n")
-	fmt.Println("View source code at https://github.com/Kazzyman/Jap2")
+	fmt.Println("View source code at https://github.com/Kazzyman/Kanji")
 	fmt.Println("    Use Alpha-Numeric (US) input-mode on your system to:")
 	fmt.Println("        Enter 'dir' to redisplay this menu of available directives")
 	fmt.Println("        Enter 'gamed to set the Duration counter for a game session ")
 	fmt.Println("        Enter 'gameon' to begin a game session ")
-	fmt.Println("        Enter 'notes' for some background on Romaji conventions")
 	fmt.Println("        Enter '?' for context-sensitive help on the current character")
-	fmt.Println("        Enter '??' for help on a particular Hiragana character")
-	fmt.Println("        Enter 'set' to set a new specified prompt \"character\" ")
 	fmt.Println("        Enter 'stats' or 'st' for statistics re what you have done")
+	fmt.Println("        Enter 'notes' for an explanation of Onyomi and Kunyomi")
 	fmt.Println("        Enter 'reset' to reset (flush or clear) all stats logs etc.")
 	fmt.Println("        Enter 'rm' to Read the current contents of the Maps")
-	fmt.Println("        Enter 'about' for trivia about this app")
-	fmt.Println("        Enter 'extended' to load the deck of Extended Kata")
-	fmt.Println("        Enter 'extended_off' to un-load the deck of Extended Kata")
-	// fmt.Println("        Enter 'stack' to prime or stack the frequencyMapOf_IsFineOnChars map")
+	fmt.Println("        Enter 'set' to force the use of a specific card")
 	fmt.Println("        Enter 'exit' or 'quit', 'ex' or 'q', to terminate this app")
 	//goland:noinspection ALL
 	fmt.Println("\n")
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)
 	fmt.Printf("Current Prompt Count Total: %d \n", total_prompts)
-	fmt.Printf("Extended Kata deck is loaded: %t \n\n", include_Extended_kata_deck)
 }
 
 // 'Directive Menu' ; displays only in response to "Dir" Directive
@@ -129,25 +81,19 @@ func re_display_List_of_Directives() { // (unique)     - -
 		}
 	}
 	fmt.Printf("\n")
-	fmt.Println("View source code at https://github.com/Kazzyman/Jap2")
+	fmt.Println("View source code at https://github.com/Kazzyman/Kanji")
 	fmt.Println("    Use Alpha-Numeric (US) input-mode on your system to:")
 	fmt.Println("        Enter 'dir' to redisplay this menu of available directives")
 	fmt.Println("        Enter 'gamed to set the Duration counter for a game session ")
 	fmt.Println("        Enter 'gameon' to begin a game session ")
-	fmt.Println("        Enter 'notes' for some background on Romaji conventions")
 	fmt.Println("        Enter '?' for context-sensitive help on the current character")
-	fmt.Println("        Enter '??' for help on a particular Hiragana character")
-	fmt.Println("        Enter 'set' to set a new specified prompt \"character\" ")
 	fmt.Println("        Enter 'stats' or 'st' for statistics re what you have done")
+	fmt.Println("        Enter 'notes' for an explanation of Onyomi and Kunyomi")
 	fmt.Println("        Enter 'reset' to reset (flush or clear) all stats logs etc.")
 	fmt.Println("        Enter 'rm' to Read the current contents of the Maps")
-	fmt.Println("        Enter 'about' for trivia about this app")
-	fmt.Println("        Enter 'extended' to load the deck of Extended Kata")
-	fmt.Println("        Enter 'extended_off' to un-load the deck of Extended Kata")
-	// fmt.Println("        Enter 'stack' to prime or stack the frequencyMapOf_IsFineOnChars map")
+	fmt.Println("        Enter 'set' to force the use of a specific card")
 	fmt.Println("        Enter 'exit' or 'quit', 'ex' or 'q', to terminate this app")
 	//goland:noinspection ALL
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)
 	fmt.Printf("Current Prompt Count Total: %d \n", total_prompts)
-	fmt.Printf("Extended Kata deck is loaded: %t \n\n", include_Extended_kata_deck)
 }

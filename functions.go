@@ -4,107 +4,11 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
-	"regexp"
 	"time"
 )
 
 // DIRECTIVES : --------------------------------------------------------------------------------------------
 //
-func handle_doubleQuestMark_directive(objective_kind string) { //        - -
-	var Hira_or_Romaji_input_sameAsPrompt_toFindHelpOn string
-	//
-	fmt.Printf("\n  -- Type either a Hiragana or Romaji prompt you need help with:> ")
-	_, _ = fmt.Scan(&Hira_or_Romaji_input_sameAsPrompt_toFindHelpOn)
-	//
-	locateCardAndDisplayHelpFieldsContainedInIt(Hira_or_Romaji_input_sameAsPrompt_toFindHelpOn, objective_kind)
-	fmt.Println("")
-}
-
-// Handles the Directive 'set'
-func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objective_kind string) { //  - -
-	var theHiraganaOfCardToSilentlyLocate string
-	var isAlphanumeric bool
-
-	fmt.Printf("\nEnter a Hiragana to")
-	fmt.Printf("%s", colorCyan) //
-	fmt.Printf(" reSet the prompt :> ")
-	fmt.Printf("%s", colorReset) //
-	_, _ = fmt.Scan(&theHiraganaOfCardToSilentlyLocate)
-
-	// Determine if the user has entered a valid Hiragana char (instead of, accidentally, an alpha char or string)
-	findAlphasIn := regexp.MustCompile(`[a-zA-Z]`)
-	switch true {
-	case findAlphasIn.MatchString(theHiraganaOfCardToSilentlyLocate):
-		isAlphanumeric = true
-	default:
-		isAlphanumeric = false
-	}
-	// Tentatively, prepare to Scan for user's input and attempt locating a matching 'aCard'
-	if isAlphanumeric == true {
-		fmt.Println("Are you in alphanumeric input mode?")
-		fmt.Printf("... if so, change it to Hiragana (or I mignt die)\n")
-		fmt.Printf("%s", colorRed) //
-		fmt.Printf(" cautiously ")
-		fmt.Printf("%s", colorCyan)
-		fmt.Printf("re-enter your selection, in Hiragana mode :> ")
-		fmt.Printf("%s", colorReset)
-		_, _ = fmt.Scan(&theHiraganaOfCardToSilentlyLocate)
-		// May yet send an Alpha string to the next func, which will itself deal with it elegantly
-		silentlyLocateCard(theHiraganaOfCardToSilentlyLocate) // Set the Convenience-global: foundElement
-		aCard = *foundElement                                 // Set the global var-object 'aCard'
-		// new_prompt, new_objective, new_objective_kind
-		prompt = aCard.Hira
-		objective = aCard.Romaji
-		objective_kind = "Romaji"
-		fmt.Println("")
-	} else {
-		// Confidently, go-looking for user's input: locate matching 'aCard'
-		silentlyLocateCard(theHiraganaOfCardToSilentlyLocate) // Set the Convenience-global: foundElement
-		aCard = *foundElement                                 // Set the global var-object 'aCard'
-		prompt = aCard.Hira
-		objective = aCard.Romaji
-		objective_kind = "Romaji"
-		fmt.Println("")
-	}
-	return prompt, objective, objective_kind
-}
-
-// end of DIRECTIVES -----------------------------------------------------------------------------------
-
-// Creates a func named check_error which takes one parameter "e" of type error
-func check_error(e error) { //    - -
-	if e != nil {
-		panic(e) // use panic() to display error code
-	}
-}
-
-func testForDirective(in string) (result bool) { // - -
-	if in == "set" ||
-		in == "?" || // <-- If it IS a directive
-		in == "??" ||
-		in == "reset" ||
-		in == "stat" ||
-		in == "st" ||
-		in == "dir" ||
-		in == "notes" ||
-		in == "quit" ||
-		in == "q" ||
-		in == "exit" ||
-		in == "ex" ||
-		in == "stats" ||
-		in == "rm" ||
-		in == "gameon" ||
-		in == "gameoff" ||
-		in == "about" ||
-		in == "gamed" ||
-		in == "extended" ||
-		in == "extended_off" {
-		// Then:
-		result = true
-	}
-	return result
-}
-
 func game_on() (game string) { // - -
 	game = "on"
 	gameOn = true
@@ -154,22 +58,70 @@ func game_off() (game string) { // - -
 	return game
 }
 
-func respond_to_UserSuppliedDirective(in, objective_kind string) (prompt, objective, kind string) { // - -
+// Creates a func named check_error which takes one parameter "e" of type error
+func check_error(e error) { //    - -
+	if e != nil {
+		panic(e) // use panic() to display error code
+	}
+}
+
+func testForDirective(in string) (result bool) { // - -
+	if in == "?" || // <-- If it IS a directive
+		in == "reset" ||
+		in == "set" ||
+		in == "stat" ||
+		in == "notes" ||
+		in == "st" ||
+		in == "dir" ||
+		in == "quit" ||
+		in == "q" ||
+		in == "exit" ||
+		in == "ex" ||
+		in == "stats" ||
+		in == "rm" ||
+		in == "gameon" ||
+		in == "gameoff" ||
+		in == "gamed" {
+		// Then:
+		result = true
+	}
+	return result
+}
+
+func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string) { // - -
 	var count int
 	switch in {
-	case "about":
-		fmt.Printf("\n" +
-			"This app consists of the following files and lines of code:\n\n" +
-			"1701 constants.go ~ 35\n" +
-			"343 functions.go ~ 300\n" +
-			"157 locateCard.go ~ 80\n" +
-			"357 main.go ~ 320\n" +
-			"127 memoryFunctions.go ~ 45\n" +
-			"133 objectsAndMethods.go ~ 40\n" +
-			"82 prompts&directions.go ~ 75\n" +
-			"145 statsFunctions.go ~ 125 \n\n" +
-			"3045 lines of code (SOC) \n" +
-			"or, about 1,020 functional lines of code \n\n")
+	case "notes":
+		fmt.Println("\nOnyomi (音読み, おにょみ): the reading based on the character's original Chinese pronunciation. \n" +
+			"    Onyomi readings are typically used when kanji characters are combined to form compound words, especially in words with \n" +
+			"a more formal or academic context.\n" +
+			"    The Onyomi reading of a kanji character in Japanese was derived from the character's original Chinese pronunciation. \n" +
+			"However, over time, the pronunciation of characters has evolved differently in the two languages; so, there are often \n" +
+			"significant differences in how they are now pronounced in the two languages. There might be some similarities due to \n" +
+			"their shared origin, but the sounds are usually no longer identical; largely because, the pronunciation in Japanese \n" +
+			"has been influenced by the Japanese language's phonetic structure and historical linguistic developments.\n" +
+			"    In addition, a kanji character may have a certain pronunciation in Mandarin Chinese, but its Onyomi reading in Japanese \n" +
+			"may have undergone changes in consonants, vowels, or tones. And, the meanings associated with the characters \n" +
+			"might also have diverged between the two languages.\n" +
+			"    So, while there may be historical and etymological connections, the modern pronunciation of Onyomi in Japanese \n" +
+			"does not necessarily closely resemble how a Mandarin Chinese speaker would pronounce the corresponding characters.\n\n" +
+			"Kunyomi (訓読み, くにょみ): an alternative reading based on the character's native Japanese pronunciation. \n" +
+			"    When Chinese characters were introduced, the Japanese adapted them to fit their language by assigning Kunyomi readings \n" +
+			"based on existing Japanese words that had similar meanings. Kunyomi readings are commonly used when the kanji character \n" +
+			"appears in isolation or is combined with Hiragana characters to form native Japanese words -- allowing for the creation of \n" +
+			"new terms and expressions with extra nuance. \n" +
+			"    Distinguishing Homophones: As more characters were borrowed from Chinese, it became essential to distinguish between \n" +
+			"homophones and provide context-specific meanings. Kunyomi readings helped in achieving this, as they often carried specific \n" +
+			"nuances and meanings in the Japanese language.\n" +
+			"    Influence of Japanese Phonetics: The Japanese language has a different phonetic structure from Chinese. The Kunyomi \n" +
+			"readings reflect this phonetic structure, including differences in syllables, vowel sounds, and pitch accent, making the \n" +
+			"pronunciation more natural for native Japanese speakers.\n" +
+			"    Development of Native Vocabulary: Over centuries, Japan developed its own vocabulary and linguistic expressions. \n" +
+			"Kunyomi readings evolved to accommodate these developments and ensure that Chinese characters were effectively integrated \n" +
+			"into the Japanese language.\n" +
+			"    In summary, the creation and use of Kunyomi readings in Japanese kanji were motivated by a desire to adapt Chinese \n" +
+			"characters to the linguistic, cultural, and semantic needs of the Japanese language. This process allowed for the \n" +
+			"coexistence of both Onyomi and Kunyomi readings, contributing to the rich and nuanced nature of the Japanese writing system.\n")
 	case "gamed":
 		fmt.Println("Enter a number for how many prompts there will be in the game")
 		_, _ = fmt.Scan(&count)
@@ -202,185 +154,126 @@ func respond_to_UserSuppliedDirective(in, objective_kind string) (prompt, object
 		os.Exit(1)
 	case "ex":
 		os.Exit(1)
-	case "??": // Directives follow:
-		handle_doubleQuestMark_directive(objective_kind)
 	case "?":
-		fmt.Printf("\n%s\n%s\n%s\n\n", aCard.HiraHint, aCard.KataHint, aCard.TT_Hint)
-	case "set":
-		prompt, objective, kind = reSet_aCard_andThereBy_reSet_thePromptString()
+		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 	case "stat":
 		hits()
 	case "st":
 		hits()
 	case "stats":
 		hits()
-	case "notes":
-		//goland:noinspection ALL  **do-this**
-		fmt.Println("\nIn the traditional Hepburn romanization system, the sound じ in hiragana is romanized as \"ji\" \n" +
-			"and the katakana ジ is also romanized as \"ji\" \n\n" +
-			"However, in some other romanization systems like the Nihon-shiki and Kunrei-shiki, the sound じ is romanized as\n" +
-			" \"zi\" instead of \"ji\"\n\n" +
-			"The sound gi:ぎ in hiragana is romanized as \"gi\" and the katakana ギ is also romanized as \"gi\"\n")
-		//goland:noinspection ALL  **do-this**
-		fmt.Println("゜is called \"handakuten\" 半濁点 translates to \"half-voicing mark\" or \"semi-voiced mark\"\n" +
-			"゛is called \"dakuten\" 濁点 meaning 'voiced mark' or 'voicing mark'")
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
 		re_display_List_of_Directives()
 	case "rm":
 		read_map_of_fineOn()
 		read_map_of_needWorkOn()
-	case "extended":
-		include_Extended_kata_deck = true
-		fmt.Println("Extended Kata deck has been loaded")
-	case "extended_off":
-		include_Extended_kata_deck = false
-		fmt.Println("Extended Kata deck has been un-loaded")
+	case "set":
+		prompt, objective, kind = reSet_aCard_andThereBy_reSet_thePromptString()
 	default:
 		// fmt.Println("Directive not found") // Does not work because only existent cases are passed to the switch
+	}
+	if prompt == "" {
+		fmt.Println("\n That string was not found, setting to \"west\" \n")
+		prompt = "西"
+		objective = "west"
+		kind = "Romaji"
 	}
 	return prompt, objective, kind
 }
 
-/*
-// This func, sans "_Extended" at the end of its name, becomes a testing version of pick_RandomCard_Assign_fields()
-// ... for fileOfCardsE : the deck of Extended Kata
-func pick_RandomCard_Assign_fields_Extended() (promptField, objective, objective_kind string) { // - -
-	randIndexE := rand.Intn(len(fileOfCardsE))
-	aCard = fileOfCardsE[randIndexE] // Randomly pick a 'card' from a 'deck' and store it in a global var
-	promptField = aCard.Kata
-	objective = aCard.Romaji
-	objective_kind = "Extended_Romaji" // Used to set a special prompt for Extended Kata
-	whichDeck = 4
-	return promptField, objective, objective_kind
-}
-*/
-
-/*
-// Drop "_Test", at the end of its name, & this func becomes a short testing version of pick_RandomCard_Assign_fields()
-func pick_RandomCard_Assign_fields_Test() (promptField, objective, objective_kind string) { // - -
-	randIndex := rand.Intn(len(fileOfCardsMostDifficult))
-	aCard = fileOfCardsMostDifficult[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-	promptField = aCard.Hira
-	objective = aCard.Romaji
-	objective_kind = "Romaji"
-	whichDeck = 3
-	return promptField, objective, objective_kind
-}
-*/
-
 func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind string) { // - -
-	randIndex := rand.Intn(len(fileOfCards))
-	randIndexS := rand.Intn(len(fileOfCardsS))
-	randIndexD := rand.Intn(len(fileOfCardsMostDifficult))
-	randIndexE := rand.Intn(len(fileOfCardsE))
+	/*
+		Kanji   string
+		Meaning string
+		Onyomi  string aCard.Onyomi done
+		Kunyomi string
+		Vocab   string
 
-	if include_Extended_kata_deck {
-		randomFileOfCards = rand.Intn(13)
-	} else {
-		randomFileOfCards = rand.Intn(12)
-	}
+		Kata   string
+		Hira   string
+		Romaji string
+		HiraHint string
+		KataHint string
+	*/
 
-	// Hira prompting, Romaji objective:
-	if randomFileOfCards == 0 {
-		aCard = fileOfCards[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Hira
-		objective = aCard.Romaji
+	/*
+		// Random prompting
+		randIndex := rand.Intn(len(fileOfCardsK))
+		aCard = fileOfCardsK[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
 		objective_kind = "Romaji"
-		whichDeck = 1
+
+	*/
+
+	/*
+		// Sequential prompting
+		for {
+			if index < len(fileOfCardsK) {
+				aCard = fileOfCardsK[index] // pick a 'card' from a 'deck' and store it in a global var
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				index++
+				break
+			} else {
+				index = 0
+				continue
+			}
+		}
+
+	*/
+	objective_kind = "Romaji" // i.e., "Meaning"
+
+	randIndex := rand.Intn(len(fileOfCardsK))
+	randIndexS := rand.Intn(len(fileOfCardsGuru2))
+	randIndexD := rand.Intn(len(fileOfCardsGuru))
+
+	randomFileOfCards = rand.Intn(3)
+
+	// Kanji prompting, Meaning objective:
+	if randomFileOfCards == 0 {
+		aCard = fileOfCardsK[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
 	}
 	if randomFileOfCards == 1 {
-		aCard = fileOfCardsS[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Hira
-		objective = aCard.Romaji
-		objective_kind = "Romaji"
-		whichDeck = 2
+		aCard = fileOfCardsGuru2[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
 	}
 	if randomFileOfCards == 2 {
-		aCard = fileOfCardsMostDifficult[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Hira
-		objective = aCard.Romaji
-		objective_kind = "Romaji"
-		whichDeck = 3
+		aCard = fileOfCardsGuru[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
 	}
 
-	// Kata prompting, Romaji objective: (plus an option for including Extended Kata)
-	if include_Extended_kata_deck { //              ^ ^                 v v v ^ ^ ^
-		if randomFileOfCards == 12 {
-			aCard = fileOfCardsE[randIndexE] // Randomly pick a 'card' from a 'deck' and store it in a global var
-			promptField = aCard.Kata
-			objective = aCard.Romaji
-			objective_kind = "Extended_Romaji" // Used to set a special prompt for Extended Kata
-			whichDeck = 4
-		}
-	}
-
-	if randomFileOfCards == 3 {
-		aCard = fileOfCards[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kata
-		objective = aCard.Romaji
-		objective_kind = "Romaji"
-		whichDeck = 1
-	}
-	if randomFileOfCards == 4 {
-		aCard = fileOfCardsS[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kata
-		objective = aCard.Romaji
-		objective_kind = "Romaji"
-		whichDeck = 2
-	}
-	if randomFileOfCards == 5 {
-		aCard = fileOfCardsMostDifficult[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kata
-		objective = aCard.Romaji
-		objective_kind = "Romaji"
-		whichDeck = 3
-	}
-
-	// Romaji prompting, Hira objective:
-	if randomFileOfCards == 6 {
-		aCard = fileOfCards[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Romaji
-		objective = aCard.Hira
-		objective_kind = "Hira"
-		whichDeck = 1
-
-	}
-	if randomFileOfCards == 7 {
-		aCard = fileOfCardsS[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Romaji
-		objective = aCard.Hira
-		objective_kind = "Hira"
-		whichDeck = 2
-	}
-	if randomFileOfCards == 8 {
-		aCard = fileOfCardsMostDifficult[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Romaji
-		objective = aCard.Hira
-		objective_kind = "Hira"
-		whichDeck = 3
-	}
-
-	// Kata prompting, Hira objective:
-	if randomFileOfCards == 9 {
-		aCard = fileOfCards[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kata
-		objective = aCard.Hira
-		objective_kind = "Hira"
-		whichDeck = 1
-	}
-	if randomFileOfCards == 10 {
-		aCard = fileOfCardsS[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kata
-		objective = aCard.Hira
-		objective_kind = "Hira"
-		whichDeck = 2
-	}
-	if randomFileOfCards == 11 {
-		aCard = fileOfCardsMostDifficult[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kata
-		objective = aCard.Hira
-		objective_kind = "Hira"
-		whichDeck = 3
-	}
 	return promptField, objective, objective_kind
+
+}
+
+// Handles the Directive 'set'
+func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objective_kind string) { //  - -
+	var theMeaningOfCardToSilentlyLocate string
+
+	fmt.Printf("\nEnter a Meaning to")
+	fmt.Printf("%s", colorCyan) //
+	fmt.Printf(" reSet the prompt via the corresponding Kanji card :> ")
+	fmt.Printf("%s", colorReset) //
+	_, _ = fmt.Scan(&theMeaningOfCardToSilentlyLocate)
+
+	// Tentatively, prepare to Scan for user's input and attempt locating a matching 'aCard'
+
+	// Confidently, go-looking for user's input: locate matching 'aCard'
+	silentlyLocateCard(theMeaningOfCardToSilentlyLocate) // Set the Convenience-global: foundElement
+	if foundElement != nil {
+		aCard = *foundElement // Set the global var-object 'aCard'
+		prompt = aCard.Kanji
+		objective = aCard.Meaning
+	} else {
+		fmt.Printf("\n %s not found \n", theMeaningOfCardToSilentlyLocate)
+	}
+	objective_kind = "Romaji"
+	fmt.Println("")
+
+	return prompt, objective, objective_kind
 }
