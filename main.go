@@ -71,7 +71,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 		} else {
 			game_loop_counter = 0
 		}
-		rightOrOops(in, promptField, objective, objective_kind, skipOops) // This func may call: tryAgain() ... which may call: lastTry()
+		rightOrOops(in, promptField, objective, skipOops) // This func may call: tryAgain() ... which may call: lastTry()
 	}
 	if recall {
 		if gameOn {
@@ -79,7 +79,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 		} else {
 			game_loop_counter = 0
 		}
-		rightOrOops(in, promptField, objective, objective_kind, skipOops) // This func may call: tryAgain() ... which may call: lastTry()
+		rightOrOops(in, promptField, objective, skipOops) // This func may call: tryAgain() ... which may call: lastTry()
 	} else {
 		// If recall is false, then do nothing
 	}
@@ -112,7 +112,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 	}
 }
 
-func rightOrOops(in, promptField, objective, objective_kind string, skipOops bool) { // - -
+func rightOrOops(in, promptField, objective string, skipOops bool) { // - -
 
 	if in == objective {
 		log_right(promptField)

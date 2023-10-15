@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -276,4 +278,57 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 	fmt.Println("")
 
 	return prompt, objective, objective_kind
+}
+
+// Use to format new elements for the various fileOfCardsX
+func formatter() {
+	fileHandle, err := os.OpenFile("formatted.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	if err != nil {
+		fmt.Println("Error opening or creating formatted.txt:", err)
+		return
+	}
+	defer func(fileHandle *os.File) {
+		_ = fileHandle.Close()
+	}(fileHandle)
+
+	// Open the input file
+	file, err := os.Open("source.txt")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return
+	}
+	defer func(file *os.File) {
+		_ = file.Close()
+	}(file)
+
+	// Create a scanner to read the file line by line
+	scanner := bufio.NewScanner(file)
+
+	// Iterate through each line
+	for scanner.Scan() {
+		line := scanner.Text()
+
+		// Split the line into its five ; delimited fields
+		fields := strings.Split(line, ";")
+
+		// Process the second field
+		secondFieldWords := strings.Fields(fields[1]) // Split the second field into words
+		// Take the first word, convert to lowercase, and update the second field
+		meaning := strings.ToLower(secondFieldWords[0])
+
+		// Format the fields
+		formattedLine := fmt.Sprintf("{\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"},\n",
+			fields[0], meaning, fields[1], fields[2], fields[3], fields[4])
+
+		// Print each formatted line to a file
+		_, err := fmt.Fprintf(fileHandle, formattedLine)
+		if err != nil {
+			return
+		}
+	}
+
+	// Check for scanning errors
+	if err := scanner.Err(); err != nil {
+		fmt.Println("Error reading file:", err)
+	}
 }
