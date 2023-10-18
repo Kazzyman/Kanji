@@ -80,6 +80,7 @@ func testForDirective(in string) (result bool) { // - -
 		in == "exit" ||
 		in == "ex" ||
 		in == "stats" ||
+		in == "format" ||
 		in == "rm" ||
 		in == "gameon" ||
 		in == "gameoff" ||
@@ -164,6 +165,8 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 		hits()
 	case "stats":
 		hits()
+	case "format":
+		formatter()
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
 		re_display_List_of_Directives()
 	case "rm":
@@ -171,15 +174,24 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 		read_map_of_needWorkOn()
 	case "set":
 		prompt, objective, kind = reSet_aCard_andThereBy_reSet_thePromptString()
+		if prompt == "" {
+			fmt.Println("\n That string was not found, setting to \"west\" \n")
+			prompt = "西"
+			objective = "west"
+			kind = "Romaji"
+		}
 	default:
 		// fmt.Println("Directive not found") // Does not work because only existent cases are passed to the switch
 	}
-	if prompt == "" {
-		fmt.Println("\n That string was not found, setting to \"west\" \n")
-		prompt = "西"
-		objective = "west"
-		kind = "Romaji"
-	}
+	/*
+		if prompt == "" {
+			fmt.Println("\n That string was not found, setting to \"west\" \n")
+			prompt = "西"
+			objective = "west"
+			kind = "Romaji"
+		}
+
+	*/
 	return prompt, objective, kind
 }
 
@@ -198,21 +210,20 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 		KataHint string
 	*/
 
-	/*
-		// Random prompting
-		randIndex := rand.Intn(len(fileOfCardsK))
-		aCard = fileOfCardsK[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kanji
-		objective = aCard.Meaning
-		objective_kind = "Romaji"
-
-	*/
+	// Random prompting
+	//
+	randIndex := rand.Intn(len(fileOfCardsK))
+	aCard = fileOfCardsK[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+	promptField = aCard.Kanji
+	objective = aCard.Meaning
+	objective_kind = "Romaji"
 
 	/*
-		// Sequential prompting
+		// Sequential prompting from the manually semi-randomized deck
+		//
 		for {
-			if index < len(fileOfCardsK) {
-				aCard = fileOfCardsK[index] // pick a 'card' from a 'deck' and store it in a global var
+			if index < len(fileOfCards) {
+				aCard = fileOfCards[index] // pick a 'card' from a 'deck' and store it in a global var
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
 				index++
@@ -224,30 +235,35 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 		}
 
 	*/
+
 	objective_kind = "Romaji" // i.e., "Meaning"
+	/*
+		//  Random prompting from all decks
+		//
+			randIndex := rand.Intn(len(fileOfCardsK))
+			randIndexS := rand.Intn(len(fileOfCardsGuru2))
+			randIndexD := rand.Intn(len(fileOfCardsGuru))
 
-	randIndex := rand.Intn(len(fileOfCardsK))
-	randIndexS := rand.Intn(len(fileOfCardsGuru2))
-	randIndexD := rand.Intn(len(fileOfCardsGuru))
+			randomFileOfCards = rand.Intn(3)
 
-	randomFileOfCards = rand.Intn(3)
+			// Kanji prompting, Meaning objective:
+			if randomFileOfCards == 0 {
+				aCard = fileOfCardsK[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+			}
+			if randomFileOfCards == 1 {
+				aCard = fileOfCardsGuru2[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+			}
+			if randomFileOfCards == 2 {
+				aCard = fileOfCardsGuru[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+			}
 
-	// Kanji prompting, Meaning objective:
-	if randomFileOfCards == 0 {
-		aCard = fileOfCardsK[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kanji
-		objective = aCard.Meaning
-	}
-	if randomFileOfCards == 1 {
-		aCard = fileOfCardsGuru2[randIndexS] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kanji
-		objective = aCard.Meaning
-	}
-	if randomFileOfCards == 2 {
-		aCard = fileOfCardsGuru[randIndexD] // Randomly pick a 'card' from a 'deck' and store it in a global var
-		promptField = aCard.Kanji
-		objective = aCard.Meaning
-	}
+	*/
 
 	return promptField, objective, objective_kind
 
@@ -282,9 +298,9 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 
 // Use to format new elements for the various fileOfCardsX
 func formatter() {
-	fileHandle, err := os.OpenFile("formatted.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	fileHandle, err := os.OpenFile("formattedElements.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	if err != nil {
-		fmt.Println("Error opening or creating formatted.txt:", err)
+		fmt.Println("Error opening or creating formattedElements.txt:", err)
 		return
 	}
 	defer func(fileHandle *os.File) {
@@ -292,9 +308,9 @@ func formatter() {
 	}(fileHandle)
 
 	// Open the input file
-	file, err := os.Open("source.txt")
+	file, err := os.Open("unformattedElements.txt")
 	if err != nil {
-		fmt.Println("Error opening file:", err)
+		fmt.Println("Error opening file: unformattedElements: ", err)
 		return
 	}
 	defer func(file *os.File) {
@@ -308,22 +324,35 @@ func formatter() {
 	for scanner.Scan() {
 		line := scanner.Text()
 
-		// Split the line into its five ; delimited fields
+		// Split the line into its six (any number of) ';' delimited fields
 		fields := strings.Split(line, ";")
 
-		// Process the second field
-		secondFieldWords := strings.Fields(fields[1]) // Split the second field into words
-		// Take the first word, convert to lowercase, and update the second field
-		meaning := strings.ToLower(secondFieldWords[0])
+		/*
+				// Process the second field - was used on source file with only one meaning field (usually a capitalized sentence)
+				secondFieldWords := strings.Fields(fields[1]) // Split the second field into its composite words
+				// Take the first word of that second field, convert it to lowercase, and update that second field
+				meaning := strings.ToLower(secondFieldWords[0]) // secondFieldWords[0] is the first word of the original sentence
+			// Format the fields
+				formattedLine := fmt.Sprintf("{\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"},\n",
+					fields[0], meaning, fields[1], fields[2], fields[3], fields[4]) // Generating six 六 fields
+		*/
 
-		// Format the fields
-		formattedLine := fmt.Sprintf("{\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"},\n",
-			fields[0], meaning, fields[1], fields[2], fields[3], fields[4])
+		// Check the length (the total number of the ';' delimited fields in the line) - should be 六
+		if len(fields) > 6 {
+			fmt.Printf("\n The line:%s has too many fields \n", line)
+		} else if len(fields) < 6 {
+			fmt.Printf("\n The line:%s has too few fields \n", line)
+		} else {
+			// Therefore the line had exactly 6 六 fields, and, is probably sans errors in its composition, so ...
+			formattedLine := fmt.Sprintf("{\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"},\n",
+				fields[0], fields[1], fields[2], fields[3], fields[4], fields[5])
 
-		// Print each formatted line to a file
-		_, err := fmt.Fprintf(fileHandle, formattedLine)
-		if err != nil {
-			return
+			// Print each formatted line to a file
+			_, err := fmt.Fprintf(fileHandle, formattedLine)
+
+			if err != nil {
+				return
+			}
 		}
 	}
 

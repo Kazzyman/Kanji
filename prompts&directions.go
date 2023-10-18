@@ -55,6 +55,7 @@ func display_List_of_Directives() { // (unique)     - -
 	fmt.Println("        Enter 'reset' to reset (flush or clear) all stats logs etc.")
 	fmt.Println("        Enter 'rm' to Read the current contents of the Maps")
 	fmt.Println("        Enter 'set' to force the use of a specific card")
+	fmt.Println("        Enter 'format' to format a text file as card elements")
 	fmt.Println("        Enter 'exit' or 'quit', 'ex' or 'q', to terminate this app")
 	//goland:noinspection ALL
 	fmt.Println("\n")
@@ -92,6 +93,7 @@ func re_display_List_of_Directives() { // (unique)     - -
 	fmt.Println("        Enter 'reset' to reset (flush or clear) all stats logs etc.")
 	fmt.Println("        Enter 'rm' to Read the current contents of the Maps")
 	fmt.Println("        Enter 'set' to force the use of a specific card")
+	fmt.Println("        Enter 'format' to format a text file as card elements")
 	fmt.Println("        Enter 'exit' or 'quit', 'ex' or 'q', to terminate this app")
 	//goland:noinspection ALL
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)

@@ -22,9 +22,11 @@ func main() {
 		}
 		new_prompt, objective, objective_kind := pick_RandomCard_Assign_fields() // This line is done after each ^^Right!
 		begin(new_prompt, objective, objective_kind)
+		// And then, begin again; i.e., pick another card
 	}
 }
 
+// The first function that prompts the user
 func begin(promptField, objective, objective_kind string) { // May be a Hira, Kata, or Romaji prompt  - -
 	if game_loop_counter > game_duration {
 		game_off()
@@ -49,8 +51,7 @@ func begin(promptField, objective, objective_kind string) { // May be a Hira, Ka
 			evaluateUsersGuess(in, promptField, objective, objective_kind, false, false, false)
 			break // ... Having finished with all potential guessing, return to main ...
 		}
-	} // ... Returns to main()'s inner loop; to randomly-select the next fieldOfCard ::
-
+	} // ... Returns to main()'s inner loop; to (usually randomly) select the next card
 }
 
 func evaluateUsersGuess(in, promptField, objective, objective_kind string, recursion, recall, skipOops bool) { // - -
@@ -58,8 +59,8 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 		game_off()
 	}
 	/*
-		This next construct is strange! Because, it seems to allow for rightOrOops() to be done "twice" -- but it does not!
-		since rightOrOops() sets in motion a chain of events that never returns directly here where it was called ...
+		This next construct is strange! Because; it seems to allow for rightOrOops() to be done "twice" -- but it does not!
+		Since rightOrOops() sets in motion a chain of events that never returns directly here where it was called ...
 		duplication here never occurs. The construct is needed to allow for rightOrOops() to be omitted if
 		evaluateUsersGuess() has been called with recursion true and recall false
 	*/
@@ -102,24 +103,32 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 			and, with skipOops true [and passed to rightOrOops()] rightOrOops() will not say ^^Oops! after this recursion
 			...                                                                        t, f, t Skips rightOrOops
 		*/
+		// Recursive call if DetectedDirective:
 		evaluateUsersGuess(in, promptField, objective, objective_kind, true, false, true) //
 	} else {
 		/*
 			Do a normal, i.e., unconditional recursion with skipOops set to false
 			via recall==true & skipOops==false [recursion false or recall true, means do rightOrOops]
 		*/
+		// Recursive call if DetectedDirective:
 		evaluateUsersGuess(in, promptField, objective, objective_kind, true, true, false) // t,t,f Does rightOrOops
 	}
+	// Returns to here from all subsequent functions ???
+	// and, returns to begin() and, hense, to main() for the next card ???
 }
 
 func rightOrOops(in, promptField, objective string, skipOops bool) { // - -
 
 	if in == objective {
 		log_right(promptField)
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("      　^^Right! \n")
+		// fmt.Printf("%s", colorGreen)
+		// fmt.Printf("      　^^Right! \n")
 		fmt.Printf("%s", colorReset)
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s", in)
+		fmt.Printf("%s", colorGreen)
+		fmt.Printf(" <--Right!\n")
+		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s", colorReset)
 		// Since this was "^^Right!", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind := pick_RandomCard_Assign_fields() // Gets a new card and extract the new prompt field
 		// This prompt, deployed by new_objective_kind, take new_prompt
@@ -147,11 +156,13 @@ func rightOrOops(in, promptField, objective string, skipOops bool) { // - -
 			fmt.Printf("      　^^Oops! ")
 		}
 		tryAgain(promptField, objective) // passing the old original values
+		// Returns here from both tryAgain() and lastTry()
 	}
 }
 
 func tryAgain(promptField, objective string) { // - -
 	fmt.Printf("Try again \n")
+	fmt.Printf("%s", string(colorReset))
 	var in string // var declaration needed as a ":=" would not work within the conditional because "in" not in signature
 	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives:(currently inoperative)
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
@@ -164,11 +175,14 @@ func tryAgain(promptField, objective string) { // - -
 
 	if in == objective {
 		log_right(promptField)
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("      　^^Right! \n")
 		fmt.Printf("%s", colorReset)
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s", in)
+		fmt.Printf("%s", colorGreen)
+		fmt.Printf(" <--Right!\n")
+		// fmt.Printf("%s", colorReset)
+		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		new_prompt, new_objective, new_objective_kind := pick_RandomCard_Assign_fields()
+		fmt.Printf("%s", colorReset)
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptForRomajiWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -190,11 +204,13 @@ func tryAgain(promptField, objective string) { // - -
 		fmt.Printf("%s", colorRed)
 		fmt.Printf("      　^^Oops Again! ")
 		lastTry(promptField, objective)
+		// Returns to caller:
 	}
 }
 
 func lastTry(promptField, objective string) { // - -
 	fmt.Printf("Last Try! \n")
+	fmt.Printf("%s", string(colorReset))
 	var in string // var declaration needed as a ":=" would not work within the conditional ~ "in" not in signature
 	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives:(currently inoperative)
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
@@ -207,11 +223,14 @@ func lastTry(promptField, objective string) { // - -
 
 	if in == objective {
 		log_right(promptField)
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("      　^^Right! \n")
 		fmt.Printf("%s", colorReset)
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s", in)
+		fmt.Printf("%s", colorGreen)
+		fmt.Printf(" <--Right!\n")
+		// fmt.Printf("%s", colorReset)
+		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		new_prompt, new_objective, new_objective_kind := pick_RandomCard_Assign_fields()
+		fmt.Printf("%s", colorReset)
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptForRomajiWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -231,7 +250,9 @@ func lastTry(promptField, objective string) { // - -
 	} else {
 		log_oops(aCard.Kanji, aCard.Meaning, in)
 		fmt.Printf("%s", colorRed)
-		fmt.Printf("      　^^That was your last try, Oops! ")
+		// fmt.Printf("      　^^That was your last try, Oops! ")
 		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s", string(colorReset))
 	}
+	// Returns to caller:
 }
