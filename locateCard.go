@@ -4,46 +4,72 @@ import (
 	"fmt"
 )
 
-// used ONLY in the 'set' directive to reSet the prompt & "aCard." fields
+//
+// Used ONLY in the 'set' directive: reSet_aCard_andThereBy_reSet_thePromptString()
+// ... to reSet the card, i.e., the Kanji/prompt(and all other aCard fields) via its Meaning field
+//
+
 func silentlyLocateCard(setKeyRequest string) { //  - -
-	foundElement = nil
-	for _, card := range fileOfCardsK {
+	foundElement = nil // Prime the global foundElement, a pointer thus: var foundElement *charSetStructKanji
+	//
+	// Firstly, look in fileOfCardsInitiate
+	for _, card := range fileOfCardsInitiate {
 		if card.Meaning == setKeyRequest {
-			// v v v if we find a 'card' in the range of 'fileOfCardsK',
-			// ... we set the foundElement global var, which is used in reSet_aCard_andThereBy_reSet_thePromptString()
-			foundElement = &card // foundElement is a global var and contains all the fields of a card or element
+			// v v v if we find a 'card' in the range of 'fileOfCardsInitiate',
+			// ... we set the foundElement global var
+			foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
+			// i.e., it is a pointer thus: var foundElement *charSetStructKanji
 			break
 		}
 	}
-	if foundElement == nil {
-		// fmt.Println("Element not found in fileOfCardsK: func silentlyLocateCard()")
-	}
-	if foundElement == nil {
-
-		for _, card := range fileOfCardsGuru2 {
+	//
+	if foundElement == nil { // If we did not locate the card we seek: look in ALL other decks
+		// fmt.Println("Element not found in fileOfCardsInitiate: func silentlyLocateCard()")
+		//
+		// As a SECONDARY possible location, look in fileOfCardsNovice
+		for _, card := range fileOfCardsNovice {
 			if card.Meaning == setKeyRequest {
-				// v v v if we find a 'card' in the range of 'fileOfCardsGuru2',
-				// ... we set the foundElement global var, which is used in reSet_aCard_andThereBy_reSet_thePromptString()
-				foundElement = &card // foundElement is a global var and contains all the fields of a card or element
+				foundElement = &card
 				break
 			}
 		}
-		// if it is still nil ...
-		if foundElement == nil {
-			// fmt.Println("Element not found in fileOfCardsGuru2: func silentlyLocateCard()")
-
-			for _, card := range fileOfCardsGuru {
+		if foundElement == nil { // If we STILL have not yet located the card we seek:
+			// fmt.Println("Element not found in fileOfCardsNovice: func silentlyLocateCard()")
+			//
+			// As a TERTIARY possible location, look in fileOfCardsGraduate
+			for _, card := range fileOfCardsGraduate {
 				if card.Meaning == setKeyRequest {
-					// v v v if we find a 'card' in the range of 'fileOfCardsGuru',
-					// ... we set the foundElement global var, which is used in reSet_aCard_andThereBy_reSet_thePromptString()
-					foundElement = &card // foundElement is a global var and contains all the fields of a card or element
+					foundElement = &card
 					break
 				}
 			}
+		} else {
 			if foundElement == nil {
-				fmt.Printf("\nElement %s not found\n", setKeyRequest)
+				// fmt.Println("Element not found in fileOfCardsGraduate: func silentlyLocateCard()")
+				//
+				// As a QUATERNARY possible location, look in fileOfCardsMaster
+				for _, card := range fileOfCardsMaster {
+					if card.Meaning == setKeyRequest {
+						foundElement = &card
+						break
+					}
+				}
+			} else {
+				if foundElement == nil {
+					// fmt.Println("Element not found in fileOfCardsMaster: func silentlyLocateCard()")
+					//
+					// As THE FINAL possible location, look in fileOfCardsGuru
+					for _, card := range fileOfCardsGuru {
+						if card.Meaning == setKeyRequest {
+							foundElement = &card
+							break
+						}
+					}
+					if foundElement == nil {
+						fmt.Printf("\nElement %s not found in any deck\n", setKeyRequest)
+					}
+				}
 			}
 		}
 	}
-
 }

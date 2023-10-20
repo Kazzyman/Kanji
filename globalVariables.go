@@ -2,23 +2,48 @@ package main
 
 import "time"
 
-// All global vars NOT located in the constants.go file :
-// ... Or/and, NOT located in the objectsAndMethods.go file ::
+// This file contains All global vars NOT located in the objectsAndMethods.go file
+//
+
+// All of the decks will draw cards per this aCard var:
+var aCard = charSetStructKanji{}
+
+//
+var foundElement *charSetStructKanji
+
+//
 var randomFileOfCards int
+
+// All cards in all of the decks are of this Structure:
+type charSetStructKanji struct {
+	Kanji        string
+	Meaning      string
+	Long_Meaning string
+	Onyomi       string
+	Kunyomi      string
+	Vocab        string
+	Vocab2       string
+}
 
 var total_prompts int
 var index int // Is sometimes used to do sequential prompting - -
-var game string
-var gameOn bool
+
 var startBeforeCall = time.Now()
 var TimeOfStartFromTop = time.Now()
 
 var game_loop_counter int
-
-var foundElement *charSetStructK
-
 var game_duration = 998
+var game string
+var gameOn bool
 
+// Constants:
+const colorReset = "\033[0m"
+const colorRed = "\033[31m"
+const colorGreen = "\033[32m"
+const colorCyan = "\033[36m"
+const colorPurple = "\033[35m"
+
+//
 // Global Maps:
 //
 // Used in : func read_map_of_fineOn()
