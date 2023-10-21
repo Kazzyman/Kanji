@@ -3,23 +3,46 @@ package main
 import "math/rand"
 
 func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind string) { // - -
-	// Random prompting from initiate deck
+	// Random prompting from selected deck
 	//
-	/*
+	if current_deck == "init" {
 		randIndex := rand.Intn(len(fileOfCardsInitiate))
 		aCard = fileOfCardsInitiate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
-		objective_kind = "Romaji"
-	*/
+	} else if current_deck == "nov" {
+		randIndex := rand.Intn(len(fileOfCardsNovice))
+		aCard = fileOfCardsNovice[randIndex]
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+	} else if current_deck == "grad" {
+		randIndex := rand.Intn(len(fileOfCardsGraduate))
+		aCard = fileOfCardsGraduate[randIndex]
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+	} else if current_deck == "mast" {
+		randIndex := rand.Intn(len(fileOfCardsMaster))
+		aCard = fileOfCardsMaster[randIndex]
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+	} else if current_deck == "guru" {
+		randIndex := rand.Intn(len(fileOfCardsGuru))
+		aCard = fileOfCardsGuru[randIndex]
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+	}
+	objective_kind = "Romaji" // i.e., "Meaning"
 
 	// Random prompting from fileOfAllCardsSequentially deck
 	//
-	randIndex := rand.Intn(len(fileOfAllCardsSequentially))
-	aCard = fileOfAllCardsSequentially[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-	promptField = aCard.Kanji
-	objective = aCard.Meaning
-	objective_kind = "Romaji"
+	/*
+		randIndex := rand.Intn(len(fileOfAllCardsSequentially))
+		aCard = fileOfAllCardsSequentially[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+		objective_kind = "Romaji"
+
+	*/
 
 	/*
 		// Sequential prompting from the manually semi-randomized deck
@@ -39,7 +62,6 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 
 	*/
 
-	objective_kind = "Romaji" // i.e., "Meaning"
 	/*
 		//  Random prompting from all decks
 		//

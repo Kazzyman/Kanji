@@ -4,36 +4,37 @@ import (
 	"fmt"
 )
 
-func contentOf_List_of_Directives() {
+func List_of_Directives() {
 	fmt.Println("View source code at https://github.com/Kazzyman/Kanji")
 	fmt.Println("    Use Alpha-Numeric (US) input-mode on your system to:")
 	fmt.Println("        Enter 'dir' redisplay this menu of available Directives")
-	fmt.Println("        Enter 'gdc set the Duration Counter for a Game session ")
-	fmt.Println("        Enter 'bgs' Begin a Game Session ")
+	fmt.Println("        Enter 'sdk' set the Deck")
+	fmt.Println("        Enter 'gdc' set the Duration Counter for a Game session ")
+	fmt.Println("        Enter 'bgs' or 'goff' Begin or end a Game Session ")
 	fmt.Println("        Enter '?' context-sensitive help on the current character")
 	fmt.Println("        Enter 'st' Statistics")
 	fmt.Println("        Enter 'nt' (notes) an explanation of Onyomi and Kunyomi")
 	fmt.Println("        Enter 'rs' ReSet (flush or clear) all stats logs etc.")
 	fmt.Println("        Enter 'rm' Read the current contents of the Maps")
-	fmt.Println("        Enter 'st' (set) force the use of a specific card")
+	fmt.Println("        Enter 'setc' (set) force the use of a specific card")
 	fmt.Println("        Enter 'frmt' Format a text file as card elements")
 	fmt.Println("        Enter 'q', (quit) terminate the app")
 }
 
 // Special prompts for use when soliciting second, or final, guesses
-func promptForRomaji(promptField string) (usersGuessOrOptionDirective string) { //  - -
+func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Type meaning,\n Here:> ")
+	fmt.Printf(" Enter the meaning (%s),\n Here:> ", current_deck)
 	fmt.Printf("%s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective
 }
 
-func promptForRomajiWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
+func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf("%s", prompt)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Type meaning, 'dir' or '?' for help with: %s \n", prompt)
+	fmt.Printf(" Enter the meaning (%s), 'dir' or '?' for help with: %s \n", current_deck, prompt)
 	fmt.Printf(" Here:> ")
 	fmt.Printf("%s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
@@ -59,14 +60,15 @@ func display_List_of_Directives() { // (unique)     - -
 		}
 	}
 	fmt.Printf("\n\n\n\n\n")
-	contentOf_List_of_Directives()
+	List_of_Directives()
 	//goland:noinspection ALL
 	fmt.Println("\n")
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)
 	fmt.Printf("Current Prompt Count Total: %d \n", total_prompts)
+	fmt.Printf("Current Deck is: %s \n", current_deck)
 }
 
-// 'Directive Menu' ; displays only in response to "Dir" Directive
+// 'Directive Menu' ; displays only in response to "dir" Directive
 func re_display_List_of_Directives() { // (unique)     - -
 	frequencyMapRightOrOops := make(map[string]int)
 	for i := 0; i < len(cyclicArrayHits.RightOrOops); i++ {
@@ -84,13 +86,10 @@ func re_display_List_of_Directives() { // (unique)     - -
 			total_prompts = total_prompts + freq
 		}
 	}
-	/*
-		dk, show the name of the current deck
-		chdk, display a menu of the available decks : and then switch to a selected deck
-	*/
 	fmt.Printf("\n")
-	contentOf_List_of_Directives()
+	List_of_Directives()
 	//goland:noinspection ALL
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)
 	fmt.Printf("Current Prompt Count Total: %d \n", total_prompts)
+	fmt.Printf("Current Deck is: %s \n", current_deck)
 }

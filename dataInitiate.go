@@ -50,16 +50,60 @@ package main
 
 */
 var fileOfCardsInitiate = []charSetStructKanji{
-	{"若者", "youth", "or, Young person", "しゃく, にゃく", "わかい",
-		"わかもの、若者 ",
+	{"建築家 : けんちくか ", "architect", "Architect : けんちくか", " -", " -",
+		" – vocab",
 		" "},
 
-	{"時", "time", "or, hour", "じ", "とき",
-		"時計 (clock, watch)",
+	{"赤ちゃん (aka-chan)", "baby", "or: infant", " -", " -",
+		" – 私は赤女です  あかちゃん、(akachan)",
 		" "},
+
+	{"先", "before", "or; ahead, future", "せん", "さき",
+		"先週 (last week), 先生 (teacher, master)",
+		" "},
+
+	{"前", "before", "or, in front of", "ぜん", "まえ",
+		"名前 (name)",
+		" "},
+
+	{"少年", "boy-small", "Small in years, boy?男, しょうねん", " -", " -",
+		" – 少 \"a little\": but can also mean \"few\"",
+		" "},
+
+	{"歯医者 : しかい、、はいしゃ", "dentist", "Dentist : (shikai, ha-isha)", " -", " -",
+		" – vocab",
+		" "},
+
+	{"医者", "doctor", "Doctor: いしゃ", " -", " -",
+		" – vocab ",
+		" "},
+
+	{"エンジニア", "engineer", "Engineer", " -", " -",
+		" – vocab",
+		" "},
+
+	{"消防士 : しょうぼうし", "firefighter", "Firefighter : しょうぼうし", " -", " -",
+		" – vocab",
+		" "},
+
+	{"脚", "leg", "Foot足 or Leg脚, あし", " -", "あし",
+		"foot; base; leg; foundation",
+		"Variant of Chinese: 腳"},
+
+	{"少女", "girl-small", "Little Girl, 私は女の赤ちゃんです:I am a baby girl ", " -", " -",
+		" – 少 means \"a little\": but can also mean \"few\"",
+		" "},
+
+	{"踵", "heel", "かかと Heel: to follow; to visit; to call on", "しょう (shō), しゅ (shu)", "かかと",
+		"踵 of 足, heel of foot",
+		"to follow; to visit; to call on"},
 
 	{"私 (わたし)", "I", "Myself, I", " -", " -",
 		"vocabulary: ",
+		" "},
+
+	{"あたし、私", "I-female", "Softer ver of \"I\" used by females", " -", " -",
+		"私は女です (I am a female [softer sounding]) ",
 		" "},
 
 	{"わたくし、私", "I-formal", "Most formal version of Myself or I", " -", " -",
@@ -74,24 +118,8 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		"俺は男です (I am a male[between friends])",
 		" "},
 
-	{"あたし、私", "I-female", "Softer ver of \"I\" used by females", " -", " -",
-		"私は女です (I am a female [softer sounding]) ",
-		" "},
-
-	{"赤ちゃん (aka-chan)", "baby", "or: infant", " -", " -",
-		" – 私は赤女です  あかちゃん、(akachan)",
-		" "},
-
-	{"少女", "girl-small", "Little Girl, 私は女の赤ちゃんです:I am a baby girl ", " -", " -",
-		" – 少 means \"a little\": but can also mean \"few\"",
-		" "},
-
-	{"少年", "boy-small", "Small in years, boy?男, しょうねん", " -", " -",
-		" – 少 \"a little\": but can also mean \"few\"",
-		" "},
-
-	{"医者", "doctor", "Doctor: いしゃ", " -", " -",
-		" – vocab ",
+	{"弁護士 : べんごし", "lawyer", "Lawyer : べんごし", " -", " -",
+		" – vocab",
 		" "},
 
 	{"看護師 : かんごし", "nurse", "Nurse: かんごし", " -", " -",
@@ -102,7 +130,7 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		" – vocab",
 		" "},
 
-	{"歯医者 : しかい、、はいしゃ", "dentist", "Dentist : (shikai, ha-isha)", " -", " -",
+	{"警察官 : けいさつかん", "police-officer", "Police Officer : けいさつかん", " -", " -",
 		" – vocab",
 		" "},
 
@@ -110,15 +138,7 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		" – vocab",
 		" "},
 
-	{"弁護士 : べんごし", "lawyer", "Lawyer : べんごし", " -", " -",
-		" – vocab",
-		" "},
-
-	{"消防士 : しょうぼうし", "firefighter", "Firefighter : しょうぼうし", " -", " -",
-		" – vocab",
-		" "},
-
-	{"警察官 : けいさつかん", "police-officer", "Police Officer : けいさつかん", " -", " -",
+	{"歌手 : かしゅ", "singer", "Singer", " -", " -",
 		" – vocab",
 		" "},
 
@@ -126,8 +146,8 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		" – vocab",
 		" "},
 
-	{"建築家 : けんちくか ", "architect", "Architect : けんちくか", " -", " -",
-		" – vocab",
+	{"時", "time", "or, hour", "じ", "とき",
+		"時計 (clock, watch)",
 		" "},
 
 	{"先生 : せんせい", "teacher", "Teacher (sensei) : せんせい", " -", " -",
@@ -138,19 +158,11 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		" – vocab",
 		" "},
 
-	{"歌手 : かしゅ", "singer", "Singer", " -", " -",
-		" – vocab",
+	{"時", "time", "or, hour", "じ", "とき",
+		"時計 (clock, watch)",
 		" "},
 
-	{"エンジニア", "engineer", "Engineer", " -", " -",
-		" – vocab",
-		" "},
-
-	{"先", "before", "or; ahead, future", "せん", "さき",
-		"先週 (last week), 先生 (teacher, master)",
-		" "},
-
-	{"前", "before", "or, in front of", "ぜん", "まえ",
-		"名前 (name)",
+	{"若者", "youth", "or, Young person", "しゃく, にゃく", "わかい",
+		"わかもの、若者 ",
 		" "},
 }

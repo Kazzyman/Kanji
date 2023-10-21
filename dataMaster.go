@@ -36,52 +36,80 @@ package main
 
 */
 var fileOfCardsMaster = []charSetStructKanji{
+	{"車", "car", "or, vehicle", "sha　しゃ", "kuruma　くるま",
+		"電車 (electric train)",
+		" "},
+
 	{"日", "day", "or, sun", "にち, じつ", "ひ, か",
 		"明日 (tomorrow)",
+		" "},
+
+	{"土", "earth", "ground", "do　ど, to　と", "tsuchi　つち",
+		"土曜日 (Saturday)",
 		" "},
 
 	{"高", "expensive", "high", "kouこう", "takaたか(iい)",
 		"高い (expensive)",
 		" "},
 
-	{"長", "long", "or, leader", "chouちょう", "nagaなが(iい)",
-		"長い (long), 部長 (manager)",
-		" "},
-
-	{"古", "old", "Old", "koこ", "furuふる(iい)",
-		"古い (old)",
-		" "},
-
-	{"休", "to-rest", "or; break, holiday, vacation", "kyuu きゅう", "yasu やす(muむ), yasu やす(mi み)",
-		"休む (to take a day off)",
+	{"魚", "fish", "Fish", "gyo　ぎょ", "sakana　さかな",
+		"魚 (fish)",
 		" "},
 
 	{"足", "foot", "or, to add", "soku　そく", "ashi　あし, ta(su)　た(す)",
 		"足 (foot)",
 		" "},
 
-	{"魚", "fish", "Fish", "gyo　ぎょ", "sakana　さかな",
-		"魚 (fish)",
+	{"友", "friend", "Friend", "yuu　ゆう", "tomo　とも",
+		"友達 (friend)",
 		" "},
 
 	{"天", "heaven", "Heaven", "ten　てん", "ame　あめ, ama　あま",
 		"天気 (weather)",
 		" "},
 
-	{"雨", "rain", "Rain", "u　う", "ame　あめ",
-		"雨 (rain)",
+	{"百", "hundred", "Hundred", "hyaku　ひゃく", "—",
+		"百万円 (1 million Yen)",
+		" "},
+
+	{"左", "left", "Left", "sa　さ", "hidari　ひだり",
+		"左 (left)",
+		" "},
+
+	{"長", "long", "or, leader", "chouちょう", "nagaなが(iい)",
+		"長い (long), 部長 (manager)",
 		" "},
 
 	{"母", "mother", "Mother", "bo　ぼ", "haha　はは",
 		"母 (mother)",
 		" "},
 
-	{"友", "friend", "Friend", "yuu　ゆう", "tomo　とも",
-		"友達 (friend)",
+	{"北", "north", "North", "hoku　ほく", "kita　きた",
+		"北 (north)",
+		" "},
+
+	{"古", "old", "Old", "koこ", "furuふる(iい)",
+		"古い (old)",
+		" "},
+
+	{"雨", "rain", "Rain", "u　う", "ame　あめ",
+		"雨 (rain)",
+		" "},
+
+	{"右", "right", "Right", "yuu　ゆう", "migi　みぎ",
+		"右 (right)",
 		" "},
 
 	{"店", "shop", "or, Store", "ten てん", "mise　みせ",
 		"喫茶店 (coffee shop)",
+		" "},
+
+	{"社", "shrine", "or, society", "sha　しゃ", "yashiro　やしろ",
+		"社長 (president of a company)",
+		" "},
+
+	{"六", "six", "Six", "roku　ろく", "mut(tsu), mu　む",
+		"六日 (6th day of the month)",
 		" "},
 
 	{"駅", "station", "as in: Train Station", "eki　えき", " -",
@@ -92,39 +120,23 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"道具 (tool)",
 		" "},
 
-	{"社", "shrine", "or, society", "sha　しゃ", "yashiro　やしろ",
-		"社長 (president of a company)",
-		" "},
-
-	{"北", "north", "North", "hoku　ほく", "kita　きた",
-		"北 (north)",
-		" "},
-
-	{"右", "right", "Right", "yuu　ゆう", "migi　みぎ",
-		"右 (right)",
-		" "},
-
-	{"左", "left", "Left", "sa　さ", "hidari　ひだり",
-		"左 (left)",
-		" "},
-
 	{"三日", "tdom", "3rd day of the month", "san　さん", "mi　みか",
 		"三日(3rd day of the month",
-		" "},
-
-	{"六", "six", "Six", "roku　ろく", "mut(tsu), mu　む",
-		"六日 (6th day of the month)",
-		" "},
-
-	{"百", "hundred", "Hundred", "hyaku　ひゃく", "—",
-		"百万円 (1 million Yen)",
 		" "},
 
 	{"万", "ten-thousand", "Ten thousand", "man　まん, ban　ばん", "—",
 		"万年筆 (fountain pen, ten thousand year brush)",
 		" "},
 
-	{"土", "earth", "ground", "do　ど, to　と", "tsuchi　つち",
-		"土曜日 (Saturday)",
+	{"休", "to-rest", "or; break, holiday, vacation", "kyuu きゅう", "yasu やす(muむ), yasu やす(mi み)",
+		"休む (to take a day off)",
+		" "},
+
+	{"水", "water", "Water", "sui　すい", "mizu　みづ",
+		"水曜日 (Wednesday)",
+		" "},
+
+	{"白", "white", "White", "hakuはく, byakuびゃく", "shiroしろ, しろ(い)",
+		"白い (white), 面白い (interesting)",
 		" "},
 }

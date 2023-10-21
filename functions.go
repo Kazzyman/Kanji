@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -12,42 +10,58 @@ import (
 //
 
 func testForDirective(in string) (result bool) { // - -
-	if in == "?" || // <-- If it IS a directive
-		in == "reset" ||
-		in == "set" ||
-		in == "stat" ||
-		in == "notes" ||
-		in == "st" ||
-		in == "dir" ||
-		in == "quit" ||
-		in == "q" ||
-		in == "exit" ||
-		in == "ex" ||
-		in == "stats" ||
-		in == "format" ||
-		in == "rm" ||
-		in == "gameon" ||
-		in == "gameoff" ||
-		in == "gamed" {
+	// if it IS a directive
+	if in == "?" || // context-sensitive help on the current card
+		in == "sdk" || // Switch Deck
+		in == "fif" || // find in files
+		in == "rs" || // reset all logs etc
+		in == "setc" || // set, force, a new card
+		in == "nt" || // notes
+		in == "st" || // stats
+		in == "dir" || // redisplay the menu of directives etc
+		in == "q" || // quit
+		in == "frmt" || // format a file
+		in == "rm" || // Read the Maps
+		in == "bgs" || // Begin a Game Session
+		in == "goff" || // Game session Off
+		in == "gdc" { // set the Game Duration Counter
 		// Then:
 		result = true
 	}
 	return result
 }
 
+func switch_the_deck() {
+	fmt.Println("Enter a deck:")
+	fmt.Println("init")
+	fmt.Println("nov")
+	fmt.Println("grad")
+	fmt.Println("mast")
+	fmt.Println("guru")
+
+	_, _ = fmt.Scan(&current_deck)
+}
+
+var current_deck string
+
 func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string) { // - -
 	var count int
 	switch in {
-	case "gamed":
+	case "fif":
+		find_in_files()
+	case "sdk":
+		// Switch Decks
+		switch_the_deck()
+	case "gdc": // set the Game Duration Counter
 		fmt.Println("Enter a number for how many prompts there will be in the game")
 		_, _ = fmt.Scan(&count)
 		game_duration = count - 2
-	case "gameon":
+	case "bgs": // Begin a Game Session
 		// game_loop_counter ++
 		game_on()
-	case "gameoff":
+	case "goff": // Game session Off
 		game_off()
-	case "reset":
+	case "rs": // reset all logs etc
 		// Flush (clear) the old stats and hits arrays
 		cyclicArrayOfTheJcharsGottenWrong = CyclicArrayOfTheJcharsGottenWrong{}
 		cyclicArrayHits = CyclicArrayHits{}
@@ -62,22 +76,20 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 		//goland:noinspection ALL
 		fmt.Println("    frequencyMapOf_need_workOn\n")
 		fmt.Println("  And, all Game values have also been reset")
-	case "q":
+	case "q": // quit
 		os.Exit(1)
-	case "?":
+	case "?": // context-sensitive help on the current card
 		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-	case "st":
+	case "st": // stats
 		hits()
-	case "stats":
-		hits()
-	case "format":
+	case "frmt": // format a file
 		formatter()
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
 		re_display_List_of_Directives()
-	case "rm":
+	case "rm": // Read the Maps
 		read_map_of_fineOn()
 		read_map_of_needWorkOn()
-	case "set":
+	case "setc": // set, force, a new card
 		prompt, objective, kind = reSet_aCard_andThereBy_reSet_thePromptString()
 		if prompt == "" {
 			fmt.Println("\n That string was not found, setting to \"west\" \n")
@@ -85,7 +97,8 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 			objective = "west"
 			kind = "Romaji"
 		}
-	case "notes":
+
+	case "nt":
 		fmt.Println("\nOnyomi (音読み, おにょみ): the reading based on the character's original Chinese pronunciation. \n" +
 			"    Onyomi readings are typically used when kanji characters are combined to form compound words, especially in words with \n" +
 			"a more formal or academic context.\n" +
@@ -156,72 +169,6 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 	fmt.Println("")
 
 	return prompt, objective, objective_kind
-}
-
-// Use to format new elements for the various fileOfCardsX
-func formatter() {
-	fileHandle, err := os.OpenFile("formattedElements.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-	if err != nil {
-		fmt.Println("Error opening or creating formattedElements.txt:", err)
-		return
-	}
-	defer func(fileHandle *os.File) {
-		_ = fileHandle.Close()
-	}(fileHandle)
-
-	// Open the input file
-	file, err := os.Open("unformattedElements.txt")
-	if err != nil {
-		fmt.Println("Error opening file: unformattedElements: ", err)
-		return
-	}
-	defer func(file *os.File) {
-		_ = file.Close()
-	}(file)
-
-	// Create a scanner to read the file line by line
-	scanner := bufio.NewScanner(file)
-
-	// Iterate through each line
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		// Split the line into its six (any number of) ';' delimited fields
-		fields := strings.Split(line, ";")
-
-		/*
-				// Process the second field - was used on source file with only one meaning field (usually a capitalized sentence)
-				secondFieldWords := strings.Fields(fields[1]) // Split the second field into its composite words
-				// Take the first word of that second field, convert it to lowercase, and update that second field
-				meaning := strings.ToLower(secondFieldWords[0]) // secondFieldWords[0] is the first word of the original sentence
-			// Format the fields
-				formattedLine := fmt.Sprintf("{\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"},\n",
-					fields[0], meaning, fields[1], fields[2], fields[3], fields[4]) // Generating six 六 fields
-		*/
-
-		// Check the length (the total number of the ';' delimited fields in the line) - should be 六
-		if len(fields) > 6 {
-			fmt.Printf("\n The line:%s has too many fields \n", line)
-		} else if len(fields) < 6 {
-			fmt.Printf("\n The line:%s has too few fields \n", line)
-		} else {
-			// Therefore the line had exactly 6 六 fields, and, is probably sans errors in its composition, so ...
-			formattedLine := fmt.Sprintf("{\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"},\n",
-				fields[0], fields[1], fields[2], fields[3], fields[4], fields[5])
-
-			// Print each formatted line to a file
-			_, err := fmt.Fprintf(fileHandle, formattedLine)
-
-			if err != nil {
-				return
-			}
-		}
-	}
-
-	// Check for scanning errors
-	if err := scanner.Err(); err != nil {
-		fmt.Println("Error reading file:", err)
-	}
 }
 
 func game_on() (game string) { // - -
