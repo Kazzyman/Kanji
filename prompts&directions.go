@@ -25,7 +25,7 @@ func List_of_Directives() {
 func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Enter the meaning (%s),\n Here:> ", current_deck)
+	fmt.Printf(" Meaning? (deck:%s),\n :> ", current_deck)
 	fmt.Printf("%s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective
@@ -34,8 +34,11 @@ func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { /
 func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf("%s", prompt)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Enter the meaning (%s), 'dir' or '?' for help with: %s \n", current_deck, prompt)
-	fmt.Printf(" Here:> ")
+	fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deck)
+	fmt.Printf(string(colorReset))
+	fmt.Printf("%s \n", prompt)
+	fmt.Printf("%s", colorCyan)
+	fmt.Printf(" :> ")
 	fmt.Printf("%s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective
@@ -92,4 +95,19 @@ func re_display_List_of_Directives() { // (unique)     - -
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)
 	fmt.Printf("Current Prompt Count Total: %d \n", total_prompts)
 	fmt.Printf("Current Deck is: %s \n", current_deck)
+
+	if current_deck == "inits" || current_deck == "novs" || current_deck == "grads" ||
+		current_deck == "masts" || current_deck == "gurus" {
+		fmt.Println("Order is set to Sequential\n")
+	} else {
+		fmt.Println("Order is Random\n")
+	}
+
+	/*
+		"inits")
+		"novs")
+		"grads")
+		"masts")
+		"gurus")
+	*/
 }

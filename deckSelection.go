@@ -30,26 +30,17 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 		aCard = fileOfCardsGuru[randIndex]
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
-	}
-	objective_kind = "Romaji" // i.e., "Meaning"
-
-	// Random prompting from fileOfAllCardsSequentially deck
-	//
-	/*
-		randIndex := rand.Intn(len(fileOfAllCardsSequentially))
-		aCard = fileOfAllCardsSequentially[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+	} else if current_deck == "init" {
+		randIndex := rand.Intn(len(fileOfCardsInitiate))
+		aCard = fileOfCardsInitiate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
-		objective_kind = "Romaji"
-
-	*/
-
-	/*
-		// Sequential prompting from the manually semi-randomized deck
+	} else if current_deck == "novs" {
+		// Sequential prompting
 		//
 		for {
-			if index < len(fileOfCards) {
-				aCard = fileOfCards[index] // pick a 'card' from a 'deck' and store it in a global var
+			if index < len(fileOfCardsNovice) {
+				aCard = fileOfCardsNovice[index]
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
 				index++
@@ -59,8 +50,53 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 				continue
 			}
 		}
-
-	*/
+	} else if current_deck == "grads" {
+		// Sequential prompting
+		//
+		for {
+			if index < len(fileOfCardsGraduate) {
+				aCard = fileOfCardsGraduate[index]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				index++
+				break
+			} else {
+				index = 0
+				continue
+			}
+		}
+	} else if current_deck == "masts" {
+		// Sequential prompting
+		//
+		for {
+			if index < len(fileOfCardsMaster) {
+				aCard = fileOfCardsMaster[index]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				index++
+				break
+			} else {
+				index = 0
+				continue
+			}
+		}
+	} else if current_deck == "gurus" {
+		// Sequential prompting
+		//
+		for {
+			if index < len(fileOfCardsGuru) {
+				aCard = fileOfCardsGuru[index]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				index++
+				break
+			} else {
+				index = 0
+				continue
+			}
+		}
+	}
+	objective_kind = "Romaji" // i.e., "Meaning"
 
 	/*
 		//  Random prompting from all decks

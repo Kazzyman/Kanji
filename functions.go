@@ -32,14 +32,38 @@ func testForDirective(in string) (result bool) { // - -
 }
 
 func switch_the_deck() {
-	fmt.Println("Enter a deck:")
-	fmt.Println("init")
-	fmt.Println("nov")
-	fmt.Println("grad")
-	fmt.Println("mast")
-	fmt.Println("guru")
+	for {
+		fmt.Println("\nEnter a deck from below for randomized prompting:\n")
 
-	_, _ = fmt.Scan(&current_deck)
+		fmt.Println("    init")
+		fmt.Println("    nov")
+		fmt.Println("    grad")
+		fmt.Println("    mast")
+		fmt.Println("    guru \n")
+
+		fmt.Println("Or, a deck from below for sequential prompting:\n")
+
+		fmt.Println("    inits")
+		fmt.Println("    novs")
+		fmt.Println("    grads")
+		fmt.Println("    masts")
+		fmt.Printf("    gurus \n\n Here:> ")
+
+		_, _ = fmt.Scan(&current_deck)
+
+		if current_deck != "init" && current_deck != "nov" && current_deck != "grad" && current_deck != "mast" &&
+			current_deck != "guru" && current_deck != "inits" && current_deck != "novs" && current_deck != "grads" &&
+			current_deck != "masts" && current_deck != "gurus" {
+			fmt.Printf("%s", string(colorRed))
+			fmt.Printf("\n  \"%s\" is not a valid deck, try again: \n", current_deck)
+			fmt.Printf("%s", string(colorReset))
+			continue
+		} else {
+			break
+		}
+	}
+	new_prompt, _, _ := pick_RandomCard_Assign_fields()
+	promptWithDir(new_prompt)
 }
 
 var current_deck string
@@ -91,11 +115,33 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 		read_map_of_needWorkOn()
 	case "setc": // set, force, a new card
 		prompt, objective, kind = reSet_aCard_andThereBy_reSet_thePromptString()
-		if prompt == "" {
-			fmt.Println("\n That string was not found, setting to \"west\" \n")
-			prompt = "西"
-			objective = "west"
-			kind = "Romaji"
+		// if prompt == "" {
+		if foundElement == nil {
+			fmt.Println(" Setting to \"west\" :: ")
+			fmt.Printf(string(colorRed))
+			runeOfCode := `
+    silentlyLocateCard("west") // Set the Convenience-global: foundElement
+    if foundElement != nil {
+        aCard = *foundElement // Set the global var-object 'aCard'
+        prompt = aCard.Kanji
+        objective = aCard.Meaning
+    }
+`
+			fmt.Println(runeOfCode)
+			fmt.Printf(string(colorReset))
+			silentlyLocateCard("west") // Set the Convenience-global: foundElement
+			if foundElement != nil {
+				aCard = *foundElement // Set the global var-object 'aCard'
+				prompt = aCard.Kanji
+				objective = aCard.Meaning
+			} else {
+				fmt.Printf("\"west\" Not found : respond_to_UserSuppliedDirective()\n\n")
+			}
+			/*
+				prompt = "西"
+				objective = "west"
+				kind = "Romaji"
+			*/
 		}
 
 	case "nt":
@@ -163,7 +209,14 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 		prompt = aCard.Kanji
 		objective = aCard.Meaning
 	} else {
-		fmt.Printf("\n %s not found \n", theMeaningOfCardToSilentlyLocate)
+		/*
+			fmt.Printf("\n \"%s\" ", theMeaningOfCardToSilentlyLocate)
+			fmt.Printf(string(colorRed))
+			fmt.Printf("Not found!")
+			fmt.Printf(string(colorReset))
+			fmt.Printf(" : reSet_aCard_andThereBy_reSet_thePromptString() \n")
+
+		*/
 	}
 	objective_kind = "Romaji"
 	fmt.Println("")
