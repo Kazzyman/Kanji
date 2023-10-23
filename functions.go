@@ -31,6 +31,7 @@ func testForDirective(in string) (result bool) { // - -
 	return result
 }
 
+// sdk Directive
 func switch_the_deck() {
 	for {
 		fmt.Println("\nEnter a deck from below for randomized prompting:\n")
@@ -62,8 +63,19 @@ func switch_the_deck() {
 			break
 		}
 	}
-	new_prompt, _, _ := pick_RandomCard_Assign_fields()
-	promptWithDir(new_prompt)
+	// Tried to get too fancy here. But it fucked things up. So, just live with the bug you were trying to fix.
+	// ... which was just that after a sdk Dir you would get one last prompt from the prior deck, big F'n deal!
+	/*
+		new_prompt, _, _ := pick_RandomCard_Assign_fields()
+		promptWithDir(new_prompt)
+
+	*/
+	/*
+		new_prompt, _, _ := pick_RandomCard_Assign_fields()
+		in = promptWithDir(new_prompt)
+		return in
+
+	*/
 }
 
 var current_deck string
@@ -115,10 +127,10 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 		read_map_of_needWorkOn()
 	case "setc": // set, force, a new card
 		prompt, objective, kind = reSet_aCard_andThereBy_reSet_thePromptString()
-		// if prompt == "" {
 		if foundElement == nil {
 			fmt.Println(" Setting to \"west\" :: ")
 			fmt.Printf(string(colorRed))
+			// Show the user exactly what is about to be done:
 			runeOfCode := `
     silentlyLocateCard("west") // Set the Convenience-global: foundElement
     if foundElement != nil {
@@ -137,11 +149,6 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 			} else {
 				fmt.Printf("\"west\" Not found : respond_to_UserSuppliedDirective()\n\n")
 			}
-			/*
-				prompt = "西"
-				objective = "west"
-				kind = "Romaji"
-			*/
 		}
 
 	case "nt":
@@ -178,19 +185,10 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 	default:
 		// fmt.Println("Directive not found") // Does not work because only existent cases are passed to the switch
 	}
-	/*
-		if prompt == "" {
-			fmt.Println("\n That string was not found, setting to \"west\" \n")
-			prompt = "西"
-			objective = "west"
-			kind = "Romaji"
-		}
-
-	*/
 	return prompt, objective, kind
 }
 
-// Handles the Directive 'set'
+// Handles the Directive 'setc'
 func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objective_kind string) { //  - -
 	var theMeaningOfCardToSilentlyLocate string
 
@@ -209,14 +207,7 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 		prompt = aCard.Kanji
 		objective = aCard.Meaning
 	} else {
-		/*
-			fmt.Printf("\n \"%s\" ", theMeaningOfCardToSilentlyLocate)
-			fmt.Printf(string(colorRed))
-			fmt.Printf("Not found!")
-			fmt.Printf(string(colorReset))
-			fmt.Printf(" : reSet_aCard_andThereBy_reSet_thePromptString() \n")
-
-		*/
+		fmt.Println("Error, foundElement is nil in reSet_aCard_andThereBy_reSet_thePromptString()")
 	}
 	objective_kind = "Romaji"
 	fmt.Println("")

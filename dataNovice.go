@@ -1,31 +1,31 @@
 package main
 
 var fileOfCardsNovice = []charSetStructKanji{
-	{"後", "after", "later, behind", "go　ご, kou　こう", "ato　あと",
+	{"後", "after", "later, behind", "ご, こう", "あと",
 		"午後 (afternoon, P.M.)",
 		" "},
 
-	{"子", "child", "Child", "shi, su", "ko",
+	{"子", "child", "Child", "し, す", "こ",
 		"子供 (child)",
 		" "},
 
-	{"国", "country", "or, State", "koku", "kuni",
+	{"国", "country", "State", "こく", "くに",
 		"外国人 (foreigner)",
 		" "},
 
-	{"四", "four", "Four", "し", "yo(tsu), yo, よん",
+	{"四", "four", "4", "し", "よ(つ), よ, よん",
 		"四日 (4th day of the month)",
 		" "},
 
-	{"語", "language", "or; word, to chat", "go　ご", "kata(ru)　かた(る)",
+	{"語", "language", "word, to chat", "ご", "かた(る)",
 		"英語 (English)",
 		" "},
 
-	{"分", "minute", "or; part, to understand, to divide", "ぶん, bu, ふん", "wa(karu)",
+	{"分", "minute", "part, to understand, to divide", "ぶん, ぶ, ふん", "わ(かる)",
 		"三十分 (thirty minutes), 自分 (oneself)",
 		" "},
 
-	{"月", "month", "or, moon", "げつ, がつ", "tsuki　つき",
+	{"月", "month", "moon", "げつ, がつ", "つき",
 		"月曜日 (Monday)",
 		" "},
 
@@ -33,15 +33,15 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"わかもの、若者 : young person",
 		" "},
 
-	{"学 or 校 or 学校", "school", "or, learning", "gaku, kou", "mana(bu)",
+	{"学 or 校 or 学校", "school", "learning", "がく, こう", "まな(ぶ)",
 		"大学 (university)",
 		" "},
-		
-	{"空", "sky", "or, empty", "kuu　くう", "sora　そら, a(keru)　あ(ける)",
+
+	{"空", "sky", "empty", "くう", "そら, あ(ける)",
 		"空 (sky)",
 		" "},
 
-	{"十", "ten", "Ten", "juu, ji", "tou, to",
+	{"十", "ten", "10", "じゅう, じ", "とう, と",
 		"十日 (10th day of the month)",
 		" "},
 
@@ -49,19 +49,19 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"千万円 (10 million Yen)",
 		" "},
 
-	{"間", "time", "Time frame, span of time", "かん, けん", "あいだ",
+	{"間", "time", "span of time, Time-frame", "かん, けん", "あいだ",
 		"時間 (time, hours)",
 		" "},
 
-	{"読", "to-read", "To read", "doku　どく", "yo(mu)　よ(む)",
+	{"読", "to-read", "To read", "どく", "よ(む)",
 		"読む (to read)",
 		" "},
 
-	{"話", "to-talk", "or, conversation", "wa　わ", "hanashi　はなし, hana(su)　はな(す)",
+	{"話", "to-talk", "conversation", "わ", "はなし, はな(す)",
 		"電話 (telephone)",
 		" "},
 
-	{"書", "to-write", "To write", "sho　しょ", "ka(ku)　か(く)",
+	{"書", "to-write", "To write", "しょ", "か(く)",
 		"辞書 (dictionary)",
 		" "},
 
@@ -69,7 +69,7 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"毎週 (every week)",
 		" "},
 
-	{"言", "word", "or, To talk", "げん, ごん", "い(う)",
+	{"言", "word", "To talk", "げん, ごん", "い(う)",
 		"言う (to say)",
 		" "},
 
@@ -77,7 +77,7 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"今年 (this year), 去年 (last year)",
 		" "},
 
-	{"円", "yen", "or; circle, round", "えん", "まるい",
+	{"円", "yen", "circle, round", "えん", "まるい",
 		"円い (round)",
 		" "},
 }

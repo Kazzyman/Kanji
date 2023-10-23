@@ -11,9 +11,6 @@ var aCard = charSetStructKanji{}
 //
 var foundElement *charSetStructKanji
 
-//
-var randomFileOfCards int
-
 // All cards in all of the decks are of this Structure:
 type charSetStructKanji struct {
 	Kanji        string
@@ -26,7 +23,11 @@ type charSetStructKanji struct {
 }
 
 var total_prompts int
-var index int // Is sometimes used to do sequential prompting - -
+var indexNovS int
+var indexInitS int
+var indexGuruS int
+var indexMastS int
+var indexGradS int
 
 var startBeforeCall = time.Now()
 var TimeOfStartFromTop = time.Now()

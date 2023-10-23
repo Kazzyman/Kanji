@@ -4,8 +4,8 @@ import (
 	"fmt"
 )
 
-//
-// Used ONLY in the 'setc' directive: reSet_aCard_andThereBy_reSet_thePromptString()
+// Used in respond_to_UserSuppliedDirective() in case: "setc"
+// Also used in the 'setc' directive via: reSet_aCard_andThereBy_reSet_thePromptString()
 // ... to reSet the card, i.e., the Kanji/prompt(and all other aCard fields) via its Meaning field
 //
 // The sole function of this func is to set the global: foundElement
