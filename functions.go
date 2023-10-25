@@ -3,8 +3,93 @@ package main
 import (
 	"fmt"
 	"os"
+	"regexp"
 	"time"
 )
+
+var (
+	first_hit   string
+	second_hit  string
+	third_hit   string
+	fourth_hit  string
+	fifth_hit   string
+	sixth_hit   string
+	sfirst_hit  string
+	ssecond_hit string
+	sthird_hit  string
+	sfourth_hit string
+	sfifth_hit  string
+	ssixth_hit  string
+)
+
+// Create six string variables to store the matched strings
+func extract() {
+	first_hit = ""
+	second_hit = ""
+	third_hit = ""
+	fourth_hit = ""
+	fifth_hit = ""
+	sixth_hit = ""
+	sfirst_hit = ""
+	ssecond_hit = ""
+	sthird_hit = ""
+	sfourth_hit = ""
+	sfifth_hit = ""
+	ssixth_hit = ""
+	// Your complex string
+	complexString := aCard.Vocab
+	complexStrings := aCard.Vocab2
+
+	// Define the regular expression pattern to match upper or lower case alphabetical characters
+	pattern := "[a-zA-Z]+"
+
+	// Compile the regular expression
+	reg := regexp.MustCompile(pattern)
+
+	// Find all matches in the complex string
+	matches := reg.FindAllString(complexString, 6)   // Limit to at most 6 matches
+	matchess := reg.FindAllString(complexStrings, 6) // Limit to at most 6 matches
+
+	// Assign matches to the variables, up to six matches
+	if len(matches) > 0 {
+		first_hit = matches[0]
+	}
+	if len(matches) > 1 {
+		second_hit = matches[1]
+	}
+	if len(matches) > 2 {
+		third_hit = matches[2]
+	}
+	if len(matches) > 3 {
+		fourth_hit = matches[3]
+	}
+	if len(matches) > 4 {
+		fifth_hit = matches[4]
+	}
+	if len(matches) > 5 {
+		sixth_hit = matches[5]
+	}
+	//
+	// Assign matches to the variables, up to six matches
+	if len(matchess) > 0 {
+		sfirst_hit = matchess[0]
+	}
+	if len(matchess) > 1 {
+		ssecond_hit = matchess[1]
+	}
+	if len(matchess) > 2 {
+		sthird_hit = matchess[2]
+	}
+	if len(matchess) > 3 {
+		sfourth_hit = matchess[3]
+	}
+	if len(matchess) > 4 {
+		sfifth_hit = matchess[4]
+	}
+	if len(matchess) > 5 {
+		ssixth_hit = matchess[5]
+	}
+}
 
 // DIRECTIVES : --------------------------------------------------------------------------------------------
 //
@@ -80,7 +165,7 @@ func switch_the_deck() {
 
 var current_deck string
 
-func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string) { // - -
+func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secondary_objective string) { // - -
 	var count int
 	switch in {
 	case "fif":
@@ -115,7 +200,7 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 	case "q": // quit
 		os.Exit(1)
 	case "?": // context-sensitive help on the current card
-		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 	case "st": // stats
 		hits()
 	case "frmt": // format a file
@@ -126,7 +211,7 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 		read_map_of_fineOn()
 		read_map_of_needWorkOn()
 	case "setc": // set, force, a new card
-		prompt, objective, kind = reSet_aCard_andThereBy_reSet_thePromptString()
+		prompt, objective, kind, secondary_objective = reSet_aCard_andThereBy_reSet_thePromptString()
 		if foundElement == nil {
 			fmt.Println(" Setting to \"west\" :: ")
 			fmt.Printf(string(colorRed))
@@ -146,6 +231,7 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 				aCard = *foundElement // Set the global var-object 'aCard'
 				prompt = aCard.Kanji
 				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
 			} else {
 				fmt.Printf("\"west\" Not found : respond_to_UserSuppliedDirective()\n\n")
 			}
@@ -185,11 +271,11 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind string
 	default:
 		// fmt.Println("Directive not found") // Does not work because only existent cases are passed to the switch
 	}
-	return prompt, objective, kind
+	return prompt, objective, kind, secondary_objective
 }
 
 // Handles the Directive 'setc'
-func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objective_kind string) { //  - -
+func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objective_kind, secondary_objective string) { //  - -
 	var theMeaningOfCardToSilentlyLocate string
 
 	fmt.Printf("\nEnter a Meaning to")
@@ -206,13 +292,14 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 		aCard = *foundElement // Set the global var-object 'aCard'
 		prompt = aCard.Kanji
 		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
 	} else {
 		fmt.Println("Error, foundElement is nil in reSet_aCard_andThereBy_reSet_thePromptString()")
 	}
 	objective_kind = "Romaji"
 	fmt.Println("")
 
-	return prompt, objective, objective_kind
+	return prompt, objective, objective_kind, secondary_objective
 }
 
 func game_on() (game string) { // - -

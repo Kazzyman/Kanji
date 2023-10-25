@@ -21,14 +21,14 @@ func main() {
 		if game_loop_counter > game_duration {
 			game_off()
 		}
-		new_prompt, objective, objective_kind := pick_RandomCard_Assign_fields() // This line is done after each ^^Right!
-		begin(new_prompt, objective, objective_kind)
+		new_prompt, objective, objective_kind, secondary_objective := pick_RandomCard_Assign_fields() // This line is done after each ^^Right!
+		begin(new_prompt, objective, objective_kind, secondary_objective)
 		// And then, begin again; i.e., pick another card
 	}
 }
 
 // The first function that prompts the user
-func begin(promptField, objective, objective_kind string) { // May be a Hira, Kata, or Romaji prompt  - -
+func begin(promptField, objective, objective_kind, secondary_objective string) { // May be a Hira, Kata, or Romaji prompt  - -
 	if game_loop_counter > game_duration {
 		game_off()
 	}
@@ -41,7 +41,7 @@ func begin(promptField, objective, objective_kind string) { // May be a Hira, Ka
 		DetectedDirective = testForDirective(in) // Sets DetectedDirective true if a "Directive" was detected
 		if DetectedDirective {
 			if in == "setc" { // respond_to_UserSuppliedDirective(in, new_objective_kind) will want to return values is "set" is switched on
-				promptField, objective, objective_kind = respond_to_UserSuppliedDirective(in)
+				promptField, objective, objective_kind, secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -49,13 +49,13 @@ func begin(promptField, objective, objective_kind string) { // May be a Hira, Ka
 		} else {
 			// Passing recursion false [or recall true], means do rightOrOops()
 			// ...                                                                  f,f,f Does rightOrOops
-			evaluateUsersGuess(in, promptField, objective, objective_kind, false, false, false)
+			evaluateUsersGuess(in, promptField, objective, objective_kind, false, false, false, secondary_objective)
 			break // ... Having finished with all potential guessing, return to main ...
 		}
 	} // ... Returns to main()'s inner loop; to (usually randomly) select the next card
 }
 
-func evaluateUsersGuess(in, promptField, objective, objective_kind string, recursion, recall, skipOops bool) { // - -
+func evaluateUsersGuess(in, promptField, objective, objective_kind string, recursion, recall, skipOops bool, secondary_objective string) { // - -
 	if game_loop_counter > game_duration {
 		game_off()
 	}
@@ -73,7 +73,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 		} else {
 			game_loop_counter = 0
 		}
-		rightOrOops(in, promptField, objective, skipOops) // This func may call: tryAgain() ... which may call: lastTry()
+		rightOrOops(in, promptField, objective, skipOops, secondary_objective) // This func may call: tryAgain() ... which may call: lastTry()
 	}
 	if recall {
 		if gameOn {
@@ -81,7 +81,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 		} else {
 			game_loop_counter = 0
 		}
-		rightOrOops(in, promptField, objective, skipOops) // This func may call: tryAgain() ... which may call: lastTry()
+		rightOrOops(in, promptField, objective, skipOops, secondary_objective) // This func may call: tryAgain() ... which may call: lastTry()
 	} else {
 		// If recall is false, then do nothing
 	}
@@ -93,7 +93,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 	DetectedDirective = testForDirective(in)
 	if DetectedDirective {
 		if in == "setc" { // See prior comments
-			promptField, objective, objective_kind = respond_to_UserSuppliedDirective(in)
+			promptField, objective, objective_kind, secondary_objective = respond_to_UserSuppliedDirective(in)
 		} else {
 			respond_to_UserSuppliedDirective(in)
 		}
@@ -105,33 +105,32 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 			...                                                                        t, f, t Skips rightOrOops
 		*/
 		// Recursive call if DetectedDirective:
-		evaluateUsersGuess(in, promptField, objective, objective_kind, true, false, true) //
+		evaluateUsersGuess(in, promptField, objective, objective_kind, true, false, true, secondary_objective) //
 	} else {
 		/*
 			Do a normal, i.e., unconditional recursion with skipOops set to false
 			via recall==true & skipOops==false [recursion false or recall true, means do rightOrOops]
 		*/
 		// Recursive call if DetectedDirective:
-		evaluateUsersGuess(in, promptField, objective, objective_kind, true, true, false) // t,t,f Does rightOrOops
+		evaluateUsersGuess(in, promptField, objective, objective_kind, true, true, false, secondary_objective) // t,t,f Does rightOrOops
 	}
 	// Returns to here from all subsequent functions ???
 	// and, returns to begin() and, hense, to main() for the next card ???
 }
 
-func rightOrOops(in, promptField, objective string, skipOops bool) { // - -
-
+func rightOrOops(in, promptField, objective string, skipOops bool, secondary_objective string) { // - -
+	// fmt.Printf("secondary_objective is:%s\n", secondary_objective)
+	extract()
 	if in == objective {
 		log_right(promptField)
-		// fmt.Printf("%s", colorGreen)
-		// fmt.Printf("      　^^Right! \n")
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
 		fmt.Printf(" <--Right!\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind := pick_RandomCard_Assign_fields() // Gets a new card and extract the new prompt field
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and extract the new prompt field
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -140,13 +139,66 @@ func rightOrOops(in, promptField, objective string, skipOops bool) { // - -
 		DetectedDirective = testForDirective(in)
 		if DetectedDirective {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind = respond_to_UserSuppliedDirective(in)
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
-			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true)
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
 		} else {
-			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false)
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
+		}
+	} else if in == secondary_objective {
+		log_right(promptField)
+		fmt.Printf("%s", colorReset)
+		fmt.Printf("%s", in)
+		fmt.Printf("%s", colorGreen)
+		fmt.Printf(" <--somewhat Right!\n")
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("%s", colorReset)
+		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and extract the new prompt field
+		// This prompt, deployed by new_objective_kind, take new_prompt
+		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+
+		// Refer to the previous comments re the following mirrored section:
+		DetectedDirective := false
+		DetectedDirective = testForDirective(in)
+		if DetectedDirective {
+			if in == "setc" {
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+			} else {
+				respond_to_UserSuppliedDirective(in)
+			}
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
+		} else {
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
+		}
+	} else if first_hit != "" || second_hit != "" || third_hit != "" || fourth_hit != "" || sixth_hit != "" ||
+		sfirst_hit != "" || ssecond_hit != "" || sthird_hit != "" || sfourth_hit != "" || ssixth_hit != "" {
+		log_right(promptField)
+		fmt.Printf("%s", colorReset)
+		fmt.Printf("%s", in)
+		fmt.Printf("%s", colorGreen)
+		fmt.Printf(" <--somewhat Right!\n")
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("%s", colorReset)
+		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and extract the new prompt field
+		// This prompt, deployed by new_objective_kind, take new_prompt
+		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+
+		// Refer to the previous comments re the following mirrored section:
+		DetectedDirective := false
+		DetectedDirective = testForDirective(in)
+		if DetectedDirective {
+			if in == "setc" {
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+			} else {
+				respond_to_UserSuppliedDirective(in)
+			}
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
+		} else {
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else { // it is not a Right, and is therefor an Oops, no new aCard has been fetched etc. Not even checkMemory has been run
 		if skipOops {
@@ -156,12 +208,12 @@ func rightOrOops(in, promptField, objective string, skipOops bool) { // - -
 			fmt.Printf("%s", colorRed)
 			fmt.Printf("      　^^Oops! ")
 		}
-		tryAgain(promptField, objective) // passing the old original values
+		tryAgain(promptField, objective, secondary_objective) // passing the old original values
 		// Returns here from both tryAgain() and lastTry()
 	}
 }
 
-func tryAgain(promptField, objective string) { // - -
+func tryAgain(promptField, objective, secondary_objective string) { // - -
 	fmt.Printf("Try again \n")
 	fmt.Printf("%s", string(colorReset))
 	var in string // var declaration needed as a ":=" would not work within the conditional because "in" not in signature
@@ -181,8 +233,8 @@ func tryAgain(promptField, objective string) { // - -
 		fmt.Printf("%s", colorGreen)
 		fmt.Printf(" <--Right!\n")
 		// fmt.Printf("%s", colorReset)
-		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-		new_prompt, new_objective, new_objective_kind := pick_RandomCard_Assign_fields()
+		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		fmt.Printf("%s", colorReset)
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
@@ -192,24 +244,50 @@ func tryAgain(promptField, objective string) { // - -
 		DetectedDirective = testForDirective(in)
 		if DetectedDirective {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind = respond_to_UserSuppliedDirective(in)
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
-			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true)
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
 		} else {
-			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false)
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
+		}
+	} else if in == secondary_objective {
+		log_right(promptField)
+		fmt.Printf("%s", colorReset)
+		fmt.Printf("%s", in)
+		fmt.Printf("%s", colorGreen)
+		fmt.Printf(" <--somewhat Right!\n")
+		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s", colorReset)
+		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and extract the new prompt field
+		// This prompt, deployed by new_objective_kind, take new_prompt
+		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+
+		// Refer to the previous comments re the following mirrored section:
+		DetectedDirective := false
+		DetectedDirective = testForDirective(in)
+		if DetectedDirective {
+			if in == "setc" {
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+			} else {
+				respond_to_UserSuppliedDirective(in)
+			}
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
+		} else {
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else {
 		log_oops(promptField, objective, in)
 		fmt.Printf("%s", colorRed)
 		fmt.Printf("      　^^Oops Again! ")
-		lastTry(promptField, objective)
+		lastTry(promptField, objective, secondary_objective)
 		// Returns to caller:
 	}
 }
 
-func lastTry(promptField, objective string) { // - -
+func lastTry(promptField, objective, secondary_objective string) { // - -
 	fmt.Printf("Last Try! \n")
 	fmt.Printf("%s", string(colorReset))
 	var in string // var declaration needed as a ":=" would not work within the conditional ~ "in" not in signature
@@ -229,8 +307,8 @@ func lastTry(promptField, objective string) { // - -
 		fmt.Printf("%s", colorGreen)
 		fmt.Printf(" <--Right!\n")
 		// fmt.Printf("%s", colorReset)
-		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-		new_prompt, new_objective, new_objective_kind := pick_RandomCard_Assign_fields()
+		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		fmt.Printf("%s", colorReset)
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
@@ -240,19 +318,45 @@ func lastTry(promptField, objective string) { // - -
 		DetectedDirective = testForDirective(in)
 		if DetectedDirective {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind = respond_to_UserSuppliedDirective(in)
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
-			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true)
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
 		} else {
-			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false)
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
+		}
+	} else if in == secondary_objective {
+		log_right(promptField)
+		fmt.Printf("%s", colorReset)
+		fmt.Printf("%s", in)
+		fmt.Printf("%s", colorGreen)
+		fmt.Printf(" <--somewhat Right!\n")
+		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s", colorReset)
+		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and extract the new prompt field
+		// This prompt, deployed by new_objective_kind, take new_prompt
+		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+
+		// Refer to the previous comments re the following mirrored section:
+		DetectedDirective := false
+		DetectedDirective = testForDirective(in)
+		if DetectedDirective {
+			if in == "setc" {
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+			} else {
+				respond_to_UserSuppliedDirective(in)
+			}
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
+		} else {
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else {
 		log_oops(aCard.Kanji, aCard.Meaning, in)
 		fmt.Printf("%s", colorRed)
 		// fmt.Printf("      　^^That was your last try, Oops! ")
-		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Long_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", string(colorReset))
 	}
 	// Returns to caller:
