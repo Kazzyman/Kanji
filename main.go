@@ -54,7 +54,7 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 	} // ... Returns to main()'s inner loop; to (usually randomly) select the next card
 }
 
-func evaluateUsersGuess(in, promptField, objective, objective_kind string, recursion, recall, skipOops bool, secondary_objective string) { // - -
+func evaluateUsersGuess(in, promptField, objective, objective_kind string, recursion, recall, skipOops bool, secondary_objective string) {
 	if game_loop_counter > game_duration {
 		game_off()
 	}
@@ -104,14 +104,15 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 			...                                                                        t, f, t Skips rightOrOops
 		*/
 		// Recursive call if DetectedDirective:
-		evaluateUsersGuess(in, promptField, objective, objective_kind, true, false, true, secondary_objective) //
+		evaluateUsersGuess(in, promptField, objective, objective_kind, true, false, true, secondary_objective)
 	} else {
 		/*
 			Do a normal, i.e., unconditional recursion with skipOops set to false
 			via recall==true & skipOops==false [recursion false or recall true, means do rightOrOops]
 		*/
 		// Recursive call if DetectedDirective:
-		evaluateUsersGuess(in, promptField, objective, objective_kind, true, true, false, secondary_objective) // t,t,f Does rightOrOops
+		evaluateUsersGuess(in, promptField, objective, objective_kind, true, true, false, secondary_objective)
+		// t,t,f Does rightOrOops
 	}
 	// Returns to here from all subsequent functions ???
 	// and, returns to begin() and, hense, to main() for the next card ???
@@ -130,7 +131,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and check_for_match_in_other_fields the new prompt field
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -156,7 +157,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and check_for_match_in_other_fields the new prompt field
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -182,7 +183,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and check_for_match_in_other_fields the new prompt field
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -261,7 +262,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and check_for_match_in_other_fields the new prompt field
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -287,7 +288,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and check_for_match_in_other_fields the new prompt field
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -361,7 +362,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and check_for_match_in_other_fields the new prompt field
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
@@ -387,7 +388,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields() // Gets a new card and check_for_match_in_other_fields the new prompt field
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 

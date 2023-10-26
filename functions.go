@@ -8,15 +8,14 @@ import (
 	"time"
 )
 
-// Assign twelve string variables: store any matched strings, up to a maximum of six
 func check_for_match_in_other_fields(in string) (found_one bool) {
 
 	found_one = false
 
-	// String to match against (the guess, i.e. "in"), as a lowered case version
+	// String to match against (the guess, i.e. "in"), as a lowered-case version
 	our_guess_in_lower_case := strings.ToLower(in)
 
-	// The strings from the card to parse
+	// The strings from the card to parse [all of them! 'cause, why not?]
 	strings_from_card := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
 
 	// Create a case-insensitive regular expression pattern
@@ -24,11 +23,10 @@ func check_for_match_in_other_fields(in string) (found_one bool) {
 	// Compile the regular expression
 	reg := regexp.MustCompile(pattern)
 
-	// Iterate through all fields of card [strings_from_card] and find matches
+	// Iterate through ALL fields of card [strings_from_card] and find matches
 	for _, str := range strings_from_card {
 		found := reg.FindString(str)
-		if found != "" { // if not MT then we have found a match
-			// matches = append(matches, found) // Store any matches in the slice called matches
+		if found != "" { // if string not MT then we have found a match
 			found_one = true
 		}
 	}
