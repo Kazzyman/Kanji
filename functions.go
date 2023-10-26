@@ -4,91 +4,35 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strings"
 	"time"
 )
 
-var (
-	first_hit   string
-	second_hit  string
-	third_hit   string
-	fourth_hit  string
-	fifth_hit   string
-	sixth_hit   string
-	sfirst_hit  string
-	ssecond_hit string
-	sthird_hit  string
-	sfourth_hit string
-	sfifth_hit  string
-	ssixth_hit  string
-)
+// Assign twelve string variables: store any matched strings, up to a maximum of six
+func check_for_match_in_other_fields(in string) (found_one bool) {
 
-// Create six string variables to store the matched strings
-func extract() {
-	first_hit = ""
-	second_hit = ""
-	third_hit = ""
-	fourth_hit = ""
-	fifth_hit = ""
-	sixth_hit = ""
-	sfirst_hit = ""
-	ssecond_hit = ""
-	sthird_hit = ""
-	sfourth_hit = ""
-	sfifth_hit = ""
-	ssixth_hit = ""
-	// Your complex string
-	complexString := aCard.Vocab
-	complexStrings := aCard.Vocab2
+	found_one = false
 
-	// Define the regular expression pattern to match upper or lower case alphabetical characters
-	pattern := "[a-zA-Z]+"
+	// String to match against (the guess, i.e. "in"), as a lowered case version
+	our_guess_in_lower_case := strings.ToLower(in)
 
+	// The strings from the card to parse
+	strings_from_card := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
+
+	// Create a case-insensitive regular expression pattern
+	pattern := `(?i)` + regexp.QuoteMeta(our_guess_in_lower_case)
 	// Compile the regular expression
 	reg := regexp.MustCompile(pattern)
 
-	// Find all matches in the complex string
-	matches := reg.FindAllString(complexString, 6)   // Limit to at most 6 matches
-	matchess := reg.FindAllString(complexStrings, 6) // Limit to at most 6 matches
-
-	// Assign matches to the variables, up to six matches
-	if len(matches) > 0 {
-		first_hit = matches[0]
+	// Iterate through all fields of card [strings_from_card] and find matches
+	for _, str := range strings_from_card {
+		found := reg.FindString(str)
+		if found != "" { // if not MT then we have found a match
+			// matches = append(matches, found) // Store any matches in the slice called matches
+			found_one = true
+		}
 	}
-	if len(matches) > 1 {
-		second_hit = matches[1]
-	}
-	if len(matches) > 2 {
-		third_hit = matches[2]
-	}
-	if len(matches) > 3 {
-		fourth_hit = matches[3]
-	}
-	if len(matches) > 4 {
-		fifth_hit = matches[4]
-	}
-	if len(matches) > 5 {
-		sixth_hit = matches[5]
-	}
-	//
-	// Assign matches to the variables, up to six matches
-	if len(matchess) > 0 {
-		sfirst_hit = matchess[0]
-	}
-	if len(matchess) > 1 {
-		ssecond_hit = matchess[1]
-	}
-	if len(matchess) > 2 {
-		sthird_hit = matchess[2]
-	}
-	if len(matchess) > 3 {
-		sfourth_hit = matchess[3]
-	}
-	if len(matchess) > 4 {
-		sfifth_hit = matchess[4]
-	}
-	if len(matchess) > 5 {
-		ssixth_hit = matchess[5]
-	}
+	return found_one
 }
 
 // DIRECTIVES : --------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ func hits() { // - -
 	frequencyMapWrongs := make(map[string]int)
 
 	//
-	// Parse the relevant cyclic array to extract the strings and put them into the relevant map:
+	// Parse the relevant cyclic array to check_for_match_in_other_fields the strings and put them into the relevant map:
 	//
 	// Load the RightOrOops frequency map
 	for i := 0; i < len(cyclicArrayHits.RightOrOops); i++ {
