@@ -153,7 +153,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--somewhat Right! as second meaning\n")
+		fmt.Printf(" <--Also Right! But as second meaning\n")
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
@@ -258,7 +258,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--somewhat Right! as second meaning\n")
+		fmt.Printf(" <--Also Right! But as second meaning\n")
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
@@ -358,7 +358,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--somewhat Right! as second meaning\n")
+		fmt.Printf(" <--Also Right! But as second meaning\n")
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller

@@ -3,33 +3,35 @@ package main
 import (
 	"fmt"
 	"os"
-	"regexp"
 	"strings"
 	"time"
 )
 
+func customMatch(our_guess, str string) bool {
+	ourGuessLower := strings.ToLower(our_guess)
+	strLower := strings.ToLower(str)
+
+	return strings.Contains(strLower, ourGuessLower) || strings.Contains(ourGuessLower, strLower) || strings.Contains(strLower, strings.Trim(ourGuessLower, "s"))
+}
+
 func check_for_match_in_other_fields(in string) (found_one bool) {
-
-	found_one = false
-
-	// String to match against (the guess, i.e. "in"), as a lowered-case version
 	our_guess_in_lower_case := strings.ToLower(in)
-
-	// The strings from the card to parse [all of them! 'cause, why not?]
 	strings_from_card := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
 
-	// Create a case-insensitive regular expression pattern
-	pattern := `(?i)` + regexp.QuoteMeta(our_guess_in_lower_case)
-	// Compile the regular expression
-	reg := regexp.MustCompile(pattern)
-
-	// Iterate through ALL fields of card [strings_from_card] and find matches
 	for _, str := range strings_from_card {
-		found := reg.FindString(str)
-		if found != "" { // if string not MT then we have found a match
+		if customMatch(our_guess_in_lower_case, str) {
 			found_one = true
+			break
 		}
 	}
+	/*
+		// Debugging: Print whether a match was found
+		fmt.Printf("Search String: %s\n", our_guess_in_lower_case)
+		fmt.Printf("Fields: %v\n", strings_from_card)
+		fmt.Printf("Matches: %v\n", found_one)
+
+	*/
+
 	return found_one
 }
 

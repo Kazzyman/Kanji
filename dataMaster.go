@@ -60,7 +60,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"足 (foot)",
 		" "},
 
-	{"友", "friend", "Friend", "yuu　ゆう", "tomo　とも",
+	{"友", "friend", "Friend", "yuu ゆう", "tomo とも",
 		"友達 (friend)",
 		" "},
 
