@@ -3,42 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 	"time"
 )
-
-func customMatch(our_guess, str string) bool {
-	ourGuessLower := strings.ToLower(our_guess)
-	strLower := strings.ToLower(str)
-
-	return strings.Contains(strLower, ourGuessLower) || strings.Contains(ourGuessLower, strLower) || strings.Contains(strLower, strings.Trim(ourGuessLower, "s"))
-}
-
-func check_for_match_in_other_fields(in string) (found_one bool) {
-	our_guess_in_lower_case := strings.ToLower(in)
-	strings_from_card := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
-
-	for _, str := range strings_from_card {
-		if customMatch(our_guess_in_lower_case, str) {
-			found_one = true
-			break
-		}
-	}
-	/*
-		// Debugging: Print whether a match was found
-		fmt.Printf("Search String: %s\n", our_guess_in_lower_case)
-		fmt.Printf("Fields: %v\n", strings_from_card)
-		fmt.Printf("Matches: %v\n", found_one)
-
-	*/
-
-	return found_one
-}
 
 // DIRECTIVES : --------------------------------------------------------------------------------------------
 //
 
-func testForDirective(in string) (result bool) { // - -
+func in_list_of_Directives(in string) bool { // - -
 	// if it IS a directive
 	if in == "?" || // context-sensitive help on the current card
 		in == "sdk" || // Switch Deck
@@ -55,9 +26,9 @@ func testForDirective(in string) (result bool) { // - -
 		in == "goff" || // Game session Off
 		in == "gdc" { // set the Game Duration Counter
 		// Then:
-		result = true
+		return true
 	}
-	return result
+	return false
 }
 
 // sdk Directive
@@ -106,8 +77,6 @@ func switch_the_deck() {
 
 	*/
 }
-
-var current_deck string
 
 func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secondary_objective string) { // - -
 	var count int
@@ -251,7 +220,7 @@ func game_on() (game string) { // - -
 	gameOn = true
 	fmt.Println("The game is on")
 
-	startBeforeCall = time.Now()
+	// startBeforeCall = time.Now()
 	currentTime := time.Now()
 	TimeOfStartFromTop = time.Now()
 

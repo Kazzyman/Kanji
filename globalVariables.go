@@ -13,15 +13,16 @@ var foundElement *charSetStructKanji
 
 // All cards in all of the decks are of this Structure:
 type charSetStructKanji struct {
-	Kanji        string
-	Meaning      string
-	Long_Meaning string
-	Onyomi       string
-	Kunyomi      string
-	Vocab        string
-	Vocab2       string
+	Kanji          string
+	Meaning        string
+	Second_Meaning string
+	Onyomi         string
+	Kunyomi        string
+	Vocab          string
+	Vocab2         string
 }
 
+var current_deck string
 var total_prompts int
 var indexNovS int
 var indexInitS int
@@ -29,12 +30,11 @@ var indexGuruS int
 var indexMastS int
 var indexGradS int
 
-var startBeforeCall = time.Now()
 var TimeOfStartFromTop = time.Now()
 
 var game_loop_counter int
 var game_duration = 998
-var game string
+
 var gameOn bool
 
 // Constants:

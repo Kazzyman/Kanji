@@ -9,7 +9,6 @@ import (
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	gameOn = false
-	game = "off"
 	current_deck = "mast"
 	display_List_of_Directives()
 	for {
@@ -36,9 +35,7 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
 		in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
 
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in) // Sets DetectedDirective true if a "Directive" was detected
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" { // respond_to_UserSuppliedDirective(in, new_objective_kind) will want to return values is "set" is switched on
 				promptField, objective, objective_kind, secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -88,9 +85,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 	// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
 	in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
 
-	DetectedDirective := false
-	DetectedDirective = testForDirective(in)
-	if DetectedDirective {
+	if in_list_of_Directives(in) {
 		if in == "setc" { // See prior comments
 			promptField, objective, objective_kind, secondary_objective = respond_to_UserSuppliedDirective(in)
 		} else {
@@ -120,8 +115,6 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 
 func rightOrOops(in, promptField, objective string, skipOops bool, secondary_objective string) { // - -
 
-	found_one := check_for_match_in_other_fields(in)
-
 	if in == objective {
 		log_right(promptField)
 		fmt.Printf("%s", colorReset)
@@ -136,9 +129,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -162,9 +153,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -174,7 +163,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		} else {
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
-	} else if found_one { // in any of the fields of the card
+	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
 		log_right(promptField)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
@@ -188,9 +177,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -222,8 +209,6 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
 	in = prompt_interim(promptField) // Get user's input, from a randomly selected prompt
 
-	found_one := check_for_match_in_other_fields(in)
-
 	// ...
 	// Note the lack of a Directive handling section which normally follows prompting, Directives are currently inoperative
 	//
@@ -241,9 +226,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -267,9 +250,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -279,7 +260,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		} else {
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
-	} else if found_one { // in any of the fields of the card
+	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
 		log_right(promptField)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
@@ -293,9 +274,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -321,7 +300,6 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives:(currently inoperative)
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
 	in = prompt_interim(promptField) // Get user's input, from a randomly selected prompt
-	found_one := check_for_match_in_other_fields(in)
 
 	// ...
 	// Note the lack of a Directive handling section which normally follows prompting, Directives are currently inoperative
@@ -341,9 +319,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -367,9 +343,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
@@ -379,7 +353,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		} else {
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
-	} else if found_one { // in any of the fields of the card
+	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
 		log_right(promptField)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
@@ -393,9 +367,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
 
 		// Refer to the previous comments re the following mirrored section:
-		DetectedDirective := false
-		DetectedDirective = testForDirective(in)
-		if DetectedDirective {
+		if in_list_of_Directives(in) {
 			if in == "setc" {
 				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
