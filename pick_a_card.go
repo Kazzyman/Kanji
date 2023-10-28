@@ -2,7 +2,7 @@ package main
 
 import "math/rand"
 
-func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind string) { // - -
+func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, secondary_objective string) { // - -
 	// Random prompting from selected deck
 	//
 	if current_deck == "init" {
@@ -10,31 +10,37 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 		aCard = fileOfCardsInitiate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
 	} else if current_deck == "nov" {
 		randIndex := rand.Intn(len(fileOfCardsNovice))
 		aCard = fileOfCardsNovice[randIndex]
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
 	} else if current_deck == "grad" {
 		randIndex := rand.Intn(len(fileOfCardsGraduate))
 		aCard = fileOfCardsGraduate[randIndex]
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
 	} else if current_deck == "mast" {
 		randIndex := rand.Intn(len(fileOfCardsMaster))
 		aCard = fileOfCardsMaster[randIndex]
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
 	} else if current_deck == "guru" {
 		randIndex := rand.Intn(len(fileOfCardsGuru))
 		aCard = fileOfCardsGuru[randIndex]
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
 	} else if current_deck == "init" {
 		randIndex := rand.Intn(len(fileOfCardsInitiate))
 		aCard = fileOfCardsInitiate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
 		promptField = aCard.Kanji
 		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
 	} else if current_deck == "inits" {
 		// Sequential prompting
 		//
@@ -43,6 +49,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 				aCard = fileOfCardsInitiate[indexInitS]
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
 				indexInitS++
 				break
 			} else {
@@ -58,6 +65,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 				aCard = fileOfCardsNovice[indexNovS]
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
 				indexNovS++
 				break
 			} else {
@@ -73,6 +81,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 				aCard = fileOfCardsGraduate[indexGradS]
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
 				indexGradS++
 				break
 			} else {
@@ -88,6 +97,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 				aCard = fileOfCardsMaster[indexMastS]
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
 				indexMastS++
 				break
 			} else {
@@ -103,6 +113,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 				aCard = fileOfCardsGuru[indexGuruS]
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
 				indexGuruS++
 				break
 			} else {
@@ -141,6 +152,6 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind str
 
 	*/
 
-	return promptField, objective, objective_kind
+	return promptField, objective, objective_kind, secondary_objective
 
 }

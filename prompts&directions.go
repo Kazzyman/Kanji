@@ -18,6 +18,7 @@ func List_of_Directives() {
 	fmt.Println("        Enter 'rm' Read the current contents of the Maps")
 	fmt.Println("        Enter 'setc' (set) force the use of a specific card")
 	fmt.Println("        Enter 'frmt' Format a text file as card elements")
+	fmt.Println("        Enter 'fif' Find in files")
 	fmt.Println("        Enter 'q', (quit) terminate the app")
 }
 
@@ -25,7 +26,7 @@ func List_of_Directives() {
 func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Meaning? (deck:%s),\n :> ", current_deck)
+	fmt.Printf(" Meaning? (deck:%s)\n :> ", current_deck)
 	fmt.Printf("%s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective

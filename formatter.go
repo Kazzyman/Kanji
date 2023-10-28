@@ -19,9 +19,9 @@ func formatter() {
 	}(fileHandle)
 
 	// Open the input file
-	file, err := os.Open("unformattedElements.txt")
+	file, err := os.Open("700_kanji.txt")
 	if err != nil {
-		fmt.Println("Error opening file: unformattedElements: ", err)
+		fmt.Println("Error opening file: 700_kanji.txt: ", err)
 		return
 	}
 	defer func(file *os.File) {
@@ -53,16 +53,25 @@ func formatter() {
 			fmt.Printf("\n The line:%s has too many fields \n", line)
 		} else if len(fields) < 6 {
 			fmt.Printf("\n The line:%s has too few fields \n", line)
+			/*
+				last := []string{fields[0], fields[1], fields[2], fields[3], fields[4], "last"}
+				fields = last
+
+			*/
 		} else {
-			// Therefore the line had exactly 6 六 fields, and, is probably sans errors in its composition, so ...
-			formattedLine := fmt.Sprintf("{\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"},\n",
-				fields[0], fields[1], fields[2], fields[3], fields[4], fields[5])
+			if fields[0] != "//" {
+				// Therefore the line had exactly 6 六 fields, and, is probably sans errors in its composition, so ...
+				formattedLine := fmt.Sprintf("{\"%s\", \"%s\", \n\t\"%s\", \n\t\"%s\", \n\t\"%s\",\n\t\"%s\",\n\t\"seven\"},\n\n",
+					fields[0], fields[1], fields[2], fields[3], fields[4], fields[5])
 
-			// Print each formatted line to a file
-			_, err := fmt.Fprintf(fileHandle, formattedLine)
+				// Print each formatted line to a file
+				_, err := fmt.Fprintf(fileHandle, formattedLine)
 
-			if err != nil {
-				return
+				if err != nil {
+					return
+				}
+			} else {
+				fmt.Printf("skipping %s\n", fields)
 			}
 		}
 	}

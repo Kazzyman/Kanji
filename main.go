@@ -30,13 +30,13 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 	if game_loop_counter > game_duration {
 		game_off()
 	}
-	var in string // var declaration needed as a ":=" would not work within the conditional because "in" not in signature
+	var in string // A var declaration was needed as a ":=" would not work within the conditional because "in" not in signature
 	for {
 		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
 		in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
 
 		if in_list_of_Directives(in) {
-			if in == "setc" { // respond_to_UserSuppliedDirective(in, new_objective_kind) will want to return values is "set" is switched on
+			if in == "setc" { // respond_to_UserSuppliedDirective(in) will want to return values if "setc" is switched on
 				promptField, objective, objective_kind, secondary_objective = respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
@@ -98,14 +98,14 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 			and, with skipOops true [and passed to rightOrOops()] rightOrOops() will not say ^^Oops! after this recursion
 			...                                                                        t, f, t Skips rightOrOops
 		*/
-		// Recursive call if DetectedDirective:
+		// Do a recursive call after handling a Directive
 		evaluateUsersGuess(in, promptField, objective, objective_kind, true, false, true, secondary_objective)
 	} else {
 		/*
 			Do a normal, i.e., unconditional recursion with skipOops set to false
 			via recall==true & skipOops==false [recursion false or recall true, means do rightOrOops]
 		*/
-		// Recursive call if DetectedDirective:
+		// Do a recursive call after handling a Directive
 		evaluateUsersGuess(in, promptField, objective, objective_kind, true, true, false, secondary_objective)
 		// t,t,f Does rightOrOops
 	}

@@ -6,7 +6,7 @@ import (
 )
 
 func check_for_match_in_other_fields(users_guess string) bool {
-	// Look everywhere
+	// Look everywhere (in every field of the card)
 	fields_from_aCard := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
 
 	for n, one_field_from_aCard := range fields_from_aCard { // Read through the slice of fields from aCard (see above)
@@ -15,8 +15,7 @@ func check_for_match_in_other_fields(users_guess string) bool {
 			// fmt.Printf("Tossed value is position number:%v\n", n) // If we want to know what the position was, print it
 			if n != 99999 {
 				n = 0
-			} // Must use n for something, as we chose not to toss the returned parameter via a _,
-			// break
+			} // We had to use n for something, since we chose not to toss the returned parameter via a _,
 			return true
 		}
 	}
@@ -74,7 +73,7 @@ func check_for_match_in_other_fields(in string) (found_one bool) {
 */
 
 func bool_from_rune(r rune) bool {
-	return !unicode.IsLetter(r) // r will be supplied by the caller, and is any
+	return !unicode.IsLetter(r) // r will be supplied by the caller, and is any Unicode (sans white space or punctuation)
 }
 
 func customMatch(our_guess, str string) bool {
@@ -85,8 +84,8 @@ func customMatch(our_guess, str string) bool {
 	// Check for a simple match of one within the other
 	if strings.Contains(strLower, ourGuessLower) ||
 		strings.Contains(ourGuessLower, strLower) { // i.e. :
-		// if strLower contains ourGuessLower, OR ... // an exact match of our Guess anywhere within the card field
-		// if ourGuessLower contains strLower        // an exact match of the entire card field within our Guess
+		// if strLower contains ourGuessLower, OR ... // Then it is an exact match of our Guess anywhere within the card field
+		// if ourGuessLower contains strLower        // Then it is an exact match of the entire card field within our Guess
 		return true
 	}
 

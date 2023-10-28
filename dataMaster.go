@@ -36,6 +36,7 @@ package main
 
 */
 var fileOfCardsMaster = []charSetStructKanji{
+
 	{"車", "car", "or, vehicle", "sha　しゃ", "kuruma　くるま",
 		"電車 (electric train)",
 		" "},
