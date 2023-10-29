@@ -9,68 +9,37 @@ func check_for_match_in_other_fields(users_guess string) bool {
 	// Look everywhere (in every field of the card)
 	fields_from_aCard := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
 
-	for n, one_field_from_aCard := range fields_from_aCard { // Read through the slice of fields from aCard (see above)
-		if customMatch(users_guess, one_field_from_aCard) {
-			// found_one = true // Let the caller know that we found at least one match via our custom parsing algorithm
-			// fmt.Printf("Tossed value is position number:%v\n", n) // If we want to know what the position was, print it
-			if n != 99999 {
-				n = 0
-			} // We had to use n for something, since we chose not to toss the returned parameter via a _,
-			return true
+	if len(users_guess) < 3 { // if the guess is only two chars long then we call it a miss
+		// Add some exceptions here for words that are only two chars long
+		// if ... { ... return true } // or something
+		/*
+			for n, one_field_from_aCard := range fields_from_aCard { // Read through the slice of fields from aCard (see above)
+				if customMatch(users_guess, one_field_from_aCard) {
+					// found_one = true // Let the caller know that we found at least one match via our custom parsing algorithm
+					// fmt.Printf("Tossed value is position number:%v\n", n) // If we want to know what the position was, print it
+					if n != 99999 {
+						n = 0
+					} // We had to use n for something, since we chose not to toss the returned parameter via a _,
+					return true
+				}
+			}
+		*/
+		return false // For now we just return false in the case of a very short guess, but this line will go away once we implement the above code
+	} else {
+		for n, one_field_from_aCard := range fields_from_aCard { // Read through the slice of fields from aCard (see above)
+			if customMatch(users_guess, one_field_from_aCard) {
+				// found_one = true // Let the caller know that we found at least one match via our custom parsing algorithm
+				// fmt.Printf("Tossed value is position number:%v\n", n) // If we want to know what the position was, print it
+				if n != 99999 {
+					n = 0
+				} // We had to use n for something, since we chose not to toss the returned parameter via a _,
+				return true
+			}
 		}
 	}
 	// else
 	return false
 }
-
-// Older versions and segments of code:
-/*
-pattern := `(?i).*` + strings.Join(strings.Split(our_guess_in_lower_case, ""), `.*`) + `.*`
-    reg := regexp.MustCompile(pattern)
-
-    for _, str := range strings_from_card {
-        if reg.MatchString(str) {
-            found_one = true
-            break
-        }
-    }
-*/
-
-/*
-func customMatch(our_guess, str string) bool {
-	ourGuessLower := strings.ToLower(our_guess)
-	strLower := strings.ToLower(str)
-
-	// Debugging info:
-	fmt.Printf("strLower:%s, ourGuessLower:%s, %v\n", strLower, ourGuessLower, strings.Contains(strLower, ourGuessLower))
-	fmt.Printf("ourGuessLower:%s, strLower:%s, %v\n\n", ourGuessLower, strLower, strings.Contains(ourGuessLower, strLower))
-
-	return strings.Contains(strLower, ourGuessLower) ||
-		strings.Contains(ourGuessLower, strLower)
-	// Add more code here to parse strLower for any (non-alpha delimited) substrings in it that match any substring in ourGuessLower ...
-	// ... such that if strLower is: "one, two, three, sam, sick, water", it will match if ourGuessLower is: "xxxxwaterxxxx" where x is any char
-}
-
-func check_for_match_in_other_fields(in string) (found_one bool) {
-	our_guess_in_lower_case := strings.ToLower(in)
-	strings_from_card := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
-
-	for _, str := range strings_from_card {
-		if customMatch(our_guess_in_lower_case, str) {
-			found_one = true
-			break
-		}
-	}
-
-		// Debugging: Print whether a match was found
-		fmt.Printf("Search String: %s\n", our_guess_in_lower_case)
-		fmt.Printf("Fields: %v\n", strings_from_card)
-		fmt.Printf("Matches: %v\n", found_one)
-
-		return found_one
-}
-
-*/
 
 func bool_from_rune(r rune) bool {
 	return !unicode.IsLetter(r) // r will be supplied by the caller, and is any Unicode (sans white space or punctuation)

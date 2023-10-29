@@ -12,6 +12,8 @@ import (
 func in_list_of_Directives(in string) bool { // - -
 	// if it IS a directive
 	if in == "?" || // context-sensitive help on the current card
+		in == "t1" || // test one
+		in == "t2" || // test two
 		in == "sdk" || // Switch Deck
 		in == "fif" || // find in files
 		in == "rs" || // reset all logs etc
@@ -81,6 +83,10 @@ func switch_the_deck() {
 func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secondary_objective string) { // - -
 	var count int
 	switch in {
+	case "t1":
+		test1()
+	case "t2":
+		test2()
 	case "fif":
 		find_in_files()
 	case "sdk":
@@ -115,7 +121,7 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 	case "?": // context-sensitive help on the current card
 		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 	case "st": // stats
-		hits()
+		newHits()
 	case "frmt": // format a file
 		formatter()
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):

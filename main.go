@@ -20,6 +20,8 @@ func main() {
 		if game_loop_counter > game_duration {
 			game_off()
 		}
+		// promptField = aCard.Kanji
+		// objective = aCard.Meaning, secondary_objective is second meaning
 		new_prompt, objective, objective_kind, secondary_objective := pick_RandomCard_Assign_fields() // This line is done after each ^^Right!
 		begin(new_prompt, objective, objective_kind, secondary_objective)
 	} // And then, begin again; i.e., pick another card
@@ -116,7 +118,11 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 func rightOrOops(in, promptField, objective string, skipOops bool, secondary_objective string) { // - -
 
 	if in == objective {
-		log_right(promptField)
+		log_right(promptField, in)
+		// promptField ~ aCard.Kanji
+		// in ~ users guess
+		// objective ~ aCard.Meaning, secondary_objective is second meaning
+		// recordGuess(kanji, users_Guess, Meaning_on_record string)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
@@ -140,7 +146,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else if in == secondary_objective {
-		log_right(promptField)
+		log_right(promptField, in)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
@@ -164,7 +170,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
-		log_right(promptField)
+		log_right(promptField, in)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
@@ -214,7 +220,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 	//
 
 	if in == objective {
-		log_right(promptField)
+		log_right(promptField, in)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
@@ -237,7 +243,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else if in == secondary_objective {
-		log_right(promptField)
+		log_right(promptField, in)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
@@ -261,7 +267,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
-		log_right(promptField)
+		log_right(promptField, in)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
@@ -306,7 +312,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 	//
 
 	if in == objective {
-		log_right(promptField)
+		log_right(promptField, in)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
@@ -330,7 +336,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else if in == secondary_objective {
-		log_right(promptField)
+		log_right(promptField, in)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
@@ -354,7 +360,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
 	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
-		log_right(promptField)
+		log_right(promptField, in)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
