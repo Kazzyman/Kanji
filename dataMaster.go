@@ -38,39 +38,39 @@ package main
 var fileOfCardsMaster = []charSetStructKanji{
 
 	{"車", "car", "or, vehicle", "sha しゃ", "kuruma くるま",
-		"電車 (electric train)",
+		"電車 (electric train 66)",
 		" "},
 
 	{"日", "day", "or, sun", "にち, じつ", "ひ, か",
-		"明日 (tomorrow)",
+		"明日 66 (tomorrow)",
 		" "},
 
 	{"土", "earth", "ground", "do ど, to と", "tsuchi つち",
-		"土曜日 (Saturday)",
+		"土曜日 (66Saturday)",
 		" "},
 
 	{"高", "expensive", "high", "kou こう", "taka たか(iい)",
-		"高い (expensive)",
+		"高い (expensive)66",
 		" "},
 
 	{"魚", "fish", "Fish", "gyo ぎょ", "sakana さかな",
 		"魚 (fish)",
-		" "},
+		" 66"},
 
 	{"足", "foot", "or, to add", "soku そく", "ashi あし, ta(su) た(す)",
 		"足 (foot)",
-		" "},
+		"66 "},
 
 	{"友", "friend", "Friend", "yuu ゆう", "tomo とも",
 		"友達 (friend)",
-		" "},
+		" 55"},
 
 	{"天", "heaven", "Heaven", "ten てん", "ame あめ, ama あま",
 		"天気 (weather)",
-		" "},
+		"55 "},
 
 	{"百", "hundred", "Hundred", "hyaku ひゃく", "—",
-		"百万円 (1 million Yen)",
+		"百万円 (1 million Yen99)",
 		" "},
 
 	{"左", "left", "Left", "sa さ", "hidari ひだり",
@@ -109,8 +109,8 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"社長 (president of a company)",
 		" "},
 
-	{"六", "six", "Six", "roku ろく", "mut(tsu), mu む",
-		"六日 (6th day of the month)",
+	{"六", "six", "6", "roku ろく", "mut(tsu), mu む",
+		"六日 (6th day of the month)", // matches 6 in SM but not in vocab: cool
 		" "},
 
 	{"駅", "station", "as in: Train Station", "eki えき", " -",
@@ -121,9 +121,9 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"道具 (tool)",
 		" "},
 
-	{"三日", "tdom", "3rd day of the month", "san さん", "mi みか",
+	{"三日", "3rd-day-of-the-month", "3rd day of the month", "san さん", "mi みか",
 		"三日 3rd day of the month",
-		" "},
+		"xxxx"},
 
 	{"万", "ten-thousand", "Ten thousand", "man まん, ban ばん", "—",
 		"万年筆 (fountain pen, ten thousand year brush)",
