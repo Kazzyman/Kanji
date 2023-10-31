@@ -8,7 +8,7 @@ import (
 )
 
 func isSingleDigit(usersGuess string) bool { // - -
-	fmt.Println("In isSingleDigit")
+	// fmt.Println("In isSingleDigit")
 	// Define a regular expression pattern to match a single alpha string digit char from 1 to 9
 
 	pattern := `^[1-9]$`
@@ -20,7 +20,7 @@ func isSingleDigit(usersGuess string) bool { // - -
 	return reg.MatchString(usersGuess)
 }
 func isDoubleDigit(usersGuess string) bool { // - -
-	fmt.Println("In isDoubleDigit")
+	// fmt.Println("In isDoubleDigit")
 	// Define a regular expression pattern to match a double-digit alpha string from 10 to 99
 	pattern := `^[1-9][0-9]$`
 
@@ -110,7 +110,7 @@ func customMatch2digits(our_guess, str string) bool {
 	ourGuessLower := strings.ToLower(our_guess)
 	strLower := strings.ToLower(str)
 
-	delimiters := ";, -().:"                      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  HERE *****
+	delimiters := ";, -().:"                      // - - - - - - - - - - - - - - - - - - - - - -   HERE *****
 	strParts := customSplit(strLower, delimiters) // This is the only time that "customSplit(str, delimiters string) []string" is called
 	for _, part := range strParts {               // Read through the slice: strParts to obtain each part
 		// fmt.Printf("Here is a part from customMatch2digits: %s \n", part)
@@ -164,7 +164,7 @@ func check_for_match_in_other_fields(users_guess string) bool {
 			return false
 		}
 		// else return false
-		return false // For now we just return false in the case of a very short guess, but this line will go away once we implement the above code
+		// return false // For now we just return false in the case of a very short guess, but this line will go away once we implement the above code
 	} else {
 		for _, one_field_from_aCard := range fields_from_aCard { // Read through the slice of fields from aCard (see above)
 			// If we want to know what the position was, could use n instead of _ to print it
@@ -186,8 +186,9 @@ func check_for_match_in_other_fields(users_guess string) bool {
 	return false
 }
 
-func bool_from_rune(r rune) bool {
-	return !unicode.IsLetter(r) // r will be supplied by the caller, and is any Unicode (sans white space or punctuation)
+func bool_from_rune(rune_unicode_code_point rune) bool {
+	return !unicode.IsLetter(rune_unicode_code_point) // rune_unicode_code_point is any Unicode (sans white space or punctuation)
+	// See discussion
 }
 
 func customMatch(our_guess, str string) bool {
@@ -288,15 +289,14 @@ It's a way to customize how strings are split when using strings.FieldsFunc
 
 In the above code, it helps split strLower into non-alpha delimited substrings for further matching.
 
-The r is simply a parameter name, and it's used to represent the rune value (Unicode code point) that you pass to the
-function. It's a common convention in Go (and in many programming languages) to use descriptive parameter names that
-make the code more readable and self-explanatory. In this case, r is used to indicate that the function operates on a
-rune value.
+rune_unicode_code_point is simply a parameter name, and it's used to represent the rune value (Unicode code point) that we pass
+to the function. It's a common convention in Go (and in many programming languages) to use descriptive parameter names that
+make the code more readable and self-explanatory. In this case, rune_unicode_code_point is used to indicate that the function
+operates on a rune value.
 
 The rune parameter represents a single Unicode code point, which can be any character from the Unicode standard.
-The name r is just a choice made by the developer, yours truly, who wrote this code; it could have been named something
-else, but r is a concise and commonly used name for such parameters, especially when dealing with Unicode code points.
-It doesn't have any specific source or significance other than being a descriptive variable name.
+The name rune_unicode_code_point is just a choice made by the developer, yours truly, who wrote this code; it could have been
+named something else. It doesn't have any specific source or significance other than being a descriptive variable name.
 
 When you call the strings.FieldsFunc function with bool_from_rune as its argument, you're not explicitly supplying a
 parameter of type rune to it. Instead, the strings.FieldsFunc function itself will handle this.

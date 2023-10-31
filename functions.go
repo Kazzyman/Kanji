@@ -68,12 +68,12 @@ func switch_the_deck() {
 	// Tried to get too fancy here. But it fucked things up. So, just live with the bug you were trying to fix.
 	// ... which was just that after a sdk Dir you would get one last prompt from the prior deck, big F'n deal!
 	/*
-		new_prompt, _, _ := pick_RandomCard_Assign_fields()
+		new_prompt, _, _ := pick_aCard_and_assign_fields()
 		promptWithDir(new_prompt)
 
 	*/
 	/*
-		new_prompt, _, _ := pick_RandomCard_Assign_fields()
+		new_prompt, _, _ := pick_aCard_and_assign_fields()
 		in = promptWithDir(new_prompt)
 		return in
 
@@ -107,12 +107,15 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 		cyclicArrayHits = CyclicArrayHits{}
 		// Also, flush (clear) the maps
 		total_prompts = 0
+		kanjiHitMap = make(map[string]CardInfo)
+		frequencyMapOf_IsFineOnChars = make(map[string]int)
 		//
 		//goland:noinspection ALL
 		fmt.Println("\nArrays and maps flushed:\n")
 		fmt.Println("    cyclicArrayOfTheJcharsGottenWrong")
 		fmt.Println("    cyclicArrayHits")
 		fmt.Println("    frequencyMapOf_IsFineOnChars")
+		fmt.Println("    kanjiHitMap")
 		//goland:noinspection ALL
 		fmt.Println("    frequencyMapOf_need_workOn\n")
 		fmt.Println("  And, all Game values have also been reset")

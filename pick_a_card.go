@@ -2,7 +2,7 @@ package main
 
 import "math/rand"
 
-func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, secondary_objective string) { // - -
+func pick_aCard_and_assign_fields() (promptField, objective, objective_kind, secondary_objective string) { // - -
 	// Random prompting from selected deck
 	//
 	if current_deck == "init" {

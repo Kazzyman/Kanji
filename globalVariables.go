@@ -22,6 +22,7 @@ type charSetStructKanji struct {
 	Vocab2         string
 }
 
+var from_last_failed_attempt = false
 var current_deck string
 var total_prompts int
 var indexNovS int

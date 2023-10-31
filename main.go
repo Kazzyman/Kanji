@@ -19,12 +19,12 @@ func main() {
 		}
 		if game_loop_counter > game_duration {
 			game_off()
+			fmt.Println("Game has ended")
+			// Do game stats etc.
 		}
-		// promptField = aCard.Kanji
-		// objective = aCard.Meaning, secondary_objective is second meaning
-		new_prompt, objective, objective_kind, secondary_objective := pick_RandomCard_Assign_fields() // This line is done after each ^^Right!
+		new_prompt, objective, objective_kind, secondary_objective := pick_aCard_and_assign_fields() // This line is done after each ^^Right!
 		begin(new_prompt, objective, objective_kind, secondary_objective)
-	} // And then, begin again; i.e., pick another card
+	} // Endlessly loop: check game status, pick another card, and begin again
 }
 
 // The first function that prompts the user
@@ -35,7 +35,7 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 	var in string // A var declaration was needed as a ":=" would not work within the conditional because "in" not in signature
 	for {
 		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
-		in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(promptField) // Get user's guess
 
 		if in_list_of_Directives(in) {
 			if in == "setc" { // respond_to_UserSuppliedDirective(in) will want to return values if "setc" is switched on
@@ -48,9 +48,10 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 			// Passing recursion false [or recall true], means do rightOrOops()
 			// ...                                                                  f,f,f Does rightOrOops
 			evaluateUsersGuess(in, promptField, objective, objective_kind, false, false, false, secondary_objective)
+			// from_last_failed_attempt = true
 			break // ... Having finished with all potential guessing, return to main ...
 		}
-	} // ... Returns to main()'s inner loop; to (usually randomly) select the next card
+	} // ... Returns to main()'s inner loop; to obtain a new card from which to prompt
 }
 
 func evaluateUsersGuess(in, promptField, objective, objective_kind string, recursion, recall, skipOops bool, secondary_objective string) {
@@ -64,7 +65,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 		evaluateUsersGuess() has been called with recursion true and recall false
 	*/
 	if recursion {
-		// If recursion is true, then do nothing
+		// If a recursion has occurred, then do nothing
 	} else {
 		if gameOn {
 			game_loop_counter++
@@ -84,8 +85,14 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 		// If recall is false, then do nothing
 	}
 	// ^ ^ ^ If evaluateUsersGuess() has been called after handling a "Directive" then rightOrOops() is omitted entirely
-	// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
-	in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
+
+	if from_last_failed_attempt {
+		from_last_failed_attempt = false
+		in = prompt_interim3(promptField)
+	} else {
+		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+		in = promptWithDir(promptField) // Get user's guess
+	}
 
 	if in_list_of_Directives(in) {
 		if in == "setc" { // See prior comments
@@ -111,28 +118,24 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 		evaluateUsersGuess(in, promptField, objective, objective_kind, true, true, false, secondary_objective)
 		// t,t,f Does rightOrOops
 	}
-	// Returns to here from all subsequent functions ???
-	// and, returns to begin() and, hense, to main() for the next card ???
+	// Returns to here from all subsequent functions ...
+	// and, then returns to begin() and, hense, to main() for the next card ???
 }
 
 func rightOrOops(in, promptField, objective string, skipOops bool, secondary_objective string) { // - -
 
 	if in == objective {
 		log_right(promptField, in)
-		// promptField ~ aCard.Kanji
-		// in ~ users guess
-		// objective ~ aCard.Meaning, secondary_objective is second meaning
-		// recordGuess(kanji, users_Guess, Meaning_on_record string)
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--Right!\n")
+		fmt.Printf(" <--Right!  exactly right! \n")
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -154,9 +157,9 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		// This prompt, deployed by new_objective_kind, take new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -174,13 +177,13 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--somewhat Right! in other fields\n")
+		fmt.Printf(" <--somewhat Right! in other fields, or as a substring in objective\n")
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -193,7 +196,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		} else {
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
-	} else { // it is not a Right, and is therefor an Oops, no new aCard has been fetched etc.
+	} else { // It is not a Right, and is therefor an Oops, no new aCard has been fetched etc.
 		if skipOops {
 			// Then do nothing
 		} else {
@@ -211,9 +214,9 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 	fmt.Printf("Try again \n")
 	fmt.Printf("%s", string(colorReset))
 	var in string // var declaration needed as a ":=" would not work within the conditional because "in" not in signature
-	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives:(currently inoperative)
+	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives, which are currently inoperative
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
-	in = prompt_interim(promptField) // Get user's input, from a randomly selected prompt
+	in = prompt_interim(promptField) // Get user's guess
 
 	// ...
 	// Note the lack of a Directive handling section which normally follows prompting, Directives are currently inoperative
@@ -224,12 +227,12 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--Right!\n")
+		fmt.Printf(" <--Right!  exactly right! \n")
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		fmt.Printf("%s", colorReset)
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -251,9 +254,9 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		// This prompt, deployed by new_objective_kind, take new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -271,13 +274,13 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--somewhat Right! in other fields\n")
+		fmt.Printf(" <--somewhat Right! in other fields, or as a substring in objective\n")
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		// This prompt, deployed by new_objective_kind, take new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -303,9 +306,9 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 	fmt.Printf("Last Try! \n")
 	fmt.Printf("%s", string(colorReset))
 	var in string // var declaration needed as a ":=" would not work within the conditional ~ "in" not in signature
-	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives:(currently inoperative)
+	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives, which are currently inoperative
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
-	in = prompt_interim(promptField) // Get user's input, from a randomly selected prompt
+	in = prompt_interim2(promptField) // Get user's guess
 
 	// ...
 	// Note the lack of a Directive handling section which normally follows prompting, Directives are currently inoperative
@@ -316,13 +319,13 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--Right!\n")
+		fmt.Printf(" <--Right!  exactly right! \n")
 		// fmt.Printf("%s", colorReset)
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		fmt.Printf("%s", colorReset)
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -344,9 +347,9 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -364,13 +367,13 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
-		fmt.Printf(" <--somewhat Right! in other fields\n")
+		fmt.Printf(" <--somewhat Right! in other fields, or as a substring in objective\n")
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		in = promptWithDir(new_prompt) // Get user's guess
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -386,10 +389,10 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 	} else {
 		log_oops(aCard.Kanji, aCard.Meaning, in)
 		fmt.Printf("%s", colorRed)
-		// fmt.Printf("      　^^That was your last try, Oops! ")
 		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Second_Meaning,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", string(colorReset))
+		from_last_failed_attempt = true
 	}
 	// Returns to caller:
 }

@@ -26,8 +26,26 @@ func List_of_Directives() {
 func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Meaning? (deck:%s)\n :> ", current_deck)
-	fmt.Printf("%s", colorReset)
+	fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deck, colorReset)
+	fmt.Printf("you must guess! \n :> ")
+	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
+	return usersGuessOrOptionDirective
+}
+func prompt_interim2(promptField string) (usersGuessOrOptionDirective string) { //  - -
+	fmt.Printf("%s", promptField)
+	fmt.Printf("%s", colorCyan)
+	fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deck, colorReset)
+	fmt.Printf("just once more!! \n :> ")
+	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
+	return usersGuessOrOptionDirective
+}
+func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { //  - -
+	fmt.Printf("%s", promptField)
+	fmt.Printf("%s", colorCyan)
+	fmt.Printf(" Meaning? (deck:%s) %s", current_deck, colorReset)
+	fmt.Printf("try any substring from the %s", colorRed)
+	fmt.Printf("red%s", colorReset)
+	fmt.Printf(" text\n :> ")
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective
 }
