@@ -26,7 +26,13 @@ func List_of_Directives() {
 func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deck, colorReset)
+	if current_deck == "all" || current_deck == "rand" {
+		fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deckA, colorReset)
+	} else if current_deck == "randAll" {
+		fmt.Printf(" Meaning? (mode:%s) Help is off, %s", current_deckA, colorReset)
+	} else {
+		fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deck, colorReset)
+	}
 	fmt.Printf("you must guess! \n :> ")
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective
@@ -34,7 +40,13 @@ func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { /
 func prompt_interim2(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deck, colorReset)
+	if current_deck == "all" || current_deck == "rand" {
+		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deckA, colorReset)
+	} else if current_deck == "randAll" {
+		fmt.Printf(" Meaning? (mode:%s) Help is off, you must guess, %s", current_deckA, colorReset)
+	} else {
+		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deck, colorReset)
+	}
 	fmt.Printf("just once more!! \n :> ")
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return usersGuessOrOptionDirective
@@ -42,7 +54,13 @@ func prompt_interim2(promptField string) (usersGuessOrOptionDirective string) { 
 func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Meaning? (deck:%s) %s", current_deck, colorReset)
+	if current_deck == "all" || current_deck == "rand" {
+		fmt.Printf(" Meaning? (deck:%s) %s", current_deckA, colorReset)
+	} else if current_deck == "randAll" {
+		fmt.Printf(" Meaning? (mode:%s) %s", current_deckA, colorReset)
+	} else {
+		fmt.Printf(" Meaning? (deck:%s) %s", current_deck, colorReset)
+	}
 	fmt.Printf("try any substring from the %s", colorRed)
 	fmt.Printf("red%s", colorReset)
 	fmt.Printf(" text\n :> ")
@@ -53,7 +71,13 @@ func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { 
 func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf("%s", prompt)
 	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deck)
+	if current_deck == "all" || current_deck == "rand" {
+		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deckA)
+	} else if current_deck == "randAll" {
+		fmt.Printf(" Meaning? (mode:%s), 'dir' or '?' for help with ", current_deckA)
+	} else {
+		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deck)
+	}
 	fmt.Printf(string(colorReset))
 	fmt.Printf("%s \n", prompt)
 	fmt.Printf("%s", colorCyan)
@@ -118,6 +142,8 @@ func re_display_List_of_Directives() { // (unique)     - -
 	if current_deck == "inits" || current_deck == "novs" || current_deck == "grads" ||
 		current_deck == "masts" || current_deck == "gurus" {
 		fmt.Println("Order is set to Sequential\n")
+	} else if current_deck == "randAll" {
+		fmt.Printf("Mode is randAll, and deck is %s\n\n", current_deckA)
 	} else {
 		fmt.Println("Order is Random\n")
 	}

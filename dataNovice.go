@@ -57,7 +57,7 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"読む (to read)",
 		" "},
 
-	{"話", "to-talk", "conversation", "わ", "はなし, はな(す)",
+	{"話", "to-talk", "conversation, to speak", "わ", "はなし, はな(す)",
 		"電話 (telephone)",
 		" "},
 

@@ -3,13 +3,15 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 	"time"
 )
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	gameOn = false
-	current_deck = "mast"
+	current_deck = "randAll"
+	indexInitS = 30
 	display_List_of_Directives()
 	for {
 		if gameOn {
@@ -123,6 +125,10 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 }
 
 func rightOrOops(in, promptField, objective string, skipOops bool, secondary_objective string) { // - -
+	// Let's work only with lower-case versions of our data
+	in = strings.ToLower(in)
+	objective = strings.ToLower(objective)
+	secondary_objective = strings.ToLower(secondary_objective)
 
 	if in == objective {
 		log_right(promptField, in)

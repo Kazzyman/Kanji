@@ -38,6 +38,10 @@ func switch_the_deck() {
 	for {
 		fmt.Println("\nEnter a deck from below for randomized prompting:\n")
 
+		fmt.Println("    all, sequentially read all cards from each deck")
+		fmt.Println("    rand, randomly read from all decks")
+		fmt.Println("    randAll (default), randomize over decks and modes\n")
+
 		fmt.Println("    init")
 		fmt.Println("    nov")
 		fmt.Println("    grad")
@@ -53,10 +57,14 @@ func switch_the_deck() {
 		fmt.Printf("    gurus \n\n Here:> ")
 
 		_, _ = fmt.Scan(&current_deck)
+		if current_deck == "all" {
+			indexInitS = 20
+		}
 
 		if current_deck != "init" && current_deck != "nov" && current_deck != "grad" && current_deck != "mast" &&
 			current_deck != "guru" && current_deck != "inits" && current_deck != "novs" && current_deck != "grads" &&
-			current_deck != "masts" && current_deck != "gurus" {
+			current_deck != "masts" && current_deck != "gurus" && current_deck != "all" && current_deck != "rand" &&
+			current_deck != "randAll" {
 			fmt.Printf("%s", string(colorRed))
 			fmt.Printf("\n  \"%s\" is not a valid deck, try again: \n", current_deck)
 			fmt.Printf("%s", string(colorReset))
@@ -109,12 +117,15 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 		total_prompts = 0
 		kanjiHitMap = make(map[string]CardInfo)
 		frequencyMapOf_IsFineOnChars = make(map[string]int)
+		frequencyMapOf_need_workOn = make(map[string]int)
 		//
 		//goland:noinspection ALL
 		fmt.Println("\nArrays and maps flushed:\n")
 		fmt.Println("    cyclicArrayOfTheJcharsGottenWrong")
 		fmt.Println("    cyclicArrayHits")
 		fmt.Println("    frequencyMapOf_IsFineOnChars")
+		fmt.Println("    frequencyMapOf_need_workOn")
+
 		fmt.Println("    kanjiHitMap")
 		//goland:noinspection ALL
 		fmt.Println("    frequencyMapOf_need_workOn\n")

@@ -24,7 +24,14 @@ type charSetStructKanji struct {
 
 var from_last_failed_attempt = false
 var current_deck string
+var current_deckA string
 var total_prompts int
+
+var forLoop int
+var randDeck int
+var randDeckAndMode int
+
+// Five indexes for the five sequential files
 var indexNovS int
 var indexInitS int
 var indexGuruS int
