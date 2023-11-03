@@ -38,39 +38,39 @@ package main
 var fileOfCardsMaster = []charSetStructKanji{
 
 	{"車", "car", "or, vehicle", "sha しゃ", "kuruma くるま",
-		"電車 (electric train 66)",
+		"電車 (electric train)",
 		" "},
 
 	{"日", "day", "or, sun", "にち, じつ", "ひ, か",
-		"明日 66 (tomorrow)",
+		"明日 (tomorrow)",
 		" "},
 
 	{"土", "earth", "ground", "do ど, to と", "tsuchi つち",
-		"土曜日 (66Saturday)",
+		"土曜日 (Saturday)",
 		" "},
 
 	{"高", "expensive", "high", "kou こう", "taka たか(iい)",
-		"高い (expensive)66",
+		"高い (expensive)",
 		" "},
 
 	{"魚", "fish", "Fish", "gyo ぎょ", "sakana さかな",
 		"魚 (fish)",
-		" 66"},
+		" "},
 
 	{"足", "foot", "or, to add", "soku そく", "ashi あし, ta(su) た(す)",
 		"足 (foot)",
-		"66 "},
+		" "},
 
 	{"友", "friend", "Friend", "yuu ゆう", "tomo とも",
 		"友達 (friend)",
-		" 55"},
+		" "},
 
 	{"天", "heaven", "Heaven", "ten てん", "ame あめ, ama あま",
 		"天気 (weather)",
-		"55 "},
+		" "},
 
 	{"百", "hundred", "Hundred", "hyaku ひゃく", "—",
-		"百万円 (1 million Yen99)",
+		"百万円 (1 million Yen)",
 		" "},
 
 	{"左", "left", "Left", "sa さ", "hidari ひだり",

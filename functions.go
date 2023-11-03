@@ -143,6 +143,7 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 	case "rm": // Read the Maps
 		read_map_of_fineOn()
 		read_map_of_needWorkOn()
+		read_map()
 	case "setc": // set, force, a new card
 		prompt, objective, kind, secondary_objective = reSet_aCard_andThereBy_reSet_thePromptString()
 		if foundElement == nil {

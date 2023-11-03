@@ -19,6 +19,19 @@ cyclicArrayHits := CyclicArrayHits{} // Explicitly, an empty, uninitialized, var
 .
 */
 
+var cyclicArrayPulls CyclicArrayPulls
+
+type CyclicArrayPulls struct {
+	pulls [90]string
+	index int
+}
+
+func (ca *CyclicArrayPulls) InsertKChar(pulls string) { // Please refer also to the lengthy discussion below: // - -
+	ca.pulls[ca.index] = pulls                // Assign the passed string 'value' to the 'data' array at position 'ca.index'
+	ca.index = (ca.index + 1) % len(ca.pulls) // Increment 'index' (an integer indexing element) such that it loops-back to ...
+	// ... the first position of the 'jchar' array -- having determined its length using: len(ca.jchar).
+}
+
 // The universal hits array:
 //
 // Declare a memory allocation for storing the most-recent 300 data-points; a cyclic array of structures

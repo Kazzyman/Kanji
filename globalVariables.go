@@ -4,6 +4,7 @@ import "time"
 
 // This file contains All global vars NOT located in the objectsAndMethods.go file
 //
+var from_recursion bool
 
 // All of the decks will draw cards per this aCard var:
 var aCard = charSetStructKanji{}

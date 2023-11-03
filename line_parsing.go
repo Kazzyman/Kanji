@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"regexp"
 	"strings"
 	"unicode"
@@ -50,7 +49,7 @@ func customSplit(str, delimiters string) []string {
 // The two (commented) above functions were to be equivalent to the following, but I failed
 // Caller passes two strings, one to split, and a string of delimiters; as of last writing: delimiters := ";, -().:"
 func customSplit(str, delimiters string) []string {
-	fmt.Println("In customSplit")
+	// fmt.Println("In customSplit")
 
 	// isDelimiter is a custom lambda function which checks if a rune is one of the specified delimiters ...
 	// and, it checks to see if delimiter is found as a char in str, see the discussion below

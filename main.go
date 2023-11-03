@@ -9,6 +9,7 @@ import (
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
+	from_recursion = false
 	gameOn = false
 	current_deck = "randAll"
 	indexInitS = 30
@@ -24,7 +25,8 @@ func main() {
 			fmt.Println("Game has ended")
 			// Do game stats etc.
 		}
-		new_prompt, objective, objective_kind, secondary_objective := pick_aCard_and_assign_fields() // This line is done after each ^^Right!
+		// oldPrompt = aCard.Kanji
+		new_prompt, objective, objective_kind, secondary_objective := pick_aCard_and_assign_fields(false) // This line is done after each ^^Right!
 		begin(new_prompt, objective, objective_kind, secondary_objective)
 	} // Endlessly loop: check game status, pick another card, and begin again
 }
@@ -139,7 +141,14 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -163,7 +172,14 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -187,7 +203,14 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -218,7 +241,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 func tryAgain(promptField, objective, secondary_objective string) { // - -
 
 	fmt.Printf("Try again \n")
-	fmt.Printf("%s", string(colorReset))
+	fmt.Printf("%s", colorReset)
 	var in string // var declaration needed as a ":=" would not work within the conditional because "in" not in signature
 	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives, which are currently inoperative
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
@@ -235,8 +258,15 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorGreen)
 		fmt.Printf(" <--Right!  exactly right! \n")
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
 		fmt.Printf("%s", colorReset)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -260,7 +290,14 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -284,7 +321,14 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, take new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -310,7 +354,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 
 func lastTry(promptField, objective, secondary_objective string) { // - -
 	fmt.Printf("Last Try! \n")
-	fmt.Printf("%s", string(colorReset))
+	fmt.Printf("%s", colorReset)
 	var in string // var declaration needed as a ":=" would not work within the conditional ~ "in" not in signature
 	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives, which are currently inoperative
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
@@ -328,8 +372,15 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf(" <--Right!  exactly right! \n")
 		// fmt.Printf("%s", colorReset)
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
 		fmt.Printf("%s", colorReset)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -353,7 +404,14 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -377,7 +435,14 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields()
+		oldPrompt = aCard.Kanji
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		if from_recursion {
+			new_prompt = aCard.Kanji
+			new_objective = aCard.Meaning
+			new_secondary_objective = aCard.Second_Meaning
+			from_recursion = false
+		}
 		// This prompt, deployed by new_objective_kind, takes new_prompt
 		in = promptWithDir(new_prompt) // Get user's guess
 
@@ -397,7 +462,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorRed)
 		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Second_Meaning,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
-		fmt.Printf("%s", string(colorReset))
+		fmt.Printf("%s", colorReset)
 		from_last_failed_attempt = true
 	}
 	// Returns to caller:
