@@ -8,7 +8,7 @@ import (
 // Also used in the 'setc' directive via: reSet_aCard_andThereBy_reSet_thePromptString()
 // ... to reSet the card, i.e., the Kanji/prompt(and all other aCard fields) via its Meaning field
 //
-// The sole function of this func is to set the global: foundElement
+// The sole purpose of this func is to set the global: foundElement
 func silentlyLocateCard(setKeyRequest string) { //  - -
 	foundElement = nil // Prime the global foundElement, a pointer thus: var foundElement *charSetStructKanji
 	//

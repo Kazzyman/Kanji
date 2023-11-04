@@ -2,7 +2,7 @@ package main
 
 import "time"
 
-// This file contains All global vars NOT located in the objectsAndMethods.go file
+// This file contains many of the global vars NOT located in the objectsAndMethods.go file
 //
 var from_recursion bool
 
@@ -23,7 +23,7 @@ type charSetStructKanji struct {
 	Vocab2         string
 }
 
-var from_last_failed_attempt = false
+var returning_from_a_wrong_guess = false
 var current_deck string
 var current_deckA string
 var total_prompts int
@@ -32,7 +32,7 @@ var forLoop int
 var randDeck int
 var randDeckAndMode int
 
-// Five indexes for the five sequential files
+// Five indexes for the five sequential files, used in pick_a_card.go
 var indexNovS int
 var indexInitS int
 var indexGuruS int
@@ -43,7 +43,6 @@ var TimeOfStartFromTop = time.Now()
 
 var game_loop_counter int
 var game_duration = 998
-
 var gameOn bool
 
 // Constants:

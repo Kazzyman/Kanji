@@ -5,6 +5,14 @@ import (
 	"strings"
 )
 
+func test1() {
+
+}
+
+func test2() {
+
+}
+
 // Create a kanjiHitMap map. A map of keys (kanji chars) and/to their associated history data, i.e., the struct: CardInfo
 var kanjiHitMap = make(map[string]CardInfo)
 
@@ -144,12 +152,4 @@ func newHits() {
 		}
 	}
 	fmt.Println("")
-}
-
-func test1() {
-
-}
-
-func test2() {
-
 }

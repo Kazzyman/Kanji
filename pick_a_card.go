@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 )
 
@@ -134,7 +133,7 @@ func pick_aCard_and_assign_fields(recursion bool) (promptField, objective, objec
 			lastPull = cyclicArrayPulls.pulls[i]
 			// fmt.Printf("pulling/pulled:%s, OldPrompt is:%s, promptField is:%s\n", lastPull, oldPrompt, promptField)
 			if lastPull == promptField { // seen it, so reset i, get new promptField, i.e. repeat
-				fmt.Printf("seen it before as lastPull:%s- and promptField:%s- \n", lastPull, promptField)
+				// fmt.Printf("seen it before as lastPull:%s- and promptField:%s- \n", lastPull, promptField)
 				// seen it, so acquire a new promptField, having reset index so as to search array anew
 				i = 0
 				from_recursion = true

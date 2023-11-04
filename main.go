@@ -11,7 +11,7 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 	from_recursion = false
 	gameOn = false
-	current_deck = "randAll"
+	current_deck = "randAll" // default deck
 	indexInitS = 30
 	display_List_of_Directives()
 	for {
@@ -25,7 +25,7 @@ func main() {
 			fmt.Println("Game has ended")
 			// Do game stats etc.
 		}
-		// oldPrompt = aCard.Kanji
+		// oldPrompt = aCard.Kanji // This, and related actions, are done on all subsequent (non-initial) picks and prompts
 		new_prompt, objective, objective_kind, secondary_objective := pick_aCard_and_assign_fields(false) // This line is done after each ^^Right!
 		begin(new_prompt, objective, objective_kind, secondary_objective)
 	} // Endlessly loop: check game status, pick another card, and begin again
@@ -38,7 +38,7 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 	}
 	var in string // A var declaration was needed as a ":=" would not work within the conditional because "in" not in signature
 	for {
-		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+		// This initial prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
 		in = promptWithDir(promptField) // Get user's guess
 
 		if in_list_of_Directives(in) {
@@ -52,7 +52,7 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 			// Passing recursion false [or recall true], means do rightOrOops()
 			// ...                                                                  f,f,f Does rightOrOops
 			evaluateUsersGuess(in, promptField, objective, objective_kind, false, false, false, secondary_objective)
-			// from_last_failed_attempt = true
+			// returning_from_a_wrong_guess = true
 			break // ... Having finished with all potential guessing, return to main ...
 		}
 	} // ... Returns to main()'s inner loop; to obtain a new card from which to prompt
@@ -90,8 +90,8 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 	}
 	// ^ ^ ^ If evaluateUsersGuess() has been called after handling a "Directive" then rightOrOops() is omitted entirely
 
-	if from_last_failed_attempt {
-		from_last_failed_attempt = false
+	if returning_from_a_wrong_guess {
+		returning_from_a_wrong_guess = false
 		in = prompt_interim3(promptField)
 	} else {
 		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
@@ -141,8 +141,10 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^Right!", next we obtain new values in-preparation of "returning" to caller
-		oldPrompt = aCard.Kanji
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -172,8 +174,10 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		oldPrompt = aCard.Kanji
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -203,8 +207,10 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		oldPrompt = aCard.Kanji
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -258,9 +264,11 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", colorGreen)
 		fmt.Printf(" <--Right!  exactly right! \n")
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-		oldPrompt = aCard.Kanji
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
 		fmt.Printf("%s", colorReset)
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -290,8 +298,10 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		oldPrompt = aCard.Kanji
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -321,8 +331,10 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		oldPrompt = aCard.Kanji
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -370,11 +382,12 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s", in)
 		fmt.Printf("%s", colorGreen)
 		fmt.Printf(" <--Right!  exactly right! \n")
-		// fmt.Printf("%s", colorReset)
-		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
-		oldPrompt = aCard.Kanji
-		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
 		fmt.Printf("%s", colorReset)
+		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -404,8 +417,10 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		oldPrompt = aCard.Kanji
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -435,8 +450,10 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
-		oldPrompt = aCard.Kanji
+		oldPrompt = aCard.Kanji // Used to determine if a Kanji has been recently picked, and should therefore be skipped in favor of something new
+
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_aCard_and_assign_fields(false)
+		// If returning from the foregoing func wherein a recursion has occurred, assign the new values per that recursion
 		if from_recursion {
 			new_prompt = aCard.Kanji
 			new_objective = aCard.Meaning
@@ -463,7 +480,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Second_Meaning,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("%s", colorReset)
-		from_last_failed_attempt = true
+		returning_from_a_wrong_guess = true
 	}
 	// Returns to caller:
 }

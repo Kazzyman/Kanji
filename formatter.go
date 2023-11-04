@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// The only func in this file ...
 // Use to format new elements for the various fileOfCardsX
 func formatter() {
 	fileHandle, err := os.OpenFile("formattedElements.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)

@@ -6,6 +6,8 @@ import (
 	"unicode"
 )
 
+// This file contains func check_for_match_in_other_fields and all of its supporting functions
+
 func isSingleDigit(usersGuess string) bool { // - -
 	// fmt.Println("In isSingleDigit")
 	// Define a regular expression pattern to match a single alpha string digit char from 1 to 9

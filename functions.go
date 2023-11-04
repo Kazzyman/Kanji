@@ -7,7 +7,8 @@ import (
 )
 
 // DIRECTIVES : --------------------------------------------------------------------------------------------
-//
+// sdk, Directive detection, Directive switch (includes embedded Dir handling code),
+// setc, gameOn, gameOff, check_error
 
 func in_list_of_Directives(in string) bool { // - -
 	// if it IS a directive
