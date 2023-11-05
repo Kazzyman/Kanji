@@ -7,19 +7,45 @@ import (
 func List_of_Directives() {
 	fmt.Println("View source code at https://github.com/Kazzyman/Kanji")
 	fmt.Println("    Use Alpha-Numeric (US) input-mode on your system to:")
-	fmt.Println("        Enter 'dir' redisplay this menu of available Directives")
-	fmt.Println("        Enter 'sdk' set the Deck")
-	fmt.Println("        Enter 'gdc' set the Duration Counter for a Game session ")
-	fmt.Println("        Enter 'bgs' or 'goff' Begin or end a Game Session ")
-	fmt.Println("        Enter '?' context-sensitive help on the current character")
-	fmt.Println("        Enter 'st' Statistics")
-	fmt.Println("        Enter 'nt' (notes) an explanation of Onyomi and Kunyomi")
-	fmt.Println("        Enter 'rs' ReSet (flush or clear) all stats logs etc.")
-	fmt.Println("        Enter 'rm' Read the current contents of the Maps")
-	fmt.Println("        Enter 'setc' (set) force the use of a specific card")
-	fmt.Println("        Enter 'frmt' Format a text file as card elements")
-	fmt.Println("        Enter 'fif' Find in files")
-	fmt.Println("        Enter 'q', (quit) terminate the app")
+	fmt.Println("        Enter '" + colorGreen +
+		"dir" + colorReset +
+		"' redisplay this menu of available Directives")
+	fmt.Println("        Enter '" + colorGreen +
+		"sdk" + colorReset +
+		"' set the Deck")
+	fmt.Println("        Enter '" + colorGreen +
+		"gdc" + colorReset +
+		"' set the Duration Counter for a Game session ")
+	fmt.Println("        Enter '" + colorGreen +
+		"bgs" + colorReset +
+		"' or 'goff' Begin or end a Game Session ")
+	fmt.Println("        Enter '" + colorGreen +
+		"?" + colorReset +
+		"' context-sensitive help on the current character")
+	fmt.Println("        Enter '" + colorGreen +
+		"st" + colorReset +
+		"' Statistics")
+	fmt.Println("        Enter '" + colorGreen +
+		"nt" + colorReset +
+		"' (notes) an explanation of Onyomi and Kunyomi")
+	fmt.Println("        Enter '" + colorGreen +
+		"rs" + colorReset +
+		"' ReSet (flush or clear) all stats logs etc.")
+	fmt.Println("        Enter '" + colorGreen +
+		"rm" + colorReset +
+		"' Read the current contents of the Maps")
+	fmt.Println("        Enter '" + colorGreen +
+		"setc" + colorReset +
+		"' (set) force the use of a specific card")
+	fmt.Println("        Enter '" + colorGreen +
+		"frmt" + colorReset +
+		"' Format a text file as card elements")
+	fmt.Println("        Enter '" + colorGreen +
+		"fif" + colorReset +
+		"' Find in files")
+	fmt.Println("        Enter '" + colorGreen +
+		"q" + colorReset +
+		"', (quit) terminate the app")
 }
 
 // Special prompts for use when soliciting second, or final, guesses

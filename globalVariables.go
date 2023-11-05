@@ -4,7 +4,6 @@ import "time"
 
 // This file contains many of the global vars NOT located in the objectsAndMethods.go file
 //
-var from_recursion bool
 
 // All of the decks will draw cards per this aCard var:
 var aCard = charSetStructKanji{}
@@ -51,6 +50,7 @@ const colorRed = "\033[31m"
 const colorGreen = "\033[32m"
 const colorCyan = "\033[36m"
 const colorPurple = "\033[35m"
+const colorYellow = "\033[33m"
 
 //
 // Global Maps:

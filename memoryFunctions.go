@@ -5,23 +5,36 @@ import (
 )
 
 func read_map() {
-	if len(frequencyMap) == 0 {
+	if len(frequencyMapOfSeenChars) == 0 {
 		fmt.Printf(colorRed)
-		fmt.Printf("\nThe Map is empty\n")
+		fmt.Printf("\nThe seenMap is empty\n")
 		fmt.Printf(colorReset)
 	}
-	for s, f := range frequencyMap {
-		fmt.Printf(" --- From Map: string is:")
-		fmt.Printf(colorCyan)
-		fmt.Printf("%s", s)
-		fmt.Printf(colorReset)
-		fmt.Printf(", freq is:")
-		fmt.Printf(colorRed)
-		fmt.Printf("%d", f)
-		fmt.Printf(colorReset)
-		fmt.Printf(" ---\n")
+	for s, f := range frequencyMapOfSeenChars {
+		if s != "" {
+			if s != "primedK0" {
+				fmt.Printf(" --- From seenMap: string is:")
+				fmt.Printf(colorCyan)
+				fmt.Printf("%s", s)
+				fmt.Printf(colorReset)
+				fmt.Printf(", freq is:")
+				fmt.Printf(colorRed)
+				fmt.Printf("%d", f)
+				fmt.Printf(colorReset)
+				fmt.Printf("\n")
+			}
+		}
 	}
 	fmt.Println("")
+	var indexIntoArray int
+	for indexIntoArray < len(cyclicArrayPulls.pulls) {
+		if cyclicArrayPulls.pulls[indexIntoArray] != "" {
+			if cyclicArrayPulls.pulls[indexIntoArray] != "primedK0" {
+				fmt.Printf("Char in array:%s\n", cyclicArrayPulls.pulls[indexIntoArray])
+			}
+		}
+		indexIntoArray++
+	}
 }
 
 func read_map_of_fineOn() { //     - -

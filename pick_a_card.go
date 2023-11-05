@@ -1,212 +1,162 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 )
 
-var i int
-var oldPrompt string
-var lastPull string
-var frequencyMap = make(map[string]int)
+// var lastPull string
+var frequencyMapOfSeenChars = make(map[string]int)
+
+func randomize_over_all_decks() (promptField, objective, objective_kind, secondary_objective string) {
+	// Randomize over all decks and modes (except Guru)  (using global values of the indices to maintain state)
+	// Randomly chose a deck and a mode
+	randDeckAndMode = rand.Intn(8)
+	//
+	// Randomly access cards // deck and mode 0-3
+	if randDeckAndMode == 0 {
+		current_deckA = "init"
+		randIndex := rand.Intn(len(fileOfCardsInitiate))
+		aCard = fileOfCardsInitiate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
+	} else if randDeckAndMode == 1 {
+		current_deckA = "nov"
+		randIndex := rand.Intn(len(fileOfCardsNovice))
+		aCard = fileOfCardsNovice[randIndex]
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
+	} else if randDeckAndMode == 2 {
+		current_deckA = "grad"
+		randIndex := rand.Intn(len(fileOfCardsGraduate))
+		aCard = fileOfCardsGraduate[randIndex]
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
+	} else if randDeckAndMode == 3 {
+		current_deckA = "mast"
+		randIndex := rand.Intn(len(fileOfCardsMaster))
+		aCard = fileOfCardsMaster[randIndex]
+		promptField = aCard.Kanji
+		objective = aCard.Meaning
+		secondary_objective = aCard.Second_Meaning
+	} else if randDeckAndMode == 4 {
+		//
+		// Randomly access cards // deck and mode 4-7
+		current_deckA = "inits"
+		for {
+			if indexInitS < len(fileOfCardsInitiate) {
+				aCard = fileOfCardsInitiate[indexInitS]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
+				indexInitS++
+				break // We only pull one card, and then exit
+			} else {
+				indexInitS = 0 // If end of deck, go through it again
+				continue
+			}
+		}
+	} else if randDeckAndMode == 5 {
+		current_deckA = "novs"
+		for {
+			if indexNovS < len(fileOfCardsNovice) {
+				aCard = fileOfCardsNovice[indexNovS]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
+				indexNovS++
+				break
+			} else {
+				indexNovS = 0
+				continue
+			}
+		}
+	} else if randDeckAndMode == 6 {
+		current_deckA = "grads"
+		for {
+			if indexGradS < len(fileOfCardsGraduate) {
+				aCard = fileOfCardsGraduate[indexGradS]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
+				indexGradS++
+				break
+			} else {
+				indexGradS = 0
+				continue
+			}
+		}
+	} else if randDeckAndMode == 7 {
+		current_deckA = "masts"
+		for {
+			if indexMastS < len(fileOfCardsMaster) {
+				aCard = fileOfCardsMaster[indexMastS]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
+				indexMastS++
+				break
+			} else {
+				indexMastS = 0
+				continue
+			}
+		}
+	}
+	return
+}
 
 // recursion bool arg no longer needed or used
-func pick_aCard_and_assign_fields(recursion bool) (promptField, objective, objective_kind, secondary_objective string) { // - -
-	if oldPrompt == "" {
-		oldPrompt = "Primed_oldPrompt"
-	} else {
-		// It was stored in main prior to each call of this func
-		// oldPrompt = aCard.Kanji
-	}
+func pick_aCard_and_assign_fields() (promptField, objective, objective_kind, secondary_objective string) { // - -
+	/*
+		if cyclicArrayPulls.pulls[0] == "" {
+			cyclicArrayPulls.InsertKChar("primedK0") // Prime the array
+		}
 
-	if cyclicArrayPulls.pulls[0] == "" {
-		cyclicArrayPulls.InsertKChar("primedK0") // prime the array
-	} else if cyclicArrayPulls.pulls[1] == "" {
-		cyclicArrayPulls.InsertKChar("primedK1") // prime the array
-	}
-
-	// Randomize over all decks and modes (except Guru)  (using global values of the indices to maintain state)
+	*/
+	//
 	if current_deck == "randAll" {
+		// Get the first promptField value (and also the values that need to be returned with it)
+		promptField, objective, objective_kind, secondary_objective = randomize_over_all_decks()
+		// Now that we have a newly-acquired promptField, check to see if we have it stored in the cyclicArrayPulls slice ...
+		// and, if it is so stored, obtain a replacement, and then look again through the entire slice. Repeat the entire
+		// process as many times as may be required to finally obtain a value of promptField which is novel according to said slice.
+		for {
+			found := false
+			for _, lastPull := range cyclicArrayPulls.pulls {
+				if lastPull == promptField {
+					// We also wish to store these duplicates in the map, to keep a tally of such events -- accessible via the rm Dir
+					frequencyMapOfSeenChars[promptField]++ // The '++' increments the int value associated with promptField
+					fmt.Printf("We've seen the pseudo-random char before lastPull: %s and promptField: %s\n", lastPull, promptField)
+					found = true
+					promptField, objective, objective_kind, secondary_objective = randomize_over_all_decks()
+					break // Exit the inner loop, having a new and potentially novel promptField in hand
+				}
+			}
 
-		// Randomly chose a deck and a mode
-		randDeckAndMode = rand.Intn(8)
-		//
-		// Randomly access cards // deck and mode 0-3
-		if randDeckAndMode == 0 {
-			current_deckA = "init"
-			randIndex := rand.Intn(len(fileOfCardsInitiate))
-			aCard = fileOfCardsInitiate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
-			promptField = aCard.Kanji
-			objective = aCard.Meaning
-			secondary_objective = aCard.Second_Meaning
-		} else if randDeckAndMode == 1 {
-			current_deckA = "nov"
-			randIndex := rand.Intn(len(fileOfCardsNovice))
-			aCard = fileOfCardsNovice[randIndex]
-			promptField = aCard.Kanji
-			objective = aCard.Meaning
-			secondary_objective = aCard.Second_Meaning
-		} else if randDeckAndMode == 2 {
-			current_deckA = "grad"
-			randIndex := rand.Intn(len(fileOfCardsGraduate))
-			aCard = fileOfCardsGraduate[randIndex]
-			promptField = aCard.Kanji
-			objective = aCard.Meaning
-			secondary_objective = aCard.Second_Meaning
-		} else if randDeckAndMode == 3 {
-			current_deckA = "mast"
-			randIndex := rand.Intn(len(fileOfCardsMaster))
-			aCard = fileOfCardsMaster[randIndex]
-			promptField = aCard.Kanji
-			objective = aCard.Meaning
-			secondary_objective = aCard.Second_Meaning
-		} else if randDeckAndMode == 4 {
-			//
-			// Randomly access cards // deck and mode 4-7
-			current_deckA = "inits"
-			for {
-				if indexInitS < len(fileOfCardsInitiate) {
-					aCard = fileOfCardsInitiate[indexInitS]
-					promptField = aCard.Kanji
-					objective = aCard.Meaning
-					secondary_objective = aCard.Second_Meaning
-					indexInitS++
-					break // We only pull one card, and then exit
-				} else {
-					indexInitS = 0 // If end of deck, go through it again
-					continue
-				}
-			}
-		} else if randDeckAndMode == 5 {
-			current_deckA = "novs"
-			for {
-				if indexNovS < len(fileOfCardsNovice) {
-					aCard = fileOfCardsNovice[indexNovS]
-					promptField = aCard.Kanji
-					objective = aCard.Meaning
-					secondary_objective = aCard.Second_Meaning
-					indexNovS++
-					break
-				} else {
-					indexNovS = 0
-					continue
-				}
-			}
-		} else if randDeckAndMode == 6 {
-			current_deckA = "grads"
-			for {
-				if indexGradS < len(fileOfCardsGraduate) {
-					aCard = fileOfCardsGraduate[indexGradS]
-					promptField = aCard.Kanji
-					objective = aCard.Meaning
-					secondary_objective = aCard.Second_Meaning
-					indexGradS++
-					break
-				} else {
-					indexGradS = 0
-					continue
-				}
-			}
-		} else if randDeckAndMode == 7 {
-			current_deckA = "masts"
-			for {
-				if indexMastS < len(fileOfCardsMaster) {
-					aCard = fileOfCardsMaster[indexMastS]
-					promptField = aCard.Kanji
-					objective = aCard.Meaning
-					secondary_objective = aCard.Second_Meaning
-					indexMastS++
-					break
-				} else {
-					indexMastS = 0
-					continue
-				}
-			}
-		}
-		//
-		//
-		//
-		// fmt.Printf("acquired a new promptField1:%s\n", promptField)
-		// now that we have a newly-acquired promptField, check if we have seen it recently
-
-		i = 0
-		for i < len(cyclicArrayPulls.pulls) {
-			lastPull = cyclicArrayPulls.pulls[i]
-			// fmt.Printf("pulling/pulled:%s, OldPrompt is:%s, promptField is:%s\n", lastPull, oldPrompt, promptField)
-			if lastPull == promptField { // seen it, so reset i, get new promptField, i.e. repeat
-				// fmt.Printf("seen it before as lastPull:%s- and promptField:%s- \n", lastPull, promptField)
-				// seen it, so acquire a new promptField, having reset index so as to search array anew
-				i = 0
-				from_recursion = true
-				pick_aCard_and_assign_fields(true) // get yet another new promptField, just once!!!!!
-				return
-
+			if !found {
+				// If promptField is not found in the slice ...
+				break // All of our work here being done! We hereby exit the outer naked for loop
 			} else {
-				// there was no match yet, so continue to end of array
-				i++
-				// fmt.Println("continue")
-				continue // only continue to end of array, then "break"
+				// A match WAS found (and a new promptField value has therefore been obtained; so, we need to restart the entire process)
+				continue // explicitly continue, i.e., restart range with the replacement value of promptField
 			}
 		}
-		//
-		//
-		//
-		//
-		/*
-			// fmt.Printf("acquired a new promptField1:%s\n", promptField)
-			// now that we have a newly-acquired promptField, check if we have seen it recently
-			if recursion {
-				// do nothing, i.e., skip the else block because only one recursion is desired
-				fmt.Println("recursion detected")
-				from_recursion = true
-			} else { // do this block only if here not by recursion
-				// fmt.Printf("recursion should happen first, and should be false:%v\n", recursion)
-				i = 0
-				for i < len(cyclicArrayPulls.pulls) {
-					lastPull = cyclicArrayPulls.pulls[i]
-					// fmt.Printf("pulling/pulled:%s, OldPrompt is:%s, promptField is:%s\n", lastPull, oldPrompt, promptField)
-					if lastPull == promptField { // seen it, so reset i, get new promptField, i.e. repeat
-						fmt.Printf("seen it before as lastPull:%s- and promptField:%s- \n", lastPull, promptField)
-						// seen it, so acquire a new promptField, having reset index so as to search array anew
-						i = 0
-						from_recursion = true
-						pick_aCard_and_assign_fields(true) // get yet another new promptField, just once!!!!!
-						return
 
-					} else {
-						// there was no match yet, so continue to end of array
-						i++
-						// fmt.Println("continue")
-						continue // only continue to end of array, then "break"
-					}
-				}
-			}
-
-
-		*/
-		//
-		//
-		//
-		//
-		//
-		//
-		//
-		// fmt.Printf("Exited loop, last pull:%s, OldPrompt:%s, promptField:%s\n", lastPull, oldPrompt, promptField)
-		// exited with newly-acquired promptField
-		// store newly-acquired promptField in array
-		cyclicArrayPulls.InsertKChar(promptField)
-		// fmt.Println("returnE statement is next")
+		// Exited the loops having obtained a newly-acquired, and verified as novel, value of promptField, so, ...
+		// ... store that newly-acquired promptField in an array to be used as a memory of already-seen-and-used chars
+		cyclicArrayPulls.InsertKChar(promptField) // Only the chars that are actually used are put into the array
+		// Also, store that newly-acquired promptField in frequencyMapOfSeenChars
+		frequencyMapOfSeenChars[promptField]++ // The '++' increments the int value associated with promptField
 		return
-
-		/*
-			for str := range frequencyMap {
-				fmt.Printf("str from map: %s\n", str)
-			}
-
-		*/
 	}
-
-	//
-	//
+	/*
+		*
+		A stack overflow error occurs when the program's call stack becomes too deep, often due to recursive function calls without
+		a proper base case or termination condition.
+	*/
 	//
 	//
 	//
