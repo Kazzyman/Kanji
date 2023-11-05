@@ -30,7 +30,7 @@ func read_map() {
 	for indexIntoArray < len(cyclicArrayPulls.pulls) {
 		if cyclicArrayPulls.pulls[indexIntoArray] != "" {
 			if cyclicArrayPulls.pulls[indexIntoArray] != "primedK0" {
-				fmt.Printf("Char in array:%s\n", cyclicArrayPulls.pulls[indexIntoArray])
+				fmt.Printf("Char stored in cyclicArrayPulls: %s \n", cyclicArrayPulls.pulls[indexIntoArray])
 			}
 		}
 		indexIntoArray++

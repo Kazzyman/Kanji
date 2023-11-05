@@ -41,7 +41,7 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 
 		if in_list_of_Directives(in) {
 			if in == "setc" { // respond_to_UserSuppliedDirective(in) will want to return values if "setc" is switched on
-				promptField, objective, objective_kind, secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -98,7 +98,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 
 	if in_list_of_Directives(in) {
 		if in == "setc" { // See prior comments
-			promptField, objective, objective_kind, secondary_objective = respond_to_UserSuppliedDirective(in)
+			respond_to_UserSuppliedDirective(in)
 		} else {
 			respond_to_UserSuppliedDirective(in)
 		}
@@ -148,7 +148,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -174,7 +174,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -200,7 +200,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -251,7 +251,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -277,7 +277,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -303,7 +303,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -349,7 +349,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -375,7 +375,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}
@@ -401,7 +401,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
 			if in == "setc" {
-				new_prompt, new_objective, new_objective_kind, new_secondary_objective = respond_to_UserSuppliedDirective(in)
+				respond_to_UserSuppliedDirective(in)
 			} else {
 				respond_to_UserSuppliedDirective(in)
 			}

@@ -94,6 +94,7 @@ func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { 
 	return usersGuessOrOptionDirective
 }
 
+// Initial prompt, to be used when first introducing a new Kanji char
 func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf("%s", prompt)
 	fmt.Printf("%s", colorCyan)
@@ -173,12 +174,4 @@ func re_display_List_of_Directives() { // (unique)     - -
 	} else {
 		fmt.Println("Order is Random\n")
 	}
-
-	/*
-		"inits")
-		"novs")
-		"grads")
-		"masts")
-		"gurus")
-	*/
 }

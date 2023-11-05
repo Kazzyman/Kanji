@@ -42,6 +42,7 @@ var TimeOfStartFromTop = time.Now()
 
 var game_loop_counter int
 var game_duration = 998
+var count int
 var gameOn bool
 
 // Constants:

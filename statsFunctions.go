@@ -34,5 +34,3 @@ func logHits_in_cyclicArrayHits(RightOrOops, JChar string) { // - -
 func logJcharsGottenWrong_in_cyclicArrayOfTheJcharsGottenWrong(Jchar string) { // - -
 	cyclicArrayOfTheJcharsGottenWrong.InsertCharsWrong(Jchar)
 }
-
-// Directives:

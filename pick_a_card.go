@@ -110,12 +110,9 @@ func randomize_over_all_decks() (promptField, objective, objective_kind, seconda
 
 // recursion bool arg no longer needed or used
 func pick_aCard_and_assign_fields() (promptField, objective, objective_kind, secondary_objective string) { // - -
-	/*
-		if cyclicArrayPulls.pulls[0] == "" {
-			cyclicArrayPulls.InsertKChar("primedK0") // Prime the array
-		}
-
-	*/
+	if cyclicArrayPulls.pulls[0] == "" {
+		cyclicArrayPulls.InsertKChar("primedK0") // prime the array
+	}
 	//
 	if current_deck == "randAll" {
 		// Get the first promptField value (and also the values that need to be returned with it)
@@ -129,7 +126,7 @@ func pick_aCard_and_assign_fields() (promptField, objective, objective_kind, sec
 				if lastPull == promptField {
 					// We also wish to store these duplicates in the map, to keep a tally of such events -- accessible via the rm Dir
 					frequencyMapOfSeenChars[promptField]++ // The '++' increments the int value associated with promptField
-					fmt.Printf("We've seen the pseudo-random char before lastPull: %s and promptField: %s\n", lastPull, promptField)
+					fmt.Printf("We've seen the pseudo-random char before; lastPull: %s and promptField: %s\n", lastPull, promptField)
 					found = true
 					promptField, objective, objective_kind, secondary_objective = randomize_over_all_decks()
 					break // Exit the inner loop, having a new and potentially novel promptField in hand
@@ -194,7 +191,6 @@ func pick_aCard_and_assign_fields() (promptField, objective, objective_kind, sec
 			promptField = aCard.Kanji
 			objective = aCard.Meaning
 			secondary_objective = aCard.Second_Meaning
-			// randDeck++
 			randDeck = 0
 		} else {
 			/*
