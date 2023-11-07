@@ -49,7 +49,7 @@ var fileOfCardsGraduate = []charSetStructKanji{
 		"生徒 (pupil)",
 		"to live, to be born, to grow"},
 
-	{"小", "little", "small", "shouしょう", "chiiちい(saiさい), koこ",
+	{"小", "little", "small", "ショウ shouしょう", "chiiちい (saiさい), お, koこ",
 		"小さい (little)",
 		" "},
 

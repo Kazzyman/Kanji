@@ -5,7 +5,7 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"午後 (afternoon, P.M.)",
 		" "},
 
-	{"子", "child", "Child", "し, す", "こ",
+	{"子", "child", "Child", "シ　ス, し, す", "こ",
 		"子供 (child)",
 		" "},
 
@@ -33,7 +33,7 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"わかもの、若者 : young person",
 		" "},
 
-	{"学 or 校 or 学校", "school", "learning", "がく, こう", "まな(ぶ)",
+	{"学 or 校 or 学校", "school", "study, learning", "ガク:がく, こう", "まな(ぶ)",
 		"大学 (university)",
 		" "},
 
@@ -79,5 +79,89 @@ var fileOfCardsNovice = []charSetStructKanji{
 
 	{"円", "yen", "circle, round", "えん", "まるい",
 		"円い (round)",
+		" "},
+
+	{"王", "king", "king", "", "",
+		"オウ",
+		" "},
+
+	{"音", "sound", "sound", "おと　ね", "オン　イン",
+		"",
+		" "},
+
+	{"火", "fire", "fire", "ひ　ほ", "カ",
+		"",
+		" "},
+
+	{"校", "school", "school", "コウ", "",
+		"",
+		" "},
+
+	{"糸", "thread", "thread", "シ", "いと",
+		"",
+		" "},
+
+	{"字", "character", "character", "ジ", "あざ",
+		"",
+		" "},
+
+	{"正", "correct", "correct", "セイ, ショウ", "ただ, まさ",
+		"",
+		" "},
+
+	{"夕", "evening", "evening", "セキ", "ゆう",
+		"",
+		" "},
+
+	{"村", "village", "village", "ソン", "むら",
+		"",
+		" "},
+
+	{"大", "big", "big", "ダイ, タイ", "おお",
+		"",
+		" "},
+
+	{"竹", "bamboo", "bamboo", "チク", "たけ",
+		"",
+		" "},
+
+	{"町", "town", "town", "チョウ", "まち",
+		"",
+		" "},
+
+	{"文", "sentence", "literature", "ブン, モン", "ふみ",
+		"",
+		" "},
+
+	{"林", "grove", "grove", "リン", "はやし",
+		"",
+		" "},
+
+	{"玉", "jewel", "ball", "ギョク", "たま, だま",
+		"",
+		" "},
+
+	{"犬", "dog", "dog", "ケン", "いぬ",
+		"",
+		" "},
+
+	{"五", "5", "five", "ゴ", "いつ",
+		"",
+		" "},
+
+	{"七", "7", "seven", "シチ", "なな, なの",
+		"",
+		" "},
+
+	{"青", "blue", "blue", "セイ, ショウ", "あお",
+		"",
+		" "},
+
+	{"赤", "red", "red", "セキ, シャク", "あか",
+		"",
+		" "},
+
+	{"早", "early", "early", "ソウ, サッ", "はや",
+		"",
 		" "},
 }

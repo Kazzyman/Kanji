@@ -57,7 +57,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"魚 (fish)",
 		" "},
 
-	{"足", "foot", "or, to add", "soku そく", "ashi あし, ta(su) た(す)",
+	{"足", "foot", "leg, to add", "ソク soku そく", "ashi あし, ta(su) た(す)",
 		"足 (foot)",
 		" "},
 
@@ -129,7 +129,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"万年筆 (fountain pen, ten thousand year brush)",
 		" "},
 
-	{"休", "to-rest", "or; break, holiday, vacation", "kyuu きゅう", "yasu やす(muむ), yasu やす(mi み)",
+	{"休", "to-rest", "or; break, holiday, vacation", "キュウ, きゅう", "yasu やす(muむ), yasu やす(mi み)",
 		"休む (to take a day off)",
 		" "},
 
@@ -137,7 +137,15 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"水曜日 (Wednesday)",
 		" "},
 
-	{"白", "white", "White", "haku はく, byaku びゃく", "shiro しろ, しろ(い)",
+	{"白", "white", "White",
+		"haku はく, byaku びゃく",
+		"shiro しろ, しろ(い)",
 		"白い (white), 面白い (interesting)",
 		" "},
+
+	{"本 、ほん", "book", "three",
+		"four",
+		"five",
+		"six",
+		"seven"},
 }

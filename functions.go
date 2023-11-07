@@ -41,8 +41,11 @@ func switch_the_deck() {
 
 		fmt.Println("    all, sequentially read all cards from each deck")
 		fmt.Println("    rand, randomly read from all decks")
-		fmt.Println("    randAll (default), randomize over decks and modes\n")
-
+		fmt.Println("    randAll, randomize over all decks\n")
+		fmt.Println("    specific, randomize over specific decks\n")
+		fmt.Println("    current, randomize over current deck\n")
+		fmt.Println("    fresh (default), only the latest")
+		//
 		fmt.Println("    init")
 		fmt.Println("    nov")
 		fmt.Println("    grad")
@@ -58,14 +61,17 @@ func switch_the_deck() {
 		fmt.Printf("    gurus \n\n Here:> ")
 
 		_, _ = fmt.Scan(&current_deck)
-		if current_deck == "all" {
-			indexInitS = 20 // Just skipping the first 20 or so cards in the init deck when doing all decks sequentially
-		}
+		/*
+			if current_deck == "all" {
+				indexInitS = 20 // Just skipping the first 20 or so cards in the init deck when doing all decks sequentially
+			}
+
+		*/
 
 		if current_deck != "init" && current_deck != "nov" && current_deck != "grad" && current_deck != "mast" &&
 			current_deck != "guru" && current_deck != "inits" && current_deck != "novs" && current_deck != "grads" &&
 			current_deck != "masts" && current_deck != "gurus" && current_deck != "all" && current_deck != "rand" &&
-			current_deck != "randAll" {
+			current_deck != "randAll" && current_deck != "fresh" && current_deck != "current" { //
 			fmt.Printf("%s", string(colorRed))
 			fmt.Printf("\n  \"%s\" is not a valid deck, try again: \n", current_deck)
 			fmt.Printf("%s", string(colorReset))
@@ -126,9 +132,9 @@ func respond_to_UserSuppliedDirective(in string) { // - -
 		os.Exit(1)
 	case "rm":
 		// Read the Maps
-		read_map_of_fineOn()
+		// read_map_of_fineOn()
 		read_map_of_needWorkOn()
-		read_map()
+		read_pulledButNotUsedMap()
 	case "rs":
 		// reset all logs etc. I.e., flush (clear) the old stats and hits arrays
 		resetAllLogs()

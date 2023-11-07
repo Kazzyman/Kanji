@@ -1,8 +1,26 @@
 Document all files 
+
+Download and install Anki on your computer or mobile device.
+    Open Anki and go to the "Browse" tab.
+Click on "Get Shared" on the left side of the window.
+    In the "Decks" section, you can search for Kanji decks by entering relevant keywords like "Kanji," "Japanese," or specific Kanji characters. 
+You'll find a variety of user-created decks.
+    Select a deck that suits your needs and click "Download."
+The deck will be added to your Anki collection, and you can use it within the Anki app or export it for use in your custom app.
+
 apply the treatment to other pick_a_card functions 
 Work on data files ??
-All occurrences of objective_kind should be vanquished from this app 
+All occurrences of objective_kind should be vanquished from this app ??
 sort card in a deck alphabetically by meaning 
+
+Onyomi (音読み): Onyomi readings are derived from the original Chinese pronunciation of the character when it was adopted into the Japanese writing system. 
+These readings are typically used when Kanji characters are part of compound words or have a specific meaning. Onyomi readings are often based on Chinese 
+pronunciation and may differ from their native Japanese counterparts.
+    Kunyomi (訓読み): Kunyomi readings are the native Japanese readings of Kanji characters. These readings are used when a Kanji character is used in 
+isolation or at the beginning of a word. Kunyomi readings are typically associated with the character's meaning, and they can vary depending on the 
+context of use. It's important to note that there are often multiple readings (both onyomi and kunyomi) for each Kanji character, and the choice of 
+reading depends on the specific word or phrase in which the Kanji is used. Learning when to use each reading in different contexts is an essential 
+part of mastering Kanji in the Japanese language.
 
 pi and friends project with many files
 pi and friends, GUI ??

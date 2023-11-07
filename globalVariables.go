@@ -31,12 +31,13 @@ var forLoop int
 var randDeck int
 var randDeckAndMode int
 
-// Five indexes for the five sequential files, used in pick_a_card.go
+// Indexes for the sequential files, used in pick_a_card.go
 var indexNovS int
 var indexInitS int
 var indexGuruS int
 var indexMastS int
 var indexGradS int
+var indexFresh int
 
 var TimeOfStartFromTop = time.Now()
 

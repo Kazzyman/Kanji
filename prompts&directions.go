@@ -53,45 +53,54 @@ func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { /
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
 	if current_deck == "all" || current_deck == "rand" {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deckA, colorReset)
+		fmt.Printf(" Meaning? (deck:%s) Help is off, ", current_deckA)
 	} else if current_deck == "randAll" {
-		fmt.Printf(" Meaning? (mode:%s) Help is off, %s", current_deckA, colorReset)
+		fmt.Printf(" Meaning? (mode:%s) Help is off, ", current_deckA)
+	} else if current_deck == "fresh" {
+		fmt.Printf(" Meaning? (deck:%s) Help is off, ", current_deckA)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deck, colorReset)
+		fmt.Printf(" Meaning? (deck:%s) Help is off, ", current_deck)
 	}
+	fmt.Printf(string(colorReset))
 	fmt.Printf("you must guess! \n :> ")
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
-	return usersGuessOrOptionDirective
+	return
 }
 func prompt_interim2(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
 	if current_deck == "all" || current_deck == "rand" {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deckA, colorReset)
+		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, ", current_deckA)
 	} else if current_deck == "randAll" {
-		fmt.Printf(" Meaning? (mode:%s) Help is off, you must guess, %s", current_deckA, colorReset)
+		fmt.Printf(" Meaning? (mode:%s) Help is off, you must guess, ", current_deckA)
+	} else if current_deck == "fresh" {
+		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, ", current_deckA)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deck, colorReset)
+		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, ", current_deck)
 	}
+	fmt.Printf(string(colorReset))
 	fmt.Printf("just once more!! \n :> ")
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
-	return usersGuessOrOptionDirective
+	return
 }
 func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s", promptField)
 	fmt.Printf("%s", colorCyan)
 	if current_deck == "all" || current_deck == "rand" {
-		fmt.Printf(" Meaning? (deck:%s) %s", current_deckA, colorReset)
+		fmt.Printf(" Meaning? (deck:%s)", current_deckA)
 	} else if current_deck == "randAll" {
-		fmt.Printf(" Meaning? (mode:%s) %s", current_deckA, colorReset)
+		fmt.Printf(" Meaning? (mode:%s)", current_deckA)
+	} else if current_deck == "fresh" {
+		fmt.Printf(" Meaning? (deck:%s)", current_deckA)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s) %s", current_deck, colorReset)
+		fmt.Printf(" Meaning? (deck:%s)", current_deck)
 	}
-	fmt.Printf("try any substring from the %s", colorRed)
+	fmt.Printf(string(colorReset))
+	fmt.Printf(" try any substring from the %s", colorRed)
 	fmt.Printf("red%s", colorReset)
 	fmt.Printf(" text\n :> ")
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
-	return usersGuessOrOptionDirective
+	return
 }
 
 // Initial prompt, to be used when first introducing a new Kanji char
@@ -102,6 +111,8 @@ func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deckA)
 	} else if current_deck == "randAll" {
 		fmt.Printf(" Meaning? (mode:%s), 'dir' or '?' for help with ", current_deckA)
+	} else if current_deck == "fresh" {
+		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deckA)
 	} else {
 		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deck)
 	}
@@ -111,7 +122,7 @@ func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf(" :> ")
 	fmt.Printf("%s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
-	return usersGuessOrOptionDirective
+	return
 }
 
 // 'Directive Menu' ; displays only at inception

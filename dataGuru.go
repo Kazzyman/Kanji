@@ -4,7 +4,7 @@ var fileOfCardsGuru = []charSetStructKanji{
 	{"山", "mountain", "Mt", "san", "yama",
 		"山 (mountain), mound",
 		"hill"},
-	// "rick"
+
 	{"人", "person", "human", "じん, にん", "ひと",
 		"人々 (people); ひと、人 – person; にんげん、人間 – human; じんるい、人類 – humanity",
 		"vocab2"},

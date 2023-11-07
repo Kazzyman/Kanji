@@ -10,7 +10,7 @@ import (
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	gameOn = false
-	current_deck = "randAll" // default deck
+	current_deck = "fresh" // default deck
 	indexInitS = 30
 	display_List_of_Directives()
 	for {
