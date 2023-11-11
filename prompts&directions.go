@@ -50,77 +50,35 @@ func List_of_Directives() {
 
 // Special prompts for use when soliciting second, or final, guesses
 func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { //  - -
-	fmt.Printf("%s", promptField)
-	fmt.Printf("%s", colorCyan)
-	if current_deck == "all" || current_deck == "rand" {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, ", current_deckA)
-	} else if current_deck == "randAll" {
-		fmt.Printf(" Meaning? (mode:%s) Help is off, ", current_deckA)
-	} else if current_deck == "fresh" {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, ", current_deckA)
-	} else {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, ", current_deck)
-	}
-	fmt.Printf(string(colorReset))
-	fmt.Printf("you must guess! \n :> ")
+	fmt.Printf("%s%s", promptField, colorCyan)
+	fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deck, colorReset)
+	fmt.Printf("you must guess! \n%s :> %s", colorCyan, colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return
 }
 func prompt_interim2(promptField string) (usersGuessOrOptionDirective string) { //  - -
-	fmt.Printf("%s", promptField)
-	fmt.Printf("%s", colorCyan)
-	if current_deck == "all" || current_deck == "rand" {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, ", current_deckA)
-	} else if current_deck == "randAll" {
-		fmt.Printf(" Meaning? (mode:%s) Help is off, you must guess, ", current_deckA)
-	} else if current_deck == "fresh" {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, ", current_deckA)
-	} else {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, ", current_deck)
-	}
-	fmt.Printf(string(colorReset))
-	fmt.Printf("just once more!! \n :> ")
+	fmt.Printf("%s%s", promptField, colorCyan)
+	fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deck, colorReset)
+	fmt.Printf("just once more!! \n%s :> %s", colorCyan, colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return
 }
 func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { //  - -
-	fmt.Printf("%s", promptField)
-	fmt.Printf("%s", colorCyan)
-	if current_deck == "all" || current_deck == "rand" {
-		fmt.Printf(" Meaning? (deck:%s)", current_deckA)
-	} else if current_deck == "randAll" {
-		fmt.Printf(" Meaning? (mode:%s)", current_deckA)
-	} else if current_deck == "fresh" {
-		fmt.Printf(" Meaning? (deck:%s)", current_deckA)
-	} else {
-		fmt.Printf(" Meaning? (deck:%s)", current_deck)
-	}
-	fmt.Printf(string(colorReset))
+	fmt.Printf("%s%s", promptField, colorCyan)
+	fmt.Printf(" Meaning? (deck:%s)%s", current_deck, colorReset)
 	fmt.Printf(" try any substring from the %s", colorRed)
 	fmt.Printf("red%s", colorReset)
-	fmt.Printf(" text\n :> ")
+	fmt.Printf(" text\n %s:> %s", colorCyan, colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return
 }
 
 // Initial prompt, to be used when first introducing a new Kanji char
 func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
-	fmt.Printf("%s", prompt)
-	fmt.Printf("%s", colorCyan)
-	if current_deck == "all" || current_deck == "rand" {
-		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deckA)
-	} else if current_deck == "randAll" {
-		fmt.Printf(" Meaning? (mode:%s), 'dir' or '?' for help with ", current_deckA)
-	} else if current_deck == "fresh" {
-		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deckA)
-	} else {
-		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with ", current_deck)
-	}
-	fmt.Printf(string(colorReset))
-	fmt.Printf("%s \n", prompt)
-	fmt.Printf("%s", colorCyan)
-	fmt.Printf(" :> ")
-	fmt.Printf("%s", colorReset)
+	fmt.Printf("%s%s", prompt, colorCyan)
+	fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with %s", current_deck, colorReset)
+	fmt.Printf("%s \n%s", prompt, colorCyan)
+	fmt.Printf(" :> %s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return
 }
@@ -176,13 +134,4 @@ func re_display_List_of_Directives() { // (unique)     - -
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)
 	fmt.Printf("Current Prompt Count Total: %d \n", total_prompts)
 	fmt.Printf("Current Deck is: %s \n", current_deck)
-
-	if current_deck == "inits" || current_deck == "novs" || current_deck == "grads" ||
-		current_deck == "masts" || current_deck == "gurus" {
-		fmt.Println("Order is set to Sequential\n")
-	} else if current_deck == "randAll" {
-		fmt.Printf("Mode is randAll, and deck is %s\n\n", current_deckA)
-	} else {
-		fmt.Println("Order is Random\n")
-	}
 }

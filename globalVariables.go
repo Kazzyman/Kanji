@@ -2,8 +2,9 @@ package main
 
 import "time"
 
-// This file contains many of the global vars NOT located in the objectsAndMethods.go file
+// This file contains All global vars NOT located in the objectsAndMethods.go file
 //
+var already_used_map = make(map[string]int)
 
 // All of the decks will draw cards per this aCard var:
 var aCard = charSetStructKanji{}
@@ -22,28 +23,15 @@ type charSetStructKanji struct {
 	Vocab2         string
 }
 
-var returning_from_a_wrong_guess = false
-var current_deck string
-var current_deckA string
-var total_prompts int
-
-var forLoop int
-var randDeck int
 var randDeckAndMode int
-
-// Indexes for the sequential files, used in pick_a_card.go
-var indexNovS int
-var indexInitS int
-var indexGuruS int
-var indexMastS int
-var indexGradS int
-var indexFresh int
+var current_deck string
+var total_prompts int
 
 var TimeOfStartFromTop = time.Now()
 
 var game_loop_counter int
 var game_duration = 998
-var count int
+
 var gameOn bool
 
 // Constants:
@@ -52,7 +40,6 @@ const colorRed = "\033[31m"
 const colorGreen = "\033[32m"
 const colorCyan = "\033[36m"
 const colorPurple = "\033[35m"
-const colorYellow = "\033[33m"
 
 //
 // Global Maps:
