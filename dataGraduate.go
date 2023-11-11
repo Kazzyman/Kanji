@@ -1,6 +1,35 @@
 package main
 
 var fileOfCardsGraduate = []charSetStructKanji{
+
+	{" ", " ", " ", " ", " ",
+		" ",
+		" "},
+
+	{"", " ", " ", " ", " ",
+		" ",
+		" "},
+
+	{" ", " ", " ", " ", " ",
+		" ",
+		" "},
+
+	{"", " ", " ", " ", " ",
+		" ",
+		" "},
+
+	{" ", " ", " ", " ", " ",
+		" ",
+		" "},
+
+	{"", " ", " ", " ", " ",
+		" ",
+		" "},
+
+	{" ", " ", " ", " ", " ",
+		" ",
+		" "},
+		
 	{"安", "cheap", "peace", "anあん", "yasuやす(iい)",
 		"安い (cheap)",
 		" - or; safety"},
@@ -49,7 +78,7 @@ var fileOfCardsGraduate = []charSetStructKanji{
 		"生徒 (pupil)",
 		"to live, to be born, to grow"},
 
-	{"小", "little", "small", "ショウ shouしょう", "chiiちい (saiさい), お, koこ",
+	{"小", "little", "small", "shouしょう", "chiiちい(saiさい), koこ",
 		"小さい (little)",
 		" "},
 

@@ -25,6 +25,7 @@ type charSetStructKanji struct {
 
 var randDeckAndMode int
 var current_deck string
+var current_deck_B string
 var total_prompts int
 
 var TimeOfStartFromTop = time.Now()

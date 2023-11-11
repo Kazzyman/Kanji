@@ -5,14 +5,6 @@ import (
 	"strings"
 )
 
-func test1() {
-
-}
-
-func test2() {
-
-}
-
 // Create a kanjiHitMap map. A map of keys (kanji chars) and/to their associated history data, i.e., the struct: CardInfo
 var kanjiHitMap = make(map[string]CardInfo)
 
@@ -72,17 +64,26 @@ func newHits() {
 		frequencyMapWrongs[str]++
 	}
 
-	// -- PRINT -- 'Right' and its frequency
+	// -- PRINT -- the 'Right' and 'Oops' and their frequencies (Right or Oops) (top of printout)
 	for str, freq := range frequencyMapRightOrOops { // The map has only one entry for Right, & one for Oops
 		if str == "Right" { // Finds the one potential entry for Right
 			fmt.Printf(colorGreen)
-			fmt.Printf("\n%s ", str)
+			fmt.Printf(" %s ", str)
 			fmt.Printf(colorCyan)
 			fmt.Printf("Frequency:")
 			fmt.Printf(colorGreen)
 			fmt.Printf(" %d\n", freq) // Frequency of Right, per the map
 			fmt.Printf(colorReset)
 			total_prompts = freq
+		} else if str == "Oops" { // Finds the one potential entry for Oops
+			fmt.Printf(colorRed)
+			fmt.Printf(" %s ", str)
+			fmt.Printf(colorCyan)
+			fmt.Printf("Frequency:")
+			fmt.Printf(colorRed)
+			fmt.Printf(" %d\n", freq) // Frequency of Oops, per the map
+			fmt.Printf(colorReset)
+			total_prompts = total_prompts + freq
 		} else if str == "" {
 			// else, it is an 'empty' position in the map due to empty uninitialized positions in the cyclic array
 		}
@@ -99,7 +100,7 @@ func newHits() {
 			fmt.Printf(" %s ", kanjiString)
 			fmt.Printf(colorGreen)
 			fmt.Printf("Your guesses:%s, ", cardInfoData.UsersGuess)
-			fmt.Printf(colorYellow)
+			fmt.Printf(colorRed)
 			fmt.Printf("Meanings: %s, %s ", cardInfoData.FirstMeaningOnRecord, cardInfoData.SecondMeaningOnRecord)
 			fmt.Printf(colorCyan)
 			fmt.Printf("Freq:")
@@ -109,7 +110,7 @@ func newHits() {
 	}
 	fmt.Printf("Number of unique chars: ")
 	fmt.Printf(colorPurple)
-	fmt.Printf("%d \n", numberOfUniqueKanjiCharsHit)
+	fmt.Printf("%d \n\n", numberOfUniqueKanjiCharsHit)
 	fmt.Printf(colorReset)
 
 	fmt.Printf("Total prompts:")
@@ -117,22 +118,6 @@ func newHits() {
 	fmt.Printf(" %d\n", total_prompts)
 	fmt.Printf(colorReset)
 
-	// -- PRINT -- 'Oops' and its frequency
-	for str, freq := range frequencyMapRightOrOops { // The map has only one entry for Right, & one for Oops
-		if str == "Oops" { // Finds the one potential entry for Oops
-			fmt.Printf(colorRed)
-			fmt.Printf("%s ", str)
-			fmt.Printf(colorCyan)
-			fmt.Printf("Frequency:")
-			fmt.Printf(colorRed)
-			fmt.Printf(" %d\n", freq) // Frequency of Oops, per the map
-			fmt.Printf(colorReset)
-			total_prompts = total_prompts + freq
-		} else if str == "" {
-			// else, it is an 'empty' position in the map due to empty uninitialized position in the cyclic array
-		}
-	}
-	//
 	// Print the ones gotten wrong  (continuing the printout above)
 	for str, freq := range frequencyMapWrongs {
 		if str == "" {
@@ -159,4 +144,12 @@ func newHits() {
 		}
 	}
 	fmt.Println("")
+}
+
+func test1() {
+
+}
+
+func test2() {
+
 }

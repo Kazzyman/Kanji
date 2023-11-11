@@ -51,20 +51,33 @@ func List_of_Directives() {
 // Special prompts for use when soliciting second, or final, guesses
 func prompt_interim(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s%s", promptField, colorCyan)
-	fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deck, colorReset)
+	if current_deck == "all" {
+		fmt.Printf(" Meaning? (deck:%s:%s) Help is off, %s", current_deck, current_deck_B, colorReset)
+	} else {
+		fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deck, colorReset)
+	}
 	fmt.Printf("you must guess! \n%s :> %s", colorCyan, colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return
 }
 func prompt_interim2(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s%s", promptField, colorCyan)
-	fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deck, colorReset)
+	if current_deck == "all" {
+		fmt.Printf(" Meaning? (deck:%s:%s) Help is off, you must guess, %s", current_deck, current_deck_B, colorReset)
+	} else {
+		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deck, colorReset)
+	}
 	fmt.Printf("just once more!! \n%s :> %s", colorCyan, colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return
 }
 func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { //  - -
 	fmt.Printf("%s%s", promptField, colorCyan)
+	if current_deck == "all" {
+		fmt.Printf(" Meaning? (deck:%s:%s)%s", current_deck, current_deck_B, colorReset)
+	} else {
+		fmt.Printf(" Meaning? (deck:%s)%s", current_deck, colorReset)
+	}
 	fmt.Printf(" Meaning? (deck:%s)%s", current_deck, colorReset)
 	fmt.Printf(" try any substring from the %s", colorRed)
 	fmt.Printf("red%s", colorReset)
@@ -76,7 +89,11 @@ func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { 
 // Initial prompt, to be used when first introducing a new Kanji char
 func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf("%s%s", prompt, colorCyan)
-	fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with %s", current_deck, colorReset)
+	if current_deck == "all" {
+		fmt.Printf(" Meaning? (deck:%s:%s), 'dir' or '?' for help with %s", current_deck, current_deck_B, colorReset)
+	} else {
+		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with %s", current_deck, colorReset)
+	}
 	fmt.Printf("%s \n%s", prompt, colorCyan)
 	fmt.Printf(" :> %s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
@@ -133,5 +150,9 @@ func re_display_List_of_Directives() { // (unique)     - -
 	//goland:noinspection ALL
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)
 	fmt.Printf("Current Prompt Count Total: %d \n", total_prompts)
-	fmt.Printf("Current Deck is: %s \n", current_deck)
+	if current_deck == "all" {
+		fmt.Printf("Current Deck is: %s:%s \n", current_deck, current_deck_B)
+	} else {
+		fmt.Printf("Current Deck is: %s \n", current_deck)
+	}
 }

@@ -82,6 +82,7 @@ func is_pick_novel(kanji string) bool {
 	// for stringFromMap, freqInMap = range already_used_map {
 	for stringFromMap, _ = range already_used_map {
 		// fmt.Printf("in is_pick_novel str:%s, f:%d \n", stringFromMap, freqInMap)
+
 		if kanji == stringFromMap {
 			// fmt.Printf("returning false, picked was:%s, map had:%s\n", kanji, stringFromMap)
 			// Having either found the pick in the map prior to reading the entire map, or as the map's last element ...
