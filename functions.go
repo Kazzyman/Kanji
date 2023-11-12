@@ -61,6 +61,7 @@ func switch_the_deck() {
 	for {
 		fmt.Println("\nEnter a deck from below for randomized prompting of a specific deck:\n")
 
+		fmt.Println("    data")
 		fmt.Println("    fresh")
 		fmt.Println("    current")
 		fmt.Println("    all")
@@ -77,7 +78,8 @@ func switch_the_deck() {
 		_, _ = fmt.Scan(&current_deck)
 
 		if current_deck != "init" && current_deck != "nov" && current_deck != "grad" && current_deck != "mast" &&
-			current_deck != "guru" && current_deck != "fresh" && current_deck != "current" && current_deck != "all" {
+			current_deck != "guru" && current_deck != "fresh" && current_deck != "current" &&
+			current_deck != "all" && current_deck != "data" {
 			fmt.Printf("%s\n  \"%s\" is not a valid deck, try again: \n%s", colorRed, current_deck, colorReset)
 			continue
 		} else {

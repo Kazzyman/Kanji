@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -146,10 +147,103 @@ func newHits() {
 	fmt.Println("")
 }
 
-func test1() {
+var cardCount int
+var position int
+var secondField charSetStructKanji
+var already_used_map2 = make(map[string]int)
 
+func test1() {
+	/*
+		for position, secondField = range data_file {
+			// ^ ^ ^ read data_file :: [for position, secondField = range data_file {]
+			// v v v read through the ENTIRE already_used_map2 :: [for length <= len(already_used_map2) { length++ ]
+			for length <= len(already_used_map2) {
+				if secondField.Kanji is not already in already_used_map2 { // if is_pick_novel2(secondField.Kanji) {
+					already_used_map2[secondField.Kanji]++ // then put it in
+					fmt.Fprintf(output_file, "%s was unique\n", secondField.Kanji) //
+				} else { // it was in the map already, so make a note of it:
+					fmt.Fprintf(output_file2, "%s was not unique\n", secondField.Kanji)
+				}
+			}
+		}
+	*/
+	// length := 0
+	output_file, _ := os.OpenFile("all_unique_Cards.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	output_file2, _ := os.OpenFile("all_duplicate_Cards.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	for position, secondField = range data_file { // *
+		cardCount++
+		// for length <= len(already_used_map2) { // *
+		// length++ // *
+		if is_pick_novel2(secondField.Kanji) { // * this should ALREADY be reading the ENTIRE map
+			already_used_map2[secondField.Kanji]++ // * having read the entire map, put it in
+			// break // keep it and print it
+			// fmt.Printf("length is:%d\n", length)
+			// fmt.Fprintf(output_file, "%d was length\n", length)
+			fmt.Fprintf(output_file, "%s was unique\n", secondField.Kanji) // *
+			// break *
+		} else {
+			// fmt.Fprintf(output_file2, "%s was not in the map at position:%d\n", secondField.Kanji, length) // Verified
+			fmt.Fprintf(output_file2, "%s was in the map\n", secondField.Kanji)
+			// length = 0 // continue the loop ensuring that the entire map is read with this new pick
+			// continue // redundant
+		}
+		// }
+	}
+	// fmt.Fprintf(output_file, "%s was also unique\n", secondField.Kanji)
+	fmt.Printf("Count of cards is:%d\n", cardCount)
+	fmt.Printf("position:%d, secondField:%s\n", position, secondField.Kanji)
+}
+func is_pick_novel2(kanji string) bool {
+	for stringFromMap, freqInMap = range already_used_map2 {
+		// fmt.Printf("in is_pick_novel str:%s, f:%d \n", stringFromMap, freqInMap)
+		if kanji == stringFromMap {
+			fmt.Printf("returning false, picked was:%s, map had:%s\n", kanji, stringFromMap)
+			// Having either found the pick in the map prior to reading the entire map, or as the map's last element ...
+			return false
+		}
+	} // having read the entire map, and not having found a previously used card in said map ...
+	fmt.Printf("returning true, data was:%s, map had:%s\n", kanji, stringFromMap)
+	return true
 }
 
 func test2() {
-
+	/*
+		for position, secondField = range data_file {
+			// ^ ^ ^ read data_file :: [for position, secondField = range data_file {]
+			// v v v read through the ENTIRE already_used_map2 :: [for length <= len(already_used_map2) { length++ ]
+			for length <= len(already_used_map2) {
+				if secondField.Kanji is not already in already_used_map2 { // if is_pick_novel2(secondField.Kanji) {
+					already_used_map2[secondField.Kanji]++ // then put it in
+					fmt.Fprintf(output_file, "%s was unique\n", secondField.Kanji) //
+				} else { // it was in the map already, so make a note of it:
+					fmt.Fprintf(output_file2, "%s was not unique\n", secondField.Kanji)
+				}
+			}
+		}
+	*/
+	// length := 0
+	output_file, _ := os.OpenFile("all_unique_Cards.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	output_file2, _ := os.OpenFile("all_duplicate_Cards.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	for position, secondField = range data_file { // *
+		cardCount++
+		// for length <= len(already_used_map2) { // *
+		// length++ // *
+		if is_pick_novel2(secondField.Kanji) { // * this should ALREADY be reading the ENTIRE map
+			already_used_map2[secondField.Kanji]++ // * having read the entire map, put it in
+			// break // keep it and print it
+			// fmt.Printf("length is:%d\n", length)
+			// fmt.Fprintf(output_file, "%d was length\n", length)
+			fmt.Fprintf(output_file, "%s was unique\n", secondField.Kanji) // *
+			// break *
+		} else {
+			// fmt.Fprintf(output_file2, "%s was not in the map at position:%d\n", secondField.Kanji, length) // Verified
+			fmt.Fprintf(output_file2, "%s was in the map\n", secondField.Kanji)
+			// length = 0 // continue the loop ensuring that the entire map is read with this new pick
+			// continue // redundant
+		}
+		// }
+	}
+	// fmt.Fprintf(output_file, "%s was also unique\n", secondField.Kanji)
+	fmt.Printf("Count of cards is:%d\n", cardCount)
+	fmt.Printf("position:%d, secondField:%s\n", position, secondField.Kanji)
 }

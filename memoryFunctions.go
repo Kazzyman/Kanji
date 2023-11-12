@@ -77,7 +77,8 @@ func clearMap() {
 
 var stringFromMap string
 
-// var freqInMap int
+var freqInMap int // Used also in: [is_pick_novel2(kanji string) bool] - -
+
 func is_pick_novel(kanji string) bool {
 	// for stringFromMap, freqInMap = range already_used_map {
 	for stringFromMap, _ = range already_used_map {
