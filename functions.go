@@ -77,13 +77,22 @@ func switch_the_deck() {
 
 		_, _ = fmt.Scan(&current_deck)
 
-		if current_deck != "init" && current_deck != "nov" && current_deck != "grad" && current_deck != "mast" &&
+		if current_deck != "init" && current_deck != "nov" && current_deck != "2098_lines_of_cards" && current_deck != "mast" &&
 			current_deck != "guru" && current_deck != "fresh" && current_deck != "current" &&
-			current_deck != "all" && current_deck != "data" {
+			current_deck != "all" && current_deck != "data" && current_deck != "kun" {
 			fmt.Printf("%s\n  \"%s\" is not a valid deck, try again: \n%s", colorRed, current_deck, colorReset)
 			continue
 		} else {
-			break
+			for {
+				fmt.Println("\nEnter a field to prompt from:\n")
+				_, _ = fmt.Scan(&field_to_prompt_from)
+				if field_to_prompt_from != "kanji" && field_to_prompt_from != "kunyomi" {
+					fmt.Printf("%s\n  \"%s\" is not a valid field, try again: \n%s", colorRed, field_to_prompt_from, colorReset)
+					continue
+				} else {
+					return
+				}
+			}
 		}
 	}
 	// Tried to get too fancy here. But it fucked things up. So, just live with the bug you were trying to fix.
@@ -144,7 +153,8 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 	case "q": // quit
 		os.Exit(1)
 	case "?": // context-sensitive help on the current card
-		fmt.Printf("\n%s\n%s\n%s\n%s\n%s\n%s\n\n", aCard.Kanji, aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab)
+		fmt.Printf("%s: primary\n%s: secondary\n%s: Onyomi\n%s: Kunyomi\n%s\n%s\n\n",
+			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 	case "st": // stats
 		newHits()
 	case "frmt": // format a file

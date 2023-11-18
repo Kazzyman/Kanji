@@ -23,7 +23,7 @@ func find_in_files() {
 	}(output_file)
 
 	// Open the master source file for reading
-	source, err := os.Open("a_maybe_100.go") // The input file
+	source, err := os.Open("2098_lines_of_cards.go") // The input file
 	if err != nil {
 		fmt.Println("Error opening file: a_maybe_100.go", err)
 		return
@@ -34,7 +34,7 @@ func find_in_files() {
 
 	//
 	// Open the category files for reading
-	grad, err := os.Open("dataGraduate.go")
+	grad, err := os.Open("dataGraduate_165.go")
 	if err != nil {
 		fmt.Println("Error opening file: dataGraduate.go", err)
 		return
@@ -43,8 +43,7 @@ func find_in_files() {
 		_ = grad.Close()
 	}(grad)
 	//
-	//
-	guru, err := os.Open("dataGuru.go")
+	guru, err := os.Open("dataGuru_28.go")
 	if err != nil {
 		fmt.Println("Error opening file: dataGuru.go", err)
 		return
@@ -53,7 +52,7 @@ func find_in_files() {
 		_ = guru.Close()
 	}(guru)
 	//
-	initiate, err := os.Open("dataInitiate.go")
+	initiate, err := os.Open("dataInitiate_194_of_4124.go")
 	if err != nil {
 		fmt.Println("Error opening file: dataInitiate.go", err)
 		return
@@ -62,7 +61,7 @@ func find_in_files() {
 		_ = initiate.Close()
 	}(initiate)
 	//
-	master, err := os.Open("dataMaster.go")
+	master, err := os.Open("dataMaster_111_of_147.go")
 	if err != nil {
 		fmt.Println("Error opening file: dataMaster.go", err)
 		return
@@ -71,7 +70,7 @@ func find_in_files() {
 		_ = master.Close()
 	}(master)
 	//
-	novice, err := os.Open("dataNovice.go")
+	novice, err := os.Open("dataNovice_88.go")
 	if err != nil {
 		fmt.Println("Error opening file: dataNovice.go", err)
 		return
@@ -80,13 +79,15 @@ func find_in_files() {
 		_ = novice.Close()
 	}(novice)
 
-	// Create scanners to read the files line by line
-	scan_source := bufio.NewScanner(source)
+	// Create scanners to read the files line by line:
+	scan_source := bufio.NewScanner(source) // "input" file being checked against older files
+	// Older files:
 	scan_grad := bufio.NewScanner(grad)
 	scan_guru := bufio.NewScanner(guru)
-	// scan_initiate := bufio.NewScanner(initiate)
+	scan_initiate := bufio.NewScanner(initiate)
 	scan_master := bufio.NewScanner(master)
 	scan_novice := bufio.NewScanner(novice)
+	// Add the other files in collection (todo here)
 
 	/* pseudo code:
 	scan(loop1:) [1] - 7
@@ -146,22 +147,20 @@ func find_in_files() {
 				} // 3 // end of loop 3
 				scan_guru = bufio.NewScanner(guru) // These are actually needed, but why? (dont care, it works!)
 				//
-				/*
-					// .Seek resets, as was done for grad; refer to that comment
-					initiate.Seek(0, 0)
-					for scan_initiate.Scan() {
-						entire_line2 := scan_initiate.Text()
-						all_fields2 := strings.Split(entire_line2, "\"")
-						if len(all_fields2) >= 3 {
-							firstElement2 = all_fields2[1]
-						}
-						if firstElement1 == firstElement2 {
+				// .Seek resets, as was done for grad; refer to that comment
+				initiate.Seek(0, 0)
+				for scan_initiate.Scan() {
+					entire_line2 := scan_initiate.Text()
+					all_fields2 := strings.Split(entire_line2, "\"")
+					if len(all_fields2) >= 3 {
+						firstElement2 = all_fields2[1]
+					}
+					if firstElement1 == firstElement2 {
 						fmt.Fprintf(output_file, "%s is also in the Initiate category file\n", firstElement1)
-						}
-					} // 4 // end of loop 4
-					scan_initiate = bufio.NewScanner(initiate)
+					}
+				} // 4 // end of loop 4
+				scan_initiate = bufio.NewScanner(initiate)
 
-				*/
 				//
 				// .Seek resets, as was done for grad; refer to that comment
 				master.Seek(0, 0)

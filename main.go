@@ -9,7 +9,7 @@ import (
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	gameOn = false
-	current_deck = "grad" // The default deck, can be changed via the sdk Directive
+	current_deck = "2098_lines_of_cards" // The default deck, can be changed via the sdk Directive
 	display_List_of_Directives()
 	// Create and prime vars, kluge?
 	new_prompt, objective, objective_kind, secondary_objective := "prime", "prime", "prime", "prime"
