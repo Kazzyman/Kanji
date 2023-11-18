@@ -53,11 +53,28 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 			}
 		}
 	}
+	/*
+		if current_deck == "grad" {
+			for { // This for loop is only needed to check for empty cards
+				randIndex := rand.Intn(len(fileOfCardsGraduate))
+				aCard = fileOfCardsGraduate[randIndex]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
+				if promptField == "" || promptField == " " {
+					fmt.Printf("%s--- An empty kanji card was skipped in grad!!!!%s\n", colorRed, colorReset) // Verified
+					continue
+				} else {
+					break // break out of local for loop and naturally fall-through to the return
+				}
+			}
+		}
 
+	*/
 	if current_deck == "grad" {
 		for { // This for loop is only needed to check for empty cards
-			randIndex := rand.Intn(len(fileOfCardsGraduate))
-			aCard = fileOfCardsGraduate[randIndex]
+			randIndex := rand.Intn(len(data_file100_maybe))
+			aCard = data_file100_maybe[randIndex]
 			promptField = aCard.Kanji
 			objective = aCard.Meaning
 			secondary_objective = aCard.Second_Meaning

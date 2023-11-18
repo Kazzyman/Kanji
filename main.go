@@ -42,6 +42,7 @@ func main() {
 }
 
 var returning_fr_dir bool
+var field_to_prompt_from = "kanji" // The default
 
 // The first function that prompts the user for a guess, with a Kanji
 func begin(promptField, objective, objective_kind, secondary_objective string) { // May be a Hira, Kata, or Romaji prompt  - -
@@ -51,8 +52,13 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 	}
 	var in string // A var declaration was needed as a ":=" would not work within the conditional because "in" not in signature
 	for {
-		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
-		in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		if in_list_of_Directives(in) {
 			if in == "setc" { // respond_to_UserSuppliedDirective(in) will want to return values if "setc" is switched on
@@ -104,10 +110,23 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 	// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
 	// in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
 	if returning_fr_dir {
-		in = promptWithDir(promptField)
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 		returning_fr_dir = false
 	} else {
-		in = prompt_interim3(promptField)
+		// in = prompt_interim3(promptField)
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = prompt_interim3(promptField) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = prompt_interim3(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 	}
 	if in_list_of_Directives(in) {
 		if in == "setc" { // See prior comments
@@ -138,6 +157,7 @@ func evaluateUsersGuess(in, promptField, objective, objective_kind string, recur
 	// returning_fr_dir = false // Redundant ?????????????
 }
 
+// Called by evaluateUsersGuess()
 func rightOrOops(in, promptField, objective string, skipOops bool, secondary_objective string) { // - -
 
 	if in == objective {
@@ -172,7 +192,13 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 			length = 0 // continue the loop ensuring that the entire map is read with this new pick
 		}
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -214,7 +240,64 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 			length = 0 // continue the loop ensuring that the entire map is read with this new pick
 		}
 		// This prompt, deployed by new_objective_kind, take new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
+
+		// Refer to the previous comments re the following mirrored section:
+		if in_list_of_Directives(in) {
+			if in == "setc" {
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective, returning_fr_dir = respond_to_UserSuppliedDirective(in)
+			} else {
+				_, _, _, _, returning_fr_dir = respond_to_UserSuppliedDirective(in)
+			}
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
+		} else {
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
+		}
+		// check_for_match_within_primary_field
+	} else if check_for_match_within_primary_field(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
+		log_right(promptField, in)
+
+		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
+		fmt.Printf(" <--somewhat Right! within primary field\n")
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n%s",
+			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+
+		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		length := 0
+		loopCounter := 0
+		// fmt.Printf("length of map is %d\n", len(already_used_map))
+		for length <= len(already_used_map) {
+			length++
+			loopCounter++
+			if loopCounter > 9999 {
+				// fmt.Printf("loopCounter:%d, so doing a clear of the map\n", loopCounter)
+				clearMap()
+				break
+			}
+			if is_pick_novel(new_prompt) {
+				already_used_map[new_prompt]++
+				break // keep it
+			}
+			// else, pick another
+			new_prompt, new_objective, new_objective_kind, new_secondary_objective = pick_RandomCard_Assign_fields()
+			length = 0 // continue the loop ensuring that the entire map is read with this new pick
+		}
+
+		// This prompt, deployed by new_objective_kind, takes new_prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -258,7 +341,13 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		}
 
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -292,7 +381,14 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 	var in string // var declaration needed as a ":=" would not work within the conditional because "in" not in signature
 	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives:(currently inoperative)
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
-	in = prompt_interim(promptField) // Get user's guess
+	// in = prompt_interim(promptField) // Get user's guess
+	if field_to_prompt_from == "kanji" {
+		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+		in = prompt_interim(promptField) // Get user's input, from a randomly selected prompt
+	}
+	if field_to_prompt_from == "kunyomi" {
+		in = prompt_interim(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+	}
 	// ...
 	// Note the lack of a Directive handling section which normally follows prompting, Directives are currently inoperative
 	//
@@ -324,7 +420,13 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		}
 
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -337,6 +439,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		} else {
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
+		// insert here?
 	} else if in == secondary_objective {
 		log_right(promptField, in)
 
@@ -367,7 +470,63 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		}
 
 		// This prompt, deployed by new_objective_kind, take new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
+
+		// Refer to the previous comments re the following mirrored section:
+		if in_list_of_Directives(in) {
+			if in == "setc" {
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective, returning_fr_dir = respond_to_UserSuppliedDirective(in)
+			} else {
+				_, _, _, _, returning_fr_dir = respond_to_UserSuppliedDirective(in)
+			}
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
+		} else {
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
+		}
+	} else if check_for_match_within_primary_field(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
+		log_right(promptField, in)
+
+		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
+		fmt.Printf(" <--somewhat Right! within primary field\n")
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n%s",
+			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+
+		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		length := 0
+		loopCounter := 0
+		// fmt.Printf("length of map is %d\n", len(already_used_map))
+		for length <= len(already_used_map) {
+			length++
+			loopCounter++
+			if loopCounter > 9999 {
+				// fmt.Printf("loopCounter:%d, so doing a clear of the map\n", loopCounter)
+				clearMap()
+				break
+			}
+			if is_pick_novel(new_prompt) {
+				already_used_map[new_prompt]++
+				break // keep it
+			}
+			// else, pick another
+			new_prompt, new_objective, new_objective_kind, new_secondary_objective = pick_RandomCard_Assign_fields()
+			length = 0 // continue the loop ensuring that the entire map is read with this new pick
+		}
+
+		// This prompt, deployed by new_objective_kind, takes new_prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -411,7 +570,13 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		}
 
 		// This prompt, deployed by new_objective_kind, take new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -438,7 +603,14 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 	var in string // var declaration needed as a ":=" would not work within the conditional ~ "in" not in signature
 	// **** Now that we are trying again, after a failed guess, prompts do not solicit Directives:(currently inoperative)
 	// ... so, these prompts, deployed by objective_kind, take promptField (rather than the new_prompt variant)
-	in = prompt_interim2(promptField) // Get user's guess
+	// in = prompt_interim2(promptField) // Get user's guess
+	if field_to_prompt_from == "kanji" {
+		// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+		in = prompt_interim2(promptField) // Get user's input, from a randomly selected prompt
+	}
+	if field_to_prompt_from == "kunyomi" {
+		in = prompt_interim2(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+	}
 	// ...
 	// Note the lack of a Directive handling section which normally follows prompting, Directives are currently inoperative
 	//
@@ -470,7 +642,13 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		}
 
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -511,7 +689,63 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		}
 
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
+
+		// Refer to the previous comments re the following mirrored section:
+		if in_list_of_Directives(in) {
+			if in == "setc" {
+				new_prompt, new_objective, new_objective_kind, new_secondary_objective, returning_fr_dir = respond_to_UserSuppliedDirective(in)
+			} else {
+				_, _, _, _, returning_fr_dir = respond_to_UserSuppliedDirective(in)
+			}
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, false, true, new_secondary_objective)
+		} else {
+			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
+		}
+	} else if check_for_match_within_primary_field(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
+		log_right(promptField, in)
+
+		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
+		fmt.Printf(" <--somewhat Right! within primary field\n")
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n%s",
+			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+
+		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
+		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
+		length := 0
+		loopCounter := 0
+		// fmt.Printf("length of map is %d\n", len(already_used_map))
+		for length <= len(already_used_map) {
+			length++
+			loopCounter++
+			if loopCounter > 9999 {
+				// fmt.Printf("loopCounter:%d, so doing a clear of the map\n", loopCounter)
+				clearMap()
+				break
+			}
+			if is_pick_novel(new_prompt) {
+				already_used_map[new_prompt]++
+				break // keep it
+			}
+			// else, pick another
+			new_prompt, new_objective, new_objective_kind, new_secondary_objective = pick_RandomCard_Assign_fields()
+			length = 0 // continue the loop ensuring that the entire map is read with this new pick
+		}
+
+		// This prompt, deployed by new_objective_kind, takes new_prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {
@@ -553,7 +787,13 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		}
 
 		// This prompt, deployed by new_objective_kind, takes new_prompt
-		in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		if field_to_prompt_from == "kanji" {
+			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
+			in = promptWithDir(new_prompt) // Get user's input, from a randomly selected prompt
+		}
+		if field_to_prompt_from == "kunyomi" {
+			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+		}
 
 		// Refer to the previous comments re the following mirrored section:
 		if in_list_of_Directives(in) {

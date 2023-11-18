@@ -10,8 +10,7 @@ import (
 var firstElement1 string
 var firstElement2 string
 
-// The only func in this file ...
-// Used to scan the category files to see if a particular card in a source file is already in one or more category files
+// Used to scan the category files to see if card in a source file are already in one or more category files
 func find_in_files() {
 	// Open a file to be used to log the cards that match in any category file
 	output_file, err := os.OpenFile("CardsAlreadyInCategories.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
@@ -24,9 +23,9 @@ func find_in_files() {
 	}(output_file)
 
 	// Open the master source file for reading
-	source, err := os.Open("dataInitiate.go")
+	source, err := os.Open("a_maybe_100.go") // The input file
 	if err != nil {
-		fmt.Println("Error opening file: dataInitiate.go", err)
+		fmt.Println("Error opening file: a_maybe_100.go", err)
 		return
 	}
 	defer func(source *os.File) {

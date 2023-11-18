@@ -192,6 +192,7 @@ func test1() {
 	// fmt.Fprintf(output_file, "%s was also unique\n", secondField.Kanji)
 	fmt.Printf("Count of cards is:%d\n", cardCount)
 	fmt.Printf("position:%d, secondField:%s\n", position, secondField.Kanji)
+	already_used_map2 = make(map[string]int)
 }
 func is_pick_novel2(kanji string) bool {
 	for stringFromMap, freqInMap = range already_used_map2 {
@@ -224,7 +225,7 @@ func test2() {
 	// length := 0
 	output_file, _ := os.OpenFile("all_unique_Cards.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	output_file2, _ := os.OpenFile("all_duplicate_Cards.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-	for position, secondField = range data_file { // *
+	for position, secondField = range data_file100_maybe { // The input dataset
 		cardCount++
 		// for length <= len(already_used_map2) { // *
 		// length++ // *
@@ -246,4 +247,5 @@ func test2() {
 	// fmt.Fprintf(output_file, "%s was also unique\n", secondField.Kanji)
 	fmt.Printf("Count of cards is:%d\n", cardCount)
 	fmt.Printf("position:%d, secondField:%s\n", position, secondField.Kanji)
+	already_used_map2 = make(map[string]int)
 }
