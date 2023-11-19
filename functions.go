@@ -90,6 +90,12 @@ func switch_the_deck() {
 					fmt.Printf("%s\n  \"%s\" is not a valid field, try again: \n%s", colorRed, field_to_prompt_from, colorReset)
 					continue
 				} else {
+					if current_deck == "init" {
+						deck_len = init_len
+					}
+					if current_deck == "data" {
+						deck_len = data_len
+					}
 					return
 				}
 			}
@@ -108,6 +114,7 @@ func switch_the_deck() {
 		return in
 
 	*/
+
 }
 
 func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secondary_objective string, returning_fr_dir bool) { // - -

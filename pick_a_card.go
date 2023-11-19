@@ -73,8 +73,8 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 	*/
 	if current_deck == "2098_lines_of_cards" {
 		for { // This for loop is only needed to check for empty cards
-			randIndex := rand.Intn(len(data_file100_maybe))
-			aCard = data_file100_maybe[randIndex]
+			randIndex := rand.Intn(len(claude))
+			aCard = claude[randIndex]
 			promptField = aCard.Kanji
 			objective = aCard.Meaning
 			secondary_objective = aCard.Second_Meaning

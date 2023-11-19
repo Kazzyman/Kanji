@@ -225,7 +225,7 @@ func test2() {
 	// length := 0
 	output_file, _ := os.OpenFile("all_unique_Cards.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	output_file2, _ := os.OpenFile("all_duplicate_Cards.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-	for position, secondField = range data_file100_maybe { // The input dataset
+	for position, secondField = range claude { // The input dataset
 		cardCount++
 		// for length <= len(already_used_map2) { // *
 		// length++ // *

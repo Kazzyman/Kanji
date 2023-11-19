@@ -1,7 +1,131 @@
 package main
 
-var data_file100_maybe = []charSetStructKanji{
-	
+var claude = []charSetStructKanji{
+	{"政 - 1", "politics", "government",
+		"ony: セイ(sei)", "kun: まつ(matsu)",
+		"政治(seiji; politics), 政府(seifu; government), 政策(seisaku; policy)",
+		"行政(gyousei; administration), 治政(chisei; governing), 政党(seitou; political party)"},
+
+	{"政 - 2", "government", "politics, policy",
+		"ony: セイ(sei)", "kun: まつ(matsu)",
+		"政治(seiji; politics), 政府(seifu; government), 政策(seisaku; policy)",
+		"行政(gyousei; administration), 治政(chisei; governing), 政党(seitou; political party)"},
+
+	{"空", "sky", "emptiness, vacuum",
+		"ony: クウ(kuu); ソラ(sora)", "kun: あく(aku); あき(aki); から(kara)",
+		"空港(kuukou; airport), 宇宙空間(uchuu kukan; outer space), 空腹(kuufuku; hunger)",
+		"空っぽ(karappo; empty), 空く(aku; become empty), 空(sora; sky)"},
+
+	{"運 - 1", "fortune", "transport",
+		"ony: ウン(un)", "kun: はこ(hako)",
+		"運命(unmei; fate), 運転(unten; driving), 運搬(unpan; transport)",
+		"運がいい(un ga ii; be lucky), 運ぶ(hakobu; transport), 運動(undou; exercise)"},
+
+	{"運 - 2", "transport", "luck",
+		"ony: ウン(un)", "kun: はこ(hako)ぶ",
+		"運転(unten; driving), 運行(unkou; operation), 運命(unmei; fate)",
+		"運ぶ(hakobu; transport), 運搬(unpan; freight), 運が良い(un ga ii; be lucky)"},
+
+	{"派", "faction", "dispatch, school",
+		"ony: ハ(ha); パイ(hai)", "kun: -",
+		"政治派閥(seiji habatsu; political faction), 派遣(haken; dispatch), 芸術派(geijutsu ha; art school)",
+		"派生(hassei; derivation), 支部(shibu; branch), 分派(bunpa; splinter group)"},
+
+	{"集", "gather", "collection, crowd",
+		"ony: シュウ(shuu)", "kun: あつ(atsu)",
+		"集合(shugou; assembly), 収集(shushuu; collection), 人集り(hitoatsumari; crowd of people)",
+		"集める(atsumeru; gather), 集中(shuchuu; concentration), 図書館(toshokan; library)"},
+
+	{"党", "party", "faction, clique",
+		"ony: トウ(tou)", "kun: -",
+		"政党(seitou; political party), 与党(yotou; ruling party), 野党(yatou; opposition party)",
+		"党首(toushu; party leader), 党員(touin; party member), 民主党(minshutou; Democratic Party)"},
+
+	{"具", "tool", "equipment, ingredient",
+		"ony: グ(gu)", "kun: そな(sona)",
+		"用具(yougu; tool), 調理器具(chouri kigu; cooking utensil), 具材(guzai; ingredient)",
+		"装備(soubai; equipment), 装置(souchi; apparatus), 道具(dougu; tool)"},
+
+	{"材", "material", "ingredient",
+		"ony: ザイ(zai)",
+		"kun: -",
+		"材料(zairyou; ingredient, material), 原材料(genzairyou; raw material), 食材(shokuzai; food ingredient)",
+		"部材(buzai; component, part), 資材(shizai; resource, material), 材(zai)" +
+			" \n材 on its own can also be read as \"zai\" and generally refers to an ingredient or component material."},
+
+	{"治", "govern", "cure, remedy",
+		"ony: チ(chi); ジ(ji)", "kun: おさ(osa)",
+		"政治(seiji; politics), 治療(chiryou; medical treatment), 整備 (seibi; preparation)",
+		"治す(osameru; put in order), 治る(naoru; get well), 治安(chian; public peace)"},
+
+	{"君", "you", "ruler",
+		"ony: クン(kun)", "kun: きみ(kimi)",
+		"君主(kunshu; monarch), 君臨(kunrin; reign), 君民(kunmin; the people)",
+		"お前(omae; you), 貴方(anata; you), あなた(anata; you)"},
+
+	{"信", "faith", "belief, letter",
+		"ony: シン(shin)", "kun: まこと(makoto)",
+		"信頼(shinrai; trust), 信仰(shinkou; religious belief), 信号(shingou; traffic signal)",
+		"信じる(shinjiru; believe in), 誠実(seijitsu; sincere), 宛名(ate name; addressee)"},
+
+	{"始", "begin", "start, opening",
+		"ony: シ(shi)", "kun: はじ(haji)",
+		"開始(kaishi; start), 始発(shuppatsu; first train), 始業(shigyou; start of work)",
+		"始める(hajimeru; begin), 始まる(hajimaru; begin), 初日(shonichi; first day)"},
+
+	{"返", "return", "revert, repay",
+		"ony: ヘン(hen)", "kun: かえ(kae)",
+		"返事(henji; reply), 帰り道(kaerimichi; return route), 返品(henpin; returned goods)",
+		"返す(kaesu; return), 返る(kaeru; go back), 振り返る(furikaeru; look back)"},
+
+	{"読", "read", "reading",
+		"ony: ドク(doku); トウ(tou)", "kun: よ(yo)",
+		"読書(dokusho; reading), 読者(dokusha; reader), 読み取る(yomitoru; interpret)",
+		"読む(yomu; read), 朗読(roudoku; reading aloud), 披露(hiryou; recital)"},
+
+	{"話", "speak", "talk, story",
+		"ony: ワ(wa)", "kun: はなし(hanashi)",
+		"会話(kaiwa; conversation), 電話(denwa; telephone), 話題(wadai; topic of conversation)",
+		"話す(hanasu; speak), 物語(monogatari; tale), 談話(danka; talk)"},
+
+	{"品", "goods", "dignity, quality",
+		"ony: ヒン(hin); ホン(hon)", "kun: しな(shina)",
+		"商品(shouhin; goods), 品物(shinamono; article), 食品(shokuhin; food products)",
+		"品格(hinkaku; dignity), 品質(hinshitsu; quality), 工芸品(kougeihin; craft goods)"},
+
+	{"友", "friend", "companion",
+		"ony: ユウ(yuu)", "kun: とも(tomo)",
+		"友人(yuujin; friend), 友好(yuukou; friendship), 親友(shin'yuu; close friend)",
+		"仲間(nakama; companion), 取引先(torihikisaki; business connection), 共同(kyoudou; joint)"},
+
+	{"刀", "sword", "knife, blade",
+		"ony: トウ(tou)", "kun: かたな(katana)",
+		"刀剣(touken; sword), 小刀(shoutou; knife), 短刀(tantou; short sword)",
+		"刃(ha; blade), 刀身(toumi; sword blade), 刀工(toukou; swordsmith)"},
+
+	{"度", "degree", "time, occasion",
+		"ony: ド(do); ト(to)", "kun: たび(tabi)",
+		"温度(ondo; temperature), 三度(sand; three times), 十度(juutodo; ten degrees)",
+		"再度(saido; again), 度々(tabitabi; often), 幾度(ikutabi; how many times)"},
+
+	{"動", "move", "motion, activity",
+		"ony: ドウ(dou)", "kun: うご(ugo)",
+		"移動(idou; movement), 動作(dousa; movement), 反動(handou; reaction)",
+		"動く(ugoku; move), 動機(douki; motive), 感動(kandou; being moved)"},
+
+	{"合", "join", "fit, suit",
+		"ony: ゴウ(gou); カッ(katsu); ガッ(gatu)", "kun: あ(a); あう(au)",
+		"合同(godou; joint), 合成(gousei; synthesis), 結合(ketsugou; combination)",
+		"合う(au; fit), 合意(goui; agreement), 手合わせ(teawase; applause)"},
+
+	{"願", "request", "petition, \"please\"",
+		"ony: ガン(gan)",
+		"kun: ねが(nega)う",
+		"願い(negai), 願書(ganbun), 願望(ganbou)",
+		"お願い(onegai), 祈願(kigan), 懇願(kon'gan), 切望(sesshou), 心願(shingan), 念願(nengan);" +
+			" \nAlso used in the polite phrase \"お願いします\" (onegai shimasu) to say \"please\" when making a request;" +
+			"\nAnd: 願い (negai; wish, request), 願書 (ganbun; written petition), and 願望 (ganbou; hope, aspiration)."},
+
 	{"数", "number", "figure, several",
 		"ony: スウ(suu); シュ(shu); ス(su)", "kun: かず(kazu)",
 		"数字(suuji; number), 数学(suugaku; mathematics), 数少ない(sukunai; few)",
@@ -184,12 +308,12 @@ var data_file100_maybe = []charSetStructKanji{
 		"草原(sougen; grassland), 野草(nogusa; wild grass), 芝草(shibafu; lawn grass)",
 		"草花(kusabana; grass and flowers), 雑草(zassou; weed), 芝生(shibafu; lawn)"},
 
-	{"木", "tree", "wood, forest",
+	{"木", "tree", "wood, forest, grove",
 		"ony: モク(moku)", "kun: き(ki)",
-		"樹木(jumoku; tree), 木材(mokuzai; timber), 竹(take; bamboo)",
+		"樹木(jumoku; tree), 木材(mokuzai; timber), 竹(take; bamboo), 竹林(chikurin; bamboo grove)",
 		"森林(shinrin; forest), 家具(kagu; furniture), 椅子(isu; chair)"},
 
-	{"林", "grove", "many trees",
+	{"林", "grove", "many trees, wood, forest",
 		"ony: リン(rin)", "kun: はやし(hayashi)",
 		"森林(shinrin; forest), 松林(matsubayashi; pine grove), 竹林(chikurin; bamboo grove)",
 		"山林(sanrin; mountain forest), 林間(hayashi ma; among trees), 人工林(jinkou rinka; artificial forest)"},
@@ -208,11 +332,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"ony: カイ(kai)", "kun: うみ(umi)",
 		"海岸(kaigan; seashore), 海水(kaisui; seawater), 海外(kaigai; overseas)",
 		"海産物(kaisanbutsu; marine products), 海洋(kaiyou; ocean), 海辺(umibe; seaside)"},
-
-	{"金", "gold", "money, metal",
-		"ony: キン(kin)", "kun: かね(kane)",
-		"金地金(kinjinkin; gold bullion), 金メダル(kinmedaru; gold medal), 金貨(kinga; gold coin)",
-		"お金(okane; money), 金庫(kinko; safe), 銀行(ginkou; bank)"},
 
 	{"銀", "silver", "metal, shine",
 		"ony: ギン(gin)", "kun: しろがね(shirogane)",
@@ -379,16 +498,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"安楽(anraku; comfort), 楽園(rakuen; paradise), 楽屋(gakuya; dressing room)",
 		"楽しい(tanoshii; enjoyable), 楽勝(rakushou; easy win), 手軽(tegaru; easy)"},
 
-	{"運", "fortune", "transport",
-		"ony: ウン(un)", "kun: はこ(hako)",
-		"運命(unmei; fate), 運転(unten; driving), 運搬(unpan; transport)",
-		"運がいい(un ga ii; be lucky), 運ぶ(hakobu; transport), 運動(undou; exercise)"},
-
-	{"空", "sky", "emptiness, vacuum",
-		"ony: クウ(kuu); ソラ(sora)", "kun: あく(aku); あき(aki); から(kara)",
-		"空港(kuukou; airport), 宇宙空間(uchuu kukan; outer space), 空腹(kuufuku; hunger)",
-		"空っぽ(karappo; empty), 空く(aku; become empty), 空(sora; sky)"},
-
 	{"院", "institution", "temple, hospital",
 		"ony: イン(in)", "kun: -",
 		"大学院(daigakuin; graduate school), 研究所(kenkyuujo; research institute), 病院(byouin; hospital)",
@@ -398,11 +507,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"ony: シ(shi)", "kun: いち(ichi)",
 		"都市(toshi; city), 市役所(shiyakusho; city hall), 市場(ichiba; marketplace)",
 		"町(machi; town), 開市(kaishi; opening of market), 閉市(heishi; closing of market)"},
-
-	{"政", "government", "politics, policy",
-		"ony: セイ(sei)", "kun: まつ(matsu)",
-		"政府(seifu; government), 政策(seisaku; policy), 政治(seiji; politics)",
-		"行政(gyousei; administration), 治政(chisei; governing), 政党(seitou; political party)"},
 
 	{"正", "correct", "justice, 10th month",
 		"ony: セイ(sei)", "kun: ただ(tada); まさ(masa)",
@@ -429,11 +533,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"切手(kitte; postage stamp), 切符(kippu; ticket), 切断(setsudan; disruption)",
 		"切る(kiru; cut), 切開(kikai; cut open), 切り取る(kiri toru; cut off)"},
 
-	{"然", "natural", "so, unconsciously",
-		"ony: ゼン(zen); ジ(ji)", "kun: しか(shika)",
-		"当然(touzen; natural), 必然(hitsuzen; inevitable), 無意識(muishiki; unconsciously)",
-		"然るべき(arubeki; proper), 然し(shikashi; however), 然も (shikamo; nevertheless)"},
-
 	{"親", "parent", "intimate, close",
 		"ony: シン(shin)", "kun: おや(oya); したし(shitashi)",
 		"親子(oyako; parent and child), 親友(shin'yu; close friend), 親しい(shitashii; intimate)",
@@ -449,36 +548,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"命令(meirei; order), 規則(kisoku; rule), 法令(houritsu; law)",
 		"令状(reijou; warrant), 命令(meirei; command), 勅令(chokurei; imperial edict)"},
 
-	{"合", "join", "fit, suit",
-		"ony: ゴウ(gou); カッ(katsu); ガッ(gatu)", "kun: あ(a); あう(au)",
-		"合同(godou; joint), 合成(gousei; synthesis), 結合(ketsugou; combination)",
-		"合う(au; fit), 合意(goui; agreement), 手合わせ(teawase; applause)"},
-
-	{"動", "move", "motion, activity",
-		"ony: ドウ(dou)", "kun: うご(ugo)",
-		"移動(idou; movement), 動作(dousa; movement), 反動(handou; reaction)",
-		"動く(ugoku; move), 動機(douki; motive), 感動(kandou; being moved)"},
-
-	{"度", "degree", "time, occasion",
-		"ony: ド(do); ト(to)", "kun: たび(tabi)",
-		"温度(ondo; temperature), 三度(sand; three times), 十度(juutodo; ten degrees)",
-		"再度(saido; again), 度々(tabitabi; often), 幾度(ikutabi; how many times)"},
-
-	{"刀", "sword", "knife, blade",
-		"ony: トウ(tou)", "kun: かたな(katana)",
-		"刀剣(touken; sword), 小刀(shoutou; knife), 短刀(tantou; short sword)",
-		"刃(ha; blade), 刀身(toumi; sword blade), 刀工(toukou; swordsmith)"},
-
-	{"友", "friend", "companion",
-		"ony: ユウ(yuu)", "kun: とも(tomo)",
-		"友人(yuujin; friend), 友好(yuukou; friendship), 親友(shin'yuu; close friend)",
-		"仲間(nakama; companion), 取引先(torihikisaki; business connection), 共同(kyoudou; joint)"},
-
-	{"品", "goods", "dignity, quality",
-		"ony: ヒン(hin); ホン(hon)", "kun: しな(shina)",
-		"商品(shouhin; goods), 品物(shinamono; article), 食品(shokuhin; food products)",
-		"品格(hinkaku; dignity), 品質(hinshitsu; quality), 工芸品(kougeihin; craft goods)"},
-
 	{"買", "buy", "purchase",
 		"ony: バイ(bai)", "kun: か(ka)",
 		"購入(kounyuu; purchase), 買い物(kaimono; shopping), 買取(kaitori; buying)",
@@ -488,61 +557,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"ony: バイ(bai)", "kun: う(u)",
 		"販売(hanbai; sale), 売店(uriten; shop), 売り切れ(uri kire; sold out)",
 		"売る(uru; sell), 売買(baibai; buying and selling), 売上(uriage; sales)"},
-
-	{"話", "speak", "talk, story",
-		"ony: ワ(wa)", "kun: はなし(hanashi)",
-		"会話(kaiwa; conversation), 電話(denwa; telephone), 話題(wadai; topic of conversation)",
-		"話す(hanasu; speak), 物語(monogatari; tale), 談話(danka; talk)"},
-
-	{"読", "read", "reading",
-		"ony: ドク(doku); トウ(tou)", "kun: よ(yo)",
-		"読書(dokusho; reading), 読者(dokusha; reader), 読み取る(yomitoru; interpret)",
-		"読む(yomu; read), 朗読(roudoku; reading aloud), 披露(hiryou; recital)"},
-
-	{"返", "return", "revert, repay",
-		"ony: ヘン(hen)", "kun: かえ(kae)",
-		"返事(henji; reply), 帰り道(kaerimichi; return route), 返品(henpin; returned goods)",
-		"返す(kaesu; return), 返る(kaeru; go back), 振り返る(furikaeru; look back)"},
-
-	{"始", "begin", "start, opening",
-		"ony: シ(shi)", "kun: はじ(haji)",
-		"開始(kaishi; start), 始発(shuppatsu; first train), 始業(shigyou; start of work)",
-		"始める(hajimeru; begin), 始まる(hajimaru; begin), 初日(shonichi; first day)"},
-
-	{"信", "faith", "belief, letter",
-		"ony: シン(shin)", "kun: まこと(makoto)",
-		"信頼(shinrai; trust), 信仰(shinkou; religious belief), 信号(shingou; traffic signal)",
-		"信じる(shinjiru; believe in), 誠実(seijitsu; sincere), 宛名(ate name; addressee)"},
-
-	{"君", "you", "ruler",
-		"ony: クン(kun)", "kun: きみ(kimi)",
-		"君主(kunshu; monarch), 君臨(kunrin; reign), 君民(kunmin; the people)",
-		"お前(omae; you), 貴方(anata; you), あなた(anata; you)"},
-
-	{"治", "govern", "cure, remedy",
-		"ony: チ(chi); ジ(ji)", "kun: おさ(osa)",
-		"政治(seiji; politics), 治療(chiryou; medical treatment), 整備 (seibi; preparation)",
-		"治す(osameru; put in order), 治る(naoru; get well), 治安(chian; public peace)"},
-
-	{"具", "tool", "equipment, ingredient",
-		"ony: グ(gu)", "kun: そな(sona)",
-		"用具(yougu; tool), 調理器具(chouri kigu; cooking utensil), 具材(guzai; ingredient)",
-		"装備(soubai; equipment), 装置(souchi; apparatus), 道具(dougu; tool)"},
-
-	{"党", "party", "faction, clique",
-		"ony: トウ(tou)", "kun: -",
-		"政党(seitou; political party), 与党(yotou; ruling party), 野党(yatou; opposition party)",
-		"党首(toushu; party leader), 党員(touin; party member), 民主党(minshutou; Democratic Party)"},
-
-	{"集", "gather", "collection, crowd",
-		"ony: シュウ(shuu)", "kun: あつ(atsu)",
-		"集合(shugou; assembly), 収集(shushuu; collection), 人集り(hitoatsumari; crowd of people)",
-		"集める(atsumeru; gather), 集中(shuchuu; concentration), 図書館(toshokan; library)"},
-
-	{"派", "faction", "dispatch, school",
-		"ony: ハ(ha); パイ(hai)", "kun: -",
-		"政治派閥(seiji habatsu; political faction), 派遣(haken; dispatch), 芸術派(geijutsu ha; art school)",
-		"派生(hassei; derivation), 支部(shibu; branch), 分派(bunpa; splinter group)"},
 
 	{"住", "dwell", "reside, live",
 		"ony: ジュウ(jyu)", "kun: す(su)",
@@ -634,91 +648,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"文書(bunsho; document), 文化(bunka; culture), 文学(bungaku; literature)",
 		"文章(bunshou; sentence), 文字(moji; character), 文房具(bumbutsu; stationery)"},
 
-	{"合", "join", "fit",
-		"ony: ゴウ(gou); カッ(katsu); ガッ(gatu)", "kun: あ(a); あう(au)",
-		"合同(godou; joint), 合成(gousei; synthesis), 結合(ketsugou; combination)",
-		"合う(au; fit), 合意(goui; agreement), 手合わせ(teawase; applause)"},
-
-	{"動", "move", "motion",
-		"ony: ドウ(dou)", "kun: うご(ugo)",
-		"移動(idou; movement), 動作(dousa; movement), 反動(handou; reaction)",
-		"動く(ugoku; move), 動機(douki; motive), 感動(kandou; being moved)"},
-
-	{"度", "degree", "time",
-		"ony: ド(do); ト(to)", "kun: たび(tabi)",
-		"温度(ondo; temperature), 三度(sand; three times), 十度(juutodo; ten degrees)",
-		"再度(saido; again), 度々(tabitabi; often), 幾度(ikutabi; how many times)"},
-
-	{"刀", "sword", "knife",
-		"ony: トウ(tou)", "kun: かたな(katana)",
-		"刀剣(touken; sword), 小刀(shoutou; knife), 短刀(tantou; short sword)",
-		"刃(ha; blade), 刀身(toumi; sword blade), 刀工(toukou; swordsmith)"},
-
-	{"友", "friend", "companion",
-		"ony: ユウ(yuu)", "kun: とも(tomo)",
-		"友人(yuujin; friend), 友好(yuukou; friendship), 親友(shin'yuu; close friend)",
-		"仲間(nakama; companion), 取引先(torihikisaki; business connection), 共同(kyoudou; joint)"},
-
-	{"品", "goods", "quality",
-		"ony: ヒン(hin); ホン(hon)", "kun: しな(shina)",
-		"商品(shouhin; goods), 品物(shinamono; article), 食品(shokuhin; food products)",
-		"品格(hinkaku; dignity), 品質(hinshitsu; quality), 工芸品(kougeihin; craft goods)"},
-
-	{"話", "speak", "talk",
-		"ony: ワ(wa)", "kun: はなし(hanashi)",
-		"会話(kaiwa; conversation), 電話(denwa; telephone), 話題(wadai; topic of conversation)",
-		"話す(hanasu; speak), 物語(monogatari; tale), 談話(danka; talk)"},
-
-	{"読", "read", "reading",
-		"ony: ドク(doku); トウ(tou)", "kun: よ(yo)",
-		"読書(dokusho; reading), 読者(dokusha; reader), 読み取る(yomitoru; interpret)",
-		"読む(yomu; read), 朗読(roudoku; reading aloud), 披露(hiryou; recital)"},
-
-	{"返", "return", "repay",
-		"ony: ヘン(hen)", "kun: かえ(kae)",
-		"返事(henji; reply), 帰り道(kaerimichi; return route), 返品(henpin; returned goods)",
-		"返す(kaesu; return), 返る(kaeru; go back), 振り返る(furikaeru; look back)"},
-
-	{"始", "begin", "start",
-		"ony: シ(shi)", "kun: はじ(haji)",
-		"開始(kaishi; start), 始発(shuppatsu; first train), 始業(shigyou; start of work)",
-		"始める(hajimeru; begin), 始まる(hajimaru; begin), 初日(shonichi; first day)"},
-
-	{"信", "faith", "belief",
-		"ony: シン(shin)", "kun: まこと(makoto)",
-		"信頼(shinrai; trust), 信仰(shinkou; religious belief), 信号(shingou; traffic signal)",
-		"信じる(shinjiru; believe in), 誠実(seijitsu; sincere), 宛名(ate name; addressee)"},
-
-	{"君", "you", "ruler",
-		"ony: クン(kun)", "kun: きみ(kimi)",
-		"君主(kunshu; monarch), 君臨(kunrin; reign), 君民(kunmin; the people)",
-		"お前(omae; you), 貴方(anata; you), あなた(anata; you)"},
-
-	{"治", "govern", "cure",
-		"ony: チ(chi); ジ(ji)", "kun: おさ(osa)",
-		"政治(seiji; politics), 治療(chiryou; medical treatment), 整備 (seibi; preparation)",
-		"治す(osameru; put in order), 治る(naoru; get well), 治安(chian; public peace)"},
-
-	{"具", "tool", "equipment",
-		"ony: グ(gu)", "kun: そな(sona)",
-		"用具(yougu; tool), 調理器具(chouri kigu; cooking utensil), 具材(guzai; ingredient)",
-		"装備(soubai; equipment), 装置(souchi; apparatus), 道具(dougu; tool)"},
-
-	{"党", "party", "faction",
-		"ony: トウ(tou)", "kun: -",
-		"政党(seitou; political party), 与党(yotou; ruling party), 野党(yatou; opposition party)",
-		"党首(toushu; party leader), 党員(touin; party member), 民主党(minshutou; Democratic Party)"},
-
-	{"集", "gather", "collection",
-		"ony: シュウ(shuu)", "kun: あつ(atsu)",
-		"集合(shugou; assembly), 収集(shushuu; collection), 人集り(hitoatsumari; crowd of people)",
-		"集める(atsumeru; gather), 集中(shuchuu; concentration), 図書館(toshokan; library)"},
-
-	{"派", "faction", "dispatch",
-		"ony: ハ(ha); パイ(hai)", "kun: -",
-		"政治派閥(seiji habatsu; political faction), 派遣(haken; dispatch), 芸術派(geijutsu ha; art school)",
-		"派生(hassei; derivation), 支部(shibu; branch), 分派(bunpa; splinter group)"},
-
 	{"将", "general", "leader",
 		"ony: ショウ(shou)", "kun: まさ(masa)",
 		"将軍(shougun; general), 将来(shourai; future), 棋士(kishi; go/shogi player)",
@@ -739,70 +668,10 @@ var data_file100_maybe = []charSetStructKanji{
 		"作成(sakusei; production), 著作(chosaku; literary work), 作者(sakusha; author)",
 		"作る(tsukuru; make), 仕事(shigoto; work), 製作(seisaku; production)"},
 
-	{"切", "cut", "sever",
-		"ony: セツ(setsu)", "kun: き(ki)",
-		"切手(kitte; postage stamp), 切符(kippu; ticket), 切断(setsudan; disruption)",
-		"切る(kiru; cut), 切開(kikai; cut open), 切り取る(kiri toru; cut off)"},
-
 	{"然", "natural", "unconscious",
 		"ony: ゼン(zen); ジ(ji)", "kun: しか(shika)",
 		"当然(touzen; natural), 必然(hitsuzen; inevitable), 無意識(muishiki; unconsciously)",
 		"然るべき(arubeki; proper), 然し(shikashi; however), 然も (shikamo; nevertheless)"},
-
-	{"言", "say", "speech",
-		"ony: ゲン(gen); ゴン(gon)", "kun: い(i)",
-		"言語(gengo; language), 発言(hatsugen; remark), 言論(genron; speech)",
-		"言う(iu; say), 言葉(kotoba; word), 正言(seigen; sensible words)"},
-
-	{"語", "language", "speech",
-		"ony: ゴ(go)", "kun: かた(kata)",
-		"言語(gengo; language), 外国語(gaikokugo; foreign language), 方言(hougen; dialect)",
-		"言葉(kotoba; word), 丁寧語(teineigo; polite language), 漢語(kango; Chinese-derived words)"},
-
-	{"主", "main", "primary",
-		"ony: シュ(shu)", "kun: あるじ(arugi); ぬし(nushi)",
-		"主人(shujin; master), 主要(shuyo; main), 主役(shuyaku; leading part)",
-		"主(nushi; owner), 主(aruji; lord), 主婦(shufu; housewife)"},
-
-	{"体", "body", "substance",
-		"ony: タイ(tai)", "kun: からだ(karada)",
-		"身体(shintai; body), 人体(jintai; human body), 容体(youtai; condition of body)",
-		"体重(taijuu; body weight), 実体(jittai; reality), 実体験(jittiken; real experience)"},
-
-	{"色", "color", "hue",
-		"ony: ショク(shoku)", "kun: いろ(iro)",
-		"原色(genshoku; primary color), 色彩(shikisai; coloration), 色調(shikichou; tone of color)",
-		"赤色(sekishoku; red color), 色合い(iroai; tint), 肌色(hadairo; skin color)"},
-
-	{"楽", "comfort", "ease",
-		"ony: ラク(raku); ガク(gaku)", "kun: たの(tanoshii)",
-		"安楽(anraku; comfort), 楽園(rakuen; paradise), 楽屋(gakuya; dressing room)",
-		"楽しい(tanoshii; enjoyable), 楽勝(rakushou; easy win), 手軽(tegaru; easy)"},
-
-	{"運", "fortune", "transport",
-		"ony: ウン(un)", "kun: はこ(hako)",
-		"運命(unmei; fate), 運転(unten; driving), 運搬(unpan; transport)",
-		"運がいい(un ga ii; be lucky), 運ぶ(hakobu; transport), 運動(undou; exercise)"},
-
-	{"空", "sky", "emptiness",
-		"ony: クウ(kuu); ソラ(sora)", "kun: あく(aku); あき(aki); から(kara)",
-		"空港(kuukou; airport), 宇宙空間(uchuu kukan; outer space), 空腹(kuufuku; hunger)",
-		"空っぽ(karappo; empty), 空く(aku; become empty), 空(sora; sky)"},
-
-	{"院", "institution", "temple",
-		"ony: イン(in)", "kun: -",
-		"大学院(daigakuin; graduate school), 研究所(kenkyuujo; research institute), 病院(byouin; hospital)",
-		"寺院(jiin; temple), 政府機関(seifu kikan; government institution), 裁判所(saibansho; courthouse)"},
-
-	{"市", "city", "town",
-		"ony: シ(shi)", "kun: いち(ichi)",
-		"都市(toshi; city), 市役所(shiyakusho; city hall), 市場(ichiba; marketplace)",
-		"町(machi; town), 開市(kaishi; opening of market), 閉市(heishi; closing of market)"},
-
-	{"政", "government", "politics",
-		"ony: セイ(sei)", "kun: まつ(matsu)",
-		"政府(seifu; government), 政策(seisaku; policy), 政治(seiji; politics)",
-		"行政(gyousei; administration), 治政(chisei; governing), 政党(seitou; political party)"},
 
 	{"正", "correct", "justice",
 		"ony: セイ(sei)", "kun: ただ(tada); まさ(masa)",
@@ -824,16 +693,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"真実(shinjitsu; truth), 真珠(shinju; pearl), 真空(shinkuu; vacuum)",
 		"真面目(majime; serious), 真っ直ぐ(massugu; straight), 真(makoto; truth)"},
 
-	{"切", "cut", "slit",
-		"ony: セツ(setsu)", "kun: き(ki)",
-		"切手(kitte; postage stamp), 切符(kippu; ticket), 切断(setsudan; disruption)",
-		"切る(kiru; cut), 切開(kikai; cut open), 切り取る(kiri toru; cut off)"},
-
-	{"然", "natural", "unconscious",
-		"ony: ゼン(zen); ジ(ji)", "kun: しか(shika)",
-		"当然(touzen; natural), 必然(hitsuzen; inevitable), 無意識(muishiki; unconsciously)",
-		"然るべき(arubeki; proper), 然し(shikashi; however), 然も (shikamo; nevertheless)"},
-
 	{"親", "parent", "intimate",
 		"ony: シン(shin)", "kun: おや(oya); したし(shitashi)",
 		"親子(oyako; parent and child), 親友(shin'yu; close friend), 親しい(shitashii; intimate)",
@@ -848,51 +707,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"ony: リョウ(ryou); レイ(rei)", "kun: みことのり(mikotonori)",
 		"命令(meirei; order), 規則(kisoku; rule), 法令(houritsu; law)",
 		"令状(reijou; warrant), 命令(meirei; command), 勅令(chokurei; imperial edict)"},
-
-	{"合", "join", "fit",
-		"ony: ゴウ(gou); カッ(katsu); ガッ(gatu)", "kun: あ(a); あう(au)",
-		"合同(godou; joint), 合成(gousei; synthesis), 結合(ketsugou; combination)",
-		"合う(au; fit), 合意(goui; agreement), 手合わせ(teawase; applause)"},
-
-	{"動", "move", "motion",
-		"ony: ドウ(dou)", "kun: うご(ugo)",
-		"移動(idou; movement), 動作(dousa; movement), 反動(handou; reaction)",
-		"動く(ugoku; move), 動機(douki; motive), 感動(kandou; being moved)"},
-
-	{"度", "degree", "time",
-		"ony: ド(do); ト(to)", "kun: たび(tabi)",
-		"温度(ondo; temperature), 三度(sand; three times), 十度(juutodo; ten degrees)",
-		"再度(saido; again), 度々(tabitabi; often), 幾度(ikutabi; how many times)"},
-
-	{"刀", "sword", "knife",
-		"ony: トウ(tou)", "kun: かたな(katana)",
-		"刀剣(touken; sword), 小刀(shoutou; knife), 短刀(tantou; short sword)",
-		"刃(ha; blade), 刀身(toumi; sword blade), 刀工(toukou; swordsmith)"},
-
-	{"友", "friend", "companion",
-		"ony: ユウ(yuu)", "kun: とも(tomo)",
-		"友人(yuujin; friend), 友好(yuukou; friendship), 親友(shin'yuu; close friend)",
-		"仲間(nakama; companion), 取引先(torihikisaki; business connection), 共同(kyoudou; joint)"},
-
-	{"品", "goods", "quality",
-		"ony: ヒン(hin); ホン(hon)", "kun: しな(shina)",
-		"商品(shouhin; goods), 品物(shinamono; article), 食品(shokuhin; food products)",
-		"品格(hinkaku; dignity), 品質(hinshitsu; quality), 工芸品(kougeihin; craft goods)"},
-
-	{"話", "speak", "talk",
-		"ony: ワ(wa)", "kun: はなし(hanashi)",
-		"会話(kaiwa; conversation), 電話(denwa; telephone), 話題(wadai; topic of conversation)",
-		"話す(hanasu; speak), 物語(monogatari; tale), 談話(danka; talk)"},
-
-	{"読", "read", "reading",
-		"ony: ドク(doku); トウ(tou)", "kun: よ(yo)",
-		"読書(dokusho; reading), 読者(dokusha; reader), 読み取る(yomitoru; interpret)",
-		"読む(yomu; read), 朗読(roudoku; reading aloud), 披露(hiryou; recital)"},
-
-	{"返", "return", "repay",
-		"ony: ヘン(hen)", "kun: かえ(kae)",
-		"返事(henji; reply), 帰り道(kaerimichi; return route), 返品(henpin; returned goods)",
-		"返す(kaesu; return), 返る(kaeru; go back), 振り返る(furikaeru; look back)"},
 
 	// 273 ? 1033/5=207
 
@@ -1004,7 +818,7 @@ var data_file100_maybe = []charSetStructKanji{
 		"水泳(suiei; swimming), 水曜日(suiyoubi; Wednesday), 水分(suibun; moisture)",
 		"飲料水(inryousui; drinking water), 水産物(suisanbutsu; seafood), 水兵(suihei; sailor)"},
 
-	{"木", "tree", "wood",
+	{"木", "tree", ", grove, wood",
 		"ony: モク(moku)", "kun: き(ki)",
 		"木曜日(mokuyoubi; Thursday), 木材(mokuzai; lumber), 森(mori; forest)",
 		"樹木(ju moku; tree), 家具(kagu; furniture), 椅子(isu; chair)"},
@@ -1100,11 +914,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"走行(soukou; driving), 走査(sousa; survey), 全力走行(zenryoku soukou; driving at full speed)",
 		"走る(hashiru; run), 運転する(unten suru; drive), 疾走(shissou; dashing)"},
 
-	{"運", "transport", "luck",
-		"ony: ウン(un)", "kun: はこ(hako)ぶ",
-		"運転(unten; driving), 運行(unkou; operation), 運命(unmei; fate)",
-		"運ぶ(hakobu; transport), 運搬(unpan; freight), 運が良い(un ga ii; be lucky)"},
-
 	{"料", "fee", "ingredients",
 		"ony: リョウ(ryou)", "kun: -",
 		"料金(ryoukin; fee), 入場料(nyuuryou ryou; admission fee), 材料(zairyou; ingredient)",
@@ -1187,15 +996,8 @@ var data_file100_maybe = []charSetStructKanji{
 		"国家(kokka; country), 他国(takoku; foreign country), 祖国(sokoku; homeland)",
 		"外国(gaikoku; foreign country), 国境(kokkyou; national border), 国際(kokusai; international)"},
 
-	{"政", "government", "politics",
-		"ony: セイ(sei)", "kun: まつ(matsu)",
-		"政治(seiji; politics), 政府(seifu; government), 治政(chisei; governing)",
-
-		"行政(gyousei; administration), 政党(seitou; political party), 政策(seisaku; policy)"},
-
 	{"経", "sutra", "longitude",
 		"ony: ケイ(kei); キョウ(kyou)", "kun: -",
-
 		"経済(keizai; economy), 経験(keiken; experience), 人生経験(jinsei keiken; life experience)",
 		"経理(keiri; accounting), 経過(keika; progress), 経営(keiei; management)"},
 
@@ -1225,11 +1027,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"ony: キョウ(kyō); ケイ(kei)", "kun: -",
 		"東京(Tōkyō; Tokyo), 京都(Kyōto; Kyoto), 大阪(Ōsaka; Osaka)",
 		"首都(Shuto; capital city), 特別区(Tokubetsuku; special ward), 首長(Shuchō; mayor)"},
-
-	{"市", "city", "town",
-		"ony: シ(shi)", "kun: いち(ichi)",
-		"都市(Toshi; city), 市場(Ichiba; marketplace), 開市(Kaishi; opening of market)",
-		"町(Machi; town), 自治体(Jichitai; municipality), 市長(Shichō; mayor)"},
 
 	{"町", "town", "street",
 		"ony: チョウ(chō)", "kun: まち(machi)",
@@ -1748,19 +1545,7 @@ var data_file100_maybe = []charSetStructKanji{
 		"器具(kigu), 器械(kikai), 器物(kibutsu)",
 		"道具(dogu), 用具(yougu), 器(utsuwa)"},
 
-	{"具", "ingredient", "equipment",
-		"ony: グ(gu)",
-		"kun: そな(sona)える",
-		"部品(buhin), 付属品(fuzokuhin), 資材(shizai)",
-		"装備(soubi), 用具(yougu), 道具(dougu)"},
-
 	// Here are some example kanji related to human physiology:
-
-	{"体", "body", "substance",
-		"ony: タイ(tai)",
-		"kun: からだ(karada)",
-		"身体(shintai), 人体(jitai), 容体(youtai)",
-		"体重(taijuu), 体液(taieki), 体系(taikei)"},
 
 	{"血", "blood", "lineage",
 		"ony: ケツ(ketsu)",
@@ -1887,12 +1672,6 @@ var data_file100_maybe = []charSetStructKanji{
 		"kun: かみ(kami)",
 		"神社(jinja), 神道(shinto), 神様(kamisama)",
 		"八百万の神(yaoyorozu no kami), 祈願(kigan), 祈祷(kito)"},
-
-	{"政", "politics", "government",
-		"ony: セイ(sei)",
-		"kun: まつ(matsu)る",
-		"政治(seiji), 政府(seifu), 政策(seisaku)",
-		"行政(gyosei), 治政(chisei), 政党(seito)"},
 
 	{"官", "government", "bureau",
 		"ony: カン(kan)",

@@ -86,13 +86,24 @@ func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { 
 	return
 }
 
+/*
+	init_len = len(fileOfCardsInitiate)
+	guru_len = len(fileOfCardsGuru)
+	master_len = len(fileOfCardsMaster)
+	novice_len = len(fileOfCardsNovice)
+	grad_len = len(fileOfCardsGraduate)
+	fresh_len = len(fileOf_fresh)
+	current_len = len(fileOf_Current)
+	data_len = len(data_file)
+	claude_len = len(claude)
+*/
 // Initial prompt, to be used when first introducing a new Kanji char
 func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf("%s%s", prompt, colorCyan)
 	if current_deck == "all" {
 		fmt.Printf(" Meaning? (deck:%s:%s), 'dir' or '?' for help with %s", current_deck, current_deck_B, colorReset)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s), 'dir' or '?' for help with %s", current_deck, colorReset)
+		fmt.Printf(" Meaning? (deck:%s:%d), 'dir' or '?' for help with %s", current_deck, deck_len, colorReset)
 	}
 	fmt.Printf("%s \n%s", prompt, colorCyan)
 	fmt.Printf(" :> %s", colorReset)

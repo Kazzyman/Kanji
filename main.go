@@ -6,7 +6,20 @@ import (
 	"time"
 )
 
+func initialize_stuff() {
+	init_len = len(fileOfCardsInitiate)
+	guru_len = len(fileOfCardsGuru)
+	master_len = len(fileOfCardsMaster)
+	novice_len = len(fileOfCardsNovice)
+	grad_len = len(fileOfCardsGraduate)
+	fresh_len = len(fileOf_fresh)
+	current_len = len(fileOf_Current)
+	data_len = len(data_file)
+	claude_len = len(claude)
+}
+
 func main() {
+	initialize_stuff()
 	rand.Seed(time.Now().UnixNano())
 	gameOn = false
 	current_deck = "2098_lines_of_cards" // The default deck, can be changed via the sdk Directive
@@ -216,7 +229,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--Also Right! But as second meaning\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+		fmt.Printf("%s - was Primary meaning\n%s\n%s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
@@ -445,7 +458,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--Also Right! But as second meaning\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, colorReset)
+		fmt.Printf("%s - was Primary meaning\n%s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, colorReset)
 
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
@@ -665,7 +678,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		log_right(promptField, in)
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--Also Right! But as second meaning\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, colorReset)
+		fmt.Printf("%s - was Primary meaning\n%s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0

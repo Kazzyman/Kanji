@@ -1,13 +1,10 @@
 package main
 
-import (
-	"fmt"
-)
-
 // Used in respond_to_UserSuppliedDirective() in case: "setc"
 // Also used in the 'setc' directive via: reSet_aCard_andThereBy_reSet_thePromptString()
 // ... to reSet the card, i.e., the Kanji/prompt(and all other aCard fields) via its Meaning field
 //
+/*
 // The sole function of this func is to set the global: foundElement
 func silentlyLocateCard(setKeyRequest string) { //  - -
 	foundElement = nil // Prime the global foundElement, a pointer thus: var foundElement *charSetStructKanji
@@ -71,6 +68,28 @@ func silentlyLocateCard(setKeyRequest string) { //  - -
 				fmt.Printf("\"%s\"%s", setKeyRequest, colorRed)
 				fmt.Printf(" was not found in any deck : silentlyLocateCard()\n%s", colorReset)
 			}
+		}
+	}
+}
+
+*/
+
+//
+//
+//
+// The sole function of this func is to set the global: foundElement
+func silentlyLocateCard(setKeyRequest string) { //  - -
+	foundElement = nil // Prime the global foundElement, a pointer thus: var foundElement *charSetStructKanji
+	//
+	// Firstly, look in data
+	// for _, card := range data_file { // The new local variable: card will be an object defined by a structure
+	for _, card := range claude { // The new local variable: card will be an object defined by a structure
+		if card.Meaning == setKeyRequest {
+			// v v v if we find a 'card' in the range of 'fileOfCardsInitiate',
+			// ... we set the foundElement global var
+			foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
+			// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+			break
 		}
 	}
 }
