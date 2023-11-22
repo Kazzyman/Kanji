@@ -101,9 +101,9 @@ func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { 
 func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf("%s%s", prompt, colorCyan)
 	if current_deck == "all" {
-		fmt.Printf(" Meaning? (deck:%s:%s), 'dir' or '?' for help with %s", current_deck, current_deck_B, colorReset)
+		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%d), 'dir' or '?' for help with %s", current_deck, current_deck_B, deck_len, colorReset)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s:%d), 'dir' or '?' for help with %s", current_deck, deck_len, colorReset)
+		fmt.Printf(" Meaning? (deck:%s, cards in deck:%d), 'dir' or '?' for help with %s", current_deck, deck_len, colorReset)
 	}
 	fmt.Printf("%s \n%s", prompt, colorCyan)
 	fmt.Printf(" :> %s", colorReset)
