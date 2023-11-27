@@ -61,40 +61,76 @@ func switch_the_deck() {
 	for {
 		fmt.Println("\nEnter a deck from below for randomized prompting of a specific deck:\n")
 
+		fmt.Println("    all")
+		fmt.Println("    beauty")
+		fmt.Println("    claude")
+		fmt.Println("    current")
 		fmt.Println("    data")
 		fmt.Println("    fresh")
-		fmt.Println("    current")
-		fmt.Println("    all")
-
-		fmt.Println("    init")
-		fmt.Println("    nov")
 		fmt.Println("    grad")
+		fmt.Println("    guru")
+		fmt.Println("    init")
 		fmt.Println("    mast")
-
-		fmt.Println("    guru \n")
+		fmt.Println("    nov \n")
 
 		fmt.Printf(" Here%s:> %s", colorCyan, colorReset)
 
 		_, _ = fmt.Scan(&current_deck)
 
-		if current_deck != "init" && current_deck != "nov" && current_deck != "2098_lines_of_cards" && current_deck != "mast" &&
-			current_deck != "guru" && current_deck != "fresh" && current_deck != "current" &&
-			current_deck != "all" && current_deck != "data" && current_deck != "kun" {
+		if current_deck != "all" &&
+			current_deck != "beauty" &&
+			current_deck != "claude" &&
+			current_deck != "current" &&
+			current_deck != "data" &&
+			current_deck != "fresh" &&
+			current_deck != "grad" &&
+			current_deck != "guru" &&
+			current_deck != "init" &&
+			current_deck != "mast" &&
+			current_deck != "nov" {
 			fmt.Printf("%s\n  \"%s\" is not a valid deck, try again: \n%s", colorRed, current_deck, colorReset)
 			continue
 		} else {
 			for {
 				fmt.Println("\nEnter a field to prompt from:\n")
+				fmt.Println("\nkanji or kunyomi\n")
 				_, _ = fmt.Scan(&field_to_prompt_from)
 				if field_to_prompt_from != "kanji" && field_to_prompt_from != "kunyomi" {
 					fmt.Printf("%s\n  \"%s\" is not a valid field, try again: \n%s", colorRed, field_to_prompt_from, colorReset)
 					continue
 				} else {
-					if current_deck == "init" {
-						deck_len = init_len
+					if current_deck == "all" {
+						// deck_len = all_len // This is taken care of in pick_RandomCard_Assign_fields()
+					}
+					if current_deck == "beauty" {
+						deck_len = beauty_len
+					}
+					if current_deck == "claude" {
+						deck_len = claude_len
+					}
+					if current_deck == "current" {
+						deck_len = current_len
 					}
 					if current_deck == "data" {
 						deck_len = data_len
+					}
+					if current_deck == "fresh" {
+						deck_len = fresh_len
+					}
+					if current_deck == "grad" {
+						deck_len = grad_len
+					}
+					if current_deck == "guru" {
+						deck_len = guru_len
+					}
+					if current_deck == "init" {
+						deck_len = init_len
+					}
+					if current_deck == "mast" {
+						deck_len = master_len
+					}
+					if current_deck == "nov" {
+						deck_len = novice_len
 					}
 					return
 				}
@@ -160,7 +196,7 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 	case "q": // quit
 		os.Exit(1)
 	case "?": // context-sensitive help on the current card
-		fmt.Printf("%s: primary\n%s: secondary\n%s: Onyomi\n%s: Kunyomi\n%s\n%s\n\n",
+		fmt.Printf("%s: primaryMeaning\n%s: secondaryMeaning\n%s\n%s\n%s\n%s\n\n",
 			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 	case "st": // stats
 		newHits()

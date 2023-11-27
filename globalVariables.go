@@ -23,6 +23,7 @@ type charSetStructKanji struct {
 	Vocab2         string
 }
 
+var beauty_len int
 var init_len int
 var guru_len int
 var master_len int
@@ -32,6 +33,7 @@ var fresh_len int
 var current_len int
 var data_len int
 var claude_len int
+
 var deck_len int
 
 var randDeckAndMode int

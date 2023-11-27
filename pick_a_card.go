@@ -46,7 +46,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 			objective = aCard.Meaning
 			secondary_objective = aCard.Second_Meaning
 			if promptField == "" || promptField == " " {
-				fmt.Printf("%s--- An empty kanji card was skipped i nov!!!!%s\n", colorRed, colorReset) // Verified
+				fmt.Printf("%s--- An empty kanji card was skipped in nov!!!!%s\n", colorRed, colorReset) // Verified
 				continue
 			} else {
 				break // break out of local for loop and naturally fall-through to the return
@@ -71,7 +71,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 		}
 
 	*/
-	if current_deck == "2098_lines_of_cards" {
+	if current_deck == "claude" {
 		for { // This for loop is only needed to check for empty cards
 			randIndex := rand.Intn(len(claude))
 			aCard = claude[randIndex]
@@ -79,7 +79,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 			objective = aCard.Meaning
 			secondary_objective = aCard.Second_Meaning
 			if promptField == "" || promptField == " " {
-				fmt.Printf("%s--- An empty kanji card was skipped in grad!!!!%s\n", colorRed, colorReset) // Verified
+				fmt.Printf("%s--- An empty kanji card was skipped in claude!!!!%s\n", colorRed, colorReset) // Verified
 				continue
 			} else {
 				break // break out of local for loop and naturally fall-through to the return
@@ -151,6 +151,22 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 		}
 	}
 
+	if current_deck == "beauty" {
+		for { // This for loop is only needed to check for empty cards
+			randIndex := rand.Intn(len(data_beauty))
+			aCard = data_beauty[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+			promptField = aCard.Kanji
+			objective = aCard.Meaning
+			secondary_objective = aCard.Second_Meaning
+			if promptField == "" || promptField == " " {
+				fmt.Printf("%s--- An empty kanji card was skipped in data_beauty!!!!%s\n", colorRed, colorReset) // Verified
+				continue
+			} else {
+				break // break out of local for loop and naturally fall-through to the return
+			}
+		}
+	}
+
 	if current_deck == "all" {
 		// Randomize over all decks, i.e., Randomly chose a deck
 		// fmt.Printf("\n random number is:%d, and must include 0-6 inclusive\n", randDeckAndMode)
@@ -159,6 +175,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 			randDeckAndMode = rand.Intn(7) // if an empty card was picked, maybe try a different deck, or not
 			if randDeckAndMode == 0 {
 				current_deck_B = "init"
+				deck_len = init_len
 				randIndex := rand.Intn(len(fileOfCardsInitiate))
 				aCard = fileOfCardsInitiate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
 				promptField = aCard.Kanji
@@ -166,13 +183,15 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 				secondary_objective = aCard.Second_Meaning
 			} else if randDeckAndMode == 1 {
 				current_deck_B = "nov"
+				deck_len = novice_len
 				randIndex := rand.Intn(len(fileOfCardsNovice))
 				aCard = fileOfCardsNovice[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
 				secondary_objective = aCard.Second_Meaning
 			} else if randDeckAndMode == 2 {
-				current_deck_B = "2098_lines_of_cards"
+				current_deck_B = "claude"
+				deck_len = claude_len
 				randIndex := rand.Intn(len(fileOfCardsGraduate))
 				aCard = fileOfCardsGraduate[randIndex]
 				promptField = aCard.Kanji
@@ -180,6 +199,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 				secondary_objective = aCard.Second_Meaning
 			} else if randDeckAndMode == 3 {
 				current_deck_B = "mast"
+				deck_len = master_len
 				randIndex := rand.Intn(len(fileOfCardsMaster))
 				aCard = fileOfCardsMaster[randIndex]
 				promptField = aCard.Kanji
@@ -187,6 +207,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 				secondary_objective = aCard.Second_Meaning
 			} else if randDeckAndMode == 4 {
 				current_deck_B = "current"
+				deck_len = current_len
 				randIndex := rand.Intn(len(fileOf_Current))
 				aCard = fileOf_Current[randIndex]
 				promptField = aCard.Kanji
@@ -194,6 +215,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 				secondary_objective = aCard.Second_Meaning
 			} else if randDeckAndMode == 5 {
 				current_deck_B = "fresh"
+				deck_len = fresh_len
 				randIndex := rand.Intn(len(fileOf_fresh))
 				aCard = fileOf_fresh[randIndex]
 				promptField = aCard.Kanji
@@ -201,6 +223,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 				secondary_objective = aCard.Second_Meaning
 			} else if randDeckAndMode == 6 {
 				current_deck_B = "guru"
+				deck_len = guru_len
 				randIndex := rand.Intn(len(fileOfCardsGuru))
 				aCard = fileOfCardsGuru[randIndex]
 				promptField = aCard.Kanji

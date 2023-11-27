@@ -15,14 +15,16 @@ func initialize_stuff() {
 	fresh_len = len(fileOf_fresh)
 	current_len = len(fileOf_Current)
 	data_len = len(data_file)
+	beauty_len = len(data_beauty)
 	claude_len = len(claude)
+	gameOn = false
+	current_deck = "claude" // The default deck, can be changed via the sdk Directive
+	deck_len = claude_len
 }
 
 func main() {
 	initialize_stuff()
 	rand.Seed(time.Now().UnixNano())
-	gameOn = false
-	current_deck = "2098_lines_of_cards" // The default deck, can be changed via the sdk Directive
 	display_List_of_Directives()
 	// Create and prime vars, kluge?
 	new_prompt, objective, objective_kind, secondary_objective := "prime", "prime", "prime", "prime"
@@ -328,7 +330,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--somewhat Right! in other fields\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n%s",
+		fmt.Printf("%s-pri\n%s-sec\n%s-ony\n%s-kun\n%s\n%s\n\n%s",
 			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
@@ -410,7 +412,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		log_right(promptField, in)
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--Right!\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n\n%s", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, colorReset)
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n%s", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
 		loopCounter := 0
@@ -458,7 +460,8 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--Also Right! But as second meaning\n")
-		fmt.Printf("%s - was Primary meaning\n%s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, colorReset)
+		fmt.Printf("%s - was Primary meaning\n%s-ony\n%s-kun\n%s\n%s\n\n%s",
+			aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
@@ -507,7 +510,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--somewhat Right! within primary field\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n%s",
+		fmt.Printf("%s\n%s\n%s-ony\n%s-kun\n%s\n%s\n\n%s",
 			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
@@ -557,7 +560,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--somewhat Right! in other fields\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n%s",
+		fmt.Printf("%s-pri\n%s-sec\n%s-ony\n%s-kun\n%s\n%s\n\n%s",
 			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
@@ -632,7 +635,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		log_right(promptField, in)
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--Right!\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n\n%s", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, colorReset)
+		fmt.Printf("%s\n%s\n%s\n%s\n%s\n\n%s", aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
 		loopCounter := 0
@@ -678,7 +681,8 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		log_right(promptField, in)
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--Also Right! But as second meaning\n")
-		fmt.Printf("%s - was Primary meaning\n%s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, colorReset)
+		fmt.Printf("%s - was Primary meaning\n%s-ony\n%s-kun\n%s\n%s\n\n%s",
+			aCard.Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -775,7 +779,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		log_right(promptField, in)
 		fmt.Printf("%s%s%s", colorReset, in, colorGreen)
 		fmt.Printf(" <--somewhat Right! in other fields\n")
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n\n%s",
+		fmt.Printf("%s-pri\n%s-sec\n%s-ony\n%s-kun\n%s\n%s\n\n%s",
 			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 		// Since this was "^^somewhat Right!", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
@@ -822,7 +826,8 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 	} else {
 		log_oops(aCard.Kanji, aCard.Meaning, in)
 		// fmt.Printf("      　^^That was your last try, Oops! ")
-		fmt.Printf("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n%s", colorRed, aCard.Kanji, aCard.Meaning, aCard.Second_Meaning,
+		fmt.Printf("%s\n%s\n%s-pri\n%s-sec\n%s-ony\n%s-kun\n%s\n%s\n\n%s", colorRed,
+			aCard.Kanji, aCard.Meaning, aCard.Second_Meaning,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 	}
 	// Returns to caller:

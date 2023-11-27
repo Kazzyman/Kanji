@@ -92,4 +92,13 @@ func silentlyLocateCard(setKeyRequest string) { //  - -
 			break
 		}
 	}
+	for _, card := range fileOf_fresh { // The new local variable: card will be an object defined by a structure
+		if card.Meaning == setKeyRequest {
+			// v v v if we find a 'card' in the range of 'fileOfCardsInitiate',
+			// ... we set the foundElement global var
+			foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
+			// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+			break
+		}
+	}
 }
