@@ -1,104 +1,155 @@
 package main
 
+import (
+	"fmt"
+	"regexp"
+)
+
 // Used in respond_to_UserSuppliedDirective() in case: "setc"
 // Also used in the 'setc' directive via: reSet_aCard_andThereBy_reSet_thePromptString()
 // ... to reSet the card, i.e., the Kanji/prompt(and all other aCard fields) via its Meaning field
 //
-/*
+//
 // The sole function of this func is to set the global: foundElement
 func silentlyLocateCard(setKeyRequest string) { //  - -
-	foundElement = nil // Prime the global foundElement, a pointer thus: var foundElement *charSetStructKanji
+	// card.Meaning will (sometimes) be either a string such as "red-1" or "red-2"
+	// ... likewise, setKeyRequest will (only sometimes) be either a string such as "red-1" or "red-2"
+	foundElement = nil                        // Prime the global foundElement, a pointer thus: var foundElement *charSetStructKanji
+	regex := regexp.MustCompile(`^([a-z]+)-`) // Used to strip the -int suffix from the card.Meaning string
+	regexH := regexp.MustCompile(`-`)         // Used to determine if the user entered a hyphenated val for setKeyRequest
+	var meaning string                        // Used to stand-in for card.Meaning in cases where setKeyRequest is sans hyphen
+
 	//
-	// Firstly, look in fileOfCardsInitiate
-	for _, card := range fileOfCardsInitiate { // The new local variable: card will be an object defined by a structure
-		if card.Meaning == setKeyRequest {
-			// v v v if we find a 'card' in the range of 'fileOfCardsInitiate',
-			// ... we set the foundElement global var
-			foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
-			// i.e., it is a pointer thus: var foundElement *charSetStructKanji
-			break
-		}
-	}
-	//
-	if foundElement == nil { // If we did not locate the card we seek: look in ALL other decks
-		// fmt.Println("Element not found in fileOfCardsInitiate: func silentlyLocateCard()")
-		//
-		// As a SECONDARY possible location, look in fileOfCardsNovice
-		for _, card := range fileOfCardsNovice {
-			if card.Meaning == setKeyRequest {
-				foundElement = &card
+	// Firstly, look in the "claude" deck
+	for _, card := range claude { // This new local variable: card, will be an object defined by a structure
+		if len(regexH.FindStringSubmatch(setKeyRequest)) > 0 { // regex-H scans setKeyRequest to see if that string is hyphenated ...
+			if card.Meaning == setKeyRequest { // ... go and look for the literal (complete) hyphenated meaning (special case).
+				// v v v if we find a 'card' in the range of 'claude',
+				// ... we set the foundElement global var
+				foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card.
+				// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+				fmt.Println("setKeyRequest was found in the \"claude\" deck")
+				break
+			}
+		} else { // The user has entered a value for setKeyRequest sans hyphen (the usual case) ...
+			// ... we therefore check it against card.Meaning which may OR MAY NOT be hyphenated, itself.
+			matches := regex.FindStringSubmatch(card.Meaning)
+			if len(matches) > 0 { // setKeyRequest is sans hyphen, and card.Meaning IS hyphenated; so (maybe) truncate card.Meaning
+				// todo:
+				// Only if card.Meaning is of the form meaning-int rather than meaning-secondWordOfMeaning ...
+				meaning = regex.FindStringSubmatch(card.Meaning)[1] // index of 1 grabs the chars left of the hyphen
+			} else { // setKeyRequest is hyphenated, so we will be looking for the complete setKeyRequest in each card.Meaning
+				// setKeyRequest string was not hyphenated, and card.Meaning has a non-int val right of any hyphen ...
+				// ... so grab all of card.Meaning (usual case)
+				meaning = card.Meaning
+			}
+
+			// if card.Meaning == setKeyRequest { // Was the prior condition in need of extra attention ...
+			if meaning == setKeyRequest { // The revised condition that will also handle compound strings suffixed by -int
+				// v v v if we find a 'card' in the range of 'claude',
+				// ... we set the foundElement global var
+				foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
+				// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+				fmt.Println("setKeyRequest was found in the \"claude\" deck")
 				break
 			}
 		}
-		if foundElement == nil { // If we STILL have not yet located the card we seek:
-			// fmt.Println("Element not found in fileOfCardsNovice: func silentlyLocateCard()")
-			//
-			// As a TERTIARY possible location, look in fileOfCardsGraduate
-			for _, card := range fileOfCardsGraduate {
-				if card.Meaning == setKeyRequest {
-					foundElement = &card
-					break
-				}
-			}
-		}
-		if foundElement == nil {
-			// fmt.Println("Element not found in fileOfCardsGraduate: func silentlyLocateCard()")
-			//
-			// As a QUATERNARY possible location, look in fileOfCardsMaster
-			for _, card := range fileOfCardsMaster {
-				if card.Meaning == setKeyRequest {
-					foundElement = &card
-					break
-				}
-			}
-		}
-		if foundElement == nil {
-			// fmt.Println("Element not found in fileOfCardsMaster: func silentlyLocateCard()")
-			//
-			// As THE FINAL possible location, look in fileOfCardsGuru
-			for _, card := range fileOfCardsGuru {
-				if card.Meaning == setKeyRequest {
-					foundElement = &card
-					break
-				}
-			}
-			if foundElement == nil {
 
-				fmt.Printf("%s\nElement %s", colorRed, colorReset)
-				fmt.Printf("\"%s\"%s", setKeyRequest, colorRed)
-				fmt.Printf(" was not found in any deck : silentlyLocateCard()\n%s", colorReset)
+	}
+
+	// When no match is found above, look in the "fileOf_fresh" deck
+	for _, card := range fileOf_fresh { // This new local variable: card, will be an object defined by a structure
+		if len(regexH.FindStringSubmatch(setKeyRequest)) > 0 { // regex-H scans setKeyRequest to see if that string is hyphenated ...
+			if card.Meaning == setKeyRequest { // ... go and look for the literal (complete) hyphenated meaning (special case).
+				// v v v if we find a 'card' in the range of 'fileOf_fresh',
+				// ... we set the foundElement global var
+				foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card.
+				// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+				fmt.Println("setKeyRequest was found in the \"fresh\" deck")
+				break
+			}
+		} else { // The user has entered a value for setKeyRequest sans hyphen (the usual case) ...
+			// ... we therefore check it against card.Meaning which may OR MAY NOT be hyphenated, itself.
+			matches := regex.FindStringSubmatch(card.Meaning)
+			if len(matches) > 0 { // setKeyRequest is sans hyphen, and card.Meaning IS hyphenated; so truncate card.Meaning
+				meaning = regex.FindStringSubmatch(card.Meaning)[1] // index of 1 grabs the chars left of the hyphen
+			} else { // setKeyRequest is hyphenated, so we will be looking for the complete setKeyRequest in each card.Meaning
+				meaning = card.Meaning // setKeyRequest string was not hyphenated, so grab all of card.Meaning (usual case)
+			}
+
+			// if card.Meaning == setKeyRequest { // Was the prior condition in need of extra attention ...
+			if meaning == setKeyRequest { // The revised condition that will also handle compound strings suffixed by -int
+				// v v v if we find a 'card' in the range of 'fileOf_fresh',
+				// ... we set the foundElement global var
+				foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
+				// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+				fmt.Println("setKeyRequest was found in the \"fresh\" deck")
+				break
 			}
 		}
 	}
-}
 
-*/
+	// When no match is found above, look in the "data_file" deck
+	for _, card := range data_file { // This new local variable: card, will be an object defined by a structure
+		if len(regexH.FindStringSubmatch(setKeyRequest)) > 0 { // regex-H scans setKeyRequest to see if that string is hyphenated ...
+			if card.Meaning == setKeyRequest { // ... go and look for the literal (complete) hyphenated meaning (special case).
+				// v v v if we find a 'card' in the range of 'data_file',
+				// ... we set the foundElement global var
+				foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card.
+				// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+				fmt.Println("setKeyRequest was found in the \"data\" deck")
+				break
+			}
+		} else { // The user has entered a value for setKeyRequest sans hyphen (the usual case) ...
+			// ... we therefore check it against card.Meaning which may OR MAY NOT be hyphenated, itself.
+			matches := regex.FindStringSubmatch(card.Meaning)
+			if len(matches) > 0 { // setKeyRequest is sans hyphen, and card.Meaning IS hyphenated; so truncate card.Meaning
+				meaning = regex.FindStringSubmatch(card.Meaning)[1] // index of 1 grabs the chars left of the hyphen
+			} else { // setKeyRequest is hyphenated, so we will be looking for the complete setKeyRequest in each card.Meaning
+				meaning = card.Meaning // setKeyRequest string was not hyphenated, so grab all of card.Meaning (usual case)
+			}
 
-//
-//
-//
-// The sole function of this func is to set the global: foundElement
-func silentlyLocateCard(setKeyRequest string) { //  - -
-	foundElement = nil // Prime the global foundElement, a pointer thus: var foundElement *charSetStructKanji
-	//
-	// Firstly, look in data
-	// for _, card := range data_file { // The new local variable: card will be an object defined by a structure
-	for _, card := range claude { // The new local variable: card will be an object defined by a structure
-		if card.Meaning == setKeyRequest {
-			// v v v if we find a 'card' in the range of 'fileOfCardsInitiate',
-			// ... we set the foundElement global var
-			foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
-			// i.e., it is a pointer thus: var foundElement *charSetStructKanji
-			break
+			// if card.Meaning == setKeyRequest { // Was the prior condition in need of extra attention ...
+			if meaning == setKeyRequest { // The revised condition that will also handle compound strings suffixed by -int
+				// v v v if we find a 'card' in the range of 'data_file',
+				// ... we set the foundElement global var
+				foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
+				// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+				fmt.Println("setKeyRequest was found in the \"data\" deck")
+				break
+			}
 		}
 	}
-	for _, card := range fileOf_fresh { // The new local variable: card will be an object defined by a structure
-		if card.Meaning == setKeyRequest {
-			// v v v if we find a 'card' in the range of 'fileOfCardsInitiate',
-			// ... we set the foundElement global var
-			foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
-			// i.e., it is a pointer thus: var foundElement *charSetStructKanji
-			break
+	// When no match is found above, look in the "fileOf_Current" deck
+	for _, card := range fileOf_Current { // This new local variable: card, will be an object defined by a structure
+		if len(regexH.FindStringSubmatch(setKeyRequest)) > 0 { // regex-H scans setKeyRequest to see if that string is hyphenated ...
+			if card.Meaning == setKeyRequest { // ... go and look for the literal (complete) hyphenated meaning (special case).
+				// v v v if we find a 'card' in the range of 'fileOf_Current',
+				// ... we set the foundElement global var
+				foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card.
+				// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+				fmt.Println("setKeyRequest was found in the \"current\" deck")
+				break
+			}
+		} else { // The user has entered a value for setKeyRequest sans hyphen (the usual case) ...
+			// ... we therefore check it against card.Meaning which may OR MAY NOT be hyphenated, itself.
+			matches := regex.FindStringSubmatch(card.Meaning)
+			if len(matches) > 0 { // setKeyRequest is sans hyphen, and card.Meaning IS hyphenated; so truncate card.Meaning
+				meaning = regex.FindStringSubmatch(card.Meaning)[1] // index of 1 grabs the chars left of the hyphen
+			} else { // setKeyRequest is hyphenated, so we will be looking for the complete setKeyRequest in each card.Meaning
+				meaning = card.Meaning // setKeyRequest string was not hyphenated, so grab all of card.Meaning (usual case)
+			}
+
+			// if card.Meaning == setKeyRequest { // Was the prior condition in need of extra attention ...
+			if meaning == setKeyRequest { // The revised condition that will also handle compound strings suffixed by -int
+				// v v v if we find a 'card' in the range of 'fileOf_Current',
+				// ... we set the foundElement global var
+				foundElement = &card // foundElement is a global var which contains(refers to) all the fields of a card
+				// i.e., it is a pointer thus: var foundElement *charSetStructKanji
+				fmt.Println("setKeyRequest was found in the \"current\" deck")
+				break
+			}
 		}
 	}
+	// todo: add the remaining decks
 }

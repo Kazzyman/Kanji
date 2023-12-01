@@ -779,10 +779,18 @@ var claude = []charSetStructKanji{
 		"黒色(koku shoku; black color), 黒板(kokuban; blackboard), 真っ黒(makkuro; pitch black)",
 		"暗黒(ankoku; darkness), 黒い(kuroi; black), 黒雲(kurokumo; black cloud)"},
 
-	{"赤", "red", "flush",
-		"ony: セキ(seki); シャク(shaku)", "kun: あか(aka)",
+	{"赤", "red-1", "flush",
+		"ony: セキ(seki); シャク(shaku)",
+		"kun: あか(aka)",
 		"赤色(sekshoku; red color), 真っ赤(makka; bright red), 赤道(sekidou; equator)",
-		"赤信号(akashingou; red traffic light), 赤み(akamimi; reddish), 赤面(sekimen; flushing)"},
+		"赤信号(aka-shingou; red traffic light), 赤み(akamimi; reddish), 赤面(sekimen; flushing)\n" +
+			"赤ちゃん(aka-chan; baby), 紅葉(kouyou; red-2 leaf), 赤十字(sekijuuji; )"},
+
+	{"紅", "red-2", "crimson",
+		"ony: こう",
+		"kun: べに　beni",
+		"紅葉 (こぅよぅ　kōyō/kouyou) refers to the autumn foliage when leaves turn red - 紅葉(red leaf) ",
+		" "},
 
 	{"青", "blue", "green",
 		"ony: セイ(sei); ショウ(shou)", "kun: あお(ao)",
@@ -864,7 +872,8 @@ var claude = []charSetStructKanji{
 	{"乗", "ride", "board",
 		"ony: ジョウ(jou)", "kun: の(no)る",
 		"乗客(joukyaku; passenger), 乗り物(norimono; vehicle), 乗車(jousha; boarding)",
-		"乗る(noru; ride), 乗せる(noseru; give a ride), 乗り換え(norikae; transfer)"},
+		"乗る(noru; ride), 乗せる(noseru; give a ride), 乗り換え(norikae; transfer)" +
+			"\nsee the slide ride on top of the treehouse"},
 
 	{"降", "descend", "alight",
 		"ony: コウ(kou)", "kun: お(o)りる",
@@ -1223,12 +1232,6 @@ var claude = []charSetStructKanji{
 		"kun: くに(kuni)",
 		"国(kuni), 他国(takoku), アメリカ合衆国(amerika gasshukoku)",
 		"国内(kokunai), 外国(gaikoku), 国旗(kokki)"},
-
-	{"赤", "red", "scarlet",
-		"ony: セキ(seki); シャク(shaku)",
-		"kun: あか(aka)",
-		"赤(aka), 真っ赤(makka), 赤信号(akashingou)",
-		"紅葉(kouyou), 赤ちゃん(akachan), 赤十字(sekijuuji)"},
 
 	{"青", "blue", "green",
 		"ony: セイ(sei); ショウ(shou)",

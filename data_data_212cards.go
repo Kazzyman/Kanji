@@ -104,7 +104,7 @@ var data_file = []charSetStructKanji{
 	{"魚", "fish", "Fish",
 		"gyo ぎょ", "kun: sakana さかな",
 		"魚 (fish)",
-		" "},
+		"\ncompare bird:鳥"},
 
 	{"足", "foot", "or, to add",
 		"soku そく", "kun: ashi あし, ta(su) た(す)",
@@ -299,7 +299,8 @@ var data_file = []charSetStructKanji{
 	{"俺", "I-male-casual", "I-male-informal",
 		" -", "kun: おれ",
 		"俺は男です (I am a male[between friends])",
-		"I, myself (mainly used by males [informal/casual])"},
+		"I, myself (mainly used by males [informal/casual])" +
+			"\ncompare dragon:竜 and note that they are only superficially similar"},
 
 	{"警察官", "police-officer", "cop",
 		" -", "kun: けいさつかん",
@@ -401,10 +402,15 @@ var data_file = []charSetStructKanji{
 		"木曜日 (Thursday)",
 		" "},
 
-	{"安", "cheap", "peace",
+	{"安 - 1", "cheap", "peace",
 		"anあん", "kun: yasuやす(iい)",
 		"安い (cheap)",
-		" - or; safety"},
+		" - or; safety\n gal wearing a Cheap hat, not a Safety Peace of attire"},
+
+	{"安 - 2", "peace", "cheap",
+		"anあん", "kun: yasuやす(iい)",
+		"安い (cheap)",
+		" - or; safety\n gal wearing a Cheap hat, not a Safety Peace of attire"},
 
 	{"耳", "ear", "ears",
 		"ji　じ", "kun: mimi　みみ",
@@ -494,7 +500,7 @@ var data_file = []charSetStructKanji{
 	{"午", "noon", "midday",
 		"ご", "kun: -",
 		"午前 (morning, A.M.)",
-		"compare: cow 牛"},
+		"\ncompare: cow 牛"},
 
 	{"今", "now", "the-present",
 		"kon　こん, kin　きん", "kun: ima　いま",
@@ -558,8 +564,8 @@ var data_file = []charSetStructKanji{
 
 	{"西", "west", "West",
 		"さい, せい", "kun: にし",
-		"西 (west)",
-		" "},
+		" ",
+		" \ncompare parents:両親 noting only a superficial similarity"},
 
 	{"何", "what", "which",
 		"ka　か", "kun: nan　なん, nani　なに",
@@ -799,7 +805,7 @@ var data_file = []charSetStructKanji{
 	{"両親", "parents", " ",
 		"ony: -", "kun: りょうしん",
 		" ",
-		" "},
+		"\ncompare west:西 "},
 
 	{"子供", "children", "child",
 		"ony: -", "kun: こども",
@@ -953,7 +959,7 @@ var data_file = []charSetStructKanji{
 
 	{"牛", "cow (ushi)", " ",
 		"ony: -", "kun: うし",
-		"compare: noon 午",
+		"\ncompare: noon 午",
 		" "},
 
 	{"豚", "pig (buta)", " ",
@@ -989,17 +995,17 @@ var data_file = []charSetStructKanji{
 	{"狼", "wolf (ōkami)", " ",
 		"ony: -", "kun: オオカミ",
 		" ",
-		" "},
+		"the white Wolf is a long-standing friend, beside a mexican in a sombrero"},
 
 	{"兎", "rabbit (usagi)", " ",
 		"ony: -", "kun: うさぎ",
 		" ",
 		" "},
 
-	{"竜", "dragon (ryū, tatsu)", " ",
-		"ony: -", "kun: りゅう、たつ",
-		" ",
-		" "},
+	{"竜", "dragon", " ",
+		"ony: -", "kun: りゅう、たつ (ryū, tatsu)",
+		"  ",
+		"\ncompare casual:俺 and note that they are only superficially similar"},
 
 	{"鹿", "deer (shika)", " ",
 		"ony: -", "kun: しか",
@@ -1033,7 +1039,7 @@ var data_file = []charSetStructKanji{
 
 	{"鳥", "bird (tori)", "とり",
 		"ony: -", "kun: -",
-		" ",
+		"\ncompare fish:魚",
 		" "},
 
 	{"鶏", "chicken", " ",
