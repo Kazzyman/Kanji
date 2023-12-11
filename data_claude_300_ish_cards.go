@@ -22,7 +22,7 @@ var claude = []charSetStructKanji{
 		"運命(unmei; fate), 運転(unten; driving), 運搬(unpan; transport)",
 		"運がいい(un ga ii; be lucky), 運ぶ(hakobu; transport), 運動(undou; exercise)"},
 
-	{"運 - 2", "transport", "luck",
+	{"運 - 2", "transport", "fortune, luck",
 		"ony: ウン(un)", "kun: はこ(hako)ぶ",
 		"運転(unten; driving), 運行(unkou; operation), 運命(unmei; fate)",
 		"運ぶ(hakobu; transport), 運搬(unpan; freight), 運が良い(un ga ii; be lucky)"},
@@ -40,7 +40,13 @@ var claude = []charSetStructKanji{
 	{"党", "party", "faction, clique",
 		"ony: トウ(tou)", "kun: -",
 		"政党(seitou; political party), 与党(yotou; ruling party), 野党(yatou; opposition party)",
-		"党首(toushu; party leader), 党員(touin; party member), 民主党(minshutou; Democratic Party)"},
+		"党首(toushu; party leader), 党員(touin; party member), 民主党(minshutou; Democratic Party)\n" +
+			"首:neck:くび"},
+
+	{"首", "neck", " ",
+		"ony: -", "kun: くび",
+		" ",
+		" "},
 
 	{"具", "tool", "equipment, ingredient",
 		"ony: グ(gu)", "kun: そな(sona)",
@@ -109,7 +115,9 @@ var claude = []charSetStructKanji{
 	{"度", "degree", "time, occasion",
 		"ony: ド(do); ト(to)", "kun: たび(tabi)",
 		"温度(ondo; temperature), 三度(sand; three times), 十度(juutodo; ten degrees)",
-		"再度(saido; again), 度々(tabitabi; often), 幾度(ikutabi; how many times)"},
+		"再度(saido; again), 度々(tabitabi; often), 幾度(ikutabi; how many times)\n" +
+			"when you get your Degree it is a special Occasion and a special Time\n" +
+			"see the graduate on the platform in his double cap/gown getting his Degree on this special Occasion/Time"},
 
 	{"動", "move", "motion, activity",
 		"ony: ドウ(dou)", "kun: うご(ugo)",
@@ -156,7 +164,7 @@ var claude = []charSetStructKanji{
 		"取る(toru; take), 受取(uketoru; receive), 取り出す(toridasu; take out)",
 		"取引(torihiki; transaction), 取材(shuzai; coverage), 携帯(keitai; portable)"},
 
-	{"以", "by means of", "because, compared to",
+	{"以", "because", "compared-to, by means of",
 		"ony: イ(i)", "kun: もっ(motte)",
 		"以下(ika; below), 以内(inai; within), 以外(igai; except)",
 		"以上(ijou; more than), 以来(irai; since), 以って(motte; by means of)"},
@@ -186,20 +194,18 @@ var claude = []charSetStructKanji{
 		"先行(senkou; precedence), 先端(sentan; cutting edge), 先生 (sensei; teacher)",
 		"以前(izen; before), まず(mazu; first), 前もって(maemotte; beforehand)"},
 
-	// 2
-	{"学", "learning", "study, school, 1-of-2-学",
+	{"学 - 1", "learning", "study, school",
 		"ony: ガク(gaku)", "kun: まな(mana)",
 		"学校(gakkou; school), 学生(gakusei; student), 学習(gakushuu; study)",
 		"勉強(benkyou; study), 学者(gakusha; scholar), 学部(gakubu; faculty)\n" +
 			"Compare: 子 child, so 学 is a child wearing a crown as reward for Learning"},
 
-	{"学", "study", "science, 2-of-2-学",
+	{"学 - 2", "study", "science",
 		"ony: ガク(gaku)",
 		"kun: まな(mana)ぶ",
 		"学問(gakumon), 学者(gakusha; scholar), 学位(gakui)",
-		"学ぶ(manabu), 修学(shugaku), 学習(gakushuu; study)"},
-
-	//
+		"学ぶ(manabu), 修学(shugaku), 学習(gakushuu; study)\n" +
+			"Compare: 子 child, so 学 is a child wearing a crown as reward for Learning"},
 
 	{"方", "direction", "person, way",
 		"ony: ホウ(hou)", "kun: かた(kata)",
@@ -211,18 +217,15 @@ var claude = []charSetStructKanji{
 		"世界(sekai; world), 学界(gakkai; academic circle), 業界(gyoukai; industry)",
 		"境界(kyoukai; border), 分界(bunkai; division), 定義(teigi; definition)"},
 
-	// 2
-	{"区", "ward", "district, zone, 1-of-2-ward",
+	{"区", "ward-1", "district, zone",
 		"ony: ク(ku)", "kun: -",
 		"区役所(kuyakusho; ward office), 住宅地区(jūtakuchiiki; residential district), 校区(kouku; school district)",
 		"区切り(kugiri; division), 区分(kubun; classification), 特別区(tokubetsuku; special ward), 区域(kuiki)"},
 
-	{"区", "ward", "district, zone, 2-of-2-ward",
+	{"区", "ward-2", "district, zone",
 		"ony: ク(ku)", "kun: -",
 		"区役所(Kuyakusho; ward office), 特別区(Tokubetsuku; special ward), 校区(Kōku; school district)",
 		"分区(Bunku; division), 地区(Chiku; local area), 区長(Kuchō; ward mayor), 区域(kuiki), 区画(kukaku), 区長(kuchou)"},
-
-	//
 
 	{"一", "one", "first, single",
 		"ony: イチ(ichi)", "kun: ひと(hito)",
@@ -292,14 +295,15 @@ var claude = []charSetStructKanji{
 	{"円", "yen; circle", "money, round",
 		"ony: エン(en)", "kun: まど(madou)",
 		"百円(hyaku-en; hundred yen), 千円(sen-en; thousand yen), 万円(man-en; ten thousand yen)",
-		"円高(endaka; high yen), 円安(en'yasu; low yen), 円周(enshuu; circumference)"},
+		"円高(endaka; high yen), 円安(en'yasu; low yen), 円周(enshuu; circumference)\n" +
+			"compare month: 月"},
 
 	{"王", "king", "ruler, crown",
 		"ony: オウ(ou)", "kun: -",
 		"王様(ousama; king), 女王(joou; queen), 王国(oukoku; kingdom)",
 		"王子(ouji; prince), 王冠(oukan; crown), 王道(oudou; kingship)"},
 
-	{"玉", "jewel; ball", "precious, spherical",
+	{"玉", "jewel;", "precious, spherical, ball",
 		"ony: ギョク(gyoku)", "kun: たま(tama)",
 		"宝玉(hougyoku; jewel), 玉石(gyokuseki; gem), 金玉(kin gyoku; gold nugget)",
 		"玉子(tamago; egg), 野球玉(yakyuudama; baseball), 玉ねぎ(tamanegi; onion)"},
@@ -680,7 +684,8 @@ var claude = []charSetStructKanji{
 	{"然", "natural", "unconscious",
 		"ony: ゼン(zen); ジ(ji)", "kun: しか(shika)",
 		"当然(touzen; natural), 必然(hitsuzen; inevitable), 無意識(muishiki; unconsciously)",
-		"然るべき(arubeki; proper), 然し(shikashi; however), 然も (shikamo; nevertheless)"},
+		"然るべき(arubeki; proper), 然し(shikashi; however), 然も (shikamo; nevertheless)\n" +
+			"many a dog's 犬 Natural place is above "},
 
 	{"正", "correct", "justice",
 		"ony: セイ(sei)", "kun: ただ(tada); まさ(masa)",
@@ -712,11 +717,6 @@ var claude = []charSetStructKanji{
 		"自分(jibun; oneself), 自動(jidou; automatic), 自然(shizen; nature)",
 		"自宅(jutaku; one's home), 自発(jihatsu; spontaneous), 自力(jirki; own power)"},
 
-	// 273 ? 1033/5=207
-
-	// Here are 39 additional Japanese kanji flash cards that I think would be useful for beginning Japanese learners,
-	// based on reviewing the cards I previously provided:
-
 	{"大", "big", "large",
 		"ony: ダイ(dai); タイ(tai)", "kun: おお(oo)",
 		"大きい(ookii; big), 大人(otona; adult), 大学(daigaku; university)",
@@ -736,12 +736,6 @@ var claude = []charSetStructKanji{
 		"ony: タン(tan)", "kun: みじか(mijika)",
 		"短い(mijikai; short), 短縮(tanshuku; reduction), 短所(tansho; shortcoming)",
 		"短期(tanki; short time), 短距離(tankyori; short distance), 簡短(kantan; brief)"},
-
-	{"高", "high", "tall, expensive",
-		"ony: コウ(kou); タカ(taka)", "kun: たか(taka)",
-		"高い(takai; high), 最高(saikou; highest), 高原(kougen; plateau)",
-		"高校(koukou; high school), 高層(kousou; high-rise), 高速(kousoku; high speed)\n" +
-			"高い (expensive)"},
 
 	{"低", "low", "short",
 		"ony: テイ(tei)", "kun: ひく(hiku)",
@@ -820,7 +814,8 @@ var claude = []charSetStructKanji{
 	{"月", "moon", "month",
 		"ony: ゲツ(getsu)", "kun: つき(tsuki)",
 		"月光(gekkou; moonlight), 一月(ichigatsu; January), 今月(kongetsu; this month)",
-		"毎月(maitsuki; every month), 月末(gekmatsu; end of month), 月見(tsukimi; moon viewing)"},
+		"毎月(maitsuki; every month), 月末(gekmatsu; end of month), 月見(tsukimi; moon viewing)\n" +
+			"compare yen: 円"},
 
 	{"火", "fire", "Tuesday",
 		"ony: カ(ka)", "kun: ひ(hi)",
@@ -920,7 +915,8 @@ var claude = []charSetStructKanji{
 	{"改", "revision", "improvement",
 		"ony: カイ(kai)", "kun: あら(ara)たる",
 		"改善(kaizen; improvement), 改札(kaisatsu; ticket gate), 改装(kaisou; renovation)",
-		"改正(kaisei; amendment), 改める(arata meru; revise), 新しい(atarashii; new)"},
+		"改正(kaisei; amendment), 改める(arata meru; revise), 新しい(atarashii; new)\n" +
+			"compare: 改女 "},
 
 	{"番", "number", "one's turn",
 		"ony: バン(ban)", "kun: -",
@@ -935,7 +931,8 @@ var claude = []charSetStructKanji{
 	{"号", "number", "counter for vehicles",
 		"ony: ゴウ(gou)", "kun: - ",
 		"列車号(ressha gou; train number), 便名(binmei; service name), 航空便(koukuu bin; airline service)",
-		"番号(bangou; number), 100号車(hyaku gou sha; car number 100), 3号線(san gou sen; line number 3)"},
+		"番号(bangou; number), 100号車(hyaku gou sha; car number 100), 3号線(san gou sen; line number 3)\n" +
+			"the train on the track has a Number under it"},
 
 	// the kanji for entrance/exit, ride/alight, go/come, next, station names, lines, and train/service numbers are very common in train stations.
 
@@ -964,7 +961,8 @@ var claude = []charSetStructKanji{
 	{"配", "distribute", "dispatch",
 		"ony: ハイ(hai)", "kun: くば(kuba)る",
 		"配達(haitatsu; delivery), 配布(haifu; distribution), 配置(haichi; arrangement)",
-		"配る(kubaru; distribute), 配慮(hairyo; consideration), 配当(haitou; dividend)"},
+		"配る(kubaru; distribute), 配慮(hairyo; consideration), 配当(haitou; dividend)\n" +
+			"alcohol 酒 was 配-ed from the 西 - west"},
 
 	// kanji for drive, transport, fee, tax, meter, and distribute/dispatch relate to taxis.
 
@@ -972,36 +970,30 @@ var claude = []charSetStructKanji{
 
 	{"食", "eat", "food",
 		"ony: ショク(shoku)", "kun: く(ku)う",
-
 		"食事(shokuji; meal), 食品(shokuhin; food), 食堂(shokudou; dining hall)",
 		"食べる(taberu; eat), 朝食(choushoku; breakfast), 献立(kondate; menu)"},
 
 	{"料", "fee", "ingredients",
 		"ony: リョウ(ryou)", "kun: -",
-
 		"料金(ryoukin; fee), 食料(shokuryou; provisions), 原料(genryou; ingredient)",
 		"材料(zairyou; ingredient), 調理料理(chouri ryouri; cooked food), 配膳料(haizen ryou; table charge)"},
 
 	{"店", "store", "shop",
 		"ony: テン(ten)", "kun: みせ(mise)",
-
 		"店舗(tenpo; shop), 書店(shoten; bookstore), 八百屋(yaoya; greengrocer's)",
 		"売店(uriba; shop), 喫茶店(kissaten; cafe), 飲食店(inshokuten; restaurant)"},
 
 	{"酒", "alcohol", "sake",
-
 		"ony: シュ(shu)", "kun: さけ(sake)",
 		"酒場(sakaba; bar), 日本酒(nihonshu; sake), ビール(biiru; beer)",
 		"酒類(shurui; alcoholic beverages), 酒飲み(sakenomi; drinking alcohol), 酔う(you; get drunk)"},
 
 	{"注", "pour", "order",
 		"ony: チュウ(chuu)", "kun: そそ(soso)ぐ",
-
 		"注文(chuumon; order), 注意(chuui; attention), 注入(chunyu; injection)",
 		"注ぐ(sosogu; pour), 注ぎ口(sogikuchi; spout), 追注(tsuichuu; additional order)"},
 
 	{"席", "seat", "occasion",
-
 		"ony: セキ(seki)", "kun: -",
 		"席順(seki jun; seating order), 席取り(seki dori; seat reservation), 出席(shusseki; attendance)",
 		"空席(kuseki; vacancy), 指定席(shitei seki; reserved seat), カウンター席(kaunta seki; counter seat)"},
@@ -1019,12 +1011,10 @@ var claude = []charSetStructKanji{
 	{"地", "earth", "place",
 		"ony: チ(chi); ジ(ji)", "kun: -",
 		"地震(jishin; earthquake), 地域(chiiki; region), 土地(tochi; land)",
-
 		"現地(genchi; site), 出身地(shusshin chi; hometown), 地名(chimei; place name)"},
 
 	{"国", "country", "homeland",
 		"ony: コク(koku)", "kun: くに(kuni)",
-
 		"国家(kokka; country), 他国(takoku; foreign country), 祖国(sokoku; homeland)",
 		"外国(gaikoku; foreign country), 国境(kokkyou; national border), 国際(kokusai; international)"},
 
@@ -1043,7 +1033,8 @@ var claude = []charSetStructKanji{
 	{"西", "west", "western",
 		"ony: セイ(sei); サイ(sai)", "kun: にし(nishi)",
 		"西日本(Nishi-Nihon; western Japan), 西洋(Seiyō; the West), 西南(Seinan; southwest)",
-		"西口(Nishiguchi; west exit), 西側(nishigawa; western side), 西向き(nishimuki; facing west)"},
+		"西口(Nishiguchi; west exit), 西側(nishigawa; western side), 西向き(nishimuki; facing west)\n" +
+			"compare 酒 alcohol "},
 
 	{"南", "south", "southern",
 		"ony: ナン(nan)", "kun: みなみ(minami)",
@@ -1093,11 +1084,17 @@ var claude = []charSetStructKanji{
 		"渋谷(Shibuya), 谷底(Tanisoko), 渓谷(Keikoku)",
 		"渓谷(keikoku; ravine), 山間(sankan; mountain recesses), 盆地(bonchi; basin)"},
 
-	{"ヶ", "counter for items", " ",
-		"ony: ケ(ke); カ(ka)",
+	{"ヶ", "counter", "count-of-items",
+		"ony: -",
 		"kun: -",
-		"一ヶ月(Ikka getsu), 三ヶ国語(Sanka kokugo), 一ヶ所(Ikasho)",
-		" ",
+		"Pronounced ka; 一ヶ月(Ikka getsu), 三ヶ国語(Sanka kokugo), 一ヶ所(Ikasho)",
+		"ヶ is a special non-standard kanji used for counting small numbers or objects and is \n" +
+			"similar to the English suffix \"-some\" as in \"three-some\" or \"couple\"\n" +
+			"For example: 2ヶ月 (2 ka getsu) - 2 months; \n" +
+			"Can indicate approximations or imprecise amounts rather than exact counts when used after numbers\n" +
+			"May be used after some qualitative counters as well, like 何ヶ (nani ka) - \"how many\" or 幾ヶ (iku ka) - \"how many\"\n" +
+			"ヶ is, technically, a kanji, but it does not carry meaning or readings as a standalone character, but serves a \n" +
+			"grammatical role in compounds to indicate counts of things without using the standard counter -tsu",
 	},
 
 	{"原", "meadow", "field, wilderness",
@@ -1112,21 +1109,19 @@ var claude = []charSetStructKanji{
 		"西新宿(Nishi-Shinjuku), 西方(Seihō), 西日(Nishibi)",
 		"西洋(seiyō; the West), 西暦(seireki; Western calendar), 西口(nishiguchi; west exit)"},
 
-	{"暦", "calendar",
-		" ",
+	{"暦", "calendar", " ",
 		"ony: - カレンダー karendā",
 		"kun: - こよみ koyomi",
 		"西暦(seireki; Western calendar)",
 		" "},
 
-	{"秒", "second",
-		" ",
+	{"秒", "second", " ",
 		"ony: -",
 		"kun: - びょう (byō)",
 		" ",
-		" "},
+		"秒 (byō) means \"second\" as a unit of time measurement"},
 
-	{"口", "entrance", "opening, hole",
+	{"口", "entrance", "opening, hole, mouth",
 		"ony: コウ(kō); ク(ku)",
 		"kun: ぐち(guchi)",
 		"新南口(Shin-Minamiguchi), 東口(Higashiguchi), 駅口(Ekiguchi)",
@@ -1285,7 +1280,8 @@ var claude = []charSetStructKanji{
 		"ony: ジン(jin); ニン(nin)",
 		"kun: ひと(hito)",
 		"人(hito), 人口(jinkou), 人数(ninzuu)",
-		"個人(kojin), 人生(jinsei), 人形(ningyou)"},
+		"個人(kojin), 人生(jinsei), 人形(ningyou)\n" +
+			"者 also means person, but is more formal and is used mainly in compounds denoting professions or such."},
 
 	// Here are 10 example kanji flashcards related to Japanese culture:
 
@@ -1318,7 +1314,8 @@ var claude = []charSetStructKanji{
 		"ony: シュ(shu)",
 		"kun: さけ(sake)",
 		"日本酒(nihonshu), 酒場(sakaba), 酒宴(sakuen)",
-		"酔う(you), 酒量(shuryou), 酒席(shaseki)"},
+		"酔う(you), 酒量(shuryou), 酒席(shaseki)\n" +
+			"酒 is from the 西 - west"},
 
 	{"刀", "sword", "katana",
 		"ony: トウ(tō)",
@@ -1336,7 +1333,8 @@ var claude = []charSetStructKanji{
 		"ony: ケイ(kei); ギョウ(gyō)",
 		"kun: かた(kata); かたち(katachi)",
 		"形状(keijō), 形式(keishiki), 人形(ningyō)",
-		"模様(moyō), 型(kata), 儀式(gishiki)"},
+		"模様(moyō), 型(kata), 儀式(gishiki)\n" +
+			"the tower was Form-ed or Shape-d by the three fingers"},
 
 	{"花", "flower", "blossom",
 		"ony: カ(ka)",
@@ -1377,11 +1375,12 @@ var claude = []charSetStructKanji{
 		"短い(mijikai), 短縮(tanshuku), 短所(tansho)",
 		"短期(tanki), 短距離(tankyori), 簡短(kantan)"},
 
-	{"高", "high", "tall",
+	{"高", "expensive", "tall, high",
 		"ony: コウ(kou); タカ(taka)",
 		"kun: たか(taka)",
-		"高い(takai), 最高(saikou), 高原(kougen)",
-		"高校(koukou), 高層(kousou), 高速(kousoku)"},
+		"高い(takai; high), 最高(saikou; highest), 高原(kougen; plateau)",
+		"高校(koukou; high school), 高層(kousou; high-rise), 高速(kousoku; high speed)\n" +
+			"高い (expensive)"},
 
 	{"低", "low", "short",
 		"ony: テイ(tei)",
@@ -1468,7 +1467,7 @@ var claude = []charSetStructKanji{
 		"ony: ロウ(rou)",
 		"kun: お(o)いる",
 		"老人(roujin), 高齢者(koureisha), 老齢(rouireki)",
-		"老若男女(rounyounan), 老体(otai), 老衰(rousui); compare person:old 者:老"},
+		"老若男女(rounyounan), 老体(otai), 老衰(rousui); compare: person(formal):old 者:老"},
 
 	{"耄", "aged", "long-lived",
 		"ony: ヒ(hi); ホウ(hou)",
@@ -1506,7 +1505,7 @@ var claude = []charSetStructKanji{
 	{"民", "people", "populace",
 		"ony: ミン(min)",
 		"kun: たみ(tami)",
-		"国民(kokumin), 民族(minzoku), 市民(shimin)",
+		"国民(kokumin; national), 民族(minzoku), 市民(shimin)",
 		"人民(jinmin), 民衆(minshū), 民生(minsei)"},
 
 	{"外", "outside", "foreign",
@@ -1629,7 +1628,8 @@ var claude = []charSetStructKanji{
 		"ony: ノウ(nou)",
 		"kun: -",
 		"脳梗塞(noukouzou), 脳波(nouha), 脳内(nounai)",
-		"頭脳(zunou), 知能(chinou), 思考(shikou)"},
+		"頭脳(zunou), 知能(chinou), 思考(shikou)\n" +
+			"monthly, the Brain in that vat goes ouch when the stirring stick skewers it "},
 
 	{"心", "heart", "spirit",
 		"ony: シン(shin)",
@@ -1720,7 +1720,8 @@ var claude = []charSetStructKanji{
 		"ony: ブツ(butsu); ブ(bu)",
 		"kun: ほとけ(hotoke)",
 		"仏教(bukkyou), 仏陀(butsuzo), 仏舎利(bussari)",
-		"仏(hotoke), 寺院(jiin), 僧侶(souryo)"},
+		"仏(hotoke), 寺院(jiin), 僧侶(souryo)\n" +
+			"resting mu cow : Buddha  "},
 
 	{"神", "god", "deity",
 		"ony: シン(jin); ジン(jin)",
@@ -1741,39 +1742,147 @@ var claude = []charSetStructKanji{
 		"法律(horitsu), 法令(horei), 法案(hopan)",
 		"規則(kisoku), 方法(hoho), 条例(jorei)"},
 
-	// Here are some example kanji for names of famous scientists:
+	{"明", "bright", "intense",
+		"ony: アク-ル, アカ-ルイ",
+		"kun: あけ-る, あか-るい",
+		"明るい部屋 (あかるいへや) (bright room)",
+		" "},
 
-	{"菅", "Kanehiro", "Nobel laureate",
-		"ony: カン(Kan)",
-		"kun: すが(Suga)",
-		"菅野(Kanno), 菅原(Kanbara), 菅谷(Kan'ya)",
-		"菅直人(Kan Naoto; former PM), 菅原道真(Sugawara no Michizane), 菅沼宏志(Kan'numa Hiroshi; mathematician)",
-	},
+	{"暗い", "dark", " ",
+		"クラ-イ",
+		"くら-い",
+		"暗い - kura-i,  暗い夜 (くらいよる) (dark night)",
+		" "},
 
-	{"湯", "Yukawa", "Nobel laureate",
-		"ony: ユ(Yu)",
-		"kun: -",
-		"湯川(Yukawa), 湯浅(Yuasa), 湯本(Yumoto)",
-		"湯川秀樹(Yukawa Hideki; physicist), 湯沢(Yuzawa), 湯木(Yunoki), 湯村(Yumura)"},
+	{"静", "quiet", "still",
+		"シズ-カ",
+		"しず-か",
+		"静か - shitsu-ka,  静かな朝 (しずかなあさ) (quiet morning)",
+		" "},
 
-	{"朝", "Asahi", "Olympic medalist",
-		"ony: チョウ(Chō)",
-		"kun: あさ(Asa)",
-		"朝日(Asahi), 朝倉(Asakura), 朝比奈(Asahina)",
-		"朝日新聞(Asahi Shimbun; newspaper), 朝食(chōshoku; breakfast), 朝青龍明徳(Asashōryū Akinori; sumo wrestler)",
-	},
+	{"寒", "cold", "frigid",
+		"サム-イ",
+		"さむ-い",
+		"寒い - samu-i, 寒い冬 (さむいふゆ) (cold winter)",
+		" "},
 
-	{"益", "Masatoshi", "Nobel laureate",
-		"ony: エキ(Eki)",
-		"kun: ます(Masu)",
-		"益子(Masuko), 益智(Masuchi), 益田(Masuda)",
-		"益々(masu masu; more and more), 有益(yūeki; beneficial), 小柴昌俊(Koshiba Masatoshi; physicist)",
-	},
+	{"暖", "warm", "balmy",
+		"アタタ-カイ",
+		"あたた-かい",
+		"暖かい - atata-kai",
+		"暖かい飲み物 (あたたかいのみもの) (warm drink)"},
 
-	{"中", "Nakaya", "physicist",
-		"ony: チュウ(Chū)",
-		"kun: なか(Naka)",
-		"中里(Nakazato), 中山(Nakayama), 中村(Nakamura)",
-		"中道(chūdō; middle way), 中心(chūshin; center), 中野目慎太郎 (Nakanome Shintarō; physicist)",
-	},
+	{"彼", "he", " ",
+		"カレ",
+		"かれ",
+		" ",
+		" "},
+
+	{"彼女", "she", " ",
+		"カノジョ",
+		"かのじょ",
+		" ",
+		" "},
+
+	{"広", "wide", "spacious",
+		"ヒロ-イ",
+		"ひろ-い",
+		"広-い - hiro",
+		"広い道 (ひろいみち) (wide road)"},
+
+	{"厚", "thick", " ",
+		"アツ-イ",
+		"あつ-い",
+		"厚い - atsu-i",
+		"厚い本 (あついほん) (thick book)"},
+
+	{"薄", "thin", " ",
+		"ウス-イ",
+		"うす-い",
+		"薄い - usu-i",
+		"薄い紙 (うすいかみ) (thin paper)"},
+
+	{"平", "flat", " ",
+		"タイ-ラ",
+		"たい-ら",
+		"平ら - tai-ra",
+		"平らな地面 (たいらなじめん) (flat ground)"},
+
+	{"負", "lose", "defeat, fail",
+		"マ-ケル",
+		"ま-ける",
+		"負 - ma, 負ける - makeru",
+		"試合に負ける (しあいにまける) (lose a match)"},
+
+	{"美", "beautiful", " ",
+		"ウツク-シイ",
+		"うつく-しい",
+		"美しい - utsuku-shii",
+		"美しい風景 (うつくしいふうけい) (beautiful scenery)"},
+
+	{"歩", "walk", " ",
+		"アル-ク",
+		"ある-く",
+		"歩く - aru-ku",
+		"公園を歩く (こうえんをあるく) (walk through the park)"},
+
+	{"跳", "jump", " ",
+		"ト-ブ",
+		"と-ぶ",
+		"跳ぶ - to-bu",
+		"反対側に跳ぶ (はんたいがわにとぶ) (jump to the other side)"},
+
+	{"飛", "fly", " ",
+		"ト-ブ",
+		"と-ぶ",
+		"飛ぶ - to-bu",
+		"鳥が空を飛ぶ(とりがそらをとぶ) (a bird flies across the sky)"},
+
+	{"愛", "love", " ",
+		"アイスル",
+		"あいする",
+		"愛する - ai-suru",
+		"彼女を愛する (かのじょをあいする) (to love her)"},
+
+	{"幸", "happy", " ",
+		"シアワ-セ",
+		"しあわ-せ",
+		"幸せ - shiawa-se",
+		"幸せな家族 (しあわせなかぞく) (happy family); happy-happy joy-joy (shiawa-se shiawa-se)"},
+
+	{"憎", "hate", " ",
+		"ニクム",
+		"にくむ",
+		"憎む - niku-mu",
+		"暑さを憎む (しょさをにくむ) (hate the heat)"},
+
+	{"陽", "sun", "sol",
+		"タイヨウ",
+		"たいよう",
+		"太陽 - sun is Obese, Thick, Important, Senior, Big-around",
+		" "},
+
+	{"太", "fat", "Obese, Thick, Important, Senior, Big-around",
+		" ",
+		"たい",
+		"Senior grade in a hierarchy",
+		"太子 (たいし) - crown prince; 太っ腹 (ふとっぱら) - big-bellied; 太る (ふとる) - to gain weight"},
+
+	{"悲しい", "sad", " ",
+		"カナシイ",
+		"かなしい",
+		"悲しい",
+		"悲しい出来事 (かなしいできごと) (sad event)"},
+
+	{"星", "star", " ",
+		"ホシ",
+		"ほし",
+		"hoshi",
+		"all life has descended from Star, 生 is under simple moon or month symbol "},
+
+	{"雲", "cloud", " ",
+		"クモ",
+		"くも",
+		"kumo",
+		" "},
 }

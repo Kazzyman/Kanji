@@ -196,8 +196,8 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 	case "q": // quit
 		os.Exit(1)
 	case "?": // context-sensitive help on the current card
-		fmt.Printf("%s: primaryMeaning\n%s: secondaryMeaning\n%s\n%s\n%s\n%s\n\n",
-			aCard.Meaning, aCard.Second_Meaning, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("\"%s\" is the primaryMeaning of %s\n\"%s\" is the secondaryMeaning of %s\n%s\n%s\n%s\n%s\n\n",
+			aCard.Meaning, aCard.Kanji, aCard.Second_Meaning, aCard.Kanji, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 	case "st": // stats
 		newHits()
 	case "frmt": // format a file

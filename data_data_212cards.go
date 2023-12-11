@@ -727,11 +727,6 @@ var data_file = []charSetStructKanji{
 		" ",
 		" "},
 
-	{"首", "neck", " ",
-		"ony: -", "kun: くび",
-		" ",
-		" "},
-
 	{"心", "feelings", "heart, feelings",
 		"ony: -", "kun: こころ",
 		"feelings of the heart",
