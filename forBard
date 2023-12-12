@@ -1,0 +1,300 @@
+
+
+type charSetStructKanji struct {
+	Kanji          string
+	Meaning        string
+	Second_Meaning string
+	Onyomi         string
+	Kunyomi        string
+	Vocab          string
+	Vocab2         string
+}
+var aCard = charSetStructKanji{}
+
+var fileOf_Current = []charSetStructKanji{
+	{"血", "blood", "lineage",
+		"ony: ケツ(ketsu)",
+		"kun: ち(chi)",
+		// Todo: each of the words should have included english translations. 
+		"血液(ketsueki), 出血(shukketsu), 血族(ketsuzoku)",
+		"血縁(kechien), 血筋(chisuji), 血友病(keppu byou)"},
+
+	{"骨", "bone", "skeleton",
+		"ony: コツ(kotsu)",
+		"kun: ほね(hone)",
+		"骨折(kossetsu), 骨髄(kotsuzui), 骨格(kokkaku)",
+		"骨盤(kotsuban), 骨片(kotsuben), 骨を埋める(hone wo umeru)"},
+
+	{"肉", "meat", "flesh",
+		"ony: ニク(niku)",
+		"kun: -",
+		"肉体(nikutai), 牛肉(gyuuniku), 鶏肉(toriniku)",
+		"筋肉(kinniku), 身体(karada), 体(tai)"},
+
+	{"皮", "skin", "hide",
+		"ony: ヒ(hi)",
+		"kun: かわ(kawa)",
+		"皮膚(hifu), 毛皮(kegawa), 皮革(kawa)",
+		"皮下(hika), 手の甲(tenohira), 皮肉(hiniku)"},
+
+	{"脳", "brain", "cerebrum",
+		"ony: ノウ(nou)",
+		"kun: -",
+		"脳梗塞(noukouzou), 脳波(nouha), 脳内(nounai)",
+		// It is permissible to extend the seventh field via concatenation as follows: 
+		// Note the inclusion of \n to add a line to a card. That last line is often used for memorization tips and such. 
+		"頭脳(zunou), 知能(chinou), 思考(shikou)\n" +
+			"monthly, the Brain in that vat goes ouch when the stirring stick skewers it "},
+
+	{"心", "heart", "spirit",
+		"ony: シン(shin)",
+		"kun: こころ(kokoro)",
+		"心臓(shinzou), 心情(shinjou), 心境(shinkyou)",
+		"情(jou), 気持ち(kimochi), 気分(kibun)"},
+
+	{"建", "build", "establish",
+		"ony: ケン(ken); コン(kon)",
+		"kun: た(ta)てる",
+		"建設(kensetsu), 建築(kenchiku), 建物(tatemono)",
+		"建てる(tateru), 設立(setsuritsu), 創建(souken)\n" +
+			"see the \"swing stage scaffold\" on the side of the tower being used to Build it"},
+
+	{"宅", "house", "residence",
+		"ony: タク(taku)",
+		"kun: -",
+		"住宅(jūtaku), 宅地(takuchi), 一戸建(ittokuken)",
+		"住居(jūkyo), 居宅(kyotaku), 家(ie)"},
+
+	{"設", "establish", "institute",
+		"ony: セツ(setsu); ショ(sho)",
+		"kun: もう(mou)ける",
+		"設計(sekkei), 設置(sechi), 設備(setsubi)",
+		"設ける(mookeru), 創設(sousetsu), 開設(kaisestu)"},
+
+	{"造", "make", "construct",
+		"ony: ゾウ(zou); ズ(zu)",
+		"kun: つく(tsuku)る",
+		"建造(kenzou), 造船(zousen), 造園(zouen)",
+		"造る(tsukuru), 製造(seizou), 創造(souzou)"},
+
+	{"所", "place", "establishment",
+		"ony: ショ(sho); ジョ(jo)",
+		"kun: ところ(tokoro)",
+		"場所(basho), 所在(shozai), 事務所(jimusho)",
+		"処(sho), ところ(tokoro), 辺(hen)"},
+
+	{"服", "clothing", "garment",
+		"ony: フク(fuku); フカ(fuka)",
+		"kun: -",
+		"衣服(ifuku), 服装(fukusou), 軍服(gunfuku)",
+		"洋服(youfuku), 手芸品(shugeihin), 織物(orimono)"},
+
+	{"帽", "hat", "cap",
+		"ony: ボウ(bou)",
+		"kun: かぶ(kabu)",
+		"帽子(boushi), ハット(hatto), 野球帽(yakyuubou)",
+		"被る(kiru), かぶる(kaburu), 冠(kanmuri)"},
+
+	{"靴", "shoes", "footwear",
+		"ony: カ(ka)",
+		"kun: くつ(kutsu)",
+		"靴下(kutsushita), 運動靴(undouka), 長靴(naga-gutsu)",
+		"履く(haku), 靴音(kutsuoto), 靴紐(kutsuhimo)"},
+
+	{"袋", "bag", "sack",
+		"ony: タイ(tai)",
+		"kun: ふくろ(fukuro)",
+		"手袋(tebukuro), 旅行かばん(ryokoukaban), ビニール袋(bini-ru fukuro)",
+		"入れ物(iremono), かばん(kaban)"},
+
+	{"帯", "belt", "sash",
+		"ony: タイ(tai)",
+		"kun: お(o)び",
+		"腰帯(koshiobi), 帯地(obiji), 黒帯(kuroobi)",
+		"締める(shimeru), 巻く(maku), 帯刀(taito)"},
+
+	{"衣", "clothing", "garment",
+		"ony: イ(i)",
+		"kun: ころも(koromo); きぬ(kinu)",
+		"衣料(iryou), 衣服(ifuku), 衣類(irui)",
+		"着物(kimono), 一枚(hitomae), 服(fuku)"},
+
+	{"教", "teach", "religion",
+		"ony: キョウ(kyou); オシ(oshi)エ(e)る",
+		"kun: -",
+		"教育(kyouiku), 教会(kyoukai), 教師(kyoushi)",
+		"教える(oshieru), 教訓(kyoukun), 宗教(shukyou)"},
+
+	{"仏", "Buddha", "Buddhism",
+		"ony: ブツ(butsu); ブ(bu)",
+		"kun: ほとけ(hotoke)",
+		"仏教(bukkyou), 仏陀(butsuzo), 仏舎利(bussari)",
+		"仏(hotoke), 寺院(jiin), 僧侶(souryo)\n" +
+			"resting mu cow : Buddha  "},
+
+	{"神", "god", "deity",
+		"ony: シン(jin); ジン(jin)",
+		"kun: かみ(kami)",
+		"神社(jinja), 神道(shinto), 神様(kamisama)",
+		"八百万の神(yaoyorozu no kami), 祈願(kigan), 祈祷(kito)"},
+
+	{"官", "government", "bureau",
+		"ony: カン(kan)",
+		"kun: -",
+		"官庁(kantyo), 官公庁(kankocho), 官吏(kanri)",
+		"役人(yakunin), 公務員(komuin), 官僚(kanryo)\n" +
+			"compare: 政 (government, politics, policy)"},
+
+	{"法", "law", "rule",
+		"ony: ホウ(hou); ハッ(hatsu)",
+		"kun: のり(nori)",
+		"法律(horitsu), 法令(horei), 法案(hopan)",
+		"規則(kisoku), 方法(hoho), 条例(jorei)"},
+
+	{"明", "bright", "intense",
+		"ony: アク-ル, アカ-ルイ",
+		"kun: あけ-る, あか-るい",
+		"明るい部屋 (あかるいへや) (bright room)",
+		// Empty fields can occur providing they contain one space char.
+		" "},
+
+	{"暗い", "dark", " ",
+	// Missing ony: and kun: labels should be added as exampled above. 
+		"クラ-イ",
+		"くら-い",
+		"暗い - kura-i,  暗い夜 (くらいよる) (dark night)",
+		" "},
+
+	{"静", "quiet", "still",
+		"シズ-カ",
+		"しず-か",
+		"静か - shitsu-ka,  静かな朝 (しずかなあさ) (quiet morning)",
+		" "},
+
+	{"寒", "cold", "frigid",
+		"サム-イ",
+		"さむ-い",
+		"寒い - samu-i, 寒い冬 (さむいふゆ) (cold winter)",
+		" "},
+
+	{"暖", "warm", "balmy",
+		"アタタ-カイ",
+		"あたた-かい",
+		"暖かい - atata-kai",
+		"暖かい飲み物 (あたたかいのみもの) (warm drink)"},
+
+// Missing content should be added where possible.
+	{"彼", "he", " ",
+		"カレ",
+		"かれ",
+		" ",
+		" "},
+
+	{"彼女", "she", " ",
+		"カノジョ",
+		"かのじょ",
+		" ",
+		" "},
+
+	{"広", "wide", "spacious",
+		"ヒロ-イ",
+		"ひろ-い",
+		"広-い - hiro",
+		"広い道 (ひろいみち) (wide road)"},
+
+	{"厚", "thick", " ",
+		"アツ-イ",
+		"あつ-い",
+		"厚い - atsu-i",
+		"厚い本 (あついほん) (thick book)"},
+
+	{"薄", "thin", " ",
+		"ウス-イ",
+		"うす-い",
+		"薄い - usu-i",
+		"薄い紙 (うすいかみ) (thin paper)"},
+
+	{"平", "flat", " ",
+		"タイ-ラ",
+		"たい-ら",
+		"平ら - tai-ra",
+		"平らな地面 (たいらなじめん) (flat ground), compare: half 半:平 (two horizontal bars move up)"},
+
+	{"負", "lose", "defeat, fail",
+		"マ-ケル",
+		"ま-ける",
+		"負 - ma, 負ける - makeru",
+		"試合に負ける (しあいにまける) (lose a match)"},
+
+	{"美", "beautiful", " ",
+		"ウツク-シイ",
+		"うつく-しい",
+		"美しい - utsuku-shii",
+		"美しい風景 (うつくしいふうけい) (beautiful scenery)"},
+
+	{"歩", "walk", " ",
+		"アル-ク",
+		"ある-く",
+		"歩く - aru-ku",
+		"公園を歩く (こうえんをあるく) (walk through the park)"},
+
+	{"跳", "jump", " ",
+		"ト-ブ",
+		"と-ぶ",
+		"跳ぶ - to-bu",
+		"反対側に跳ぶ (はんたいがわにとぶ) (jump to the other side)"},
+
+	{"飛", "fly", " ",
+		"ト-ブ",
+		"と-ぶ",
+		"飛ぶ - to-bu",
+		"鳥が空を飛ぶ(とりがそらをとぶ) (a bird flies across the sky)"},
+
+	{"愛", "love", " ",
+		"アイスル",
+		"あいする",
+		"愛する - ai-suru",
+		"彼女を愛する (かのじょをあいする) (to love her)"},
+
+	{"幸", "happy", " ",
+		"シアワ-セ",
+		"しあわ-せ",
+		"幸せ - shiawa-se",
+		"幸せな家族 (しあわせなかぞく) (happy family); happy-happy joy-joy (shiawa-se shiawa-se)"},
+
+	{"憎", "hate", " ",
+		"ニクム",
+		"にくむ",
+		"憎む - niku-mu",
+		"暑さを憎む (しょさをにくむ) (hate the heat)"},
+
+	{"陽", "sun", "sol",
+		"タイヨウ",
+		"たいよう",
+		"太陽 - sun is Obese, Thick, Important, Senior, Big-around",
+		" "},
+
+	{"太", "fat", "Obese, Thick, Important, Senior, Big-around",
+		" ",
+		"たい",
+		"Senior grade in a hierarchy",
+		"太子 (たいし) - crown prince; 太っ腹 (ふとっぱら) - big-bellied; 太る (ふとる) - to gain weight"},
+
+	{"悲しい", "sad", " ",
+		"カナシイ",
+		"かなしい",
+		"悲しい",
+		"悲しい出来事 (かなしいできごと) (sad event)"},
+
+	{"星", "star", " ",
+		"ホシ",
+		"ほし",
+		"hoshi",
+		"all life has descended from Star, 生 is under simple moon or month symbol "},
+
+	{"雲", "cloud", " ",
+		"クモ",
+		"くも",
+		"kumo",
+		" "},
+}
