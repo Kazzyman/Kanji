@@ -34,10 +34,6 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		" – vocab",
 		"Firefighter : しょうぼうし"},
 
-	{"脚", "leg", "foot", " -", "あし",
-		"foot; base; leg; foundation",
-		"Variant of Chinese: 腳  -  Foot足 or Leg脚, あし"},
-
 	{"先", "future", "ahead", "せん", "さき",
 		"先週 (last week), 先生 (teacher, master)",
 		"before "},

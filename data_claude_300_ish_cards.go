@@ -12,11 +12,6 @@ var claude = []charSetStructKanji{
 		"行政(gyousei; administration), 治政(chisei; governing), 政党(seitou; political party)\n" +
 			"compare: 官 (government, bureau)"},
 
-	{"空", "sky", "emptiness, vacuum",
-		"ony: クウ(kuu); ソラ(sora)", "kun: あく(aku); あき(aki); から(kara)",
-		"空港(kuukou; airport), 宇宙空間(uchuu kukan; outer space), 空腹(kuufuku; hunger)",
-		"空っぽ(karappo; empty), 空く(aku; become empty), 空(sora; sky)"},
-
 	{"運 - 1", "fortune", "transport",
 		"ony: ウン(un)", "kun: はこ(hako)",
 		"運命(unmei; fate), 運転(unten; driving), 運搬(unpan; transport)",
@@ -35,7 +30,8 @@ var claude = []charSetStructKanji{
 	{"集", "gather", "collection, crowd",
 		"ony: シュウ(shuu)", "kun: あつ(atsu)",
 		"集合(shugou; assembly), 収集(shushuu; collection), 人集り(hitoatsumari; crowd of people)",
-		"集める(atsumeru; gather), 集中(shuchuu; concentration), 図書館(toshokan; library)"},
+		"集める(atsumeru; gather), 集中(shuchuu; concentration), 図書館(toshokan; library)\n" +
+			"gather in the East 集:東"},
 
 	{"党", "party", "faction, clique",
 		"ony: トウ(tou)", "kun: -",
@@ -102,11 +98,6 @@ var claude = []charSetStructKanji{
 		"商品(shouhin; goods), 品物(shinamono; article), 食品(shokuhin; food products)",
 		"品格(hinkaku; dignity), 品質(hinshitsu; quality), 工芸品(kougeihin; craft goods)"},
 
-	{"友", "friend", "companion",
-		"ony: ユウ(yuu)", "kun: とも(tomo)",
-		"友人(yuujin; friend), 友好(yuukou; friendship), 親友(shin'yuu; close friend)",
-		"仲間(nakama; companion), 取引先(torihikisaki; business connection), 共同(kyoudou; joint)"},
-
 	{"刀", "sword", "knife, blade",
 		"ony: トウ(tou)", "kun: かたな(katana)",
 		"刀剣(touken; sword), 小刀(shoutou; knife), 短刀(tantou; short sword)",
@@ -168,11 +159,6 @@ var claude = []charSetStructKanji{
 		"ony: イ(i)", "kun: もっ(motte)",
 		"以下(ika; below), 以内(inai; within), 以外(igai; except)",
 		"以上(ijou; more than), 以来(irai; since), 以って(motte; by means of)"},
-
-	{"思", "think", "thought",
-		"ony: シ(shi)", "kun: おも(omo)",
-		"思想(shisou; thought), 思考(shikou; thinking), 思い出(omoida; memory)",
-		"思う(omou; think), 思い込む(omoidkomu; be convinced), 思い切って(omoikkiri; boldly)"},
 
 	{"見", "see", "outlook, view",
 		"ony: ケン(ken)", "kun: み(mi)",
@@ -252,11 +238,6 @@ var claude = []charSetStructKanji{
 		"五日(itsuka; five days), 五人(gonin; five people), 五回(gokai; five times)",
 		"五角(gokaku; pentagon), 五月(gogatsu; May), 五十(isso; fifty)"},
 
-	{"六", "six", "sextuple",
-		"ony: ロク(roku)", "kun: む(mu)",
-		"六日(muika; six days), 六人(rokunin; six people), 六回(rokkai; six times)",
-		"六角(rokkaku; hexagon), 六月(rokugatsu; June), 六十(rokujuu; sixty)"},
-
 	{"七", "seven", "seventh",
 		"ony: シチ(shichi)", "kun: なな(nana)",
 		"七日(nanoka; seven days), 七人(shichinin; seven people), 七回(nanakai; seven times)",
@@ -276,11 +257,6 @@ var claude = []charSetStructKanji{
 		"ony: ジュウ(juu)", "kun: とお(too)",
 		"十日(tooka; ten days), 十人(juunin; ten people), 十回(jikkai; ten times)",
 		"十月(juugatsu; October), 十分(juubun; enough), 一十(ittoo; ten)"},
-
-	{"百", "hundred", "many, percent",
-		"ony: ヒャク(hyaku)", "kun: -",
-		"百日(hyakunichi; hundred days), 百人(hyakunin; hundred people), 百回(hyakkai; hundred times)",
-		"百パーセント(hyaku paasento; one hundred percent), 二百(nihyaku; two hundred), 三百(sanbyaku; three hundred)"},
 
 	{"千", "thousand", "myriad, many",
 		"ony: セン(sen)", "kun: ち(chi)",
@@ -318,25 +294,10 @@ var claude = []charSetStructKanji{
 		"草原(sougen; grassland), 野草(nogusa; wild grass), 芝草(shibafu; lawn grass)",
 		"草花(kusabana; grass and flowers), 雑草(zassou; weed), 芝生(shibafu; lawn)"},
 
-	{"木", "tree", "wood, forest, grove",
-		"ony: モク(moku)", "kun: き(ki)",
-		"樹木(jumoku; tree), 木材(mokuzai; timber), 竹(take; bamboo), 竹林(chikurin; bamboo grove)",
-		"森林(shinrin; forest), 家具(kagu; furniture), 椅子(isu; chair)"},
-
 	{"林", "grove", "many trees, wood, forest",
 		"ony: リン(rin)", "kun: はやし(hayashi)",
 		"森林(shinrin; forest), 松林(matsubayashi; pine grove), 竹林(chikurin; bamboo grove)",
 		"山林(sanrin; mountain forest), 林間(hayashi ma; among trees), 人工林(jinkou rinka; artificial forest)"},
-
-	{"山", "mountain", "nature, climbing",
-		"ony: サン(san)", "kun: やま(yama)",
-		"富士山(fujisan; Mt. Fuji), 山頂(sancho; mountain top), 火山(kazan; volcano)",
-		"山岳(sangaku; alpinism), 山男(yamabito; mountain man), 山菜(sansai; mountain vegetables)"},
-
-	{"川", "river", "water, stream",
-		"ony: セン(sen)", "kun: かわ(kawa)",
-		"河川(kasen; river), 川岸(kawagishi; riverside), 川底(kawazoko; riverbed)",
-		"川魚(kawauo; river fish), 川崎(Kawasaki), 川沿い(kawayoi; along the river)"},
 
 	{"海", "sea", "ocean, beach",
 		"ony: カイ(kai)", "kun: うみ(umi)",
@@ -357,11 +318,6 @@ var claude = []charSetStructKanji{
 		"ony: テン(ten)", "kun: あま(ama)",
 		"天国(tengoku; heaven), 天気(tenki; weather), 天使(tenshi; angel)",
 		"空(sora; sky), 天皇(tennou; emperor), 天井(tenjou; ceiling)"},
-
-	{"雨", "rain", "wet, umbrella",
-		"ony: ウ(u)", "kun: あめ(ame)",
-		"豪雨(gouu; heavy rain), 雨季(uuki; rainy season), 台風の雨(taifuu no ame; typhoon rain)",
-		"傘(kasa; umbrella), 雨具(amagu; rainwear), 雨天(uenten; rainy weather)"},
 
 	{"雪", "snow", "winter, cold",
 		"ony: セツ(setsu)", "kun: ゆき(yuki)",
@@ -423,11 +379,6 @@ var claude = []charSetStructKanji{
 		"新品(shinpin; new article), 新築(shinchiku; new construction), 新設(shinsetsu; new establishment)",
 		"新人(shinjin; new employee), 更新(koushin; renewal), 新鮮(shinsen; freshness)"},
 
-	{"古", "old", "former, antiquity",
-		"ony: コ(ko)", "kun: ふる(furui)",
-		"古典(koten; classic), 古代(kodai; ancient times), 古文(kobun; classical literature)",
-		"古い(furui; old), 古ぼける(fubokeru; grow old), 古着(furugi; old clothes)"},
-
 	{"少", "few", "little, scarce",
 		"ony: ショウ(shou)", "kun: すく(suku)",
 		"少数(shousuu; few), 少量(shouryou; small quantity), 少し(sukoshi; little)",
@@ -448,16 +399,6 @@ var claude = []charSetStructKanji{
 		"下半身(kahanmi; lower half of body), 下品(gehin; low quality), 下手(heta; unskillful)",
 		"下がる(sagaru; drop), 下る(kudaru; descend), 下町(shitamachi; downtown)"},
 
-	{"左", "left", "direction",
-		"ony: サ(sa)", "kun: ひだり(hidari)",
-		"左手(hidarite; left hand), 左翼(sayoku; left wing), 左折(sasetsu; turn left)",
-		"左側(hidarigawa; left side)"},
-
-	{"右", "right", "direction",
-		"ony: ウ(u)", "kun: みぎ(migi)",
-		"右手(migite; right hand), 右翼(uyoku; right wing), 右折(usettsu; turn right)",
-		"右側(migigawa; right side), 坐る(suwaru; sit)"},
-
 	{"北", "north", "direction",
 		"ony: ホク(hoku)", "kun: きた(kita)",
 		"北海道(hokkaidou; Hokkaido), 北極(hokkyoku; North Pole), 北東(higashi; northeast)",
@@ -476,7 +417,7 @@ var claude = []charSetStructKanji{
 	{"東", "east", "direction",
 		"ony: トウ(tou)", "kun: ひがし(higashi)",
 		"東日(toujitsu; rising sun), 東洋(touyou; the East), 東北(touhoku; northeast)",
-		"東口(higashiguchi; east exit)"},
+		"東口(higashiguchi; east exit), compare: gather 集:東"},
 
 	{"言", "say", "speech, words",
 		"ony: ゲン(gen); ゴン(gon)", "kun: い(i)",
@@ -621,11 +562,6 @@ var claude = []charSetStructKanji{
 		"父親(fubo; father), 父上(chichiue; father), 義父(gifu; foster father)",
 		"お父さん(otosan; father), 父ちゃん(tochan; dad), 爸(papa; dad)"},
 
-	{"母", "mother", "parent",
-		"ony: ボ(bo)", "kun: はは(haha)",
-		"母親(hahaoya; mother), 母上(hahaue; mother), 義母(gibou; mother-in-law)",
-		"お母さん(okaasan; mother), 母ちゃん(kachan; mom), ママ(mama; mom)"},
-
 	{"伯", "uncle", "senior",
 		"ony: ハク(haku)", "kun: -",
 		"叔父(ojiki; uncle), 伯父(ojiki; uncle), 大伯父(dai ojiki; granduncle)",
@@ -676,11 +612,6 @@ var claude = []charSetStructKanji{
 		"写真(shashin; photo), 複写(fukusha; duplication), 映写(eisha; projection)",
 		"写す(utsusu; copy), 写る(utsuru; be photographed), 模写(mo-sha; imitation)"},
 
-	{"作", "make", "prepare",
-		"ony: サ(sa); ソウ(sou)", "kun: つく(tsuku)",
-		"作成(sakusei; production), 著作(chosaku; literary work), 作者(sakusha; author)",
-		"作る(tsukuru; make), 仕事(shigoto; work), 製作(seisaku; production)"},
-
 	{"然", "natural", "unconscious",
 		"ony: ゼン(zen); ジ(ji)", "kun: しか(shika)",
 		"当然(touzen; natural), 必然(hitsuzen; inevitable), 無意識(muishiki; unconsciously)",
@@ -727,11 +658,6 @@ var claude = []charSetStructKanji{
 		"小さい(chiisai; small), 小学校(shougakkou; elementary school), 少女(shoujo; girl)",
 		"最小(saishou; smallest), 少量(shouryou; small amount), 細かい(komakai; tiny)"},
 
-	{"長", "long", "leader",
-		"ony: チョウ(chou)", "kun: なが(naga)",
-		"長い(nagai; long), 長さ(nagasa; length), 長期(chouki; long time)",
-		"会長(kaichou; president), 部長(buchou; department head), 長寿(chouju; longevity)"},
-
 	{"短", "short", "brief",
 		"ony: タン(tan)", "kun: みじか(mijika)",
 		"短い(mijikai; short), 短縮(tanshuku; reduction), 短所(tansho; shortcoming)",
@@ -757,11 +683,6 @@ var claude = []charSetStructKanji{
 		"ony: シン(shin)", "kun: あたら(atara)",
 		"新品(shinpin; new article), 新築(shinchiku; new construction), 新設(shinsetsu; new establishment)",
 		"新人(shinjin; new employee), 更新(koushin; renewal), 新鮮(shinsen; freshness)"},
-
-	{"旧", "old", "former",
-		"ony: キュウ(kyuu); コ(ko)", "kun: ふる(furui)",
-		"旧友(kyuuyuu; old friend), 旧姓(kyuusei; maiden name), 旧弊(kyuuhai; old practice)",
-		"昔(mukashi; in the past), 古い(furui; old), 用いられた(mochiirareru; used)"},
 
 	{"白", "white", "unmarked",
 		"ony: ハク(haku); ビャク(byaku)", "kun: しろ(shiro)",
@@ -801,11 +722,6 @@ var claude = []charSetStructKanji{
 		"女性(josei; female), 女子(joshi; girl), 女房(nyoubou; wife)",
 		"女の人(onna no hito; woman), 女らしい(onnarashii; feminine), 女子学生(joshigakusei; female student)"},
 
-	{"車", "car", "vehicle",
-		"ony: シャ(sha)", "kun: くるま(kuruma)",
-		"自動車(jidousha; automobile), 電車(densha; train), 車体(shatai; car body)",
-		"新車(shinchya; new car), 車輪(sharin; wheel), 三輪車(sanrinsha; tricycle)"},
-
 	{"本", "book", "origin",
 		"ony: ホン(hon)", "kun: もと(moto)",
 		"本屋(honya; bookstore), 本物(honmono; real thing), 日本(nihon; Japan)",
@@ -826,11 +742,6 @@ var claude = []charSetStructKanji{
 		"ony: スイ(sui)", "kun: みず(mizu)",
 		"水泳(suiei; swimming), 水曜日(suiyoubi; Wednesday), 水分(suibun; moisture)",
 		"飲料水(inryousui; drinking water), 水産物(suisanbutsu; seafood), 水兵(suihei; sailor)"},
-
-	{"木", "tree", ", grove, wood",
-		"ony: モク(moku)", "kun: き(ki)",
-		"木曜日(mokuyoubi; Thursday), 木材(mokuzai; lumber), 森(mori; forest)",
-		"樹木(ju moku; tree), 家具(kagu; furniture), 椅子(isu; chair)"},
 
 	{"金", "gold", "money",
 		"ony: キン(kin)", "kun: かね(kane)",
@@ -1008,11 +919,6 @@ var claude = []charSetStructKanji{
 		"気分(kibun; feeling), 気持ち(kimochi; feeling), 気象(kishou; weather)",
 		"大気(taiki; atmosphere), 気圧(kiatsu; atmospheric pressure), 気候(kikou; climate)"},
 
-	{"地", "earth", "place",
-		"ony: チ(chi); ジ(ji)", "kun: -",
-		"地震(jishin; earthquake), 地域(chiiki; region), 土地(tochi; land)",
-		"現地(genchi; site), 出身地(shusshin chi; hometown), 地名(chimei; place name)"},
-
 	{"国", "country", "homeland",
 		"ony: コク(koku)", "kun: くに(kuni)",
 		"国家(kokka; country), 他国(takoku; foreign country), 祖国(sokoku; homeland)",
@@ -1040,11 +946,6 @@ var claude = []charSetStructKanji{
 		"ony: ナン(nan)", "kun: みなみ(minami)",
 		"南国(Nangoku; southern country), 南極(Nankyoku; South Pole), 南北(Nanboku; north-south)",
 		"南口(Minamiguchi; south exit), 南側(minamigawa; southern side), 南向き(minamimuki; facing south)"},
-
-	{"北", "north", "northern",
-		"ony: ホク(hoku)", "kun: きた(kita)",
-		"北海道(Hokkaidō; Hokkaido), 北極(Hokkyoku; North Pole), 北東(Higashi; northeast)",
-		"北口(Kitaguchi; north exit), 北側(kitagawa; northern side), 北向き(kitamuki; facing north)"},
 
 	{"京", "capital", "metropolis",
 		"ony: キョウ(kyō); ケイ(kei)", "kun: -",
@@ -1146,11 +1047,17 @@ var claude = []charSetStructKanji{
 		"料理(ryouri), 和食(washoku), 中華料理(chuuka ryouri)",
 		"調理(chouri), 献立(kondate), レシピ(resipi)"},
 
-	{"考える", "think", "ponder",
+	{"考える", "think-1", "ponder",
 		"ony: コウエル(koueru)",
 		"kun: かんがえる(kangaeru)",
-		"考える(kangaeru), 思考(shikou), 熟考(jukkou)",
-		"思い巡らす(omoidmegurasu), 推論(suiron), 思索(shisaku)"},
+		"考える(kangaeru), 熟考(jukkou), 思考(shikou),",
+		"also 思: 思い巡らす(omoidmegurasu), 思索(shisaku)"},
+
+	{"思", "think-2", "thought",
+		"ony: シ(shi)", "kun: おも(omo)",
+		"思想(shisou; thought), 思考(shikou; thinking), 思い出(omoida; memory)",
+		"思う(omou; think), 思い込む(omoidkomu; be convinced), 思い切って(omoikkiri; boldly)\n" +
+			"compare: 心 \"heart\", \"spirit\" ; rice paddy reality crushes heart: Think!"},
 
 	{"笑う - 1", "laugh", "smile",
 		"ony: ショウ(shou)",
@@ -1246,18 +1153,6 @@ var claude = []charSetStructKanji{
 		"書く(kaku), 筆記(hikki), 記述(kijutsu)",
 		"筆者(hisha), 小説(shousetsu), 作文(sakubun)"},
 
-	{"山", "mountain", "nature",
-		"ony: サン(san)",
-		"kun: やま(yama)",
-		"山(yama), 富士山(fujisan), 山頂(sanchou)",
-		"登山(tozan), 高原(kougen), 山盛り(yama mori)"},
-
-	{"川", "river", "stream",
-		"ony: セン(sen)",
-		"kun: かわ(kawa)",
-		"川(kawa), 河川(kasen), 川岸(kawagishi)",
-		"渓流(keiryuu), 用水路(yousuiro), 河口(kakou)"},
-
 	{"田", "rice field", "paddy",
 		"ony: デン(den)",
 		"kun: た(ta)",
@@ -1275,13 +1170,6 @@ var claude = []charSetStructKanji{
 		"kun: はな(hana)",
 		"花(hana), 花瓶(kabin), 花見(hanami)",
 		"草花(kusabana), 花言葉(hanakotoba), 花壇(hanadan)"},
-
-	{"人", "person", "human",
-		"ony: ジン(jin); ニン(nin)",
-		"kun: ひと(hito)",
-		"人(hito), 人口(jinkou), 人数(ninzuu)",
-		"個人(kojin), 人生(jinsei), 人形(ningyou)\n" +
-			"者 also means person, but is more formal and is used mainly in compounds denoting professions or such."},
 
 	// Here are 10 example kanji flashcards related to Japanese culture:
 
@@ -1375,13 +1263,6 @@ var claude = []charSetStructKanji{
 		"短い(mijikai), 短縮(tanshuku), 短所(tansho)",
 		"短期(tanki), 短距離(tankyori), 簡短(kantan)"},
 
-	{"高", "expensive", "tall, high",
-		"ony: コウ(kou); タカ(taka)",
-		"kun: たか(taka)",
-		"高い(takai; high), 最高(saikou; highest), 高原(kougen; plateau)",
-		"高校(koukou; high school), 高層(kousou; high-rise), 高速(kousoku; high speed)\n" +
-			"高い (expensive)"},
-
 	{"低", "low", "short",
 		"ony: テイ(tei)",
 		"kun: ひく(hiku)",
@@ -1405,12 +1286,6 @@ var claude = []charSetStructKanji{
 		"kun: あら(ara)たら",
 		"新品(shinpin), 新築(shinchiku), 新設(shinsetsu)",
 		"新人(shinjin), 更新(koushin), 新鮮(shinsen)"},
-
-	{"旧", "old", "former",
-		"ony: キュウ(kyuu); コ(ko)",
-		"kun: ふる(furui)",
-		"旧友(kyuuyuu), 旧姓(kyuusei), 旧弊(kyuuhai)",
-		"昔(mukashi), 古い(furui), 用いられた(mochiirareru)"},
 
 	/*
 			From the initial Shinjuku area kanji:
@@ -1462,12 +1337,6 @@ var claude = []charSetStructKanji{
 
 		東, 西, 南, 北, 京, 市, 区, 町
 	*/
-
-	{"老", "old", "aged",
-		"ony: ロウ(rou)",
-		"kun: お(o)いる",
-		"老人(roujin), 高齢者(koureisha), 老齢(rouireki)",
-		"老若男女(rounyounan), 老体(otai), 老衰(rousui); compare: person(formal):old 者:老"},
 
 	{"耄", "aged", "long-lived",
 		"ony: ヒ(hi); ホウ(hou)",
@@ -1529,12 +1398,6 @@ var claude = []charSetStructKanji{
 		"装置(souchi), 御器(mikomori), 器具(kigu)\n" +
 			"lots of levers in a Machine to parallel a person with many appendages "},
 
-	{"車", "car", "vehicle",
-		"ony: シャ(sha)",
-		"kun: くるま(kuruma)",
-		"自動車(jidousha), 電車(densya), 車両(sharyou)",
-		"新車(shinsha), 車輪(sharin), 三輪車(sanrinsha)"},
-
 	{"船", "ship", "boat",
 		"ony: セン(sen)",
 		"kun: ふね(fune)",
@@ -1546,7 +1409,8 @@ var claude = []charSetStructKanji{
 		"ony: デン(den)",
 		"kun: -",
 		"電気(denki), 電子(denshi), 電力(denryoku)",
-		"電源(dengen), 電波(denpa), 電卓(dentaku)"},
+		"電源(dengen), 電波(denpa), 電卓(dentaku)\n" +
+			"There's a power cord feeding Electricity into that jukebox "},
 
 	{"計", "meter", "measure",
 		"ony: ケイ(kei)",
@@ -1561,12 +1425,6 @@ var claude = []charSetStructKanji{
 		"建設(kensetsu), 製造(seizou), 工業(kougyou)"},
 
 	// Here are some kanji related to automotive mechanics:
-
-	{"車", "car", "vehicle",
-		"ony: シャ(sha)",
-		"kun: くるま(kuruma)",
-		"自動車(jidousha), 車両(sharyou), 車体(shatai)",
-		"車輪(sharin), 車軸(shajiku), ハンドル(handoru)"},
 
 	{"修", "repair", "maintain",
 		"ony: シュウ(shu)",
@@ -1658,11 +1516,17 @@ var claude = []charSetStructKanji{
 		"設計(sekkei), 設置(sechi), 設備(setsubi)",
 		"設ける(mookeru), 創設(sousetsu), 開設(kaisestu)"},
 
-	{"造", "make", "construct",
+	{"造", "make-1", "construct",
 		"ony: ゾウ(zou); ズ(zu)",
 		"kun: つく(tsuku)る",
 		"建造(kenzou), 造船(zousen), 造園(zouen)",
-		"造る(tsukuru), 製造(seizou), 創造(souzou)"},
+		"造る(tsukuru), 製造(seizou), 創造(souzou), also 作"},
+
+	{"作", "make-2", "prepare",
+		"ony: サ(sa); ソウ(sou)", "kun: つく(tsuku)",
+		"作成(sakusei; production), 著作(chosaku; literary work), 作者(sakusha; author)",
+		"作る(tsukuru; make), 製作(seisaku; production)\n" +
+			"1+1=2 sideways-M, two-Make, \"Make\" also 造"},
 
 	{"所", "place", "establishment",
 		"ony: ショ(sho); ジョ(jo)",
@@ -1806,7 +1670,7 @@ var claude = []charSetStructKanji{
 		"タイ-ラ",
 		"たい-ら",
 		"平ら - tai-ra",
-		"平らな地面 (たいらなじめん) (flat ground)"},
+		"平らな地面 (たいらなじめん) (flat ground), compare: half 半:平 (two horizontal bars move up)"},
 
 	{"負", "lose", "defeat, fail",
 		"マ-ケル",

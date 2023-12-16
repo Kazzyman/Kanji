@@ -18,7 +18,7 @@ var fileOfCardsNovice = []charSetStructKanji{
 
 	{"国", "country", "State",
 		"こく", "くに",
-		"外国人 (foreigner) [Person from Outside the Country",
+		"外国人 (foreigner) [Person from Outside the Country]",
 		" "},
 
 	{"四", "four", "4",
@@ -41,11 +41,6 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"月曜日 (Monday)",
 		" "},
 
-	{"者", "person", "Person",
-		"しゃ, じゃ", " -",
-		"わかもの、若者 : young person",
-		"Compare 老 meaning old or aged"},
-
 	{"学", "school-1", "learning",
 		"がく, こう", "まな(ぶ)",
 		"大学 (university)",
@@ -64,11 +59,6 @@ var fileOfCardsNovice = []charSetStructKanji{
 	{"大学", "university", "big-school",
 		"がく, こう", "まな(ぶ)",
 		"大学 (university)",
-		" "},
-
-	{"空", "sky", "empty",
-		"くう", "そら, あ(ける)",
-		"空 (sky)",
 		" "},
 
 	{"十", "ten", "10",

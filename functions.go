@@ -214,14 +214,6 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 		if foundElement == nil {
 			fmt.Printf(" Setting to \"west\" :: \n%s", colorRed)
 			// Show the user exactly what is about to be done:
-			runeOfCode := `
-    silentlyLocateCard("west") // Set the Convenience-global: foundElement
-    if foundElement != nil {
-        aCard = *foundElement // Set the global var-object 'aCard'
-        prompt = aCard.Kanji
-        objective = aCard.Meaning
-    }
-`
 			fmt.Println(runeOfCode)
 			fmt.Printf(colorReset)
 			silentlyLocateCard("west") // Set the Convenience-global: foundElement
@@ -236,7 +228,8 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 		}
 
 	case "nt":
-		fmt.Println("\nOnyomi (音読み, おにょみ): the reading based on the character's original Chinese pronunciation. \n" +
+		fmt.Println("\nokurigana (hiragana written next to the kanji)\n" +
+			"Onyomi (音読み, おにょみ): the reading based on the character's original Chinese pronunciation. \n" +
 			"    Onyomi readings are typically used when kanji characters are combined to form compound words, especially in words with \n" +
 			"a more formal or academic context.\n" +
 			"    The Onyomi reading of a kanji character in Japanese was derived from the character's original Chinese pronunciation. \n" +

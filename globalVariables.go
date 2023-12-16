@@ -48,6 +48,15 @@ var game_duration = 998
 
 var gameOn bool
 
+var runeOfCode = `
+    silentlyLocateCard("west") // Set the Convenience-global: foundElement
+    if foundElement != nil {
+        aCard = *foundElement // Set the global var-object 'aCard'
+        prompt = aCard.Kanji
+        objective = aCard.Meaning
+    }
+`
+
 // Constants:
 const colorReset = "\033[0m"
 const colorRed = "\033[31m"

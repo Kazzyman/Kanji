@@ -1,16 +1,22 @@
 package main
 
-var fileOf_Future = []charSetStructKanji{
+var fileOf_FutureT = []charSetStructKanji{
 
-	{" ", " ", " ", " ", " ",
+	{" ", " ", " ",
+		" ",
+		" ",
 		" ",
 		" "},
 
-	{"", " ", " ", " ", " ",
+	{"", " ", " ",
+		" ",
+		" ",
 		" ",
 		" "},
 
-	{" ", " ", " ", " ", " ",
+	{" ", " ", " ",
+		" ",
+		" ",
 		" ",
 		" "},
 }

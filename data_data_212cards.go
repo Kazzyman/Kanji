@@ -16,19 +16,9 @@ var data_file = []charSetStructKanji{
 		"月曜日 (Monday)",
 		" "},
 
-	{"者", "person", "Person",
-		"しゃ, じゃ", "kun: -",
-		"わかもの、若者 : young person",
-		" "},
-
 	{"学 or 校 or 学校", "school", "learning",
 		"がく, こう", "kun: まな(ぶ)",
 		"大学 (university)",
-		" "},
-
-	{"空", "sky", "empty",
-		"くう", "kun: そら, あ(ける)",
-		"空 (sky)",
 		" "},
 
 	{"十", "ten", "10",
@@ -81,51 +71,6 @@ var data_file = []charSetStructKanji{
 		"円い (round)",
 		" "},
 
-	{"車", "car", "or, vehicle",
-		"sha しゃ", "kun: kuruma くるま",
-		"電車 (electric train)",
-		" "},
-
-	{"日", "day", "or, sun",
-		"にち, じつ", "kun: ひ, か",
-		"明日 (tomorrow)",
-		" "},
-
-	{"土", "earth", "ground",
-		"do ど, to と", "kun: tsuchi つち",
-		"土曜日 (Saturday)",
-		" "},
-
-	{"高", "expensive", "high",
-		"kou こう", "kun: taka たか(iい)",
-		"高い (expensive)",
-		" "},
-
-	{"魚", "fish", "Fish",
-		"gyo ぎょ", "kun: sakana さかな",
-		"魚 (fish)",
-		"\ncompare bird:鳥"},
-
-	{"足", "foot", "or, to add",
-		"soku そく", "kun: ashi あし, ta(su) た(す)",
-		"足 (foot)",
-		" "},
-
-	{"友", "friend", "Friend",
-		"yuu ゆう", "kun: tomo とも",
-		"友達 (friend)",
-		" "},
-
-	{"天", "heaven", "Heaven",
-		"ten てん", "kun: ame あめ, ama あま",
-		"天気 (weather)",
-		" "},
-
-	{"百", "hundred", "Hundred",
-		"hyaku ひゃく", "kun: —",
-		"百万円 (1 million Yen)",
-		" "},
-
 	{"左", "left", "Left",
 		"sa さ", "kun: hidari ひだり",
 		"左 (left)",
@@ -149,36 +94,6 @@ var data_file = []charSetStructKanji{
 	{"古", "old", "Old",
 		"ko こ", "kun: furu ふる(iい)",
 		"古い (old)",
-		" "},
-
-	{"雨", "rain", "Rain",
-		"u う", "kun: ame あめ",
-		"雨 (rain)",
-		" "},
-
-	{"右", "right", "Right",
-		"yuu ゆう", "kun: migi みぎ",
-		"右 (right)",
-		" "},
-
-	{"店", "shop", "or, Store",
-		"ten てん", "kun: mise みせ",
-		"喫茶店 (coffee shop)",
-		" "},
-
-	{"社", "shrine", "or, society",
-		"sha しゃ", "kun: yashiro やしろ",
-		"社長 (president of a company)",
-		" "},
-
-	{"六", "six", "6",
-		"roku ろく", "kun: mut(tsu), mu む",
-		"六日 (6th day of the month)",
-		" "},
-
-	{"駅", "station", "as in: Train Station",
-		"eki えき", "kun: -",
-		"駅前 (in front of the station)",
 		" "},
 
 	{"道", "street", "path, way",
@@ -250,11 +165,6 @@ var data_file = []charSetStructKanji{
 		" -", "kun: しょうぼうし",
 		" – vocab",
 		"Firefighter : しょうぼうし"},
-
-	{"脚", "leg", "foot",
-		" -", "kun: あし",
-		"foot; base; leg; foundation",
-		"Variant of Chinese: 腳  -  Foot足 or Leg脚, あし"},
 
 	{"先", "future", "ahead",
 		"せん", "kun: さき",
@@ -380,26 +290,6 @@ var data_file = []charSetStructKanji{
 	{"目", "eye", " ",
 		"ony: -", "kun: め",
 		" ",
-		" "},
-
-	{"山", "mountain", "Mt",
-		"san", "kun: yama",
-		"山 (mountain), mound",
-		"hill"},
-
-	{"人", "person", "human",
-		"じん, にん", "kun: ひと",
-		"人々 (people); ひと、人 – person; にんげん、人間 – human; じんるい、人類 – humanity",
-		"vocab2"},
-
-	{"川", "river", "stream",
-		"sen", "kun: kawa",
-		"川 (river)",
-		"vocab2"},
-
-	{"木", "tree", "wood",
-		"moku　もく, boku　ぼく", "kun: ki　き, ko　こ",
-		"木曜日 (Thursday)",
 		" "},
 
 	{"安 - 1", "cheap", "peace",
