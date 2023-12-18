@@ -377,11 +377,6 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\n焼き is dumpling (yaki), たこ焼き is Octopus dumpling (takoyaki)"},
 
-	{"飲み物", "drink", "beverage",
-		"ony: -", "のみもの (nomimono)",
-		" ",
-		"-\nMe likes to drink Drink/Beverage"},
-
 	{"茶", "tea", " ",
 		"ony: -", "ちゃ (cha)",
 		" ",

@@ -87,11 +87,6 @@ var fileOf_Current = []charSetStructKanji{
 		" ",
 		" "},
 
-	{"くち、口", "mouth", "three", "four",
-		" ",
-		" ",
-		" "},
-
 	{"歯 、は", "tooth", "teeth, dentures, dentition", "four", " ",
 		"歯医者 : しかい、、はいしゃ, dentist",
 		" "},

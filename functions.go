@@ -39,6 +39,7 @@ func in_list_of_Directives(in string) bool { // - -
 		in == "t2" || // test two
 		in == "sdk" || // Switch Deck
 		in == "fif" || // find in files
+		in == "lff" || // list chars
 		in == "rs" || // reset all logs etc
 		in == "setc" || // set, force, a new card
 		in == "nt" || // notes
@@ -162,6 +163,8 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 		test2()
 	case "fif":
 		find_in_files()
+	case "lff":
+		list_from_files()
 	case "sdk":
 		// Switch Decks
 		switch_the_deck()
