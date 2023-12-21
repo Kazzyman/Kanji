@@ -38,6 +38,22 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 		}
 	}
 
+	if current_deck == "grad" {
+		for { // This for loop is only needed to check for empty cards
+			randIndex := rand.Intn(len(fileOfCardsGraduate))
+			aCard = fileOfCardsGraduate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+			promptField = aCard.Kanji
+			objective = aCard.Meaning
+			secondary_objective = aCard.Second_Meaning
+			if promptField == "" || promptField == " " {
+				fmt.Printf("%s--- An empty kanji card was skipped in grad!!!!%s\n", colorRed, colorReset) // Verified
+				continue
+			} else {
+				break // break out of local for loop and naturally fall-through to the return
+			}
+		}
+	}
+
 	if current_deck == "nov" {
 		for { // This for loop is only needed to check for empty cards
 			randIndex := rand.Intn(len(fileOfCardsNovice))
@@ -172,7 +188,7 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 		// fmt.Printf("\n random number is:%d, and must include 0-6 inclusive\n", randDeckAndMode)
 		//
 		for { // This for loop is only needed to check for empty cards picked from any random deck
-			randDeckAndMode = rand.Intn(7) // if an empty card was picked, maybe try a different deck, or not
+			randDeckAndMode = rand.Intn(8) // if an empty card was picked, maybe try a different deck, or not
 			if randDeckAndMode == 0 {
 				current_deck_B = "init"
 				deck_len = init_len
@@ -226,6 +242,14 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 				deck_len = guru_len
 				randIndex := rand.Intn(len(fileOfCardsGuru))
 				aCard = fileOfCardsGuru[randIndex]
+				promptField = aCard.Kanji
+				objective = aCard.Meaning
+				secondary_objective = aCard.Second_Meaning
+			} else if randDeckAndMode == 7 {
+				current_deck_B = "grad"
+				deck_len = guru_len
+				randIndex := rand.Intn(len(fileOfCardsGraduate))
+				aCard = fileOfCardsGraduate[randIndex]
 				promptField = aCard.Kanji
 				objective = aCard.Meaning
 				secondary_objective = aCard.Second_Meaning

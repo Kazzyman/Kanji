@@ -45,6 +45,7 @@ func in_list_of_Directives(in string) bool { // - -
 		in == "nt" || // notes
 		in == "st" || // stats
 		in == "dir" || // redisplay the menu of directives etc
+		in == "dirx" || // eXtended Directives list
 		in == "q" || // quit
 		in == "frmt" || // format a file
 		in == "rm" || // Read the Maps
@@ -207,6 +208,8 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 		formatter()
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
 		re_display_List_of_Directives()
+	case "dirx":
+		extended_list_of_directives()
 	case "rm": // Read the Maps
 		read_map_of_fineOn()
 		read_map_of_needWorkOn()

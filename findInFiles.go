@@ -10,7 +10,8 @@ import (
 var firstElement1 string
 var firstElement2 string
 
-// Used to scan all data_category files to see if cards in a source file are already in one or more category files
+// Dir : fif
+// Used to scan all data_category files to see if cards in a "source" file are already in one or more category files
 func find_in_files() {
 	// Open a file to be used to log the cards that match in any category file
 	output_file, err := os.OpenFile("CardsAlreadyInCategories.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
@@ -22,10 +23,10 @@ func find_in_files() {
 		_ = output_file.Close()
 	}(output_file)
 
-	// Open the master source file for reading
-	source, err := os.Open("2098_lines_of_cards.go") // The input file
+	// Open the "source" file for reading
+	source, err := os.Open("data_claude_298_cards.go") // The input file
 	if err != nil {
-		fmt.Println("Error opening file: a_maybe_100.go", err)
+		fmt.Println("Error opening file: data_claude_298_cards.go", err)
 		return
 	}
 	defer func(source *os.File) {
@@ -34,45 +35,46 @@ func find_in_files() {
 
 	//
 	// Open the category files for reading
-	grad, err := os.Open("dataGraduate_165.go")
+	grad, err := os.Open("data_Graduate_33cards.go")
 	if err != nil {
-		fmt.Println("Error opening file: dataGraduate.go", err)
+		fmt.Println("Error opening file: data_Graduate_33cards.go", err)
 		return
 	}
 	defer func(grad *os.File) {
 		_ = grad.Close()
 	}(grad)
 	//
-	guru, err := os.Open("dataGuru_28.go")
+	guru, err := os.Open("data_Guru_6cards.go")
 	if err != nil {
-		fmt.Println("Error opening file: dataGuru.go", err)
+		fmt.Println("Error opening file: data_Guru_6cards.go", err)
 		return
 	}
 	defer func(guru *os.File) {
 		_ = guru.Close()
 	}(guru)
 	//
-	initiate, err := os.Open("dataInitiate_194_of_4124.go")
+	initiate, err := os.Open("data_Initiate_119cards.go")
 	if err != nil {
-		fmt.Println("Error opening file: dataInitiate.go", err)
+		fmt.Println("Error opening file: data_Initiate_119cards.go", err)
 		return
 	}
 	defer func(initiate *os.File) {
 		_ = initiate.Close()
 	}(initiate)
 	//
-	master, err := os.Open("dataMaster_111_of_147.go")
+	master, err := os.Open("data_Master_46cards.go")
 	if err != nil {
-		fmt.Println("Error opening file: dataMaster.go", err)
+		fmt.Println("Error opening file: data_Master_46cards.go", err)
 		return
 	}
 	defer func(master *os.File) {
 		_ = master.Close()
 	}(master)
 	//
-	novice, err := os.Open("dataNovice_88.go")
+
+	novice, err := os.Open("data_Novice_23cards.go")
 	if err != nil {
-		fmt.Println("Error opening file: dataNovice.go", err)
+		fmt.Println("Error opening file: data_Novice_23cards.go", err)
 		return
 	}
 	defer func(novice *os.File) {
@@ -175,6 +177,7 @@ func find_in_files() {
 					}
 				} // 5 // end of loop 5
 				scan_master = bufio.NewScanner(master)
+
 				//
 				// .Seek resets, as was done for grad; refer to that comment
 				novice.Seek(0, 0)

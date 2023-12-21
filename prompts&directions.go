@@ -38,11 +38,8 @@ func List_of_Directives() {
 		"setc" + colorReset +
 		"' (set) force the use of a specific card")
 	fmt.Println("        Enter '" + colorGreen +
-		"frmt" + colorReset +
-		"' Format a text file as card elements")
-	fmt.Println("        Enter '" + colorGreen +
-		"fif" + colorReset +
-		"' Find in files")
+		"dirx" + colorReset +
+		"' display extended Directives list")
 	fmt.Println("        Enter '" + colorGreen +
 		"q" + colorReset +
 		"', (quit) terminate the app")
@@ -109,6 +106,27 @@ func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	fmt.Printf(" :> %s", colorReset)
 	_, _ = fmt.Scan(&usersGuessOrOptionDirective)
 	return
+}
+
+func extended_list_of_directives() {
+	fmt.Println("        Enter '" + colorGreen +
+		"fif" + colorReset +
+		"' scan category files, compare \"source\" file. Report")
+	fmt.Println("        Enter '" + colorGreen +
+		"lff" + colorReset +
+		"' create two files. A list of kanji. A list of duplicates")
+	fmt.Println("        Enter '" + colorGreen +
+		"t1" + colorReset +
+		"' test1 : don't recall what I was testing???")
+	fmt.Println("        Enter '" + colorGreen +
+		"t2" + colorReset +
+		"' test2 : don't recall what I was testing???")
+	fmt.Println("        Enter '" + colorGreen +
+		"t3" + colorReset +
+		"' proposed third directive ??")
+	fmt.Println("        Enter '" + colorGreen +
+		"frmt" + colorReset +
+		"' Format a text file as card elements")
 }
 
 // 'Directive Menu' ; displays only at inception

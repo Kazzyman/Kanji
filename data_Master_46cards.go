@@ -117,7 +117,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"ony: ロウ (rou)",
 		"kun: お (o)いる",
 		"老人(roujin), 高齢者(koureisha), 老齢(rouireki)",
-		"老若男女(rounyounan), 老体(otai), 老衰(rousui); compare: person(formal):old 者:老"},
+		"老若男女(rounyounan), 老体(otai), 老衰(rousui); compare: p-e-r-s-o-n(formal):old 者:老"},
 
 	{"雨", "rain", "wet, umbrella",
 		"ony: ウ (u う)",
