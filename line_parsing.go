@@ -122,9 +122,74 @@ func customMatch2digits(our_guess, str string) bool {
 	}
 	return false
 }
+func check_for_match_within_primary_field(users_guess string) bool {
+	// Look everywhere (in every field of the card) v v v v v v
+	fields_from_aCard := []string{aCard.Meaning}
+
+	// In the case of a one or two-char users_guess, we want now to check if we are dealing with a guess of a digit char, like "3"
+	if len(users_guess) < 3 { // if the guess is only one or two chars long then we call it a miss, unless possibly it is a digit char or two
+
+		if isSingleDigit(users_guess) {
+			// println("It is a isSingleDigit")
+			for _, one_field_from_aCard := range fields_from_aCard { // Read through the slice of fields from aCard (see above)
+				// If we want to know what the position was, could use n instead of _ to print it
+				if customMatch(users_guess, one_field_from_aCard) {
+					// fmt.Printf("Tossed value is position number:%v\n", n)
+					/*
+						if n != 99999 { // Just a silly kluge ...
+							n = 0 // We had to use n for something, since we chose not to toss the returned parameter via a _,
+						}
+					*/
+					return true // else ...
+				}
+			}
+		}
+		// Next, we will check if it is a double-digit like "34"
+		if isDoubleDigit(users_guess) {
+			// println("It is a isDoubleDigit")
+			for _, one_field_from_aCard := range fields_from_aCard { // Read through the slice of fields from aCard (see above ^ ^ )
+				// If we want to know what the position was, could use n instead of _ to print it
+				// customMatch2digits is required because we don't want to match on a single digit, and customMatch does that!
+				if customMatch2digits(users_guess, one_field_from_aCard) { // Go check the sub parts of one_field_from_aCard
+					/*
+						if n != 99999 { // Just a silly kluge ...
+							n = 0 // We had to use n for something, since we chose not to toss the returned parameter via a _,
+						}
+					*/
+					// fmt.Println("Why is customMatch2digits returning true?")
+					// Only v v v return true if customMatch2digits returns true (thereby putting us here)
+					return true // else ... continue, and if we never exit via this return, we eventually return false, below
+				}
+			}
+			// else ...
+			return false
+		}
+		// else return false
+		// return false // For now we just return false in the case of a very short guess, but this line will go away once we implement the above code
+	} else {
+		for _, one_field_from_aCard := range fields_from_aCard { // Read through the slice of fields from aCard (see above)
+			// If we want to know what the position was, could use n instead of _ to print it
+			if customMatch(users_guess, one_field_from_aCard) {
+				// fmt.Printf("Tossed value is position number:%v\n", n) // If we want to know what the position was, we could use n instead of _ to print it
+				/*
+					if n != 99999 { // Just a silly kluge ...
+						n = 0 // We had to use n for something, since we chose not to toss the returned parameter via a _,
+					}
+				*/
+				// fmt.Printf("Why is customMatch returning true? one_field_from_aCard:%s\n", one_field_from_aCard)
+				// one_field_from_aCard is nil ??? ^ ^ ^
+				// we are only here if customMatch returned true
+				return true
+			}
+		}
+	}
+	// else
+	return false
+}
 func check_for_match_in_other_fields(users_guess string) bool {
 	// Look everywhere (in every field of the card) v v v v v v
-	fields_from_aCard := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
+	// fields_from_aCard := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
+	fields_from_aCard := []string{aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
 
 	// In the case of a one or two-char users_guess, we want now to check if we are dealing with a guess of a digit char, like "3"
 	if len(users_guess) < 3 { // if the guess is only one or two chars long then we call it a miss, unless possibly it is a digit char or two
