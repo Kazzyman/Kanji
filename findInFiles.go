@@ -12,7 +12,9 @@ var firstElement2 string
 
 // Dir : fif
 // Used to scan all of the data_category files to see if cards in the "source" file (claude) are already in one or more 
-// ... of the other category files (current, data, fresh, graduate, guru, initiate, master, or novice) 
+// ... of the other category files (current, data, fresh, graduate, guru, initiate, master, or novice) and future
+// a_maybe_100.go can also be scanned if those sections are uncommented
+//
 func find_in_files() {
 	// Open a new output file to be used to log the cards that match in any category file
 	output_file, err := os.OpenFile("fif_AlreadyInOthers.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
@@ -122,6 +124,31 @@ func find_in_files() {
 		_ = novice.Close()
 	}(novice)
 
+	//
+	//
+	// Future
+	future, err := os.Open("data_future.go")
+	if err != nil {
+		fmt.Println("Error opening file: data_future.go", err)
+		return
+	}
+	defer func(future *os.File) {
+		_ = future.Close()
+	}(future)
+	//
+	//
+	//
+	// a_maybe_100
+	// Maybe
+	maybe, err := os.Open("a_maybe_100.go")
+	if err != nil {
+		fmt.Println("Error opening file: a_maybe_100.go", err)
+		return
+	}
+	defer func(maybe *os.File) {
+		_ = maybe.Close()
+	}(maybe)
+
 	// Create scanners to read the files line by line:
 	scan_source := bufio.NewScanner(source) // "input" file (claude) is being checked against the other files
 	// The other files:
@@ -133,6 +160,9 @@ func find_in_files() {
 	scan_initiate := bufio.NewScanner(initiate)
 	scan_master := bufio.NewScanner(master)
 	scan_novice := bufio.NewScanner(novice)
+
+	scan_future := bufio.NewScanner(future)
+	// scan_maybe := bufio.NewScanner(maybe)
 
 	/* pseudo code:
 	scan(loop1:) [1] - 7
@@ -276,6 +306,41 @@ func find_in_files() {
 					}
 				}
 				scan_novice = bufio.NewScanner(novice)
+				//
+				//
+				// Future
+				future.Seek(0, 0)
+				for scan_future.Scan() {
+					entire_line2 := scan_future.Text()
+					all_fields2 := strings.Split(entire_line2, "\"")
+					if len(all_fields2) >= 3 {
+						firstElement2 = all_fields2[1]
+					}
+					if firstElement1 == firstElement2 {
+						fmt.Fprintf(output_file, "%s is also in the Future category file\n", firstElement1)
+					}
+				}
+				scan_future = bufio.NewScanner(future)
+				//
+				//
+				/*
+					//
+					// data_file100_maybe a_maybe_100.go
+					// Maybe
+					maybe.Seek(0, 0)
+					for scan_maybe.Scan() {
+						entire_line2 := scan_maybe.Text()
+						all_fields2 := strings.Split(entire_line2, "\"")
+						if len(all_fields2) >= 3 {
+							firstElement2 = all_fields2[1]
+						}
+						if firstElement1 == firstElement2 {
+							fmt.Fprintf(output_file, "%s is also in the Maybe category file\n", firstElement1)
+						}
+					}
+					scan_maybe = bufio.NewScanner(maybe)
+
+				*/
 			}
 		}
 	} // 1 // end of loop 1 ****************************************************************************** [7]
