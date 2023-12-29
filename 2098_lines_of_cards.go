@@ -1,6 +1,6 @@
 package main
 
-var claude = []charSetStructKanji{
+var claudeOld = []charSetStructKanji{
 	{"政 - 1", "politics", "government",
 		"ony: セイ(sei)", "kun: まつ(matsu)",
 		"政治(seiji; politics), 政府(seifu; government), 政策(seisaku; policy)",
