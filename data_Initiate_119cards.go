@@ -292,12 +292,11 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		" ",
 		"きんにく、 (kin'niku)"},
 
-	{"首", "neck",
-		" ",
+	{"首", "neck", " ",
 		"ony: -",
-		"kun: -",
+		"kun: くび (kubi)",
 		" ",
-		"くび、 (kubi)"},
+		" "},
 
 	{"心", "heart",
 		"heart [as in feelings] (kokoro)",

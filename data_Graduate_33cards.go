@@ -73,7 +73,7 @@ var fileOfCardsGraduate = []charSetStructKanji{
 
 	{"名", "name", "moniker", "mei　めい, myou　みょう", "na　な",
 		"名前 (name)",
-		" "},
+		"compare 右 right "},
 
 	{"九", "nine", "ninth",
 		"ony: キュウ (kyuu)",

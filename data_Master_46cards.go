@@ -129,7 +129,8 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"ony: ウ (u), ユウ　(yuu)",
 		"kun: みぎ (migi)",
 		"右手(migite; right hand), 右翼(uyoku; right wing), 右折(usettsu; turn right)",
-		"右側(migigawa; right side), 坐る(suwaru; sit)"},
+		"右側(migigawa; right side), 坐る(suwaru; sit)\n" +
+			"compare 名 name"},
 
 	{"店", "shop", "store",
 		"ony: てん (ten)",

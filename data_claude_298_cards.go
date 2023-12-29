@@ -39,11 +39,6 @@ var claude = []charSetStructKanji{
 		"党首(toushu; party leader), 党員(touin; party member), 民主党(minshutou; Democratic Party)\n" +
 			"首:neck:くび"},
 
-	{"首", "neck", " ",
-		"ony: -", "kun: くび",
-		" ",
-		" "},
-
 	{"具", "tool", "equipment, ingredient",
 		"ony: グ(gu)", "kun: そな(sona)",
 		"用具(yougu; tool), 調理器具(chouri kigu; cooking utensil), 具材(guzai; ingredient)",
@@ -97,11 +92,6 @@ var claude = []charSetStructKanji{
 		"ony: ヒン(hin); ホン(hon)", "kun: しな(shina)",
 		"商品(shouhin; goods), 品物(shinamono; article), 食品(shokuhin; food products)",
 		"品格(hinkaku; dignity), 品質(hinshitsu; quality), 工芸品(kougeihin; craft goods)"},
-
-	{"刀", "sword", "knife, blade",
-		"ony: トウ(tou)", "kun: かたな(katana)",
-		"刀剣(touken; sword), 小刀(shoutou; knife), 短刀(tantou; short sword)",
-		"刃(ha; blade), 刀身(toumi; sword blade), 刀工(toukou; swordsmith)"},
 
 	{"度", "degree", "time, occasion",
 		"ony: ド(do); ト(to)", "kun: たび(tabi)",
@@ -277,9 +267,11 @@ var claude = []charSetStructKanji{
 		"銀行(ginkou; bank), 銀色(giniro; silvery color), 銀杏(ichou; ginkgo)"},
 
 	{"星", "star", "night sky, shine",
-		"ony: セイ(sei)", "kun: ほし(hoshi)",
+		"ony: セイ (sei)",
+		"kun: ほし (hoshi)",
 		"明星(myousei; Venus), 流星(ryuusei; shooting star), 北極星(hokkyokusei; Polaris)",
-		"夜空の星(yozora no hoshi; stars in the night sky), 星座(seiza; constellation), 星宿(seishuku; star cluster)"},
+		"夜空の星(yozora no hoshi; stars in the night sky), 星座(seiza; constellation), 星宿(seishuku; star cluster)\n" +
+			"all life has descended from Star, 生 is under simple moon or month symbol "},
 
 	{"天", "heaven; sky", "above, celestial",
 		"ony: テン(ten)", "kun: あま(ama)",
@@ -423,7 +415,8 @@ var claude = []charSetStructKanji{
 		"単字(tanji; single character), 語字(goji; word character), 熟字訓(jukujikun; Japanese reading of Chinese characters)"},
 
 	{"帽", "hat", "cap",
-		"ony: ボウ(bou)", "kun: かぶ(kabu)",
+		"ony: ボウ (bou)",
+		"kun: かぶ (kabu)",
 		"帽子(boushi; hat), ハット(hatto; hat), 野球帽(yakyuubou; baseball cap)",
 		"被る(kiru; put on head), かぶる(kaburu; wear on head), 冠(kanmuri; crown)"},
 
@@ -483,7 +476,8 @@ var claude = []charSetStructKanji{
 		"指す(sashu; point at), 指差す(yubi sasu; point at), 指導(shidou; guidance)"},
 
 	{"肉", "meat", "flesh",
-		"ony: ニク(niku)", "kun: -",
+		"ony: ニク (niku)",
+		"kun: -",
 		"肉体(nikutai; flesh), 牛肉(gyuniku; beef), 鶏肉(toriniku; chicken)",
 		"筋肉(kinniku; muscle), 身体(karada; body), 体(tei; body)"},
 
@@ -524,16 +518,6 @@ var claude = []charSetStructKanji{
 		"ony: ダイ(dai); タイ(tai)", "kun: おお(oo)",
 		"大きい(ookii; big), 大人(otona; adult), 大学(daigaku; university)",
 		"最大(saidai; biggest), 大量(tairyo; large quantity), 巨大(kyodai; huge)"},
-
-	{"短", "short", "brief",
-		"ony: タン(tan)", "kun: みじか(mijika)",
-		"短い(mijikai; short), 短縮(tanshuku; reduction), 短所(tansho; shortcoming)",
-		"短期(tanki; short time), 短距離(tankyori; short distance), 簡短(kantan; brief)"},
-
-	{"低", "low", "short",
-		"ony: テイ(tei)", "kun: ひく(hiku)",
-		"低い(hikui; low), 最低(saitei; lowest), 低地(teichi; lowland)",
-		"低価(teika; low price), 低レベル(teireberu; low level), 低下(teika; decline)"},
 
 	{"白", "white", "unmarked",
 		"ony: ハク(haku); ビャク(byaku)", "kun: しろ(shiro)",
@@ -634,11 +618,12 @@ var claude = []charSetStructKanji{
 		"次第(shidai; order), 次回(jikai; next time), 次男(jinan; second son)",
 		"次に(tsugi ni; next), 次から次へ(tsugi kara tsugi e; one after another), 続く(tsuzuku; follow)"},
 
-	{"改", "revision", "improvement",
-		"ony: カイ(kai)", "kun: あら(ara)たる",
+	{"改", "revision", "revise, reform, improve, modify",
+		"ony: カイ (kai)",
+		"kun: あら (ara)たる",
 		"改善(kaizen; improvement), 改札(kaisatsu; ticket gate), 改装(kaisou; renovation)",
 		"改正(kaisei; amendment), 改める(arata meru; revise), 新しい(atarashii; new)\n" +
-			"compare: 改女 "},
+			"変更(henkou; modification), 修正(shusei), 改造(kaizo), 改良(kairyo), compare: 改女 "},
 
 	{"番", "number", "one's turn",
 		"ony: バン(ban)", "kun: -",
@@ -670,16 +655,19 @@ var claude = []charSetStructKanji{
 		"消費税(shouhi zei; consumption tax), 申告税額(shinkoku zeigaku; declared tax amount), 関税(kanzei; customs duty)",
 		"付加価値税(fukka kachi zei; value added tax), 税抜き(zeibaraki; tax excluded), 非課税(hikazei; tax free)"},
 
-	{"計", "measure", "meter",
-		"ony: ケイ(kei)", "kun: はか(haka)る",
+	{"計", "measure", "meter, plan, calculation",
+		"ony: ケイ (kei)",
+		"kun: はか (haka)る",
 		"計算(keisan; calculation), 計画(keikaku; plan), 体温計(taionkei; thermometer)",
-		"計る(hakaru; measure), 距離計(kyori kei; odometer), 料金計算機(ryoukin keisanki; fare meter)"},
+		"計る(hakaru; measure), 距離計(kyori kei; odometer), 料金計算機(ryoukin keisanki; fare meter)\n" +
+			"計時(keiji; timekeeping, measuring time), 計時装置(keiji sōchi; timekeeping device)\n" +
+			"競技の計時 (kyōgi no keiji; timing a race), 時間の計時 (jikan no keiji; measuring time), 測定(sokutei)"},
 
-	{"配", "distribute", "dispatch",
-		"ony: ハイ(hai)", "kun: くば(kuba)る",
-		"配達(haitatsu; delivery), 配布(haifu; distribution), 配置(haichi; arrangement)",
-		"配る(kubaru; distribute), 配慮(hairyo; consideration), 配当(haitou; dividend)\n" +
-			"alcohol 酒 was 配-ed from the 西 - west"},
+	{"算", "calculate", "compute, reckon",
+		"ony: サン (san)",
+		"kun: さん (san)",
+		"計算(keisan; calculation), 監算(kansan; auditing), 算数(sansū; arithmetic), 算盤(soroban; abacus)",
+		"推算(suisan; inference)"},
 
 	// kanji for drive, transport, fee, tax, meter, and distribute/dispatch relate to taxis.
 
@@ -945,11 +933,12 @@ var claude = []charSetStructKanji{
 		"華美(kabi), 華やか(hanayaka), 花びら(hanabira)\n" +
 			"compare: 花 flower"},
 
-	{"刀", "sword", "katana",
-		"ony: トウ(tō)",
-		"kun: かたな(katana)",
-		"刀剣(tōken), 小刀(shōtō), 日本刀(nihontō)",
-		"刀工(tōkō), 刀身(tōmi), 刀鍛冶(katana kaji)"},
+	{"刀", "sword", "katana, knife, blade",
+		"ony: トウ (tō)",
+		"kun: かたな (katana)",
+		"刀剣(tōken; touken; sword), 小刀(shōtō; shoutou; knife), 日本刀(nihontō; Japanese sword)",
+		"刀工(tōkō; toukou; swordsmith), 刀身(tōmi; toumi; sword blade), 刀鍛冶(katana kaji), 短刀(tantou; short sword)\n" +
+			"刃(ha; blade)"},
 
 	{"形", "form", "shape",
 		"ony: ケイ(kei); ギョウ(gyō)",
@@ -958,14 +947,6 @@ var claude = []charSetStructKanji{
 		"模様(moyō), 型(kata), 儀式(gishiki)\n" +
 			"the tower was Form-ed or Shape-d by the three fingers"},
 
-	{"神", "god", "deity",
-		"ony: シン(jin); ジン(jin)",
-		"kun: かみ(kami)",
-		"神社(jinja), 神道(shintō), 神様(kamisama)",
-		"八百万の神(yaoyorozu no kami), 祈願(kigan), 祈祷(kitō)"},
-
-	// Here are some additional foundational or high-frequency kanji we have not covered yet:
-
 	{"長", "long", "leader",
 		"ony: チョウ(chou)",
 		"kun: なが(naga)",
@@ -973,16 +954,17 @@ var claude = []charSetStructKanji{
 		"会長(kaichou), 部長(buchou), 長寿(chouju)"},
 
 	{"短", "short", "brief",
-		"ony: タン(tan)",
-		"kun: みじか(mijika)",
-		"短い(mijikai), 短縮(tanshuku), 短所(tansho)",
-		"短期(tanki), 短距離(tankyori), 簡短(kantan)"},
+		"ony: タン (tan)",
+		"kun: みじか (mijika)",
+		"短い(mijikai; short), 短縮(tanshuku; reduction), 短所(tansho; shortcoming)",
+		"短期(tanki; short time), 短距離(tankyori; short distance), 簡短(kantan; brief)"},
 
 	{"低", "low", "short",
-		"ony: テイ(tei)",
-		"kun: ひく(hiku)",
-		"低い(hikui), 最低(saitei), 低地(teichi)",
-		"低価(teika), 低レベル(teireberu), 低下(teika)"},
+		"ony: テイ (tei)",
+		"kun: ひく (hiku)",
+		"低い(hikui; low), 最低(saitei; lowest), 低地(teichi; lowland)",
+		"低価(teika; low price), 低レベル(teireberu; low level), 低下(teika; decline)"},
+
 
 	/*
 			From the initial Shinjuku area kanji:
@@ -1084,12 +1066,6 @@ var claude = []charSetStructKanji{
 		"乗船券(joufasenken), 船出(funade), 海船(kaisen)\n" +
 			"see the sails on top, or the upside-down boat"},
 
-	{"計", "meter", "measure",
-		"ony: ケイ(kei)",
-		"kun: はか(haka)る",
-		"計画(keikaku), 計算(keisan), 測定(sokutei)",
-		"計る(hakaru), 体温計(taionkei), 計時(keiji)"},
-
 	{"工", "construction", "manufacturing",
 		"ony: コウ(kou); ク(ku)",
 		"kun: -",
@@ -1104,23 +1080,18 @@ var claude = []charSetStructKanji{
 		"修理(shuri), 修繕(shusen), 整備(seibi)",
 		"直す(naosu), 手入れ(teire), 修学(shugaku)"},
 
-	{"改", "reform", "modify",
-		"ony: カイ(kai)",
-		"kun: あら(ara)たる",
-		"改造(kaizo), 改良(kairyo), 改善(kaizen)",
-		"改める(arata meru), 変更(henko), 修正(shusei)"},
-
 	{"整", "adjust", "arrange",
 		"ony: セイ(sei)",
 		"kun: とと(toto)のえる",
 		"整備(seibi), 整理(seiri), 調整(chosei)",
 		"整える(totonou), そろえる(sorou), 仕上げる(shiageru)"},
 
-	{"配", "distribute", "arrange",
-		"ony: ハイ(hai)",
-		"kun: くば(kuba)る",
-		"配列(hairetsu), 配線(haisen), 分配(bunpai)",
-		"配る(kubaru), 配置(haichi), 割り当て(wariate)"},
+	{"配", "distribute", "dispatch, arrange",
+		"ony: ハイ (hai)",
+		"kun: くば (kuba)る",
+		"配達(haitatsu; delivery), 配布(haifu; distribution), 配置(haichi; arrangement)",
+		"配る(kubaru; distribute), 配慮(hairyo; consideration), 配当(haitou; dividend)\n" +
+			"配列(hairetsu), 配線(haisen), alcohol 酒 was 配-ed from the 西 - west"},
 
 	{"器", "apparatus", "implement",
 		"ony: キ(ki)",
@@ -1141,12 +1112,6 @@ var claude = []charSetStructKanji{
 		"kun: ほね(hone)",
 		"骨折(kossetsu), 骨髄(kotsuzui), 骨格(kokkaku)",
 		"骨盤(kotsuban), 骨片(kotsuben), 骨を埋める(hone wo umeru)"},
-
-	{"肉", "meat", "flesh",
-		"ony: ニク(niku)",
-		"kun: -",
-		"肉体(nikutai), 牛肉(gyuuniku), 鶏肉(toriniku)",
-		"筋肉(kinniku), 身体(karada), 体(tai)"},
 
 	{"皮", "skin", "hide",
 		"ony: ヒ(hi)",
@@ -1214,12 +1179,6 @@ var claude = []charSetStructKanji{
 		"衣服(ifuku), 服装(fukusou), 軍服(gunfuku)",
 		"洋服(youfuku), 手芸品(shugeihin), 織物(orimono)"},
 
-	{"帽", "hat", "cap",
-		"ony: ボウ(bou)",
-		"kun: かぶ(kabu)",
-		"帽子(boushi), ハット(hatto), 野球帽(yakyuubou)",
-		"被る(kiru), かぶる(kaburu), 冠(kanmuri)"},
-
 	{"靴", "shoes", "footwear",
 		"ony: カ(ka)",
 		"kun: くつ(kutsu)",
@@ -1262,8 +1221,8 @@ var claude = []charSetStructKanji{
 	{"神", "god", "deity",
 		"ony: シン(jin); ジン(jin)",
 		"kun: かみ(kami)",
-		"神社(jinja), 神道(shinto), 神様(kamisama)",
-		"八百万の神(yaoyorozu no kami), 祈願(kigan), 祈祷(kito)"},
+		"神社(jinja), 神道(shintō), 神様(kamisama)",
+		"八百万の神(yaoyorozu no kami), 祈願(kigan), 祈祷(kitō)"},
 
 	{"官", "government", "bureau",
 		"ony: カン(kan)",
@@ -1409,12 +1368,6 @@ var claude = []charSetStructKanji{
 		"かなしい",
 		"悲しい",
 		"悲しい出来事 (かなしいできごと) (sad event)"},
-
-	{"星", "star", " ",
-		"ホシ",
-		"ほし",
-		"hoshi",
-		"all life has descended from Star, 生 is under simple moon or month symbol "},
 
 	{"雲", "cloud", " ",
 		"クモ",

@@ -23,6 +23,9 @@ type charSetStructKanji struct {
 	Vocab2         string
 }
 
+var future_len int
+var data_file100_maybe_len int
+
 var beauty_len int
 var init_len int
 var guru_len int

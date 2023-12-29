@@ -52,7 +52,7 @@ var fileOf_Current = []charSetStructKanji{
 
 	{"時計", "clock", "hour", "じ", "とき",
 		" 時計 watch",
-		" "},
+		"time時 plus measure計 "},
 
 	{"若者", "youth", "young-person", "しゃく, にゃく", "わかい",
 		"わかもの、若者 ",
