@@ -83,23 +83,11 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"左手(hidarite; left hand), 左翼(sayoku; left wing), 左折(sasetsu; turn left)",
 		"左側(hidarigawa; left side)"},
 
-	{"長", "long", "leader",
-		"ony: チョウ (chou)",
-		"kun: なが (naga)",
-		"長い(nagai; long), 長さ(nagasa; length), 長期(chouki; long time)",
-		"会長(kaichou; president), 部長(buchou; department head, manager), 長寿(chouju; longevity)"},
-
 	{"母", "mother", "parent",
 		"ony: ボ (bo)",
 		"kun: はは (haha)",
 		"母親(hahaoya; mother), 母上(hahaue; mother), 義母(gibou; mother-in-law)",
 		"お母さん(okaasan; mother), 母ちゃん(kachan; mom), ママ(mama; mom)"},
-
-	{"北", "north", "northern",
-		"ony: ホク (hoku)",
-		"kun: きた (kita)",
-		"北海道(Hokkaidō; Hokkaido), 北極(Hokkyoku; North Pole), 北東(Higashi; northeast)",
-		"北口(Kitaguchi; north exit), 北側(kitagawa; northern side), 北向き(kitamuki; facing north)"},
 
 	{"古", "old-1", "former, antiquity",
 		"ony: コ (ko)",

@@ -11,24 +11,9 @@ var data_file = []charSetStructKanji{
 		"三十分 (thirty minutes), 自分 (oneself)",
 		" "},
 
-	{"月", "month", "moon",
-		"げつ, がつ", "kun: つき",
-		"月曜日 (Monday)",
-		" "},
-
 	{"学 or 校 or 学校", "school", "learning",
 		"がく, こう", "kun: まな(ぶ)",
 		"大学 (university)",
-		" "},
-
-	{"十", "ten", "10",
-		"じゅう, じ", "kun: とう, と",
-		"十日 (10th day of the month)",
-		" "},
-
-	{"千", "thousand", "Thousand",
-		"せん", "kun: ち",
-		"千万円 (10 million Yen)",
 		" "},
 
 	{"間", "time", "span of time, Time-frame",
@@ -36,29 +21,9 @@ var data_file = []charSetStructKanji{
 		"時間 (time, hours)",
 		" "},
 
-	{"読", "to-read", "To read",
-		"どく", "kun: よ(む)",
-		"読む (to read)",
-		" "},
-
-	{"話", "to-talk", "conversation, to speak",
-		"わ", "kun: はなし, はな(す)",
-		"電話 (telephone)",
-		" "},
-
-	{"書", "to-write", "To write",
-		"しょ", "kun: か(く)",
-		"辞書 (dictionary)",
-		" "},
-
 	{"週", "week", "Week",
 		"しゅう", "kun: —",
 		"毎週 (every week)",
-		" "},
-
-	{"言", "word", "To talk",
-		"げん, ごん", "kun: い(う)",
-		"言う (to say)",
 		" "},
 
 	{"年", "year", "Year",
@@ -66,29 +31,14 @@ var data_file = []charSetStructKanji{
 		"今年 (this year), 去年 (last year)",
 		" "},
 
-	{"円", "yen", "circle, round",
-		"えん", "kun: まるい",
-		"円い (round)",
-		" "},
-
 	{"左", "left", "Left",
 		"sa さ", "kun: hidari ひだり",
 		"左 (left)",
 		" "},
 
-	{"長", "long", "or, leader",
-		"chou ちょう", "kun: naga なが(iい)",
-		"長い (long), 部長 (manager)",
-		" "},
-
 	{"母", "mother", "Mother",
 		"bo ぼ", "kun: haha はは",
 		"母 (mother)",
-		" "},
-
-	{"北", "north", "North",
-		"hoku ほく", "kun: kita きた",
-		"北 (north)",
 		" "},
 
 	{"古", "old", "Old",
@@ -135,11 +85,6 @@ var data_file = []charSetStructKanji{
 		" -", "kun: しょうぼうし",
 		" – vocab",
 		"Firefighter : しょうぼうし"},
-
-	{"先", "future", "ahead",
-		"せん", "kun: さき",
-		"先週 (last week), 先生 (teacher, master)",
-		"before "},
 
 	{"少女", "girl-small", "baby-girl",
 		" -", "kun: -",
@@ -202,21 +147,6 @@ var data_file = []charSetStructKanji{
 		" – vocab",
 		"Teacher (sensei) : せんせい"},
 
-	{"時", "time", "hour",
-		"じ", "kun: とき",
-		"時計 (clock, watch)",
-		" "},
-
-	{"若者", "youth", "young-person",
-		"しゃく, にゃく", "kun: わかい",
-		"わかもの、若者 ",
-		" "},
-
-	{"唇", "lips", " ",
-		"ony: -", "kun: くちびる",
-		" ",
-		" "},
-
 	{"脛", "shin", " ",
 		"ony: -", "kun: すね、",
 		" ",
@@ -229,11 +159,6 @@ var data_file = []charSetStructKanji{
 
 	{"腿", "thigh", "thighs",
 		"ony: -", "kun: もも、",
-		" ",
-		" "},
-
-	{"頭", "head", " ",
-		"ony: -", "kun: あたま",
 		" ",
 		" "},
 
@@ -252,19 +177,14 @@ var data_file = []charSetStructKanji{
 		" ",
 		" "},
 
-	{"目", "eye", " ",
-		"ony: -", "kun: め",
-		" ",
-		" "},
-
 	{"安 - 1", "cheap", "peace",
 		"anあん", "kun: yasuやす(iい)",
-		"安い (cheap)",
+		"安い (cheap),  安 - 2 is peace",
 		" - or; safety\n gal wearing a Cheap hat, not a Safety Peace of attire"},
 
 	{"安 - 2", "peace", "cheap",
 		"anあん", "kun: yasuやす(iい)",
-		"安い (cheap)",
+		"安い (cheap),  安 - 1 is cheap",
 		" - or; safety\n gal wearing a Cheap hat, not a Safety Peace of attire"},
 
 	{"耳", "ear", "ears",
@@ -285,11 +205,6 @@ var data_file = []charSetStructKanji{
 	{"毎", "every", "each",
 		"mai　まい", "kun: -",
 		"毎日(every day)",
-		" "},
-
-	{"目", "eye", "ocular",
-		"moku　もく", "kun: me　め",
-		"目 (eye)",
 		" "},
 
 	{"父", "father", "dad",
@@ -457,23 +372,8 @@ var data_file = []charSetStructKanji{
 		" – vocab",
 		" "},
 
-	{"時計", "clock", "hour",
-		"じ", "kun: とき",
-		" 時計 watch",
-		" "},
-
-	{"唇", "lips", " ",
-		"ony: -", "kun: くちびる",
-		" ",
-		" "},
-
 	{"膝", "knee", " ",
 		"ony: -", "kun: ひざ",
-		" ",
-		" "},
-
-	{"頭", "head", " ",
-		"ony: -", "kun: あたま",
 		" ",
 		" "},
 
@@ -807,9 +707,9 @@ var data_file = []charSetStructKanji{
 		" ",
 		" "},
 
-	{"牛", "cow (ushi)", " ",
-		"ony: -", "kun: うし",
-		"\ncompare: noon 午",
+	{"牛", "cow", " ",
+		"ony: -", "kun: うし (ushi)",
+		"\ncompare: noon 午, thousand 千",
 		" "},
 
 	{"豚", "pig (buta)", " ",

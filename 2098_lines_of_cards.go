@@ -78,16 +78,6 @@ var claudeOld = []charSetStructKanji{
 		"返事(henji; reply), 帰り道(kaerimichi; return route), 返品(henpin; returned goods)",
 		"返す(kaesu; return), 返る(kaeru; go back), 振り返る(furikaeru; look back)"},
 
-	{"読", "read", "reading",
-		"ony: ドク(doku); トウ(tou)", "kun: よ(yo)",
-		"読書(dokusho; reading), 読者(dokusha; reader), 読み取る(yomitoru; interpret)",
-		"読む(yomu; read), 朗読(roudoku; reading aloud), 披露(hiryou; recital)"},
-
-	{"話", "speak", "talk, story",
-		"ony: ワ(wa)", "kun: はなし(hanashi)",
-		"会話(kaiwa; conversation), 電話(denwa; telephone), 話題(wadai; topic of conversation)",
-		"話す(hanasu; speak), 物語(monogatari; tale), 談話(danka; talk)"},
-
 	{"品", "goods", "dignity, quality",
 		"ony: ヒン(hin); ホン(hon)", "kun: しな(shina)",
 		"商品(shouhin; goods), 品物(shinamono; article), 食品(shokuhin; food products)",
@@ -176,11 +166,6 @@ var claudeOld = []charSetStructKanji{
 		"直線(chokusen; straight line), 正直(shoujiki; honest), 直後(chokugo; immediately after)",
 		"直ぐ(sugu; immediately), 直る(naoru; be corrected), まっすぐ(massugu; straight)"},
 
-	{"先", "ahead", "previous, precedence",
-		"ony: セン(sen)", "kun: さき(saki)",
-		"先行(senkou; precedence), 先端(sentan; cutting edge), 先生 (sensei; teacher)",
-		"以前(izen; before), まず(mazu; first), 前もって(maemotte; beforehand)"},
-
 	// 2
 	{"学", "learning", "study, school, 1-of-2-学",
 		"ony: ガク(gaku)", "kun: まな(mana)",
@@ -263,30 +248,15 @@ var claudeOld = []charSetStructKanji{
 		"九日(kokonoka; nine days), 九人(kyuunin; nine people), 九回(kyuukai; nine times)",
 		"九月(kugatsu; September), 九十(kyuujuu; ninety), 九州(kyuushuu; Kyushu)"},
 
-	{"十", "ten", "tenth",
-		"ony: ジュウ(juu)", "kun: とお(too)",
-		"十日(tooka; ten days), 十人(juunin; ten people), 十回(jikkai; ten times)",
-		"十月(juugatsu; October), 十分(juubun; enough), 一十(ittoo; ten)"},
-
 	{"百", "hundred", "many, percent",
 		"ony: ヒャク(hyaku)", "kun: -",
 		"百日(hyakunichi; hundred days), 百人(hyakunin; hundred people), 百回(hyakkai; hundred times)",
 		"百パーセント(hyaku paasento; one hundred percent), 二百(nihyaku; two hundred), 三百(sanbyaku; three hundred)"},
 
-	{"千", "thousand", "myriad, many",
-		"ony: セン(sen)", "kun: ち(chi)",
-		"千日(sennichi; thousand days), 千人(sennin; thousand people), 千回(senkai; thousand times)",
-		"一千(issen; one thousand), 二千(nisen; two thousand), 三千(sanzen; three thousand)"},
-
 	{"万", "ten thousand", "myriad, all",
 		"ony: マン(man)", "kun: -",
 		"一万(ichiman; ten thousand), 二万(niman; twenty thousand), 三万(sanman; thirty thousand)",
 		"十万(juuman; hundred thousand), 百万(hyakuman; million), 千万(senman; ten million)"},
-
-	{"円", "yen; circle", "money, round",
-		"ony: エン(en)", "kun: まど(madou)",
-		"百円(hyaku-en; hundred yen), 千円(sen-en; thousand yen), 万円(man-en; ten thousand yen)",
-		"円高(endaka; high yen), 円安(en'yasu; low yen), 円周(enshuu; circumference)"},
 
 	{"王", "king", "ruler, crown",
 		"ony: オウ(ou)", "kun: -",
@@ -448,11 +418,6 @@ var claudeOld = []charSetStructKanji{
 		"右手(migite; right hand), 右翼(uyoku; right wing), 右折(usettsu; turn right)",
 		"右側(migigawa; right side), 坐る(suwaru; sit)"},
 
-	{"北", "north", "direction",
-		"ony: ホク(hoku)", "kun: きた(kita)",
-		"北海道(hokkaidou; Hokkaido), 北極(hokkyoku; North Pole), 北東(higashi; northeast)",
-		"北口(kitaguchi; north exit), 南北(nanboku; north-south), 北国(kitaguni; northern country)"},
-
 	{"南", "south", "direction",
 		"ony: ナン(nan)", "kun: みなみ(minami)",
 		"南極(nankyoku; South Pole), 南西(nansei; southwest), 南東(touhoku; southeast)",
@@ -467,11 +432,6 @@ var claudeOld = []charSetStructKanji{
 		"ony: トウ(tou)", "kun: ひがし(higashi)",
 		"東日(toujitsu; rising sun), 東洋(touyou; the East), 東北(touhoku; northeast)",
 		"東口(higashiguchi; east exit)"},
-
-	{"言", "say", "speech, words",
-		"ony: ゲン(gen); ゴン(gon)", "kun: い(i)",
-		"言語(gengo; language), 発言(hatsugen; remark), 言論(genron; speech)",
-		"言う(iu; say), 言葉(kotoba; word), 正言(seigen; sensible words)"},
 
 	{"語", "language", "speech, word",
 		"ony: ゴ(go)", "kun: かた(kata)",
@@ -628,11 +588,6 @@ var claudeOld = []charSetStructKanji{
 		"呼吸(kokyuu; breathing), 一息(hitoiki; breath), 休息(kyuuikei; rest)",
 		"息子(musuko; son), 息災(sokusai; taking a rest), 休む(yasumu; take a break)"},
 
-	{"頭", "head", "leader",
-		"ony: トウ(tou); ズ(zu)", "kun: あたま(atama)",
-		"頭脳(zunou; brain), 頭部(zubu; head), 首(kubi; neck)",
-		"主に(omoini; mainly), まず(mazu; first), 先頭(sentou; head)"},
-
 	{"指", "finger", "point",
 		"ony: シ(shi)", "kun: ゆび(yubi)",
 		"人差指(hitosashiyubi; index finger), 指先(yubisaki; fingertip), 指図(shizu; directions)",
@@ -723,11 +678,6 @@ var claudeOld = []charSetStructKanji{
 		"小さい(chiisai; small), 小学校(shougakkou; elementary school), 少女(shoujo; girl)",
 		"最小(saishou; smallest), 少量(shouryou; small amount), 細かい(komakai; tiny)"},
 
-	{"長", "long", "leader",
-		"ony: チョウ(chou)", "kun: なが(naga)",
-		"長い(nagai; long), 長さ(nagasa; length), 長期(chouki; long time)",
-		"会長(kaichou; president), 部長(buchou; department head), 長寿(chouju; longevity)"},
-
 	{"短", "short", "brief",
 		"ony: タン(tan)", "kun: みじか(mijika)",
 		"短い(mijikai; short), 短縮(tanshuku; reduction), 短所(tansho; shortcoming)",
@@ -803,11 +753,6 @@ var claudeOld = []charSetStructKanji{
 		"本屋(honya; bookstore), 本物(honmono; real thing), 日本(nihon; Japan)",
 		"元(moto; origin), 本(hon; book), 本当(hontou; real)"},
 
-	{"月", "moon", "month",
-		"ony: ゲツ(getsu)", "kun: つき(tsuki)",
-		"月光(gekkou; moonlight), 一月(ichigatsu; January), 今月(kongetsu; this month)",
-		"毎月(maitsuki; every month), 月末(gekmatsu; end of month), 月見(tsukimi; moon viewing)"},
-
 	{"火", "fire", "Tuesday",
 		"ony: カ(ka)", "kun: ひ(hi)",
 		"火事(kaji; fire), 火曜日(kayoubi; Tuesday), 炎(honoo; flame)",
@@ -837,11 +782,6 @@ var claudeOld = []charSetStructKanji{
 		"ony: ジ(ji)", "kun: みみ(mimi)",
 		"耳鳴り(miminari; ringing in ears), 耳栓(mimisen; earplugs), 耳飾り(mimi kazari; earring)",
 		"聴覚(choukaku; hearing), 聞こえる(kikoeru; audible), 聞く(kiku; listen)"},
-
-	{"目", "eye", "vision",
-		"ony: モク(moku); ボク(boku)", "kun: め(me)",
-		"目力(mejikara; eyesight), 目的(mokuteki; purpose), 目玉(medama; eyeball)",
-		"視力(shiryoku; eyesight), 見る(miru; see), 見える(mieru; visible)"},
 
 	// Here are some additional common kanji that are often seen in Japanese train stations:
 
@@ -1018,11 +958,6 @@ var claudeOld = []charSetStructKanji{
 		"南国(Nangoku; southern country), 南極(Nankyoku; South Pole), 南北(Nanboku; north-south)",
 		"南口(Minamiguchi; south exit), 南側(minamigawa; southern side), 南向き(minamimuki; facing south)"},
 
-	{"北", "north", "northern",
-		"ony: ホク(hoku)", "kun: きた(kita)",
-		"北海道(Hokkaidō; Hokkaido), 北極(Hokkyoku; North Pole), 北東(Higashi; northeast)",
-		"北口(Kitaguchi; north exit), 北側(kitagawa; northern side), 北向き(kitamuki; facing north)"},
-
 	{"京", "capital", "metropolis",
 		"ony: キョウ(kyō); ケイ(kei)", "kun: -",
 		"東京(Tōkyō; Tokyo), 京都(Kyōto; Kyoto), 大阪(Ōsaka; Osaka)",
@@ -1122,12 +1057,6 @@ var claudeOld = []charSetStructKanji{
 		"走る(hashiru), 全力走行(zenryoku soukou), 走り回る(hashirimawaru)",
 		"駆ける(kakeru), マラソン(marason), ランニング(ran'ningu)"},
 
-	{"書く", "write", "compose",
-		"ony: ショ(sho)",
-		"kun: か(ka)く",
-		"書く(kaku), 筆記(hikki), 記述(kijutsu)",
-		"筆者(hisha), 小説(shousetsu), 作文(sakubun)"},
-
 	{"読む", "read", "peruse",
 		"ony: ドク(doku); トウ(tou)",
 		"kun: よ(yo)む",
@@ -1193,12 +1122,6 @@ var claudeOld = []charSetStructKanji{
 		"kun: い(i)う",
 		"言う(iu), 発言(hatsugen), 言いたい(iitai)",
 		"語る(kataru), 主張(shuuchou), 表現(hyougen)"},
-
-	{"書く", "write", "compose",
-		"ony: ショ(sho)",
-		"kun: か(ka)く",
-		"書く(kaku), 筆記(hikki), 記述(kijutsu)",
-		"筆者(hisha), 小説(shousetsu), 作文(sakubun)"},
 
 	{"山", "mountain", "nature",
 		"ony: サン(san)",
@@ -1274,12 +1197,6 @@ var claudeOld = []charSetStructKanji{
 		"刀剣(tōken), 小刀(shōtō), 日本刀(nihontō)",
 		"刀工(tōkō), 刀身(tōmi), 刀鍛冶(katana kaji)"},
 
-	{"書", "writing", "calligraphy",
-		"ony: ショ(sho)",
-		"kun: か(ka)く",
-		"書道(shodō), 書写(shosha), 筆書(hisho)",
-		"毛筆(mōhitsu), 硯(suzuri), 漢字(kanji)"},
-
 	{"形", "form", "shape",
 		"ony: ケイ(kei); ギョウ(gyō)",
 		"kun: かた(kata); かたち(katachi)",
@@ -1311,12 +1228,6 @@ var claudeOld = []charSetStructKanji{
 		"kun: ちい(chiisai)",
 		"小さい(chiisai), 小学校(shougakkou), 少女(shoujo)",
 		"最小(saishou), 少量(shouryou), 細かい(komakai)"},
-
-	{"長", "long", "leader",
-		"ony: チョウ(chou)",
-		"kun: なが(naga)",
-		"長い(nagai), 長さ(nagasa), 長期(chouki)",
-		"会長(kaichou), 部長(buchou), 長寿(chouju)"},
 
 	{"短", "short", "brief",
 		"ony: タン(tan)",

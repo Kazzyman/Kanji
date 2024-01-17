@@ -36,11 +36,6 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"三十分 (thirty minutes), 自分 (oneself)",
 		" "},
 
-	{"月", "month", "moon",
-		"げつ, がつ", "つき",
-		"月曜日 (Monday)",
-		" "},
-
 	{"学", "school-1", "learning",
 		"がく, こう", "まな(ぶ)",
 		"大学 (university)",
@@ -61,16 +56,6 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"大学 (university)",
 		" "},
 
-	{"十", "ten", "10",
-		"じゅう, じ", "とう, と",
-		"十日 (10th day - of the month)",
-		" "},
-
-	{"千", "thousand", "Thousand",
-		"せん", "ち",
-		"千万円 (10 million Yen)",
-		" "},
-
 	{"千万", "10-million", "ten-million",
 		"せん", "ち",
 		"千万円 (10 million Yen)",
@@ -81,38 +66,13 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"時間 (time, hours)",
 		" "},
 
-	{"読", "to-read", "To read",
-		"どく", "よ(む)",
-		"読む (to read)",
-		" "},
-
-	{"話", "to-talk", "conversation, to speak",
-		"わ", "はなし, はな(す)",
-		"電話 (telephone)",
-		" "},
-
-	{"書", "to-write", "To write",
-		"しょ", "か(く)",
-		"辞書 (dictionary)",
-		" "},
-
 	{"週", "week", "Week",
 		"しゅう", "—",
 		"毎週 (every week)",
 		" "},
 
-	{"言", "word", "To talk",
-		"げん, ごん", "い(う)",
-		"言う (to say)",
-		" "},
-
 	{"年", "year", "Year",
 		"ねん", "とし",
 		"今年 (this year), 去年 (last year)",
-		" "},
-
-	{"円", "yen", "circle, round",
-		"えん", "まるい",
-		"円い (round)",
 		" "},
 }

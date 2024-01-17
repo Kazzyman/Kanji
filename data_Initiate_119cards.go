@@ -34,10 +34,6 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		" – vocab",
 		"Firefighter : しょうぼうし  "},
 
-	{"先", "future", "ahead", "せん", "さき",
-		"先週 (last week), 先生 (teacher, master)",
-		"before "},
-
 	{"少女", "girl-small", "baby-girl", " -", " -",
 		" – 少 means \"a little\": but can also mean \"few\"",
 		"Little Girl, 私は女の赤ちゃんです:I am a baby girl "},
@@ -102,19 +98,16 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		" –  : きょうし ",
 		" "},
 
-	{"時", "time", "hour", "じ", "とき",
-		"時計 (clock, watch)",
-		" "},
-
-	{"若者", "youth", "young-person", "しゃく, にゃく", "わかい",
-		"わかもの、若者 ",
+	{"若者", "youth", "young-person",
+		"ony: ジャク(jaku), ニャク(nyaku)",
+		"わかい, わかもの(wakamono)",
+		"若者 (youth), 青年 (young person)",
 		"Compare 老 meaning old or aged"},
 
-	{"唇", "lips",
-		" ",
+	{"唇", "lips", " ",
 		"ony: -",
-		"kun: -",
-		" くちびる、",
+		"kun: くちびる",
+		" ",
 		" "},
 
 	{"脛", "shin",
@@ -130,20 +123,6 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		"kun: -",
 		" ",
 		" ひざ、"},
-
-	{"腿", "thigh",
-		" ",
-		"ony: -",
-		"kun: -",
-		" ",
-		" もも、"},
-
-	{"頭", "head",
-		" ",
-		"ony: -",
-		"kun: -",
-		" ",
-		" あたま、"},
 
 	{"顔", "face",
 		" ",
@@ -165,13 +144,6 @@ var fileOfCardsInitiate = []charSetStructKanji{
 		"kun: -",
 		" ",
 		" はな、"},
-
-	{"目", "eye",
-		" ",
-		"ony: -",
-		"kun: -",
-		"め、 ",
-		" "},
 
 	{"髭、鬚、髯", "moustache",
 		"beard",

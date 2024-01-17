@@ -12,11 +12,6 @@ var data_file3 = []charSetStructKanji{
 		"三十分 (thirty minutes), 自分 (oneself)",
 		"understand, divide, part"},
 
-	{"月", "month", "moon",
-		"ony: ゲツ(getsu), カツ(katsu)", "kun: つき(tsuki)",
-		"月曜日 (Monday), 一月 (January)",
-		"moon, lunar"},
-
 	{"学", "school", "learning",
 		"ony: ガク(gaku), コウ(kō)", "kun: まな(ぶ)(manabu)",
 		"大学 (university), 勉強する(study)",
@@ -27,55 +22,20 @@ var data_file3 = []charSetStructKanji{
 		"空 (sky), 空いている (empty)",
 		"emptiness, void, vacant"},
 
-	{"十", "ten", "10",
-		"ony: ジュウ(jū), ジ(ji)", "kun: とお(tō), と(to)",
-		"十日 (10th day of the month)",
-		"ten, tenth"},
-
-	{"千", "thousand", "Thousand",
-		"ony: セン(sen)", "kun: ち(chi)",
-		"千万円 (10 million Yen)",
-		"thousand, myriad"},
-
 	{"間", "time", "span of time, Time-frame",
 		"ony: カン(kan), ケン(ken)", "kun: あいだ(aida)",
 		"時間 (time, hours), 間に合う (on time)",
 		"interval, period, space"},
-
-	{"読", "to-read", "To read",
-		"ony: ドク(doku)", "kun: よ(む)(yomu)",
-		"読む (to read), 本を読む (read a book)",
-		"read, peruse"},
-
-	{"話", "to-talk", "conversation, to speak",
-		"ony: ワ(wa)", "kun: はなし(hanashi), はな(su)(hanasu)",
-		"電話 (telephone), 話す (talk)",
-		"speak, talk, tell"},
-
-	{"書", "to-write", "To write",
-		"ony: ショ(sho)", "kun: か(く)(kaku)",
-		"辞書 (dictionary), 書く (write)",
-		"write, compose"},
 
 	{"週", "week", "Week",
 		"ony: シュウ(shū)", "kun: —",
 		"毎週 (every week), 一週間 (one week)",
 		"week, weekly"},
 
-	{"言", "word", "To talk",
-		"ony: ゲン(gen), ゴン(gon)", "kun: い(う)(iu)",
-		"言う (to say), 言葉 (word)",
-		"say, word, speak"},
-
 	{"年", "year", "Year",
 		"ony: ネン(nen)", "kun: とし(toshi)",
 		"今年 (this year), 去年 (last year)",
 		"year, annual"},
-
-	{"円", "yen", "circle, round",
-		"ony: エン(en)", "kun: まる(i)(marui)",
-		"円 (yen), 円い (round)",
-		"circle, round shape, yen"},
 
 	{"車", "car", "or, vehicle",
 		"ony: シャ(sha)", "kun: くるま(kuruma)",
@@ -128,20 +88,10 @@ var data_file3 = []charSetStructKanji{
 		"左 (left), 左側 (left side)",
 		"left, left side"},
 
-	{"長", "long", "or, leader",
-		"ony: チョウ(chō)", "kun: なが(i)(nagi)",
-		"長い (long), 部長 (manager)",
-		"long, leader, chief"},
-
 	{"母", "mother", "Mother",
 		"ony: ボ(bo)", "kun: はは(haha)",
 		"母 (mother), 母親 (mother)",
 		"mother, mama"},
-
-	{"北", "north", "North",
-		"ony: ホク(hoku)", "kun: きた(kita)",
-		"北 (north), 北の方角 (north direction)",
-		"north, northern"},
 
 	{"古", "old", "Old",
 		"ony: コ(ko)", "kun: ふる(i)(furui)",
@@ -254,11 +204,6 @@ var data_file3 = []charSetStructKanji{
 		"脚 (leg), 足 (foot)",
 		"leg, foot, lower limb"},
 
-	{"先", "future", "ahead",
-		"ony: セン(sen)", "kun: さき(saki)",
-		"先 (ahead), 未来 (future)",
-		"ahead, future, previous"},
-
 	{"少女", "girl-young", "young girl",
 		"ony: ショウ(shō), ニャク(nyaku)", "kun: しょうじょ(shōjo)",
 		"少女 (young girl), 女の子 (girl)",
@@ -313,16 +258,6 @@ var data_file3 = []charSetStructKanji{
 		"ony: セン(sen)", "kun: せんせい(sensei)",
 		"先生 (teacher), 教える人 (instructor)",
 		"teacher, instructor, professor"},
-
-	{"時", "time", "hour",
-		"ony: ジ(ji)", "kun: とき(toki)",
-		"時 (time), 1時間 (1 hour)",
-		"time, hour, occasion"},
-
-	{"若者", "youth", "young-person",
-		"ony: ジャク(jaku), ニャク(nyaku)", "kun: わかもの(wakamono)",
-		"若者 (youth), 青年 (young person)",
-		"young person, youth"},
 
 	{"くちびる、唇", "lips", "Lip",
 		"ony: シン(shin)", "kun: くちびる(kuchibiru)",
@@ -408,11 +343,6 @@ var data_file3 = []charSetStructKanji{
 		"ony: シャ(sha)", "kun: もの(mono)",
 		"若者 (young person), 本の著者 (author)",
 		"person, someone"},
-
-	{"先", "future", "ahead",
-		"ony: セン(sen)", "kun: さき(saki)",
-		"未来 (future), 前に (ahead)",
-		"future, ahead"},
 
 	{"自", "self", "oneself",
 		"ony: ジ(ji), シ(shi)", "kun: みずか(ら)(mizukara)",

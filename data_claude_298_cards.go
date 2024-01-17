@@ -80,10 +80,11 @@ var claude = []charSetStructKanji{
 		"ony: ドク(doku); トウ(tou)", "kun: よ(yo)",
 		"読書(dokusho; reading), 読者(dokusha; reader), 読み取る(yomitoru; interpret)",
 		"読む(yomu; read), 朗読(roudoku; reading aloud), 披露(hiryou; recital)\n" +
-			"compare: 話 (speak)"},
+			"to-read, compare: 話 (speak)"},
 
 	{"話", "speak", "talk, story",
-		"ony: ワ(wa)", "kun: はなし(hanashi)",
+		"ony: ワ(wa)",
+		"kun: はなし(hanashi), はな(す)",
 		"会話(kaiwa; conversation), 電話(denwa; telephone), 話題(wadai; topic of conversation)",
 		"話す(hanasu; speak), 物語(monogatari; tale), 談話(danka; talk)\n" +
 			"words talked out the mouth is Speaking; compare: 読 (read)"},
@@ -162,8 +163,8 @@ var claude = []charSetStructKanji{
 
 	{"先", "ahead", "previous, precedence",
 		"ony: セン(sen)", "kun: さき(saki)",
-		"先行(senkou; precedence), 先端(sentan; cutting edge), 先生 (sensei; teacher)",
-		"以前(izen; before), まず(mazu; first), 前もって(maemotte; beforehand)"},
+		"先行(sen-kou; precedence[行: go, to-go, carry-out]), 先端(sentan; cutting edge), 先生 (sensei; teacher, master)",
+		"未来 (future), 先週 (last week), 以前(izen; before), まず(mazu; first), 前もって(maemotte; beforehand)"},
 
 	{"学 - 1", "learning", "study, school",
 		"ony: ガク(gaku)", "kun: まな(mana)",
@@ -216,12 +217,14 @@ var claude = []charSetStructKanji{
 		"四角(shikaku; square), 四月(shigatsu; April), 四季(shiki; four seasons)"},
 
 	{"十", "ten", "tenth",
-		"ony: ジュウ(juu)", "kun: とお(too)",
+		"ony: ジュウ(juu)",
+		"kun: とお(too)",
 		"十日(tooka; ten days), 十人(juunin; ten people), 十回(jikkai; ten times)",
 		"十月(juugatsu; October), 十分(juubun; enough), 一十(ittoo; ten)"},
 
 	{"千", "thousand", "myriad, many",
-		"ony: セン(sen)", "kun: ち(chi)",
+		"ony: セン(sen)",
+		"kun: ち(chi)",
 		"千日(sennichi; thousand days), 千人(sennin; thousand people), 千回(senkai; thousand times)",
 		"一千(issen; one thousand), 二千(nisen; two thousand), 三千(sanzen; three thousand)"},
 
@@ -230,11 +233,12 @@ var claude = []charSetStructKanji{
 		"一万(ichiman; ten thousand), 二万(niman; twenty thousand), 三万(sanman; thirty thousand)",
 		"十万(juuman; hundred thousand), 百万(hyakuman; million), 千万(senman; ten million)"},
 
-	{"円", "yen; circle", "money, round",
-		"ony: エン(en)", "kun: まど(madou)",
+	{"円", "yen", "circle, money, round",
+		"ony: エン(en)",
+		"kun: まど(madou), まるい",
 		"百円(hyaku-en; hundred yen), 千円(sen-en; thousand yen), 万円(man-en; ten thousand yen)",
 		"円高(endaka; high yen), 円安(en'yasu; low yen), 円周(enshuu; circumference)\n" +
-			"compare month: 月"},
+			"円い (round), compare month: 月"},
 
 	{"王", "king", "ruler, crown",
 		"ony: オウ(ou)", "kun: -",
@@ -337,15 +341,18 @@ var claude = []charSetStructKanji{
 		"豊富(houfu; abundance), 沢山(takusan; a lot),  \n" +
 			"compare: 移 (move), "},
 
-	{"北", "north", "direction",
-		"ony: ホク(hoku)", "kun: きた(kita)",
-		"北海道(hokkaidou; Hokkaido), 北極(hokkyoku; North Pole), 北東(higashi; northeast)",
-		"北口(kitaguchi; north exit), 南北(nanboku; north-south), 北国(kitaguni; northern country)"},
+	{"北", "north", "northern",
+		"ony: ホク (hoku)",
+		"kun: きた (kita)",
+		"北海道(hokkaidou; Hokkaido), 北極(hokkyoku; North Pole), 北東(higashi; northeast), 北の方角 (north direction)",
+		"北口(kitaguchi; north exit), 南北(nanboku; north-south), 北国(kitaguni; northern country)," +
+			" 北側(kitagawa; northern side), 北向き(kitamuki; facing north)"},
 
 	{"言", "say", "speech, words",
-		"ony: ゲン(gen); ゴン(gon)", "kun: い(i)",
+		"ony: ゲン(gen); ゴン(gon)",
+		"kun: い(i)",
 		"言語(gengo; language), 発言(hatsugen; remark), 言論(genron; speech)",
-		"言う(iu; say), 言葉(kotoba; word), 正言(seigen; sensible words)"},
+		"言う(iu; say, to-say), 言葉(kotoba; word), 正言(seigen; sensible words)"},
 
 	{"語", "language", "speech, word",
 		"ony: ゴ(go)", "kun: かた(kata)",
@@ -466,7 +473,8 @@ var claude = []charSetStructKanji{
 		"息子(musuko; son), 息災(sokusai; taking a rest), 休む(yasumu; take a break)"},
 
 	{"頭", "head", "leader",
-		"ony: トウ(tou); ズ(zu)", "kun: あたま(atama)",
+		"ony: トウ(tou); ズ(zu)",
+		"kun: あたま(atama)",
 		"頭脳(zunou; brain), 頭部(zubu; head), 首(kubi; neck)",
 		"主に(omoini; mainly), まず(mazu; first), 先頭(sentou; head)"},
 
@@ -543,7 +551,8 @@ var claude = []charSetStructKanji{
 		" "},
 
 	{"月", "moon", "month",
-		"ony: ゲツ(getsu)", "kun: つき(tsuki)",
+		"ony: ゲツ(getsu), カツ(katsu)",
+		"kun: つき(tsuki)",
 		"月光(gekkou; moonlight), 一月(ichigatsu; January), 今月(kongetsu; this month)",
 		"毎月(maitsuki; every month), 月末(gekmatsu; end of month), 月見(tsukimi; moon viewing)\n" +
 			"compare yen: 円"},
@@ -891,7 +900,7 @@ var claude = []charSetStructKanji{
 	{"書", "write", "writing, compose, calligraphy",
 		"ony: ショ (sho)",
 		"kun: か (ka)",
-		"書く(kaku; write), 筆記(hikki), 記述(kijutsu), 書道(shodō), 書写(shosha), 筆書(hisho)",
+		"辞書 (dictionary), 書く(kaku; write), 筆記(hikki), 記述(kijutsu), 書道(shodō), 書写(shosha), 筆書(hisho)",
 		"筆者(hisha), 毛筆(mōhitsu), 小説(shousetsu), 硯(suzuri), 作文(sakubun), 漢字(kanji)"},
 
 	{"田", "rice field", "paddy",
@@ -948,10 +957,10 @@ var claude = []charSetStructKanji{
 			"the tower was Form-ed or Shape-d by the three fingers"},
 
 	{"長", "long", "leader",
-		"ony: チョウ(chou)",
-		"kun: なが(naga)",
-		"長い(nagai), 長さ(nagasa), 長期(chouki)",
-		"会長(kaichou), 部長(buchou), 長寿(chouju)"},
+		"ony: チョウ (chou)",
+		"kun: なが (naga)",
+		"長い(nagai; long), 長さ(nagasa; length), 長期(chouki; long time)",
+		"会長(kaichou; president), 部長(buchou; department head, manager), 長寿(chouju; longevity)"},
 
 	{"短", "short", "brief",
 		"ony: タン (tan)",
@@ -964,7 +973,6 @@ var claude = []charSetStructKanji{
 		"kun: ひく (hiku)",
 		"低い(hikui; low), 最低(saitei; lowest), 低地(teichi; lowland)",
 		"低価(teika; low price), 低レベル(teireberu; low level), 低下(teika; decline)"},
-
 
 	/*
 			From the initial Shinjuku area kanji:
