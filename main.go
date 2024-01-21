@@ -11,7 +11,7 @@ func initialize_stuff() {
 	data_file100_maybe_len = len(data_file100_maybe)
 
 	beauty_len = len(data_beauty)
-
+	words_len = len(fileOf_Words)
 	init_len = len(fileOfCardsInitiate)
 	guru_len = len(fileOfCardsGuru)
 	master_len = len(fileOfCardsMaster)

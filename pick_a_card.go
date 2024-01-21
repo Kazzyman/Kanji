@@ -183,6 +183,22 @@ func pick_RandomCard_Assign_fields() (promptField, objective, objective_kind, se
 		}
 	}
 
+	if current_deck == "words" {
+		for { // This for loop is only needed to check for empty cards
+			randIndex := rand.Intn(len(fileOf_Words))
+			aCard = fileOf_Words[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
+			promptField = aCard.Kanji       // English meaning
+			objective = aCard.Meaning       // the Japanese word
+			secondary_objective = aCard.Second_Meaning
+			if promptField == "" || promptField == " " {
+				fmt.Printf("%s--- An empty kanji card was skipped in fileOf_Words!!!!%s\n", colorRed, colorReset) // Verified
+				continue
+			} else {
+				break // break out of local for loop and naturally fall-through to the return
+			}
+		}
+	}
+
 	if current_deck == "all" {
 		// Randomize over all decks, i.e., Randomly chose a deck
 		// fmt.Printf("\n random number is:%d, and must include 0-6 inclusive\n", randDeckAndMode)

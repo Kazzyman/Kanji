@@ -63,22 +63,38 @@ func switch_the_deck() {
 	for {
 		fmt.Println("\nEnter a deck from below for randomized prompting of a specific deck:\n")
 
-		fmt.Println("    all")
-		fmt.Println("    beauty")
-		fmt.Println("    claude")
-		fmt.Println("    current")
-		fmt.Println("    data")
-		fmt.Println("    fresh")
-		fmt.Println("    grad")
-		fmt.Println("    guru")
-		fmt.Println("    init")
-		fmt.Println("    mast")
-		fmt.Println("    nov \n")
+		// fmt.Println("    \"all\" ")
+		fmt.Printf("    \"all\"      %d total (below)\n",
+			beauty_len+claude_len+current_len+data_len+fresh_len+grad_len+guru_len+init_len+master_len+novice_len)
+		// fmt.Println("    beauty")
+		fmt.Printf("    \"beauty\"   %d\n", beauty_len)
+		// fmt.Println("    claude")
+		fmt.Printf("    \"claude\"   %d\n", claude_len)
+		// fmt.Println("    current")
+		fmt.Printf("    \"current\"  %d\n", current_len)
+		// fmt.Println("    data")
+		fmt.Printf("    \"data\"     %d\n", data_len)
+		// fmt.Println("    fresh")
+		fmt.Printf("    \"fresh\"    %d\n", fresh_len)
+		// fmt.Println("    grad")
+		fmt.Printf("    \"grad\"     %d\n", grad_len)
+		// fmt.Println("    guru")
+		fmt.Printf("    \"guru\"     %d\n", guru_len)
+		// fmt.Println("    init")
+		fmt.Printf("    \"init\"     %d\n", init_len)
+		// fmt.Println("    mast")
+		fmt.Printf("    \"mast\"     %d\n", master_len)
+		// fmt.Println("    nov \n")
+		fmt.Printf("    \"nov\"      %d\n\n", novice_len)
+		fmt.Printf("    \"words\"    %d\n\n", words_len)
 
 		fmt.Printf(" Here%s:> %s", colorCyan, colorReset)
 
 		_, _ = fmt.Scan(&current_deck)
 
+		if current_deck == "q" {
+			os.Exit(1)
+		}
 		if current_deck != "all" &&
 			current_deck != "beauty" &&
 			current_deck != "claude" &&
@@ -89,7 +105,8 @@ func switch_the_deck() {
 			current_deck != "guru" &&
 			current_deck != "init" &&
 			current_deck != "mast" &&
-			current_deck != "nov" {
+			current_deck != "nov" &&
+			current_deck != "words" {
 			fmt.Printf("%s\n  \"%s\" is not a valid deck, try again: \n%s", colorRed, current_deck, colorReset)
 			continue
 		} else {
@@ -106,6 +123,9 @@ func switch_the_deck() {
 					}
 					if current_deck == "beauty" {
 						deck_len = beauty_len
+					}
+					if current_deck == "words" {
+						deck_len = words_len
 					}
 					if current_deck == "claude" {
 						deck_len = claude_len

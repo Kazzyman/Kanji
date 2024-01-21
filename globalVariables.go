@@ -36,6 +36,7 @@ var fresh_len int
 var current_len int
 var data_len int
 var claude_len int
+var words_len int
 
 var deck_len int
 
