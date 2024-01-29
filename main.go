@@ -21,6 +21,7 @@ func initialize_stuff() {
 	current_len = len(fileOf_Current)
 	data_len = len(data_file)
 	claude_len = len(claude)
+
 	gameOn = false
 	current_deck = "claude" // The default deck, can be changed via the sdk Directive
 	deck_len = claude_len
@@ -69,27 +70,27 @@ func begin(promptField, objective, objective_kind, secondary_objective string) {
 	if game_loop_counter > game_duration {
 		game_off()
 	}
-	var in string // A var declaration was needed as a ":=" would not work within the conditional because "in" not in signature
+	var usersGuess string // A var declaration was needed as a ":=" would not work within the conditional because "usersGuess" not in signature
 	for {
 		if field_to_prompt_from == "kanji" {
 			// This prompt, deployed by objective_kind, takes promptField (rather than the new_prompt variant)
-			in = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
+			usersGuess = promptWithDir(promptField) // Get user's input, from a randomly selected prompt
 		}
 		if field_to_prompt_from == "kunyomi" {
-			in = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
+			usersGuess = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
 		}
 
-		if in_list_of_Directives(in) {
-			if in == "setc" { // respond_to_UserSuppliedDirective(in) will want to return values if "setc" is switched on
-				promptField, objective, objective_kind, secondary_objective, returning_fr_dir = respond_to_UserSuppliedDirective(in)
+		if in_list_of_Directives(usersGuess) {
+			if usersGuess == "setc" { // respond_to_UserSuppliedDirective(usersGuess) will want to return values if "setc" is switched on
+				promptField, objective, objective_kind, secondary_objective, returning_fr_dir = respond_to_UserSuppliedDirective(usersGuess)
 			} else {
-				_, _, _, _, returning_fr_dir = respond_to_UserSuppliedDirective(in)
+				_, _, _, _, returning_fr_dir = respond_to_UserSuppliedDirective(usersGuess)
 			}
 			continue // ... After "Directive" handling, re-prompt with the same/original promptField
 		} else {
 			// Passing recursion false [or recall true], means do rightOrOops()
 			// ...                                                                  f,f,f Does rightOrOops
-			evaluateUsersGuess(in, promptField, objective, objective_kind, false, false, false, secondary_objective)
+			evaluateUsersGuess(usersGuess, promptField, objective, objective_kind, false, false, false, secondary_objective)
 			break // ... Having finished with all potential guessing, return to main ...
 		}
 	} // ... Returns to main()'s inner loop; to (usually randomly) select the next card
@@ -185,10 +186,13 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		// promptField ~ aCard.Kanji
 		// in ~ users guess
 		// objective ~ aCard.Meaning, secondary_objective is second meaning
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("\"%s%s%s\" was its second meaning\n%s\n%s\n%s\n%s\n%s",
-			colorReset, aCard.Second_Meaning, colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("\"%s\" %swas Exactly Correct!\n%s\n", in, colorGreen, colorReset)
+
+		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
+			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("  \"%s%s%s\" ",
+			colorReset, in, colorGreen)
+		fmt.Printf("or \"%s%s%s\" \n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset)
 		// Since the guess was correct, next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -232,10 +236,11 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		}
 	} else if in == secondary_objective {
 		log_right(promptField, in)
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("\"%s%s%s\" was its primary meaning\n%s\n%s\n%s\n%s\n\n%s",
-			colorReset, aCard.Meaning, colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("\"%s\" %swas Correct as Second Meaning\n%s\n", in, colorGreen, colorReset)
+
+		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
+			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("  \"%s%s%s\" or \"%s%s%s\"\n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset, aCard.Meaning, colorGreen, colorReset)
 		// Since that was correct as second meaning, next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -283,9 +288,13 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("    ^^%spartly-correct, within the primary meaning: \"%s%s%s\" \n", colorGreen, colorReset, aCard.Meaning, colorGreen)
-		fmt.Printf("\"%s%s%s\" is secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
-			colorReset, aCard.Second_Meaning, colorGreen,
-			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+
+		fmt.Printf("   %s \n   %s \n%s%s\n", aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+
+		fmt.Printf("  \"%s%s%s\" ",
+			colorReset, aCard.Meaning, colorGreen)
+		fmt.Printf("or \"%s%s%s\" \n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset)
 
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
@@ -338,6 +347,8 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
 			colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+		fmt.Printf("%sfound:%s \"%s%s%s\" above\n\n%s",
+			colorPurple, colorGreen, colorReset, in, colorGreen, colorReset)
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -415,10 +426,12 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 
 	if in == objective {
 		log_right(promptField, in)
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("\"%s%s%s\" was its second meaning\n%s\n%s\n%s\n%s\n%s",
-			colorReset, aCard.Second_Meaning, colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("\"%s\" %swas Exactly Correct!\n%s\n", in, colorGreen, colorReset)
+		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
+			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("  \"%s%s%s\" ",
+			colorReset, in, colorGreen)
+		fmt.Printf("or \"%s%s%s\" \n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset)
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
 		loopCounter := 0
@@ -463,10 +476,10 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		// insert here?
 	} else if in == secondary_objective {
 		log_right(promptField, in)
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("\"%s%s%s\" was its primary meaning\n%s\n%s\n%s\n%s\n\n%s",
-			colorReset, aCard.Meaning, colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("\"%s\" %swas Correct as Second Meaning\n%s\n", in, colorGreen, colorReset)
+		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
+			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("  \"%s%s%s\" or \"%s%s%s\"\n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset, aCard.Meaning, colorGreen, colorReset)
 		// Since that was correct as second meaning, next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -515,10 +528,13 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("    ^^%spartly-correct, within the primary meaning: \"%s%s%s\" \n", colorGreen, colorReset, aCard.Meaning, colorGreen)
-		fmt.Printf("\"%s%s%s\" is secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
-			colorReset, aCard.Second_Meaning, colorGreen,
-			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 
+		fmt.Printf("   %s \n   %s \n%s%s\n", aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+
+		fmt.Printf("  \"%s%s%s\" ",
+			colorReset, aCard.Meaning, colorGreen)
+		fmt.Printf("or \"%s%s%s\" \n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset)
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -565,10 +581,13 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		log_right(promptField, in)
 
 		fmt.Printf("%s", colorGreen)
+
 		fmt.Printf("     %s^^%spossibly-correct, in another field\n", colorReset, colorGreen)
 		fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
 			colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+		fmt.Printf("%sfound:%s \"%s%s%s\" above\n\n%s",
+			colorPurple, colorGreen, colorReset, in, colorGreen, colorReset)
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -639,10 +658,12 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 
 	if in == objective {
 		log_right(promptField, in)
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("\"%s%s%s\" was its second meaning\n%s\n%s\n%s\n%s\n%s",
-			colorReset, aCard.Second_Meaning, colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("\"%s\" %swas Exactly Correct!\n%s\n", in, colorGreen, colorReset)
+		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
+			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("  \"%s%s%s\" ",
+			colorReset, in, colorGreen)
+		fmt.Printf("or \"%s%s%s\" \n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset)
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
 		loopCounter := 0
@@ -686,10 +707,10 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		}
 	} else if in == secondary_objective {
 		log_right(promptField, in)
-		fmt.Printf("%s", colorGreen)
-		fmt.Printf("\"%s%s%s\" was its primary meaning\n%s\n%s\n%s\n%s\n\n%s",
-			colorReset, aCard.Meaning, colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("\"%s\" %swas Correct as Second Meaning\n%s\n", in, colorGreen, colorReset)
+		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
+			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+		fmt.Printf("  \"%s%s%s\" or \"%s%s%s\"\n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset, aCard.Meaning, colorGreen, colorReset)
 		// Since that was correct as second meaning, next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -737,10 +758,13 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 
 		fmt.Printf("%s", colorReset)
 		fmt.Printf("    ^^%spartly-correct, within the primary meaning: \"%s%s%s\" \n", colorGreen, colorReset, aCard.Meaning, colorGreen)
-		fmt.Printf("\"%s%s%s\" is secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
-			colorReset, aCard.Second_Meaning, colorGreen,
-			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
 
+		fmt.Printf("   %s \n   %s \n%s%s\n", aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+
+		fmt.Printf("  \"%s%s%s\" ",
+			colorReset, aCard.Meaning, colorGreen)
+		fmt.Printf("or \"%s%s%s\" \n\n%s",
+			colorReset, aCard.Second_Meaning, colorGreen, colorReset)
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0
@@ -786,10 +810,13 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
 		log_right(promptField, in)
 		fmt.Printf("%s", colorGreen)
+
 		fmt.Printf("     %s^^%spossibly-correct, in another field\n", colorReset, colorGreen)
 		fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
 			colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+		fmt.Printf("%sfound:%s \"%s%s%s\" above\n\n%s",
+			colorPurple, colorGreen, colorReset, in, colorGreen, colorReset)
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
 		length := 0

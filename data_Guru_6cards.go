@@ -6,7 +6,8 @@ var fileOfCardsGuru = []charSetStructKanji{
 		"ony: サン (san)",
 		"kun: やま (yama)",
 		"富士山(fujisan; Mt. Fuji), 山頂(sanchou; mountain top), 火山(kazan; volcano), 山盛り(yama mori), 登山(tozan)",
-		"山岳(sangaku; alpinism), 山男(yamabito; mountain man), 山菜(sansai; mountain vegetables) \nPeaks on a mountain　Mt."},
+		"山岳(sangaku; alpinism), 山男(yamabito; mountain man), 山菜(sansai; mountain vegetables) \n" +
+			"  Peaks on a mountain　Mt."},
 
 	{"川", "river-1", "water, stream",
 		"ony: せん (sen); or でん (den)",
