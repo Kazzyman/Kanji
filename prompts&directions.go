@@ -18,7 +18,7 @@ func List_of_Directives() {
 		"' set the Duration Counter for a Game session ")
 	fmt.Println("        Enter '" + colorGreen +
 		"bgs" + colorReset +
-		"' or 'goff' Begin or end a Game Session ")
+		"' or '" + colorGreen + "goff" + colorReset + "' Begin or end a Game Session ")
 	fmt.Println("        Enter '" + colorGreen +
 		"?" + colorReset +
 		"' context-sensitive help on the current character")
@@ -96,11 +96,45 @@ func prompt_interim3(promptField string) (usersGuessOrOptionDirective string) { 
 */
 // Initial prompt, to be used when first introducing a new Kanji char
 func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
+	// Create a map to store the frequency of the string for the map
+	frequencyMapRightOrOops := make(map[string]int)
+
+	//
+	// Parse the cyclic array to check_for_match_in_other_fields the strings and put them into the map:
+	//
+	// Load the RightOrOops frequency map
+	for i := 0; i < len(cyclicArrayHits.RightOrOops); i++ {
+		str := cyclicArrayHits.RightOrOops[i]
+		// Apparently; this loads a string into, and increments the frequency of, that particular string, in the map
+		frequencyMapRightOrOops[str]++ // Specifically, the '++' must increment the int value associated with str
+	}
+
+	// -- Update the total_prompts var (its frequency)
+	for str, freq := range frequencyMapRightOrOops { // The map has only one entry for Right, & one for Oops
+		if str == "Right" { // Finds the one potential entry for Right
+			total_prompts = freq
+		} else if str == "Oops" { // Finds the one potential entry for Oops
+			total_prompts = total_prompts + freq
+		} else if str == "" {
+			// else, it is an 'empty' position in the map due to empty uninitialized positions in the cyclic array
+		}
+	}
+	// Determine the unique Chars and their frequencies
+	numberOfUniqueKanjiCharsHit := 0
+	for _, cardInfoData := range kanjiHitMap {
+		if cardInfoData.CorrectGuessCount == 0 {
+			// it is an 'empty' position in the map due to empty uninitialized positions in the cyclic array
+		} else {
+			numberOfUniqueKanjiCharsHit++
+		}
+	}
 	fmt.Printf("%s%s", prompt, colorCyan)
 	if current_deck == "all" {
-		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%d), 'dir' or '?' for help with %s", current_deck, current_deck_B, deck_len, colorReset)
+		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), 'dir' or '?' for help with %s",
+			current_deck, current_deck_B, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s, cards in deck:%d), 'dir' or '?' for help with %s", current_deck, deck_len, colorReset)
+		fmt.Printf(" Meaning? (deck:%s, cards in deck:%s%d%s,%d,%d), 'dir' or '?' for help with %s",
+			current_deck, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
 	}
 	fmt.Printf("%s \n%s", prompt, colorCyan)
 	fmt.Printf(" :> %s", colorReset)
