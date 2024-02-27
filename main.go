@@ -338,7 +338,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		} else {
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
-	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
+	} else if check_for_match_in_secondary_field(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
 		log_right(promptField, in)
 
 		fmt.Printf("%s", colorGreen)
@@ -347,7 +347,7 @@ func rightOrOops(in, promptField, objective string, skipOops bool, secondary_obj
 		fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
 			colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("%sfound:%s \"%s%s%s\" above\n\n%s",
+		fmt.Printf("%sfound:%s \"%s%s%s\" in secondary meaning field\n\n%s",
 			colorPurple, colorGreen, colorReset, in, colorGreen, colorReset)
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
@@ -577,7 +577,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		} else {
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
-	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
+	} else if check_for_match_in_secondary_field(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
 		log_right(promptField, in)
 
 		fmt.Printf("%s", colorGreen)
@@ -586,7 +586,7 @@ func tryAgain(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
 			colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("%sfound:%s \"%s%s%s\" above\n\n%s",
+		fmt.Printf("%sfound:%s \"%s%s%s\" in secondary meaning field\n\n%s",
 			colorPurple, colorGreen, colorReset, in, colorGreen, colorReset)
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()
@@ -807,7 +807,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		} else {
 			evaluateUsersGuess(in, new_prompt, new_objective, new_objective_kind, true, true, false, new_secondary_objective)
 		}
-	} else if check_for_match_in_other_fields(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
+	} else if check_for_match_in_secondary_field(in) { // If any of the fields of the card contain a match via our custom parsing algorithm
 		log_right(promptField, in)
 		fmt.Printf("%s", colorGreen)
 
@@ -815,7 +815,7 @@ func lastTry(promptField, objective, secondary_objective string) { // - -
 		fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
 			colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
 			aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-		fmt.Printf("%sfound:%s \"%s%s%s\" above\n\n%s",
+		fmt.Printf("%sfound:%s \"%s%s%s\" in secondary meaning field\n\n%s",
 			colorPurple, colorGreen, colorReset, in, colorGreen, colorReset)
 		// Since that was "correct", next we obtain new values in-preparation of "returning" to caller
 		new_prompt, new_objective, new_objective_kind, new_secondary_objective := pick_RandomCard_Assign_fields()

@@ -6,7 +6,7 @@ import (
 	"unicode"
 )
 
-// This file contains func check_for_match_in_other_fields and all of its supporting functions
+// This file contains func check_for_match_in_secondary_field and all of its supporting functions
 
 func isSingleDigit(usersGuess string) bool { // - -
 	// fmt.Println("In isSingleDigit")
@@ -186,10 +186,11 @@ func check_for_match_within_primary_field(users_guess string) bool {
 	// else
 	return false
 }
-func check_for_match_in_other_fields(users_guess string) bool {
+func check_for_match_in_secondary_field(users_guess string) bool {
 	// Look everywhere (in every field of the card) v v v v v v
 	// fields_from_aCard := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
-	fields_from_aCard := []string{aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
+	// fields_from_aCard := []string{aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
+	fields_from_aCard := []string{aCard.Second_Meaning} // Dropped all extra fields
 
 	// In the case of a one or two-char users_guess, we want now to check if we are dealing with a guess of a digit char, like "3"
 	if len(users_guess) < 3 { // if the guess is only one or two chars long then we call it a miss, unless possibly it is a digit char or two
@@ -265,7 +266,7 @@ func customMatch(our_guess, str string) bool {
 
 	// Check for a simple match of one whole within the other
 	// This first condition will suffice to catch a single or double numeric digit ourGuessLower when customMatch is called by the first ...
-	// ... condition section in check_for_match_in_other_fields
+	// ... condition section in check_for_match_in_secondary_field
 	// if
 	if strings.Contains(strLower, ourGuessLower) ||
 		strings.Contains(ourGuessLower, strLower) { // i.e. :

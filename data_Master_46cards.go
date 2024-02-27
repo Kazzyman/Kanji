@@ -228,7 +228,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"入口 (entrance)",
 		" "},
 
-	{"電", "electricity", "electronics",
+	{"電", "electric", "electricity, electronics, electrical",
 		"ony: デン(den)",
 		"kun: -",
 		"電気 (denki; electricity), 電子(denshi), 電力(denryoku)",

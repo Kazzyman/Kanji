@@ -257,7 +257,7 @@ func hits() { // - -
 	frequencyMapWrongs := make(map[string]int)
 
 	//
-	// Parse the relevant cyclic array to check_for_match_in_other_fields the strings and put them into the relevant map:
+	// Parse the relevant cyclic array to check_for_match_in_secondary_field the strings and put them into the relevant map:
 	//
 	// Load the RightOrOops frequency map
 	for i := 0; i < len(cyclicArrayHits.RightOrOops); i++ {
@@ -381,7 +381,7 @@ func customMatch(our_guess, str string) bool {
 	// ... such that if strLower is: "one, two, three, sam, sick, water", it will match if ourGuessLower is: "xxxxwaterxxxx" where x is any char
 }
 
-func check_for_match_in_other_fields(in string) (found_one bool) {
+func check_for_match_in_secondary_field(in string) (found_one bool) {
 	our_guess_in_lower_case := strings.ToLower(in)
 	strings_from_card := []string{aCard.Meaning, aCard.Second_Meaning, aCard.Kunyomi, aCard.Onyomi, aCard.Vocab, aCard.Vocab2}
 

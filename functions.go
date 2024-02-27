@@ -7,7 +7,6 @@ import (
 )
 
 // DIRECTIVES : --------------------------------------------------------------------------------------------
-//
 func resetAllLogs() {
 	cyclicArrayOfTheJcharsGottenWrong = CyclicArrayOfTheJcharsGottenWrong{}
 	cyclicArrayHits = CyclicArrayHits{}

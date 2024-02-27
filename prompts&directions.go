@@ -100,7 +100,7 @@ func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	frequencyMapRightOrOops := make(map[string]int)
 
 	//
-	// Parse the cyclic array to check_for_match_in_other_fields the strings and put them into the map:
+	// Parse the cyclic array to check_for_match_in_secondary_field the strings and put them into the map:
 	//
 	// Load the RightOrOops frequency map
 	for i := 0; i < len(cyclicArrayHits.RightOrOops); i++ {
@@ -133,8 +133,8 @@ func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), 'dir' or '?' for help with %s",
 			current_deck, current_deck_B, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s, cards in deck:%s%d%s,%d,%d), 'dir' or '?' for help with %s",
-			current_deck, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
+		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), 'dir' or '?' for help with %s",
+			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	}
 	fmt.Printf("%s \n%s", prompt, colorCyan)
 	fmt.Printf(" :> %s", colorReset)
