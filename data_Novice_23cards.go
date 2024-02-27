@@ -26,10 +26,10 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"四日 (4th day - of the month)",
 		" "},
 
-	{"語", "language", "w-o.rd, t.o ch.at",
+	{"語", "language", "word, to chat",
 		"ご", "かた(る)",
 		"英語 (English)",
-		"when five w_r.ds ?? come out of the m.outh it is language"},
+		"when five words ?? come out of the mouth it is language"},
 
 	{"分", "minute", "part, to understand, to divide",
 		"ぶん, ぶ, ふん", "わ(かる)",

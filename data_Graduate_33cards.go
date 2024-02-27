@@ -24,7 +24,7 @@ var fileOfCardsGraduate = []charSetStructKanji{
 		"kun: や (ya), やつ",
 		"八日(youka; eight days, 8th day of the month), 八人(hachinin; eight people), 八回(hakkai; eight times)",
 		"八月(hachigatsu; August), 八十(hachijuu; eighty), 八百(happyaku; eight hundred)\n" +
-			"compare: 入 to En ter, 六 s i x"},
+			"compare: 入 to Enter, 六 six"},
 
 	{"毎", "every", "each", "mai　まい", "—",
 		"毎日(every day)",
@@ -53,7 +53,7 @@ var fileOfCardsGraduate = []charSetStructKanji{
 	{"生", "life", "to-grow", "せい, しょう", "i(kiru), u(mareru), ha(yasu)",
 		"生徒 (pupil)",
 		"to live, to be born, to grow\n" +
-			"compare: 午 n oo n, "},
+			"compare: 午 noon, "},
 
 	{"小", "small", "little",
 		"ony: ショウ(shou); コ(ko)",
@@ -143,7 +143,7 @@ var fileOfCardsGraduate = []charSetStructKanji{
 		"西日本(Nishi-Nihon; western Japan), 西洋(Seiyō; the West), 西南(Seinan; southwest)",
 		"西口(Nishiguchi; west exit), 西側(nishigawa; western side), 西向き(nishimuki; facing west)" +
 			"西新宿(Nishi-Shinjuku), 西方(Seihō), 西日(nishibi; setting sun), 西暦(seireki; Western calendar),\n" +
-			"compare: 百 h u n d r e d,  酒 alcohol (man sticks head up to look west, one v-line w 2 fifties under is 1 0 0 "},
+			"compare: 百 hundred,  酒 alcohol (man sticks head up to look west, one v-line w 2 fifties under is 100 "},
 
 	{"何", "what", "which", "ka　か", "nan　なん, nani　なに",
 		"何曜日 (what day of the week)",

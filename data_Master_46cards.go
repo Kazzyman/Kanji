@@ -105,7 +105,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"ony: ロウ (rou)",
 		"kun: お (o)いる",
 		"老人(roujin), 高齢者(koureisha), 老齢(rouireki)",
-		"老若男女(rounyounan), 老体(otai), 老衰(rousui); compare: p-e-r-s-o-n(formal):old 者:老"},
+		"老若男女(rounyounan), 老体(otai), 老衰(rousui); compare: person(formal):old 者:老"},
 
 	{"雨", "rain", "wet, umbrella",
 		"ony: ウ (u う)",
@@ -150,7 +150,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"道具 (tool)",
 		" "},
 
-	{"三日", "3rd-day-of-the-month", "3rd day of the month",
+	{"三", "three", "3",
 		"ony: san さん",
 		"kun: mi みか",
 		"三日 3rd day of the month",

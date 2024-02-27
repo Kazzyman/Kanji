@@ -11,7 +11,7 @@ import (
 		if lastPull == promptField { // If promptField has been used in recent memory ...
 			// Store seen promptField in frequencyMapOfSeenChars prior to getting another that may also not be novel (novel ones get stored later)
 			frequencyMapOfSeenChars[promptField]++ // The '++' increments the int value associated with promptField
-			fmt.Printf("We've seen the pseudo-randome char before lastPull:%s and promptField:%s \n", lastPull, promptField)
+			fmt.Printf("We've seen the pseudo-random char before lastPull:%s and promptField:%s \n", lastPull, promptField)
 			// If a match is found, set a new promptField and return
 			promptField, objective, objective_kind, secondary_objective = randomize_over_all_decks()
 			// Having obtained a replacement promptField for the one we had already seen ...
@@ -26,7 +26,7 @@ import (
 	} // The loop ends when the promptField has been verified as being a novel one
 
 */
-// idexIntoSlice = 0 // i being a convenience global
+// indexIntoSlice = 0 // i being a convenience global
 // A for loop, per chat suggestion (to avoid the recursion that I had been using, which eventually caused a stack overflow*)
 // A standard format :: for i := 0; i < len(cyclicArrayPulls.pulls); i++ {
 /*
@@ -250,7 +250,7 @@ import (
 
 */
 
-func hits() { // - -
+func hits() { // - - in comments there are
 	// Create maps to store the frequency of each relevant string for that map
 	frequencyMapRightOrOops := make(map[string]int)
 	frequencyMapChar := make(map[string]int) // These, apparently, create a map to associate a unique string with an int
