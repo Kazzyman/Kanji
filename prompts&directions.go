@@ -130,10 +130,10 @@ func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 	}
 	fmt.Printf("%s%s", prompt, colorCyan)
 	if current_deck == "all" {
-		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), 'dir' or '?' for help with %s",
+		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), \n'dir' or '?' for help with %s",
 			current_deck, current_deck_B, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), 'dir' or '?' for help with %s",
+		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	}
 	fmt.Printf("%s \n%s", prompt, colorCyan)
