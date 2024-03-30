@@ -28,7 +28,12 @@ func resetAllLogs() {
 	fmt.Println("    kanjiHitMap")
 	//goland:noinspection ALL
 	fmt.Println("    frequencyMapOf_need_workOn\n")
-	fmt.Println("  And, all Game values have also been reset")
+	if weHaveBeenHereBefore {
+		fmt.Println("  All Game values have also been reset; answer this last one from the prior deck")
+	} else {
+		fmt.Println("  Ready to begin.")
+	}
+	weHaveBeenHereBefore = true
 }
 
 func in_list_of_Directives(in string) bool { // - -
@@ -63,29 +68,29 @@ func switch_the_deck() {
 		fmt.Println("\nEnter a deck from below for randomized prompting of a specific deck:\n")
 
 		// fmt.Println("    \"all\" ")
-		fmt.Printf("    \"all\"      %d total (below)\n",
+		fmt.Printf("    \"all\"      %d total cards (below)\n\n",
 			beauty_len+claude_len+current_len+data_len+fresh_len+grad_len+guru_len+init_len+master_len+novice_len)
 		// fmt.Println("    beauty")
-		fmt.Printf("    \"beauty\"   %d\n", beauty_len)
+		fmt.Printf("    \"beauty\"   %d cards in the Beauty terms deck\n", beauty_len)
 		// fmt.Println("    claude")
-		fmt.Printf("    \"claude\"   %d\n", claude_len)
+		fmt.Printf("    \"claude\"   %d cards in the Claude deck\n", claude_len)
 		// fmt.Println("    current")
-		fmt.Printf("    \"current\"  %d\n", current_len)
+		fmt.Printf("    \"current\"  %d cards in the \"Current\" deck \n", current_len)
 		// fmt.Println("    data")
-		fmt.Printf("    \"data\"     %d\n", data_len)
+		fmt.Printf("    \"data\"     %d cards in the Data deck\n", data_len)
 		// fmt.Println("    fresh")
-		fmt.Printf("    \"fresh\"    %d\n", fresh_len)
+		fmt.Printf("    \"fresh\"    %d cards in the \"Fresh\" deck\n", fresh_len)
 		// fmt.Println("    grad")
-		fmt.Printf("    \"grad\"     %d\n", grad_len)
+		fmt.Printf("    \"grad\"     %d cards in the Graduate deck\n", grad_len)
 		// fmt.Println("    guru")
-		fmt.Printf("    \"guru\"     %d\n", guru_len)
+		fmt.Printf("    \"guru\"     %d cards in the Guru deck\n", guru_len)
 		// fmt.Println("    init")
-		fmt.Printf("    \"init\"     %d\n", init_len)
+		fmt.Printf("    \"init\"     %d cards in the Initiate deck\n", init_len)
 		// fmt.Println("    mast")
-		fmt.Printf("    \"mast\"     %d\n", master_len)
+		fmt.Printf("    \"mast\"     %d cards in the Master deck\n", master_len)
 		// fmt.Println("    nov \n")
-		fmt.Printf("    \"nov\"      %d\n\n", novice_len)
-		fmt.Printf("    \"words\"    %d\n\n", words_len)
+		fmt.Printf("    \"nov\"      %d cards in the Novice deck\n\n", novice_len)
+		fmt.Printf("    \"words\"    %d cards in the Words deck\n\n", words_len)
 
 		fmt.Printf(" Here%s:> %s", colorCyan, colorReset)
 

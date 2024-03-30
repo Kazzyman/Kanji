@@ -23,14 +23,15 @@ func initialize_stuff() {
 	claude_len = len(claude)
 
 	gameOn = false
-	current_deck = "claude" // The default deck, can be changed via the sdk Directive
-	deck_len = claude_len
+	// current_deck = "claude" // The default deck, can be changed via the sdk Directive
+	// deck_len = claude_len
 }
 
 func main() {
 	initialize_stuff()
 	rand.Seed(time.Now().UnixNano())
 	display_List_of_Directives()
+	switch_the_deck()
 	// Create and prime vars, kluge?
 	new_prompt, objective, objective_kind, secondary_objective := "prime", "prime", "prime", "prime"
 	reads := 0

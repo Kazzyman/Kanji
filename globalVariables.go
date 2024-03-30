@@ -3,13 +3,11 @@ package main
 import "time"
 
 // This file contains All global vars NOT located in the objectsAndMethods.go file
-//
 var already_used_map = make(map[string]int)
 
 // All of the decks will draw cards per this aCard var:
 var aCard = charSetStructKanji{}
 
-//
 var foundElement *charSetStructKanji
 
 // All cards in all of the decks are of this Structure:
@@ -23,6 +21,7 @@ type charSetStructKanji struct {
 	Vocab2         string
 }
 
+var weHaveBeenHereBefore bool
 var future_len int
 var data_file100_maybe_len int
 
@@ -68,13 +67,11 @@ const colorGreen = "\033[32m"
 const colorCyan = "\033[36m"
 const colorPurple = "\033[35m"
 
-//
 // Global Maps:
 //
 // Used in : func read_map_of_fineOn()
 // ... and in : func logSkipThisPrompt_inThe_frequencyMapOf_IsFineOnChars(promptToSkip string)
 var frequencyMapOf_IsFineOnChars = make(map[string]int) // - -
-//
 // Used in : func read_map_of_needWorkOn()
 // ... and in : func logReinforceThisPrompt_inThe_frequencyMapOf_need_workOn(promptToWorkMoreOn string)
 var frequencyMapOf_need_workOn = make(map[string]int) // - -
