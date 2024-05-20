@@ -28,6 +28,8 @@ func initialize_stuff() {
 }
 
 func main() {
+	fmt.Println()
+	countSLOC()
 	initialize_stuff()
 	rand.Seed(time.Now().UnixNano())
 	display_List_of_Directives()

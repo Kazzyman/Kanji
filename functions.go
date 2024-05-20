@@ -231,6 +231,7 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 	case "frmt": // format a file
 		formatter()
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
+		countSLOC()
 		re_display_List_of_Directives()
 	case "dirx":
 		extended_list_of_directives()
