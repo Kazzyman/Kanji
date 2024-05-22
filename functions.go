@@ -94,7 +94,7 @@ func switch_the_deck() {
 
 		fmt.Printf(" Here%s:> %s", colorCyan, colorReset)
 
-		_, _ = fmt.Scan(&current_deck)
+		_, _ = fmt.Scan(&current_deck) // current_deck is a global.
 
 		if current_deck == "q" {
 			os.Exit(1)
@@ -111,9 +111,12 @@ func switch_the_deck() {
 			current_deck != "mast" &&
 			current_deck != "nov" &&
 			current_deck != "words" {
-			fmt.Printf("%s\n  \"%s\" is not a valid deck, try again: \n%s", colorRed, current_deck, colorReset)
-			continue
-		} else {
+			fmt.Printf("%s\n  \"%s\" is was not a valid deck, you seem to be a novice at this so nov it will be:) \n%s",
+				colorRed, current_deck, colorReset)
+			current_deck = "nov"
+			deck_len = novice_len
+			break // Causes the use of both the novice deck, and also kanji prompting vs kun'yomi prompting.
+		} else if current_deck == "nov" {
 			for {
 				fmt.Println("\nEnter a field to prompt from:\n")
 				fmt.Println("\nkanji or kunyomi\n")
