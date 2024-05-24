@@ -21,6 +21,20 @@ type charSetStructKanji struct {
 	Vocab2         string
 }
 
+var valueFromreSet_aCard_andThereBy_reSet_thePromptString string
+var setcHasBeenrunGlobal bool
+var directiveHandlerHasBeenRun bool
+
+// var storedValForPromp string
+var new_prompt string
+var objective string
+var objective_kind string
+var secondary_objective string
+var new_objective string
+var new_objective_kind, new_secondary_objective string
+var field_to_prompt_from = "kanji" // The default of kanji vs kun'yomi (and use of a novice deck) will be effected in a fat-fingers event.
+var returning_fr_dir bool
+
 var weHaveBeenHereBefore bool
 var future_len int
 var data_file100_maybe_len int

@@ -1,17 +1,26 @@
-Treadmill
+Cmd-shift-U  does the uppercase function and toggles to lower case also
+= = = = = =
 
-fix to-go not accepting go as objective 
+Bug: two setc commands consecutively has an issue
 
-add english meanings as prompts and Japanese words as objectives, instead of english words. 
 
-Ctrl + now increases the font size in command prompt, but ...
-Windows does not do Japanese worth shit!!! I could try the black KB with Linux maybe??
 
-Windows actually does iCloud Photos and editing somewhat better than MacOS does!
 
-On Windows all you have is Wordpad and Google Docs
 
-pi and friends project refactored as many files
+just lots of testing now, then clean out the debugging prints and try to document all the fixes. 
+
+
+
+
+also tally lines of data_* files in countSLOC() func 
+
+Eliminate all remaining duplicate entries in data_* files
+re-group data files ?? 
+implement the strategy for selecting cards from the various datasets, as was done in Jap2 ???
+
+continue adding english meanings as prompts and Japanese romaji words as objectives, instead of english words. 
+next, add english prompts that require kana and or kanji objectives  
+
 pi and friends, GUI ??
 
 厂 (the ‘cliff’ radical)

@@ -10,6 +10,9 @@ import (
 
 func countSLOC() {
 
+	filenameOfThisFile55 := "/Users/quasar/Kanji-main/functionsFromMain.go"
+	totalLines55, nonEmptyLines55 := reportSLOCstats(filenameOfThisFile55) // another locally-defined func; returns, and creates, local values of predetermined type
+
 	filenameOfThisFile5 := "/Users/quasar/Kanji-main/elementsOfsloc.go"
 	totalLines5, nonEmptyLines5 := reportSLOCstats(filenameOfThisFile5) // another locally-defined func; returns, and creates, local values of predetermined type
 
@@ -50,10 +53,10 @@ func countSLOC() {
 	totalLines16, nonEmptyLines16 := reportSLOCstats(filenameOfThisFile16) // another locally-defined func; returns, and creates, local values of predetermined type
 
 	totalLines := totalLines1 + totalLines2 + totalLines5 + totalLines6 + totalLines7 + totalLines8 + totalLines9 +
-		totalLines10 + totalLines14 + totalLines15 + totalLines16 + totalLines11 + totalLines10a
+		totalLines10 + totalLines14 + totalLines15 + totalLines16 + totalLines11 + totalLines10a + totalLines55
 
 	nonEmptyLines := nonEmptyLines1 + nonEmptyLines2 + nonEmptyLines5 + nonEmptyLines6 + nonEmptyLines7 + nonEmptyLines8 + nonEmptyLines9 +
-		nonEmptyLines10 + nonEmptyLines14 + nonEmptyLines15 + nonEmptyLines16 + nonEmptyLines11 + nonEmptyLines10a
+		nonEmptyLines10 + nonEmptyLines14 + nonEmptyLines15 + nonEmptyLines16 + nonEmptyLines11 + nonEmptyLines10a + nonEmptyLines55
 
 	fmt.Printf("Total lines of Code: %d\n", totalLines)
 	fmt.Printf("Total lines of executable Code: %d\n", nonEmptyLines)

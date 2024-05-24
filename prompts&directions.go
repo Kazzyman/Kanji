@@ -128,7 +128,24 @@ func promptWithDir(prompt string) (usersGuessOrOptionDirective string) { // - -
 			numberOfUniqueKanjiCharsHit++
 		}
 	}
-	fmt.Printf("%s%s", prompt, colorCyan)
+
+	// ::: Determine if a setc has been run and we therefore need to prompt from the global value of the newly forced/set card.
+	if setcHasBeenrunGlobal {
+		// fmt.Printf("%s%s : globalVar", valueFromreSet_aCard_andThereBy_reSet_thePromptString, colorCyan)
+		fmt.Printf("%s%s", valueFromreSet_aCard_andThereBy_reSet_thePromptString, colorCyan)
+		setcHasBeenrunGlobal = false
+	} else if directiveHandlerHasBeenRun {
+		// fmt.Printf("%s%s : oldVar directiveHandlerHasBeenRun alt: prompt is %s", new_prompt, prompt, colorCyan) // ::: prompt is wrong after a dir : shows previous prompt
+		// ::: latest,last: fmt.Printf("%s%s : oldVar directiveHandlerHasBeenRun alt: new_prompt is %s", prompt, colorCyan, new_prompt)
+		fmt.Printf("%s%s", prompt, colorCyan)
+		// fmt.Printf("%s%s : is prompt val", prompt, colorCyan)
+		directiveHandlerHasBeenRun = false
+	} else {
+		// fmt.Printf("%s%s : oldVar default", prompt, colorCyan)
+		fmt.Printf("%s%s", prompt, colorCyan)
+
+	}
+
 	if current_deck == "all" {
 		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), \n'dir' or '?' for help with %s",
 			current_deck, current_deck_B, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)

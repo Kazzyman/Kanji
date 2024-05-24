@@ -36,26 +36,26 @@ func resetAllLogs() {
 	weHaveBeenHereBefore = true
 }
 
-func in_list_of_Directives(in string) bool { // - -
-	// if it IS a directive
-	if in == "?" || // context-sensitive help on the current card
-		in == "t1" || // test one
-		in == "t2" || // test two
-		in == "sdk" || // Switch Deck
-		in == "fif" || // find in files
-		in == "lff" || // list chars
-		in == "rs" || // reset all logs etc
-		in == "setc" || // set, force, a new card
-		in == "nt" || // notes
-		in == "st" || // stats
-		in == "dir" || // redisplay the menu of directives etc
-		in == "dirx" || // eXtended Directives list
-		in == "q" || // quit
-		in == "frmt" || // format a file
-		in == "rm" || // Read the Maps
-		in == "bgs" || // Begin a Game Session
-		in == "goff" || // Game session Off
-		in == "gdc" { // set the Game Duration Counter
+func userHasGivenA_DirectiveIsteadOfGuess(userInput string) bool { // - -
+	// Is it a directive?
+	if userInput == "?" || // context-sensitive help on the current card
+		userInput == "t1" || // test one
+		userInput == "t2" || // test two
+		userInput == "sdk" || // Switch Deck
+		userInput == "fif" || // find in files
+		userInput == "lff" || // list chars
+		userInput == "rs" || // reset all logs etc
+		userInput == "setc" || // set, force, a new card
+		userInput == "nt" || // notes
+		userInput == "st" || // stats
+		userInput == "dir" || // redisplay the menu of directives etc
+		userInput == "dirx" || // eXtended Directives list
+		userInput == "q" || // quit
+		userInput == "frmt" || // format a file
+		userInput == "rm" || // Read the Maps
+		userInput == "bgs" || // Begin a Game Session
+		userInput == "goff" || // Game session Off
+		userInput == "gdc" { // set the Game Duration Counter
 		// Then:
 		return true
 	}
@@ -94,7 +94,7 @@ func switch_the_deck() {
 
 		fmt.Printf(" Here%s:> %s", colorCyan, colorReset)
 
-		_, _ = fmt.Scan(&current_deck) // current_deck is a global.
+		_, _ = fmt.Scan(&current_deck) // current_deck is a global var.
 
 		if current_deck == "q" {
 			os.Exit(1)
@@ -116,7 +116,7 @@ func switch_the_deck() {
 			current_deck = "nov"
 			deck_len = novice_len
 			break // Causes the use of both the novice deck, and also kanji prompting vs kun'yomi prompting.
-		} else if current_deck == "nov" {
+		} else {
 			for {
 				fmt.Println("\nEnter a field to prompt from:\n")
 				fmt.Println("\nkanji or kunyomi\n")
@@ -167,24 +167,14 @@ func switch_the_deck() {
 			}
 		}
 	}
-	// Tried to get too fancy here. But it fucked things up. So, just live with the bug you were trying to fix.
-	// ... which was just that after a sdk Dir you would get one last prompt from the prior deck, big F'n deal!
-	/*
-		new_prompt, _, _ := pick_RandomCard_Assign_fields()
-		promptWithDir(new_prompt)
-
-	*/
-	/*
-		new_prompt, _, _ := pick_RandomCard_Assign_fields()
-		in = promptWithDir(new_prompt)
-		return in
-
-	*/
 }
 
-func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secondary_objective string, returning_fr_dir bool) { // - -
+// ::: the only reason I added return arguments in this signature was in consideration of the setc dir. Was that wise/needed???
+// todo, well, I tried running this in place of the new directiveHandler() and things were messy. Because the returns in this
+// stc handler are only local vars instantiated via the signature of this func.
+func respond_to_UserSuppliedDirective(ingOnUsersGuess string) (prompt, objective, kind, secondary_objective string, returning_fr_dir bool) { // - -
 	var count int
-	switch in {
+	switch ingOnUsersGuess { // Was "in/userInput" but ingOnUsersGuess is more fun!
 	case "t1":
 		test1()
 	case "t2":
@@ -244,7 +234,12 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 		// display_already_used_map()
 		read_already_used_map()
 	case "setc": // set, force, a new card
+		setcHasBeenrunGlobal = true
 		prompt, objective, kind, secondary_objective = reSet_aCard_andThereBy_reSet_thePromptString()
+		// setcHasBeenrunGlobal = false
+		// this needs to store our new prompt field in valueFromreSet_aCard_andThereBy_reSet_thePromptString
+		// ::: and no it does that. Like this:
+		// valueFromreSet_aCard_andThereBy_reSet_thePromptString = aCard.Kanji
 		if foundElement == nil {
 			fmt.Printf(" Setting to \"west\" :: \n%s", colorRed)
 			// Show the user exactly what is about to be done:
@@ -292,18 +287,20 @@ func respond_to_UserSuppliedDirective(in string) (prompt, objective, kind, secon
 			"into the Japanese language.\n" +
 			"    In summary, the creation and use of Kunyomi readings in Japanese kanji were motivated by a desire to adapt Chinese \n" +
 			"characters to the linguistic, cultural, and semantic needs of the Japanese language. This process allowed for the \n" +
-			"coexistence of both Onyomi and Kunyomi readings, contributing to the rich and nuanced nature of the Japanese writing system.\n")
+			"coexistence of both Onyomi and Kunyomi readings, contributing to the rich and nuanced nature of the Japanese writing system.")
+		fmt.Println()
 	default:
 		// fmt.Println("Directive not found") // Does not work because only existent cases are passed to the switch
 	}
-	return prompt, objective, kind, secondary_objective, true
+	returning_fr_dir = true
+	return prompt, objective, kind, secondary_objective, returning_fr_dir
 }
 
 // Handles the Directive 'setc'
 func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objective_kind, secondary_objective string) { //  - -
 	var theMeaningOfCardToSilentlyLocate string
 
-	fmt.Printf("\nEnter a Meaning to")
+	fmt.Printf("\nEnter an English Meaning \"using US chars\" to")
 	fmt.Printf("%s", colorCyan) //
 	fmt.Printf(" reSet the prompt via the corresponding Kanji card :> ")
 	fmt.Printf("%s", colorReset) //
@@ -316,6 +313,9 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 	if foundElement != nil {
 		aCard = *foundElement // Set the global var-object 'aCard'
 		prompt = aCard.Kanji
+		if setcHasBeenrunGlobal {
+			valueFromreSet_aCard_andThereBy_reSet_thePromptString = aCard.Kanji
+		}
 		objective = aCard.Meaning
 		secondary_objective = aCard.Second_Meaning
 	} else {
