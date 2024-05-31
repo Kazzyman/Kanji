@@ -1,10 +1,6 @@
-Cmd-shift-U  does the uppercase function and toggles to lower case also
-= = = = = =
+touch this is a new project created from the copy that I made before I attempted to Cmd-z my way back to a functioning state.
 
 Bug: two setc commands consecutively has an issue
-
-
-
 
 
 just lots of testing now, then clean out the debugging prints and try to document all the fixes. 
@@ -18,9 +14,27 @@ Eliminate all remaining duplicate entries in data_* files
 re-group data files ?? 
 implement the strategy for selecting cards from the various datasets, as was done in Jap2 ???
 
-continue adding english meanings as prompts and Japanese romaji words as objectives, instead of english words. 
-next, add english prompts that require kana and or kanji objectives  
+continue adding english meanings as prompts and Japanese romaji words as primary_meanings, instead of english words. 
+next, add english prompts that require kana and or kanji primary_meanings  
 
 pi and friends, GUI ??
 
 厂 (the ‘cliff’ radical)
+
+::: cheat-sheet :
+
+splat e  :: list of recent files
+shift splat backspace/delete  :: move to where you last made an edit
+splat [  :: to return to previous position||file  (multiple such commands will walk you back from whence you came).
+splat ]  :: steps forward after you have stepped back. 
+
+option-return  :: spell correction 
+double-tap shift  :: key to search everywhere
+
+splat F6  :: change/refactor signature (:::SUPER COOL!!!) 
+Shift splat U  :: toggle case
+splat b  :: go to declaration 
+
+Ctrl-k  :: kill to end of line. 
+
+::: end cheat-sheet.

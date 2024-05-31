@@ -36,26 +36,26 @@ func resetAllLogs() {
 	weHaveBeenHereBefore = true
 }
 
-func userHasGivenA_DirectiveIsteadOfGuess(userInput string) bool { // - -
+func userHasGivenA_DirectiveIsteadOfGuess(usersSubmission string) bool { // - -
 	// Is it a directive?
-	if userInput == "?" || // context-sensitive help on the current card
-		userInput == "t1" || // test one
-		userInput == "t2" || // test two
-		userInput == "sdk" || // Switch Deck
-		userInput == "fif" || // find in files
-		userInput == "lff" || // list chars
-		userInput == "rs" || // reset all logs etc
-		userInput == "setc" || // set, force, a new card
-		userInput == "nt" || // notes
-		userInput == "st" || // stats
-		userInput == "dir" || // redisplay the menu of directives etc
-		userInput == "dirx" || // eXtended Directives list
-		userInput == "q" || // quit
-		userInput == "frmt" || // format a file
-		userInput == "rm" || // Read the Maps
-		userInput == "bgs" || // Begin a Game Session
-		userInput == "goff" || // Game session Off
-		userInput == "gdc" { // set the Game Duration Counter
+	if usersSubmission == "?" || // context-sensitive help on the current card
+		usersSubmission == "t1" || // test one
+		usersSubmission == "t2" || // test two
+		usersSubmission == "sdk" || // Switch Deck
+		usersSubmission == "fif" || // find in files
+		usersSubmission == "lff" || // list chars
+		usersSubmission == "rs" || // reset all logs etc
+		usersSubmission == "setc" || // set, force, a new card
+		usersSubmission == "nt" || // notes
+		usersSubmission == "st" || // stats
+		usersSubmission == "dir" || // redisplay the menu of directives etc
+		usersSubmission == "dirx" || // eXtended Directives list
+		usersSubmission == "q" || // quit
+		usersSubmission == "frmt" || // format a file
+		usersSubmission == "rm" || // Read the Maps
+		usersSubmission == "bgs" || // Begin a Game Session
+		usersSubmission == "goff" || // Game session Off
+		usersSubmission == "gdc" { // set the Game Duration Counter
 		// Then:
 		return true
 	}
@@ -170,11 +170,11 @@ func switch_the_deck() {
 }
 
 // ::: the only reason I added return arguments in this signature was in consideration of the setc dir. Was that wise/needed???
-// todo, well, I tried running this in place of the new directiveHandler() and things were messy. Because the returns in this
+// todo, well, I tried running this in place of the new respond_to_UserSupplied_Directive() and things were messy. Because the returns in this
 // stc handler are only local vars instantiated via the signature of this func.
-func respond_to_UserSuppliedDirective(ingOnUsersGuess string) (prompt, objective, kind, secondary_objective string, returning_fr_dir bool) { // - -
+func respond_to_UserSuppliedDirective(ingOnUsersGuess string) (prompt, primary_meaning, secondary_meaning string, returning_fr_dir bool) { // - -
 	var count int
-	switch ingOnUsersGuess { // Was "in/userInput" but ingOnUsersGuess is more fun!
+	switch ingOnUsersGuess { // Was "in/usersSubmission" but ingOnUsersGuess is more fun!
 	case "t1":
 		test1()
 	case "t2":
@@ -233,28 +233,6 @@ func respond_to_UserSuppliedDirective(ingOnUsersGuess string) (prompt, objective
 		read_map_of_needWorkOn()
 		// display_already_used_map()
 		read_already_used_map()
-	case "setc": // set, force, a new card
-		setcHasBeenrunGlobal = true
-		prompt, objective, kind, secondary_objective = reSet_aCard_andThereBy_reSet_thePromptString()
-		// setcHasBeenrunGlobal = false
-		// this needs to store our new prompt field in valueFromreSet_aCard_andThereBy_reSet_thePromptString
-		// ::: and no it does that. Like this:
-		// valueFromreSet_aCard_andThereBy_reSet_thePromptString = aCard.Kanji
-		if foundElement == nil {
-			fmt.Printf(" Setting to \"west\" :: \n%s", colorRed)
-			// Show the user exactly what is about to be done:
-			fmt.Println(runeOfCode)
-			fmt.Printf(colorReset)
-			silentlyLocateCard("west") // Set the Convenience-global: foundElement
-			if foundElement != nil {
-				aCard = *foundElement // Set the global var-object 'aCard'
-				prompt = aCard.Kanji
-				objective = aCard.Meaning
-				secondary_objective = aCard.Second_Meaning
-			} else {
-				fmt.Printf("\"west\" Not found : respond_to_UserSuppliedDirective()\n\n")
-			}
-		}
 
 	case "nt":
 		fmt.Println("\nokurigana (hiragana written next to the kanji)\n" +
@@ -293,11 +271,35 @@ func respond_to_UserSuppliedDirective(ingOnUsersGuess string) (prompt, objective
 		// fmt.Println("Directive not found") // Does not work because only existent cases are passed to the switch
 	}
 	returning_fr_dir = true
-	return prompt, objective, kind, secondary_objective, returning_fr_dir
+	return prompt, primary_meaning, secondary_meaning, returning_fr_dir
+}
+
+func setc_kanji() {
+	setcHasBeenrunGlobal = true
+	actual_prompt_string, primary_meaning, secondary_meaning = reSet_aCard_andThereBy_reSet_thePromptString()
+	// setcHasBeenrunGlobal = false
+	// this needs to store our new prompt field in valueFromreSet_aCard_andThereBy_reSet_thePromptString
+	// ::: and no it does that. Like this:
+	// valueFromreSet_aCard_andThereBy_reSet_thePromptString = aCard.Kanji
+	if foundElement == nil {
+		fmt.Printf(" Setting to \"west\" :: \n%s", colorRed)
+		// Show the user exactly what is about to be done:
+		fmt.Println(runeOfCode)
+		fmt.Printf(colorReset)
+		silentlyLocateCard("west") // Set the Convenience-global: foundElement
+		if foundElement != nil {
+			aCard = *foundElement // Set the global var-object 'aCard'
+			actual_prompt_string = aCard.Kanji
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
+		} else {
+			fmt.Printf("\"west\" Not found : respond_to_UserSuppliedDirective()\n\n")
+		}
+	}
 }
 
 // Handles the Directive 'setc'
-func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objective_kind, secondary_objective string) { //  - -
+func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, primary_meaning, secondary_meaning string) { //  - -
 	var theMeaningOfCardToSilentlyLocate string
 
 	fmt.Printf("\nEnter an English Meaning \"using US chars\" to")
@@ -316,15 +318,15 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, objective, objectiv
 		if setcHasBeenrunGlobal {
 			valueFromreSet_aCard_andThereBy_reSet_thePromptString = aCard.Kanji
 		}
-		objective = aCard.Meaning
-		secondary_objective = aCard.Second_Meaning
+		primary_meaning = aCard.Meaning
+		secondary_meaning = aCard.Second_Meaning
 	} else {
 		fmt.Println("Error, foundElement is nil in reSet_aCard_andThereBy_reSet_thePromptString()")
 	}
-	objective_kind = "Romaji"
+	// primary_meaning_kind = "Romaji"
 	fmt.Println("")
 
-	return prompt, objective, objective_kind, secondary_objective
+	return prompt, primary_meaning, secondary_meaning
 }
 
 func game_on() (game string) { // - -

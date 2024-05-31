@@ -13,7 +13,7 @@ import (
 			frequencyMapOfSeenChars[promptField]++ // The '++' increments the int value associated with promptField
 			fmt.Printf("We've seen the pseudo-random char before lastPull:%s and promptField:%s \n", lastPull, promptField)
 			// If a match is found, set a new promptField and return
-			promptField, objective, objective_kind, secondary_objective = randomize_over_all_decks()
+			promptField, primary_meaning, secondary_meaning = randomize_over_all_decks()
 			// Having obtained a replacement promptField for the one we had already seen ...
 			i = 0 // Reset the index i so as to check the replacement against the entire contents of the array
 			// And ... implicitly continue the loop
@@ -44,7 +44,7 @@ import (
 			frequencyMapOfSeenChars[promptField]++ // The '++' increments the int value associated with promptField in the map
 			fmt.Printf("We've seen the pseudo-random char before lastPull:%s and promptField:%s \n", lastPull, promptField)
 			// If a match is found, set a new promptField (which then, also, needs to be compared to all the members of the slice)
-			promptField, objective, objective_kind, secondary_objective = randomize_over_all_decks()
+			promptField, primary_meaning, secondary_meaning = randomize_over_all_decks()
 			// Having obtained a replacement promptField for the one which was found in the slice ...
 			// instead of simply continuing the loop with the new promptField (and last-used index) ...
 			// I must be assured that the entire slice is parsed with this new promptField: Do I need to force the range operator to restart ???
@@ -66,29 +66,29 @@ import (
 			randIndex := rand.Intn(len(fileOfCardsInitiate))
 			aCard = fileOfCardsInitiate[randIndex] // Randomly pick a 'card' from a 'deck' and store it in a global var
 			promptField = aCard.Kanji
-			objective = aCard.Meaning
-			secondary_objective = aCard.Second_Meaning
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
 		} else if randDeckAndMode == 1 {
 			current_deckA = "nov"
 			randIndex := rand.Intn(len(fileOfCardsNovice))
 			aCard = fileOfCardsNovice[randIndex]
 			promptField = aCard.Kanji
-			objective = aCard.Meaning
-			secondary_objective = aCard.Second_Meaning
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
 		} else if randDeckAndMode == 2 {
 			current_deckA = "grad"
 			randIndex := rand.Intn(len(fileOfCardsGraduate))
 			aCard = fileOfCardsGraduate[randIndex]
 			promptField = aCard.Kanji
-			objective = aCard.Meaning
-			secondary_objective = aCard.Second_Meaning
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
 		} else if randDeckAndMode == 3 {
 			current_deckA = "mast"
 			randIndex := rand.Intn(len(fileOfCardsMaster))
 			aCard = fileOfCardsMaster[randIndex]
 			promptField = aCard.Kanji
-			objective = aCard.Meaning
-			secondary_objective = aCard.Second_Meaning
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
 		} else if randDeckAndMode == 4 {
 			//
 			// Randomly access cards // deck and mode 4-7
@@ -97,8 +97,8 @@ import (
 				if indexInitS < len(fileOfCardsInitiate) {
 					aCard = fileOfCardsInitiate[indexInitS]
 					promptField = aCard.Kanji
-					objective = aCard.Meaning
-					secondary_objective = aCard.Second_Meaning
+					primary_meaning = aCard.Meaning
+					secondary_meaning = aCard.Second_Meaning
 					indexInitS++
 					break // We only pull one card, and then exit
 				} else {
@@ -112,8 +112,8 @@ import (
 				if indexNovS < len(fileOfCardsNovice) {
 					aCard = fileOfCardsNovice[indexNovS]
 					promptField = aCard.Kanji
-					objective = aCard.Meaning
-					secondary_objective = aCard.Second_Meaning
+					primary_meaning = aCard.Meaning
+					secondary_meaning = aCard.Second_Meaning
 					indexNovS++
 					break
 				} else {
@@ -127,8 +127,8 @@ import (
 				if indexGradS < len(fileOfCardsGraduate) {
 					aCard = fileOfCardsGraduate[indexGradS]
 					promptField = aCard.Kanji
-					objective = aCard.Meaning
-					secondary_objective = aCard.Second_Meaning
+					primary_meaning = aCard.Meaning
+					secondary_meaning = aCard.Second_Meaning
 					indexGradS++
 					break
 				} else {
@@ -142,8 +142,8 @@ import (
 				if indexMastS < len(fileOfCardsMaster) {
 					aCard = fileOfCardsMaster[indexMastS]
 					promptField = aCard.Kanji
-					objective = aCard.Meaning
-					secondary_objective = aCard.Second_Meaning
+					primary_meaning = aCard.Meaning
+					secondary_meaning = aCard.Second_Meaning
 					indexMastS++
 					break
 				} else {
@@ -170,7 +170,7 @@ import (
 			// that I was toying with; and since it would require a fair amount of tedious edits to the code base, and I have not entirely
 			// abandoned the idea that I may yet be using it, it has stuck around.
 			// pick_aCard_and_assign_fields(true) // get yet another new promptField, just once!!!!!
-			promptField, objective, objective_kind, secondary_objective = randomize_over_all_decks()
+			promptField, primary_meaning, secondary_meaning = randomize_over_all_decks()
 			//
 			cyclicArrayPulls.InsertKChar(promptField) // Maybe need to do this here too??
 			//

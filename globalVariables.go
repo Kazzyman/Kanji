@@ -3,37 +3,53 @@ package main
 import "time"
 
 // This file contains All global vars NOT located in the objectsAndMethods.go file
-var already_used_map = make(map[string]int)
 
-// All of the decks will draw cards per this aCard var:
-var aCard = charSetStructKanji{}
+var inception bool
+var submission_already_processed_above bool
 
-var foundElement *charSetStructKanji
+// ::: Game-Feature-control-and-tallying-vars-Section: ---------------------------------------
+var correctOnFirstAttemptAccumulator int
+var correctOnSecondAttemptAccumulator int
+var correctOnThirdAttemptAccumulator int
+var failedOnThirdAttemptAccumulator int
+var gottenHonestly bool
+var nameOfPlayer string
+var weHadFailed_And_OnlyGotThisRightBecauseOfTheClue bool
 
-// All cards in all of the decks are of this Structure:
-type charSetStructKanji struct {
-	Kanji          string
-	Meaning        string
-	Second_Meaning string
-	Onyomi         string
-	Kunyomi        string
-	Vocab          string
-	Vocab2         string
-}
+var guessLevelCounter = 1 // Used to determine the level of (or the format of) prompts.
+var game_loop_counter int
+
+var TimeOfStartFromInceptionOfGame = time.Now()
+var game_duration_set_by_user int
+var game_duration int
+var now_using_game_duration_set_by_user bool
+
+var theGameIsRunning bool
+
+// ::: ---------------------------------------------------------------------------------------
+
+var gotLastCardRightSoGetFreshOne bool
+
+var actual_prompt_string string
+
+var primary_meaning string
+
+// var primary_meaning_kind string // I did get rid of one of a kind:)
+var secondary_meaning string
+
+//
+
+var usersSubmission string
+var its_a_directive bool
+
+// var storedValForPromp string
+
+var field_to_prompt_from = "kanji" // The default of kanji vs kun'yomi (and use of a novice deck) will be effected in a fat-fingers event.
+var returning_fr_dir bool
 
 var valueFromreSet_aCard_andThereBy_reSet_thePromptString string
 var setcHasBeenrunGlobal bool
 var directiveHandlerHasBeenRun bool
-
-// var storedValForPromp string
-var new_prompt string
-var objective string
-var objective_kind string
-var secondary_objective string
-var new_objective string
-var new_objective_kind, new_secondary_objective string
-var field_to_prompt_from = "kanji" // The default of kanji vs kun'yomi (and use of a novice deck) will be effected in a fat-fingers event.
-var returning_fr_dir bool
 
 var weHaveBeenHereBefore bool
 var future_len int
@@ -60,9 +76,6 @@ var total_prompts int
 
 var TimeOfStartFromTop = time.Now()
 
-var game_loop_counter int
-var game_duration = 998
-
 var gameOn bool
 
 var runeOfCode = `
@@ -70,7 +83,7 @@ var runeOfCode = `
     if foundElement != nil {
         aCard = *foundElement // Set the global var-object 'aCard'
         prompt = aCard.Kanji
-        objective = aCard.Meaning
+        primary_meaning = aCard.Meaning
     }
 `
 
@@ -89,3 +102,21 @@ var frequencyMapOf_IsFineOnChars = make(map[string]int) // - -
 // Used in : func read_map_of_needWorkOn()
 // ... and in : func logReinforceThisPrompt_inThe_frequencyMapOf_need_workOn(promptToWorkMoreOn string)
 var frequencyMapOf_need_workOn = make(map[string]int) // - -
+
+var already_used_map = make(map[string]int)
+
+// All of the decks will draw cards per this aCard var:
+var aCard = charSetStructKanji{}
+
+var foundElement *charSetStructKanji
+
+// All cards in all of the decks are of this Structure:
+type charSetStructKanji struct {
+	Kanji          string
+	Meaning        string
+	Second_Meaning string
+	Onyomi         string
+	Kunyomi        string
+	Vocab          string
+	Vocab2         string
+}
