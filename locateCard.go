@@ -5,10 +5,9 @@ import (
 	"regexp"
 )
 
-// Used in respond_to_UserSuppliedDirective() in case: "setc"
+// Used in respond_to_UserSupplied_Directive() in case: "setc"
 // Also used in the 'setc' directive via: reSet_aCard_andThereBy_reSet_thePromptString()
 // ... to reSet the card, i.e., the Kanji/prompt(and all other aCard fields) via its Meaning field
-//
 //
 // The sole function of this func is to set the global: foundElement
 func silentlyLocateCard(setKeyRequest string) { //  - -

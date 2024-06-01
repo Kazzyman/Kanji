@@ -6,12 +6,8 @@ import (
 	"time"
 )
 
-/*
-.
-*/
-
 func the_game_begins() { // ::: - -
-	theGameIsRunning = true // ::: this flag is the only thing that "starts" a game
+	aGameIsRunning = true // ::: this flag is the only thing that "starts" a game
 	game_loop_counter = 0
 	// correctOnFirstAttemptAccumulator = 1   // ::: here it is/was not able to process the last guess prior to game ending.
 	// correctOnSecondAttemptAccumulator = -1 // ::: kluge !!
@@ -25,7 +21,7 @@ func the_game_begins() { // ::: - -
 	currentTime := time.Now()
 	TimeOfStartFromInceptionOfGame = time.Now()
 
-	fileHandle, err := os.OpenFile("Jap2Log.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	check_error(err)
 
 	_, err1 := fmt.Fprintf(fileHandle,
@@ -33,13 +29,18 @@ func the_game_begins() { // ::: - -
 		currentTime.Format("15:04:05 on Monday 01-02-2006"))
 	check_error(err1)
 }
+
+/*
+.
+*/
+
 func the_game_ends() { // ::: - -
-	theGameIsRunning = false
+	aGameIsRunning = false
 	now_using_game_duration_set_by_user = false
 	// game_duration_set_by_user = 0
 	// game_loop_counter = 0
 
-	fileHandle, err := os.OpenFile("Jap2Log.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	check_error(err)
 
 	currentTime := time.Now()

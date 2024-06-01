@@ -5,7 +5,6 @@ import "time"
 // This file contains All global vars NOT located in the objectsAndMethods.go file
 
 var inception bool
-var submission_already_processed_above bool
 
 // ::: Game-Feature-control-and-tallying-vars-Section: ---------------------------------------
 var correctOnFirstAttemptAccumulator int
@@ -24,7 +23,7 @@ var game_duration_set_by_user int
 var game_duration int
 var now_using_game_duration_set_by_user bool
 
-var theGameIsRunning bool
+var aGameIsRunning bool
 
 // ::: ---------------------------------------------------------------------------------------
 
@@ -34,7 +33,6 @@ var actual_prompt_string string
 
 var primary_meaning string
 
-// var primary_meaning_kind string // I did get rid of one of a kind:)
 var secondary_meaning string
 
 //
@@ -42,10 +40,7 @@ var secondary_meaning string
 var usersSubmission string
 var its_a_directive bool
 
-// var storedValForPromp string
-
 var field_to_prompt_from = "kanji" // The default of kanji vs kun'yomi (and use of a novice deck) will be effected in a fat-fingers event.
-var returning_fr_dir bool
 
 var valueFromreSet_aCard_andThereBy_reSet_thePromptString string
 var setcHasBeenrunGlobal bool
