@@ -6,52 +6,56 @@ import (
 )
 
 func prompt_the_user_for_input() { // ::: - -
-	if guessLevelCounter == 1 { // ::: --------- 1 1 1 1 1 1 ------------------
+	if guessLevelCounter == 1 { // ::: ----------- 1 1 1 1 1 1 --------------------
 		guessLevelCounter++
 
 		/*
 			in Jap2 we did our display-Right lines here, but they are done in the caller here.
 		*/
-		promptWithDir()
-		gottenHonestly = true
-
-	} else if guessLevelCounter == 2 { // ::: ------------------------------------------ 2 2 2 2 2 2 2 2 2 2 2 -------------------
-		guessLevelCounter++
-
-		/*
-			in Jap2 we did our display-Right lines here, but they are done in the caller here.
-		*/
-		prompt_interim() // 3a, 3b
+		promptWithDir() // ::: Introduction of a new card.
 		gottenHonestly = true
 
 		// Obtain users input.
 		_, _ = fmt.Scan(&usersSubmission)
 
-	} else if guessLevelCounter == 3 { // ::: -------------------3 3 3 3 3 3 3 3 3 3 --------------------------------------
+	} else if guessLevelCounter == 2 { // ::: ---------- 2 2 2 2 2 2 2 2  ---------------------
+		guessLevelCounter++
+
+		/*
+			in Jap2 we did our display-Right lines here, but they are done by the caller in this Kanji practice app.
+		*/
+		prompt_interim() // ::: Says: you must guess!
+		gottenHonestly = true
+
+		// Obtain users input.
+		_, _ = fmt.Scan(&usersSubmission)
+
+	} else if guessLevelCounter == 3 { // ::: --------------- 3 3 3 3 3 3 3 3 3 3 ----------------------------
 		guessLevelCounter++
 
 		/*
 			in Jap2 we did our display-Right lines here, but they are done in the caller here.
 		*/
-		prompt_interim2() // 4a, 4b
-		// gottenHonestly = false // todo ??
+		prompt_interim2() // ::: Says: you must guess! just once more!!
+		gottenHonestly = true
 
 		// Obtain users input.
 		_, _ = fmt.Scan(&usersSubmission)
 
-	} else if guessLevelCounter > 3 { // ::: --------------------------  > 3  > 3  > 3  > 3  > 3  > 3  ---- i.e. 4  --------------------
+	} else if guessLevelCounter == 4 { // ::: -------------------------- 4 4 4 4 4 4 4 4 4 4 4 4  --------------------
 
+		// ::: That was your last try looser. Here's a clue, just for you: ...
+		weHadFailed_And_OnlyGotThisRightBecauseOfTheClue = true
 		display_failure_of_final_guess_message_etc(usersSubmission)
-		fmt.Printf("%s  　^^Oops! ", colorRed)
+
+		gottenHonestly = false
 
 		log_oops(actual_prompt_string, primary_meaning, usersSubmission)
-		weHadFailed_And_OnlyGotThisRightBecauseOfTheClue = true
-		guessLevelCounter = 1 // ::: was 1, why 1 ??, prob because it is set to 1 twice in main
-		begin_kanji_practice()
-
-	} else if guessLevelCounter >= 4 || guessLevelCounter <= -1 {
+		guessLevelCounter = 1
+		gotLastCardRightSoGetFreshOne = false // Re-prompt with the same card as the one the user totally-bombed on.
+		prompt_interim3()                     // Message: " try any substring from the RED text."
+	} else if guessLevelCounter > 4 || guessLevelCounter <= -1 {
 		fmt.Printf("The value of guessLevelCounter is out of range, it is %d \n", guessLevelCounter)
-	} else {
 	}
 }
 
@@ -77,19 +81,12 @@ func prompt_interim2() { //  - -
 	}
 	fmt.Printf("just once more!! \n%s :> %s", colorCyan, colorReset) // ::: ------ "just once more!!" --------
 }
+
+// To be used after the final Oops message.
 func prompt_interim3() { //  - -
-	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
-	if current_deck == "all" {
-		fmt.Printf(" Meaning? (deck:%s:%s)%s", current_deck, current_deck_B, colorReset)
-	} else {
-		fmt.Printf(" Meaning? (deck:%s)%s", current_deck, colorReset)
-	}
-	fmt.Printf(" Meaning? (deck:%s)%s", current_deck, colorReset)
 	fmt.Printf(" try any substring from the %s", colorRed) // ::: ------------- try any substring from the red text ------
 	fmt.Printf("red%s", colorReset)
-	fmt.Printf(" text\n %s:> %s", colorCyan, colorReset)
-	// _, _ = fmt.Scan(&usersSubmission)
-	// return
+	fmt.Printf(" text\n%s%s", colorCyan, colorReset)
 }
 
 /*
@@ -156,7 +153,6 @@ func promptWithDirAtInception() { // - -
 	fmt.Printf("%s \n%s", actual_prompt_string, colorCyan)
 	fmt.Printf(" here:> %s", colorReset)
 	_, _ = fmt.Scan(&usersSubmission)
-	// return
 }
 
 /*
@@ -220,8 +216,6 @@ func promptWithDir() { // - -
 	}
 	fmt.Printf("%s \n%s", actual_prompt_string, colorCyan)
 	fmt.Printf(" here:> %s", colorReset)
-	_, _ = fmt.Scan(&usersSubmission)
-	// return
 }
 
 /*
@@ -231,9 +225,9 @@ func promptWithDir() { // - -
 */
 func display_failure_of_final_guess_message_etc(userInput string) { // ::: - -
 	log_oops_andUpdateGame(aCard.Kanji, aCard.Kunyomi, userInput)
-	fmt.Printf("%s", colorRed)
-	fmt.Printf("     ^^Oops! That was your last try looser. Here's a clue, just for you: ...\n %s", colorReset)
-	fmt.Printf("\n%s\n%s\n\n", aCard.Vocab, aCard.Vocab2)
+	fmt.Printf("%s", colorReset)
+	fmt.Printf("     That was your last try looser. Here's a clue, just for you: ...\n %s", colorRed)
+	fmt.Printf("\n%s, %s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Second_Meaning, aCard.Vocab, aCard.Vocab2, colorReset)
 
 	fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	check_error(err)
@@ -242,8 +236,8 @@ func display_failure_of_final_guess_message_etc(userInput string) { // ::: - -
 	check_error(err1)
 }
 func log_oops_andUpdateGame(prompt_it_was, field_it_was, guess string) { // - -
-	if theGameIsRunning {
-		failedOnThirdAttemptAccumulator++
+	if aGameIsRunning {
+		failedOnThirdAttemptAccumulator++ // ::: update game.
 	}
 	logReinforceThisPrompt_inThe_frequencyMapOf_need_workOn(prompt_it_was)
 	logHits_in_cyclicArrayHits("Oops", prompt_it_was)
@@ -253,9 +247,8 @@ func log_oops_andUpdateGame(prompt_it_was, field_it_was, guess string) { // - -
 
 /*
 -
--
--
 */
+
 func display_limited_gaming_dir_list() {
 	fmt.Println("        Enter '" + colorGreen +
 		"dirg" + colorReset +
@@ -263,12 +256,6 @@ func display_limited_gaming_dir_list() {
 	fmt.Println("        Enter '" + colorGreen +
 		"off" + colorReset +
 		"' End this game early")
-	fmt.Println("        Enter '" + colorGreen +
-		"stc" + colorReset +
-		"' (Set-Card) force the use of a specific card (Hira input)")
-	fmt.Println("        Enter '" + colorGreen +
-		"stcr" + colorReset +
-		"' (Set-Card) force the use of a specific card (Roma input)")
 	fmt.Println("        Enter '" + colorGreen +
 		"q" + colorReset +
 		"', (quit) terminate the app")

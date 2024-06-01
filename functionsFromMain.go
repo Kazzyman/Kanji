@@ -7,28 +7,87 @@ import (
 	"time"
 )
 
-func frontEnd_Possible_Recursive_DirHandler() { // ::: - -
+func gaming_regulations() {
+	if game_loop_counter > game_duration {
+		game_off()
+	}
+	if aGameIsRunning {
+		if usersSubmission == "game" {
+		} // Do not start a new game if there is already one running.
+		if usersSubmission == "q" {
+			os.Exit(1)
+		} else if usersSubmission == "off" || usersSubmission == "goff" {
+			the_game_ends()
+		} else if usersSubmission == "dirg" {
+			display_limited_gaming_dir_list()
+		}
+	} else if usersSubmission == "game" {
+		guessLevelCounter = 1
+		fmt.Println("Welcome to the game. Dir options: off/goff, setc, q, dirg")
+		fmt.Println("What is your name?")
+		_, _ = fmt.Scan(&nameOfPlayer)
+		fmt.Println("Enter a number for how many prompts there will be in the game")
+		_, _ = fmt.Scan(&game_duration_set_by_user)
+		display_limited_gaming_dir_list()
+		now_using_game_duration_set_by_user = true
+		the_game_begins()
+	}
+}
+
+/*
+.
+*/
+
+func is_that_card_really_fresh() {
+	reads := 0
+	loopCounter := 0
+	for reads <= len(already_used_map) { // Read entire map before concluding the pick is novel.
+		reads++                 // Used to compare the current length of the map to the number of reads done of it.
+		loopCounter++           // Required to determine if an excessive/exhaustive number of secondary picks have been made and tested.
+		if loopCounter > 9999 { // 'loopCounter++' being the only way to exit the loop when no novel picks are possible.
+			clearMap()
+			break // Keep the last pick (could be any randomized card).
+		}
+		if is_pick_novel(actual_prompt_string) {
+			already_used_map[actual_prompt_string]++ // Log the novel pick into the map.
+			break                                    // Keep the novel card.
+		}
+		// via the implied else, pick another more-fresh card.
+		pick_RandomCard_Assign_fields()
+		reads = 0 // Continue the loop ensuring that the entire map is read, and compared to, the newly-picked card.
+	}
+}
+
+/*
+.
+*/
+
+func Recursive_Dir_Handler() { // ::: - -
 	detectDirective(usersSubmission)
 	if its_a_directive {
 		its_a_directive = false
 
 		respond_to_UserSupplied_Directive(usersSubmission)
 
-		prompt_the_user_for_input()       // re-prompt using same card as before.
-		_, _ = fmt.Scan(&usersSubmission) // todo ?
+		promptWithDirAtInception() // Works here because it has its own Scanner.
 
 		detectDirective(usersSubmission)
 		if its_a_directive {
 			its_a_directive = false
-			frontEnd_Possible_Recursive_DirHandler() // ::: Recursion
+			Recursive_Dir_Handler() // ::: Recursion
 		} else {
 			return // Need this to get out of the recursive func.
 		}
 	}
 }
+
+/*
+.
+*/
+
 func detectDirective(in string) { // ::: - -
-	if in == "stc" ||
-		in == "stcr" ||
+	if in == "sdk" ||
+		in == "setc" ||
 		in == "?" || // <-- If it IS a directive
 		in == "??" ||
 		in == "rs" ||
@@ -38,28 +97,27 @@ func detectDirective(in string) { // ::: - -
 		in == "q" ||
 		in == "rm" ||
 		in == "abt" ||
-		in == "exko" ||
-		in == "exkf" ||
-		in == "konly" ||
-		in == "honly" ||
-		in == "ronly" ||
-		in == "donly" ||
-		in == "hko" ||
 		in == "help" {
 		// Then:
 		its_a_directive = true
 	}
 }
+
+/*
+.
+*/
+
 func respond_to_UserSupplied_Directive(usersSubmission string) { // ::: - -
 	switch usersSubmission {
 	// Directives follow:
 	// ::: alphabetically (mostly)
-	case "?":
-		fmt.Printf("\n%s\n%s\n%s\n\n", aCard.Vocab, aCard.Vocab2, aCard.Kanji)
-
+	case "?": // context-sensitive help on the current card
+		fmt.Printf("\"%s\" is the primaryMeaning of %s\n\"%s\" is the secondaryMeaning of %s\n%s\n%s\n%s\n%s\n\n",
+			aCard.Meaning, aCard.Kanji, aCard.Second_Meaning, aCard.Kanji, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
 		re_display_List_of_Directives()
-
+	case "sdk":
+		switch_the_deck()
 	case "q":
 		os.Exit(1)
 	case "rm":
@@ -67,54 +125,19 @@ func respond_to_UserSupplied_Directive(usersSubmission string) { // ::: - -
 		read_map_of_needWorkOn()
 		// read_pulls_not_used_array()
 	case "rs":
-		// reset_all_data()
+	// reset_all_data()
+	case "setc":
+		setc_kanji()
 	case "st":
 		// st_stats_function()
-	case "stc":
-		// reSet_via_a_hira_aCard_andThereBy_reSet_thePromptString()
-	case "stcr":
-		// reSet_aCard_via_a_romaji_andThereBy_reSet_thePromptString()
 	default:
 		// fmt.Println("Directive not found") // Does not ever happen because only existent cases are passed to the switch.
 	}
 }
 
 /*
-func promptCase1(new_kanjiChar, field_to_prompt_from string) (usersSubmission string) {
-	// This prompt, deployed by new_takes new_kanjiChar
-	if field_to_prompt_from == "kanji" {
-		// This prompt, deployed by takes promptField (rather than the new_kanjiChar variant)
-		usersSubmission = promptWithDir(aCard.Kanji) // Get user's input, from a randomly selected prompt
-	}
-	if field_to_prompt_from == "kunyomi" {
-		usersSubmission = promptWithDir(aCard.Kunyomi) // Get user's input, from a randomly selected prompt
-	}
-	return usersSubmission
-}
-
+.
 */
-
-func freshCard() {
-	length := 0
-	loopCounter := 0
-	// fmt.Printf("length of map is %d\n", len(already_used_map))
-	for length <= len(already_used_map) {
-		length++
-		loopCounter++
-		if loopCounter > 9999 {
-			// fmt.Printf("loopCounter:%d, so doing a clear of the map\n", loopCounter)
-			clearMap()
-			break
-		}
-		if is_pick_novel(actual_prompt_string) {
-			already_used_map[actual_prompt_string]++
-			break // keep it
-		}
-		// else [because of the double breaks above], pick another
-		pick_RandomCard_Assign_fields()
-		length = 0 // continue the loop ensuring that the entire map is read with this new pick
-	}
-}
 
 func initialize_stuff() {
 	rand.Seed(time.Now().UnixNano()) // Seed the random number generator with the current time in nanoseconds.

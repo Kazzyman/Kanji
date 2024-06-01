@@ -49,6 +49,7 @@ func List_of_Directives() {
 .
 .
 */
+
 func extended_list_of_directives() {
 	fmt.Println("        Enter '" + colorGreen +
 		"fif" + colorReset +
