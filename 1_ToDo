@@ -1,11 +1,5 @@
 touch this is a new project created from the copy that I made before I attempted to Cmd-z my way back to a functioning state.
 
-Bug: two setc commands consecutively has an issue
-
-
-just lots of testing now, then clean out the debugging prints and try to document all the fixes. 
-
-
 
 
 also tally lines of data_* files in countSLOC() func 
