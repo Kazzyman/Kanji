@@ -7,34 +7,6 @@ import (
 )
 
 // DIRECTIVES : --------------------------------------------------------------------------------------------
-func resetAllLogs() {
-	cyclicArrayOfTheJcharsGottenWrong = CyclicArrayOfTheJcharsGottenWrong{}
-	cyclicArrayHits = CyclicArrayHits{}
-	// Also, flush (clear) the maps
-	total_prompts = 0
-	kanjiHitMap = make(map[string]CardInfo)
-	frequencyMapOf_IsFineOnChars = make(map[string]int)
-	frequencyMapOf_need_workOn = make(map[string]int)
-	already_used_map = make(map[string]int)
-	//
-	//goland:noinspection ALL
-	fmt.Println("\nArrays and maps flushed:\n")
-	fmt.Println("    cyclicArrayOfTheJcharsGottenWrong")
-	fmt.Println("    cyclicArrayHits")
-	fmt.Println("    frequencyMapOf_IsFineOnChars")
-	fmt.Println("    frequencyMapOf_need_workOn")
-	fmt.Println("    already_used_map")
-
-	fmt.Println("    kanjiHitMap")
-	//goland:noinspection ALL
-	fmt.Println("    frequencyMapOf_need_workOn\n")
-	if weHaveBeenHereBefore {
-		fmt.Println("  All Game values have also been reset; answer this last one from the prior deck")
-	} else {
-		fmt.Println("  Ready to begin.")
-	}
-	weHaveBeenHereBefore = true
-}
 
 /*
 .

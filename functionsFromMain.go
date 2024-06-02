@@ -8,7 +8,8 @@ import (
 )
 
 func gaming_regulations() {
-	if game_loop_counter > game_duration {
+	if game_loop_counter > game_duration_set_by_user {
+		fmt.Printf("The game_loop_counter was:%d, and the game_duration_set_by_user was:%d", game_loop_counter, game_duration_set_by_user)
 		game_off()
 	}
 	if aGameIsRunning {
@@ -30,9 +31,12 @@ func gaming_regulations() {
 		_, _ = fmt.Scan(&game_duration_set_by_user)
 		display_limited_gaming_dir_list()
 		now_using_game_duration_set_by_user = true
+		supress_one_oops_message = true
 		the_game_begins()
 	}
 }
+
+var supress_one_oops_message bool
 
 /*
 .
@@ -93,7 +97,6 @@ func detectDirective(in string) { // ::: - -
 		in == "rs" ||
 		in == "st" ||
 		in == "dir" ||
-		in == "nts" ||
 		in == "q" ||
 		in == "rm" ||
 		in == "abt" ||
@@ -114,6 +117,8 @@ func respond_to_UserSupplied_Directive(usersSubmission string) { // ::: - -
 	case "?": // context-sensitive help on the current card
 		fmt.Printf("\"%s\" is the primaryMeaning of %s\n\"%s\" is the secondaryMeaning of %s\n%s\n%s\n%s\n%s\n\n",
 			aCard.Meaning, aCard.Kanji, aCard.Second_Meaning, aCard.Kanji, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+	case "abt":
+		countSLOC()
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
 		re_display_List_of_Directives()
 	case "sdk":
@@ -125,11 +130,11 @@ func respond_to_UserSupplied_Directive(usersSubmission string) { // ::: - -
 		read_map_of_needWorkOn()
 		// read_pulls_not_used_array()
 	case "rs":
-	// reset_all_data()
+		resetAllLogs()
 	case "setc":
 		setc_kanji()
 	case "st":
-		// st_stats_function()
+		newHits()
 	default:
 		// fmt.Println("Directive not found") // Does not ever happen because only existent cases are passed to the switch.
 	}

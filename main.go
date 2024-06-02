@@ -41,9 +41,11 @@ func begin_kanji_practice() {
 			Recursive_Dir_Handler() // Trap and handle specific strings on the list of Directives.
 			// The forgoing func contains a method to re-prompt so as to allow for consecutive commands.
 		}
+		// fmt.Printf("%sThe game_loop_counter was:%d, and the game_duration_set_by_user was:%d%s\n", colorRed, game_loop_counter, game_duration_set_by_user, colorReset)
 
 		// If the users-Submission was not trapped and handled by Recursive_Dir_Handler()
 		Process_users_input_as_a_guess()
+
 	}
 }
 
@@ -114,7 +116,10 @@ func Process_users_input_as_a_guess() { // - -
 			// Having failed every-which-way to secure a reasonable "match", we concede with a simple Oops message ...
 		} else { // ... or not
 			if gottenHonestly {
-				fmt.Printf("%s  　^^Oops! \n", colorRed)
+				if !supress_one_oops_message {
+					fmt.Printf("%s  　^^Oops! \n", colorRed)
+					supress_one_oops_message = false
+				}
 			}
 			// In any case:
 			log_oops(actual_prompt_string, primary_meaning, usersSubmission)

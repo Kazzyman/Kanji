@@ -14,20 +14,14 @@ func List_of_Directives() {
 		"sdk" + colorReset +
 		"' set the Deck")
 	fmt.Println("        Enter '" + colorGreen +
-		"gdc" + colorReset +
-		"' set the Duration Counter for a Game session ")
-	fmt.Println("        Enter '" + colorGreen +
-		"bgs" + colorReset +
-		"' or '" + colorGreen + "goff" + colorReset + "' Begin or end a Game Session ")
-	fmt.Println("        Enter '" + colorGreen +
 		"?" + colorReset +
 		"' context-sensitive help on the current character")
 	fmt.Println("        Enter '" + colorGreen +
 		"st" + colorReset +
 		"' Statistics")
 	fmt.Println("        Enter '" + colorGreen +
-		"nt" + colorReset +
-		"' (notes) an explanation of Onyomi and Kunyomi")
+		"abt" + colorReset +
+		"' About this app")
 	fmt.Println("        Enter '" + colorGreen +
 		"rs" + colorReset +
 		"' ReSet (flush or clear) all stats logs etc.")
@@ -37,9 +31,6 @@ func List_of_Directives() {
 	fmt.Println("        Enter '" + colorGreen +
 		"setc" + colorReset +
 		"' (set) force the use of a specific card")
-	fmt.Println("        Enter '" + colorGreen +
-		"dirx" + colorReset +
-		"' display extended Directives list")
 	fmt.Println("        Enter '" + colorGreen +
 		"q" + colorReset +
 		"', (quit) terminate the app")

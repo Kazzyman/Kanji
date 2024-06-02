@@ -1,13 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 // LOGGERS:
 func log_right(actual_prompt_string, usersSubmission string) { // - -
 	recordGuess(actual_prompt_string, usersSubmission, aCard.Meaning, aCard.Second_Meaning)
 	logSkipThisPrompt_inThe_frequencyMapOf_IsFineOnChars(actual_prompt_string)
 	logHits_in_cyclicArrayHits("Right", actual_prompt_string)
-	if theGameIsRunning {
+	if aGameIsRunning {
 		game_loop_counter++
 		if game_loop_counter > game_duration_set_by_user {
 			the_game_ends()
@@ -26,13 +29,31 @@ func log_right(actual_prompt_string, usersSubmission string) { // - -
 				correctOnSecondAttemptAccumulator++ // ::: 2nd
 			} else {
 				// ... then ... the guessLevelCounter was 4.
-				fmt.Printf("here in log right, guessLevelCounter is:%d, and it should be 4\n", guessLevelCounter)
+				// fmt.Printf("here in log right, guessLevelCounter is:%d, and it should be 4\n", guessLevelCounter)
 				correctOnThirdAttemptAccumulator++ // ::: 3rd
 			}
 			// ::: The other accumulator++  thang : failedOnThirdAttemptAccumulator ]todo[ ... gets handled in log_oops()
 		}
 	}
+	if guessLevelCounter == 3 {
+		fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		check_error(err)
+		_, err1 := fmt.Fprintf(fileHandle,
+			"\nUser may have mistyped==%s:%s", aCard.Meaning, aCard.Kanji) // mistyped is a word?
+		check_error(err1)
+	} else if guessLevelCounter == 4 {
+		fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		check_error(err)
+		_, err1 := fmt.Fprintf(fileHandle,
+			"\nUser had a some difficulty with==%s:%s", aCard.Meaning, aCard.Kanji)
+		check_error(err1)
+	}
 }
+
+/*
+
+ */
+
 func log_oops(actual_prompt_string, primary_meaning, usersSubmission string) { // - -
 	logReinforceThisPrompt_inThe_frequencyMapOf_need_workOn(actual_prompt_string)
 	logHits_in_cyclicArrayHits("Oops", actual_prompt_string)
@@ -58,4 +79,37 @@ func logHits_in_cyclicArrayHits(RightOrOops, JChar string) { // - -
 // ... now only used in the new hits function ?
 func logJcharsGottenWrong_in_cyclicArrayOfTheJcharsGottenWrong(Jchar string) { // - -
 	cyclicArrayOfTheJcharsGottenWrong.InsertCharsWrong(Jchar)
+}
+
+/*
+.
+*/
+
+func resetAllLogs() {
+	cyclicArrayOfTheJcharsGottenWrong = CyclicArrayOfTheJcharsGottenWrong{}
+	cyclicArrayHits = CyclicArrayHits{}
+	// Also, flush (clear) the maps
+	total_prompts = 0
+	kanjiHitMap = make(map[string]CardInfo)
+	frequencyMapOf_IsFineOnChars = make(map[string]int)
+	frequencyMapOf_need_workOn = make(map[string]int)
+	already_used_map = make(map[string]int)
+	//
+	//goland:noinspection ALL
+	fmt.Println("\nArrays and maps flushed:\n")
+	fmt.Println("    cyclicArrayOfTheJcharsGottenWrong")
+	fmt.Println("    cyclicArrayHits")
+	fmt.Println("    frequencyMapOf_IsFineOnChars")
+	fmt.Println("    frequencyMapOf_need_workOn")
+	fmt.Println("    already_used_map")
+
+	fmt.Println("    kanjiHitMap")
+	//goland:noinspection ALL
+	fmt.Println("    frequencyMapOf_need_workOn\n")
+	if weHaveBeenHereBefore {
+		fmt.Println("  All Game values have also been reset; answer this last one from the prior deck")
+	} else {
+		fmt.Println("  Ready to begin.")
+	}
+	weHaveBeenHereBefore = true
 }
