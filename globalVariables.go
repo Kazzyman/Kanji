@@ -88,6 +88,7 @@ const colorRed = "\033[31m"
 const colorGreen = "\033[32m"
 const colorCyan = "\033[36m"
 const colorPurple = "\033[35m"
+const colorYellow = "\033[33m"
 
 // Global Maps:
 //

@@ -20,6 +20,7 @@ func gaming_regulations() {
 		if usersSubmission == "q" {
 			os.Exit(1)
 		} else if usersSubmission == "off" || usersSubmission == "goff" {
+			supress_one_oops_message = true
 			postGame_wrap_up()
 		} else if usersSubmission == "dirg" {
 			display_limited_gaming_dir_list()

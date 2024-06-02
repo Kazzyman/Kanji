@@ -184,6 +184,7 @@ func reSet_aCard_andThereBy_reSet_thePromptString() (prompt, primary_meaning, se
 */
 
 func game_off() (game string) { // - -
+	supress_one_oops_message = false
 	game = "off"
 	gameOn = false
 	game_duration = 998

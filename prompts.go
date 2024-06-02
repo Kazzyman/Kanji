@@ -55,7 +55,7 @@ func prompt_the_user_for_input() { // ::: - -
 		gotLastCardRightSoGetFreshOne = false // Re-prompt with the same card as the one the user totally-bombed on.
 		prompt_interim3()                     // Message: " try any substring from the RED text."
 	} else if guessLevelCounter > 4 || guessLevelCounter <= -1 {
-		fmt.Printf("The value of guessLevelCounter is out of range, it is %d \n", guessLevelCounter)
+		fmt.Printf("%s\n - The value of guessLevelCounter is out of range, it is %d - %s\n", colorRed, guessLevelCounter, colorReset)
 	}
 }
 
@@ -64,47 +64,64 @@ func prompt_the_user_for_input() { // ::: - -
 .
 */
 func prompt_interim() { //  - -
-	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+	// prompt string inherits prior color (white or red)
+	fmt.Printf("%s", actual_prompt_string)
+	// Meaning?... is always cyan
 	if current_deck == "all" {
-		fmt.Printf(" Meaning? (deck:%s:%s) %s", current_deck, current_deck_B, colorReset)
+		fmt.Printf("%s Meaning? (deck:%s:%s) ", colorCyan, current_deck, current_deck_B) // todo ?
+		// Meaning?... is always cyan
 	} else {
-		fmt.Printf(" Meaning? (deck:%s) %s", current_deck, colorReset)
+		fmt.Printf("%s Meaning? (deck:%s) ", colorCyan, current_deck)
 	}
-	fmt.Printf("you must guess!")
+	// you must guess! is in white
+	fmt.Printf("%syou must guess!", colorReset)
 	if aGameIsRunning {
-		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
-			colorReset, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
+		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d\n",
+			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
 			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
-			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user, colorReset)
+			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user)
+	} else {
+		fmt.Println() // This is correct! Trust me.
 	}
-	fmt.Printf("%s :> %s", colorCyan, colorReset)
-	//
-	// "%s :> %s", colorCyan, colorReset) // ::: ------- "you must guess!" ---------
-
+	if aGameIsRunning {
+		fmt.Printf("%s :game> %s", colorYellow, colorReset) // Always reset to white after :> so that users input displays consistent white.
+	} else {
+		fmt.Printf("%s :> %s", colorCyan, colorReset) // Always reset to white after :> so that users input displays consistent white.
+	}
 }
-func prompt_interim2() { //  - -
-	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
-	if current_deck == "all" {
-		fmt.Printf(" Meaning? (deck:%s:%s) you must guess, %s", current_deck, current_deck_B, colorReset)
-	} else {
-		fmt.Printf(" Meaning? (deck:%s) you must guess, %s", current_deck, colorReset)
-	}
-	fmt.Printf("just once more!!")
-	if aGameIsRunning {
-		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
-			colorReset, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
-			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
-			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user, colorReset)
-	}
-	fmt.Printf("%s :> %s", colorCyan, colorReset) // ::: ------ "just once more!!" --------
 
+/*
+
+ */
+
+func prompt_interim2() { //  - -
+	fmt.Printf("%s", actual_prompt_string)
+	if current_deck == "all" {
+		fmt.Printf("%s Meaning? (deck:%s:%s) you must guess, ", colorCyan, current_deck, current_deck_B)
+	} else {
+		fmt.Printf("%s Meaning? (deck:%s) %sLast guess!!", colorCyan, current_deck, colorRed)
+	}
+	// fmt.Printf("just once more!!")
+	if aGameIsRunning {
+		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d\n",
+			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
+			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
+			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user)
+	} else {
+		fmt.Println()
+	}
+	if aGameIsRunning {
+		fmt.Printf("%s :game> %s", colorRed, colorReset) // Always reset to white after :> so that users input displays consistent white.
+	} else {
+		fmt.Printf("%s :> %s", colorCyan, colorReset) // Always reset to white after :> so that users input displays consistent white.
+	}
 }
 
 // To be used after the final Oops message.
 func prompt_interim3() { //  - -
-	fmt.Printf(" try any substring from the %s", colorRed) // ::: ------------- try any substring from the red text ------
-	fmt.Printf("red%s", colorReset)
-	fmt.Printf(" text\n%s%s", colorCyan, colorReset)
+	fmt.Printf("%s try any substring from the ", colorReset) // ::: ------------- try any substring from the red text ------
+	fmt.Printf("%sred", colorRed)
+	fmt.Printf("%s text\n%s", colorReset, colorCyan)
 }
 
 /*
@@ -171,13 +188,13 @@ func promptWithDirAtInception() { // - -
 	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
-			colorReset, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
+			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
 			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
 			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user, colorReset)
 	} else {
 		fmt.Println()
 	}
-	fmt.Printf(" here:> %s", colorReset)
+	fmt.Printf(" :> %s", colorReset)
 	_, _ = fmt.Scan(&usersSubmission)
 }
 
@@ -185,7 +202,7 @@ func promptWithDirAtInception() { // - -
 ;
 
 */
-// Initial prompt, to be used when first introducing a new Kanji char at inception.
+// Initial prompt, to be used when first introducing a new Kanji char here.
 func promptWithDir() { // - -
 
 	// Create a map to store the frequency of the string for the map
@@ -243,13 +260,17 @@ func promptWithDir() { // - -
 	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
-			colorReset, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
+			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
 			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
 			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user, colorReset)
 	} else {
 		fmt.Println()
 	}
-	fmt.Printf(" here:> %s", colorReset)
+	if aGameIsRunning {
+		fmt.Printf("%s :game> %s", colorGreen, colorReset)
+	} else {
+		fmt.Printf("%s :> %s", colorCyan, colorReset)
+	}
 }
 
 /*

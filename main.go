@@ -115,9 +115,11 @@ func Process_users_input_as_a_guess() { // - -
 
 			// Having failed every-which-way to secure a reasonable "match", we concede with a simple Oops message ...
 		} else { // ... or not
-			if gottenHonestly {
-				if !supress_one_oops_message {
-					fmt.Printf("%s  　^^Oops! \n", colorRed)
+			if gottenHonestly { // there MAY be an Oops. // todo ??
+				if supress_one_oops_message {
+					// Suppress it. // ::: if a one-time request to suppress has been posted todo there will be NO Oops message
+				} else {
+					fmt.Printf("%s  　^^Oops! \n", colorRed) // todo, providing that it was gotten honestly, and there are no objections
 					supress_one_oops_message = false
 				}
 			}

@@ -101,6 +101,7 @@ func postGame_wrap_up() { // ::: - -
 		"The Elapsed time of the game was: %s \n\n\n",
 		TotalRun)
 	check_error(err2)
+	supress_one_oops_message = false
 }
 
 /*
