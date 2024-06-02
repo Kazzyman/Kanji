@@ -188,7 +188,7 @@ func game_off() (game string) { // - -
 	gameOn = false
 	game_duration = 998
 
-	fileHandle, err := os.OpenFile("Jap2Log.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	fileHandle, err := os.OpenFile("Kanji-newLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	check_error(err)
 
 	currentTime := time.Now()

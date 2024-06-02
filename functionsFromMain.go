@@ -9,8 +9,10 @@ import (
 
 func gaming_regulations() {
 	if game_loop_counter > game_duration_set_by_user {
-		fmt.Printf("The game_loop_counter was:%d, and the game_duration_set_by_user was:%d", game_loop_counter, game_duration_set_by_user)
+		game_loop_counter = 0
+		// fmt.Printf("The game_loop_counter was:%d, and the game_duration_set_by_user was:%d", game_loop_counter, game_duration_set_by_user)
 		game_off()
+		postGame_wrap_up()
 	}
 	if aGameIsRunning {
 		if usersSubmission == "game" {
@@ -18,7 +20,7 @@ func gaming_regulations() {
 		if usersSubmission == "q" {
 			os.Exit(1)
 		} else if usersSubmission == "off" || usersSubmission == "goff" {
-			the_game_ends()
+			postGame_wrap_up()
 		} else if usersSubmission == "dirg" {
 			display_limited_gaming_dir_list()
 		}
@@ -32,7 +34,7 @@ func gaming_regulations() {
 		display_limited_gaming_dir_list()
 		now_using_game_duration_set_by_user = true
 		supress_one_oops_message = true
-		the_game_begins()
+		initialize_game()
 	}
 }
 

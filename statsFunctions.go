@@ -13,39 +13,39 @@ func log_right(actual_prompt_string, usersSubmission string) { // - -
 	if aGameIsRunning {
 		game_loop_counter++
 		if game_loop_counter > game_duration_set_by_user {
-			the_game_ends()
+			game_loop_counter = 0
+			game_off()
+			postGame_wrap_up()
 		}
 
 		if weHadFailed_And_OnlyGotThisRightBecauseOfTheClue {
-			// Then that fail has already been logged and we need to skip all logging.
+			// Then that fail has already been logged and we need to skip tallying the score.
 			weHadFailed_And_OnlyGotThisRightBecauseOfTheClue = false
 		} else {
 			if guessLevelCounter == 2 {
-				if gottenHonestly { // todo] do not accumulate if after an "error" or hint
+				if gottenHonestly {
 					correctOnFirstAttemptAccumulator++ // ::: 1st
 					gottenHonestly = false
 				}
 			} else if guessLevelCounter == 3 {
 				correctOnSecondAttemptAccumulator++ // ::: 2nd
 			} else {
-				// ... then ... the guessLevelCounter was 4.
-				// fmt.Printf("here in log right, guessLevelCounter is:%d, and it should be 4\n", guessLevelCounter)
 				correctOnThirdAttemptAccumulator++ // ::: 3rd
 			}
 			// ::: The other accumulator++  thang : failedOnThirdAttemptAccumulator ]todo[ ... gets handled in log_oops()
 		}
 	}
 	if guessLevelCounter == 3 {
-		fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		fileHandle, err := os.OpenFile("Kanji-newLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 		check_error(err)
 		_, err1 := fmt.Fprintf(fileHandle,
-			"\nUser may have mistyped==%s:%s", aCard.Meaning, aCard.Kanji) // mistyped is a word?
+			"\n%s may have mistyped==%s:%s", nameOfPlayer, aCard.Meaning, aCard.Kanji) // mistyped is a word?
 		check_error(err1)
 	} else if guessLevelCounter == 4 {
-		fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+		fileHandle, err := os.OpenFile("Kanji-newLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 		check_error(err)
 		_, err1 := fmt.Fprintf(fileHandle,
-			"\nUser had a some difficulty with==%s:%s", aCard.Meaning, aCard.Kanji)
+			"\n%s had a some difficulty with==%s:%s", nameOfPlayer, aCard.Meaning, aCard.Kanji)
 		check_error(err1)
 	}
 }

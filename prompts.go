@@ -66,20 +66,38 @@ func prompt_the_user_for_input() { // ::: - -
 func prompt_interim() { //  - -
 	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
 	if current_deck == "all" {
-		fmt.Printf(" Meaning? (deck:%s:%s) Help is off, %s", current_deck, current_deck_B, colorReset)
+		fmt.Printf(" Meaning? (deck:%s:%s) %s", current_deck, current_deck_B, colorReset)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, %s", current_deck, colorReset)
+		fmt.Printf(" Meaning? (deck:%s) %s", current_deck, colorReset)
 	}
-	fmt.Printf("you must guess! \n%s :> %s", colorCyan, colorReset) // ::: ------- "you must guess!" ---------
+	fmt.Printf("you must guess!")
+	if aGameIsRunning {
+		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
+			colorReset, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
+			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
+			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user, colorReset)
+	}
+	fmt.Printf("%s :> %s", colorCyan, colorReset)
+	//
+	// "%s :> %s", colorCyan, colorReset) // ::: ------- "you must guess!" ---------
+
 }
 func prompt_interim2() { //  - -
 	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
 	if current_deck == "all" {
-		fmt.Printf(" Meaning? (deck:%s:%s) Help is off, you must guess, %s", current_deck, current_deck_B, colorReset)
+		fmt.Printf(" Meaning? (deck:%s:%s) you must guess, %s", current_deck, current_deck_B, colorReset)
 	} else {
-		fmt.Printf(" Meaning? (deck:%s) Help is off, you must guess, %s", current_deck, colorReset)
+		fmt.Printf(" Meaning? (deck:%s) you must guess, %s", current_deck, colorReset)
 	}
-	fmt.Printf("just once more!! \n%s :> %s", colorCyan, colorReset) // ::: ------ "just once more!!" --------
+	fmt.Printf("just once more!!")
+	if aGameIsRunning {
+		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
+			colorReset, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
+			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
+			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user, colorReset)
+	}
+	fmt.Printf("%s :> %s", colorCyan, colorReset) // ::: ------ "just once more!!" --------
+
 }
 
 // To be used after the final Oops message.
@@ -150,7 +168,15 @@ func promptWithDirAtInception() { // - -
 		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	}
-	fmt.Printf("%s \n%s", actual_prompt_string, colorCyan)
+	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+	if aGameIsRunning {
+		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
+			colorReset, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
+			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
+			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user, colorReset)
+	} else {
+		fmt.Println()
+	}
 	fmt.Printf(" here:> %s", colorReset)
 	_, _ = fmt.Scan(&usersSubmission)
 }
@@ -214,12 +240,19 @@ func promptWithDir() { // - -
 		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	}
-	fmt.Printf("%s \n%s", actual_prompt_string, colorCyan)
+	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+	if aGameIsRunning {
+		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
+			colorReset, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
+			colorRed, colorReset, correctOnSecondAttemptAccumulator, colorRed, colorReset, correctOnThirdAttemptAccumulator,
+			colorRed, colorReset, failedOnThirdAttemptAccumulator, colorCyan, game_loop_counter, game_duration_set_by_user, colorReset)
+	} else {
+		fmt.Println()
+	}
 	fmt.Printf(" here:> %s", colorReset)
 }
 
 /*
-.
 .
 .
 */
@@ -229,10 +262,10 @@ func display_failure_of_final_guess_message_etc(userInput string) { // ::: - -
 	fmt.Printf("     That was your last try looser. Here's a clue, just for you: ...\n %s", colorRed)
 	fmt.Printf("\n%s, %s\n%s\n%s\n\n%s", aCard.Meaning, aCard.Second_Meaning, aCard.Vocab, aCard.Vocab2, colorReset)
 
-	fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	fileHandle, err := os.OpenFile("Kanji-newLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	check_error(err)
 	_, err1 := fmt.Fprintf(fileHandle,
-		"\nUser had a REAL ISSUE with==%s:%s:%s", aCard.Meaning, aCard.Second_Meaning, aCard.Kanji)
+		"\n%s had a REAL ISSUE with==%s:%s:%s", nameOfPlayer, aCard.Meaning, aCard.Second_Meaning, aCard.Kanji)
 	check_error(err1)
 }
 func log_oops_andUpdateGame(prompt_it_was, field_it_was, guess string) { // - -

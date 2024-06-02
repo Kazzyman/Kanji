@@ -6,22 +6,19 @@ import (
 	"time"
 )
 
-func the_game_begins() { // ::: - -
-	aGameIsRunning = true // ::: this flag is the only thing that "starts" a game
+func initialize_game() { // ::: - -
+	aGameIsRunning = true
 	game_loop_counter = 0
-	// correctOnFirstAttemptAccumulator = 1   // ::: here it is/was not able to process the last guess prior to game ending.
-	// correctOnSecondAttemptAccumulator = -1 // ::: kluge !!
-	// ::: if the first query of a game is gotten right on the first attempt, it is logged as a 2nd and not a 1st
 	correctOnFirstAttemptAccumulator = 0
 	correctOnSecondAttemptAccumulator = 0
+	correctOnThirdAttemptAccumulator = 0
 	failedOnThirdAttemptAccumulator = 0
-
 	//
 	// ::: file-writing and time-stamping is all that follows ==========================================
 	currentTime := time.Now()
 	TimeOfStartFromInceptionOfGame = time.Now()
 
-	fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	fileHandle, err := os.OpenFile("Kanji-newLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	check_error(err)
 
 	_, err1 := fmt.Fprintf(fileHandle,
@@ -34,13 +31,11 @@ func the_game_begins() { // ::: - -
 .
 */
 
-func the_game_ends() { // ::: - -
+func postGame_wrap_up() { // ::: - -
 	aGameIsRunning = false
 	now_using_game_duration_set_by_user = false
-	// game_duration_set_by_user = 0
-	// game_loop_counter = 0
 
-	fileHandle, err := os.OpenFile("KanjiLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	fileHandle, err := os.OpenFile("Kanji-newLog.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	check_error(err)
 
 	currentTime := time.Now()
@@ -65,11 +60,8 @@ func the_game_ends() { // ::: - -
 		}
 	} else if guessLevelCounter == 3 {
 		correctOnSecondAttemptAccumulator++
-	} else { // :::  this else never runs, so guessLevelCounter is either 2 or 3, but never 1 or 4 ? ---------------------------
-		// correctOnThirdAttemptAccumulator++ // ::: why had I commented-out this line ??? if the else never is done, it could not have mattered
-		fmt.Printf("guessLevelCounter is:%d, where it maybe-should-be-4-? \n", guessLevelCounter) // ::: never executes ????
-		// ... then ... the guessLevelCounter was 4?.
-		// correctOnThirdAttemptAccumulator++ // ::: why had I commented-out this line ???
+	} else { // :::  this only runs if user gets one right on his last guess (while at the highest guessLevelCounter)
+		correctOnThirdAttemptAccumulator++
 		// ::: fail/error accumulator gets incremented (or at least it gets displayed [below]) during the oops message
 	} // - - - - - - - - - - - - - - - - - - - - - - - - - ::: -----------------------------------------------------------------
 
