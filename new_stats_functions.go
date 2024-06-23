@@ -100,7 +100,7 @@ func newHits() {
 			numberOfUniqueKanjiCharsHit++
 			fmt.Printf(" %s ", kanjiString)
 			fmt.Printf(colorGreen)
-			fmt.Printf("Your guesses:%s, ", cardInfoData.UsersGuess)
+			fmt.Printf("Was your guess for:%s, ", cardInfoData.UsersGuess)
 			fmt.Printf(colorRed)
 			fmt.Printf("Meanings: %s, %s ", cardInfoData.FirstMeaningOnRecord, cardInfoData.SecondMeaningOnRecord)
 			fmt.Printf(colorCyan)

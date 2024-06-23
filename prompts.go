@@ -9,8 +9,8 @@ func prompt_the_user_for_input() { // ::: - -
 	if guessLevelCounter == 1 { // ::: ----------- 1 1 1 1 1 1 --------------------
 		guessLevelCounter++
 
-		/*
-			in Jap2 we did our display-Right lines here, but they are done in the caller here.
+		/* 1 19
+		1 in Jap2 we did our display-Right lines here, but they are done in the caller here.
 		*/
 		promptWithDir() // ::: Introduction of a new card.
 		gottenHonestly = true
@@ -21,8 +21,8 @@ func prompt_the_user_for_input() { // ::: - -
 	} else if guessLevelCounter == 2 { // ::: ---------- 2 2 2 2 2 2 2 2  ---------------------
 		guessLevelCounter++
 
-		/*
-			in Jap2 we did our display-Right lines here, but they are done by the caller in this Kanji practice app.
+		/* 2 18
+		2 in Jap2 we did our display-Right lines here, but they are done by the caller in this Kanji practice app.
 		*/
 		prompt_interim() // ::: Says: you must guess!
 		gottenHonestly = true
@@ -33,8 +33,8 @@ func prompt_the_user_for_input() { // ::: - -
 	} else if guessLevelCounter == 3 { // ::: --------------- 3 3 3 3 3 3 3 3 3 3 ----------------------------
 		guessLevelCounter++
 
-		/*
-			in Jap2 we did our display-Right lines here, but they are done in the caller here.
+		/* 3 17
+		3 in Jap2 we did our display-Right lines here, but they are done in the caller here.
 		*/
 		prompt_interim2() // ::: Says: you must guess! just once more!!
 		gottenHonestly = true
@@ -60,8 +60,8 @@ func prompt_the_user_for_input() { // ::: - -
 }
 
 /*
-.
-.
+. 4
+. 5
 */
 func prompt_interim() { //  - -
 	// prompt string inherits prior color (white or red)
@@ -74,7 +74,7 @@ func prompt_interim() { //  - -
 		fmt.Printf("%s Meaning? (deck:%s) ", colorCyan, current_deck)
 	}
 	// you must guess! is in white
-	fmt.Printf("%syou must guess!", colorReset)
+	fmt.Printf("%sguess again!", colorReset)
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d\n",
 			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
@@ -90,7 +90,7 @@ func prompt_interim() { //  - -
 	}
 }
 
-/*
+/* 5 16
 
  */
 
@@ -124,9 +124,9 @@ func prompt_interim3() { //  - -
 	fmt.Printf("%s text\n%s", colorReset, colorCyan)
 }
 
-/*
-.
-.
+/* 6 15
+. 6
+. 7
 
 */
 
@@ -198,9 +198,9 @@ func promptWithDirAtInception() { // - -
 	_, _ = fmt.Scan(&usersSubmission)
 }
 
-/*
-;
-
+/* 7 14
+; 8
+. 9
 */
 // Initial prompt, to be used when first introducing a new Kanji char here.
 func promptWithDir() { // - -
@@ -274,8 +274,8 @@ func promptWithDir() { // - -
 }
 
 /*
-.
-.
+. 10
+. 11
 */
 func display_failure_of_final_guess_message_etc(userInput string) { // ::: - -
 	log_oops_andUpdateGame(aCard.Kanji, aCard.Kunyomi, userInput)
@@ -299,8 +299,8 @@ func log_oops_andUpdateGame(prompt_it_was, field_it_was, guess string) { // - -
 		":it was:" + field_it_was + ":but you had guessed:" + guess)
 }
 
-/*
--
+/* 9 13
+- 12
 */
 
 func display_limited_gaming_dir_list() {
