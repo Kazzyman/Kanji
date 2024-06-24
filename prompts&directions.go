@@ -12,7 +12,7 @@ func List_of_Directives() {
 		"' redisplay this menu of available Directives")
 	fmt.Println("        Enter '" + colorGreen +
 		"sdk" + colorReset +
-		"' set the Deck")
+		"' set the Deck, or prompt_field")
 	fmt.Println("        Enter '" + colorGreen +
 		"?" + colorReset +
 		"' context-sensitive help on the current character")

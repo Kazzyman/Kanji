@@ -14,8 +14,12 @@ import (
 
 // sdk Directive
 func switch_the_deck() {
+	if current_deck == "" {
+		current_deck = "nov"
+	}
+	originalDeck := current_deck
 	for {
-		fmt.Println("\nEnter a deck from below for randomized prompting of a specific deck:\n")
+		fmt.Println("\nEnter a deck from below (or rs|yomi) for randomized prompting of a specific deck:\n")
 
 		// fmt.Println("    \"all\" ")
 		fmt.Printf("    \"all\"      %d total cards (below)\n\n",
@@ -50,6 +54,8 @@ func switch_the_deck() {
 			os.Exit(1)
 		}
 		if current_deck != "all" &&
+			current_deck != "rs" &&
+			current_deck != "yomi" &&
 			current_deck != "beauty" &&
 			current_deck != "claude" &&
 			current_deck != "current" &&
@@ -66,12 +72,20 @@ func switch_the_deck() {
 			current_deck = "nov"
 			deck_len = novice_len
 			break // Causes the use of both the novice deck, and also kanji prompting vs kun'yomi prompting.
+		} else if current_deck == "rs" {
+			current_deck = originalDeck
+			field_to_prompt_from = "kanji"
+			return
+		} else if current_deck == "yomi" {
+			current_deck = originalDeck
+			field_to_prompt_from = "yomi"
+			return
 		} else {
 			for {
 				fmt.Println("\nEnter a field to prompt from:\n")
-				fmt.Println("\nkanji or kunyomi\n")
+				fmt.Println("\nkanji or yomi\n")
 				_, _ = fmt.Scan(&field_to_prompt_from)
-				if field_to_prompt_from != "kanji" && field_to_prompt_from != "kunyomi" {
+				if field_to_prompt_from != "kanji" && field_to_prompt_from != "yomi" && field_to_prompt_from != "rs" {
 					fmt.Printf("%s\n  \"%s\" is not a valid field, try again: \n%s", colorRed, field_to_prompt_from, colorReset)
 					continue
 				} else {

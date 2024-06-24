@@ -86,6 +86,7 @@ func logJcharsGottenWrong_in_cyclicArrayOfTheJcharsGottenWrong(Jchar string) { /
 */
 
 func resetAllLogs() {
+	// field_to_prompt_from = "kanji"
 	cyclicArrayOfTheJcharsGottenWrong = CyclicArrayOfTheJcharsGottenWrong{}
 	cyclicArrayHits = CyclicArrayHits{}
 	// Also, flush (clear) the maps
@@ -108,6 +109,7 @@ func resetAllLogs() {
 	fmt.Println("    frequencyMapOf_need_workOn\n")
 	if weHaveBeenHereBefore {
 		fmt.Println("  All Game values have also been reset; answer this last one from the prior deck")
+		// field_to_prompt_from = "kanji"
 	} else {
 		fmt.Println("  Ready to begin.")
 	}

@@ -65,7 +65,11 @@ func prompt_the_user_for_input() { // ::: - -
 */
 func prompt_interim() { //  - -
 	// prompt string inherits prior color (white or red)
-	fmt.Printf("%s", actual_prompt_string)
+	if field_to_prompt_from == "yomi" {
+		fmt.Printf("O:%s, K:%s", aCard.Onyomi, aCard.Kunyomi)
+	} else {
+		fmt.Printf("%s", actual_prompt_string)
+	}
 	// Meaning?... is always cyan
 	if current_deck == "all" {
 		fmt.Printf("%s Meaning? (deck:%s:%s) ", colorCyan, current_deck, current_deck_B) // todo ?
@@ -95,7 +99,11 @@ func prompt_interim() { //  - -
  */
 
 func prompt_interim2() { //  - -
-	fmt.Printf("%s", actual_prompt_string)
+	if field_to_prompt_from == "yomi" {
+		fmt.Printf("O:%s, K:%s", aCard.Onyomi, aCard.Kunyomi)
+	} else {
+		fmt.Printf("%s", actual_prompt_string)
+	}
 	if current_deck == "all" {
 		fmt.Printf("%s Meaning? (deck:%s:%s) you must guess, ", colorCyan, current_deck, current_deck_B)
 	} else {
@@ -172,10 +180,18 @@ func promptWithDirAtInception() { // - -
 		setcHasBeenrunGlobal = false
 	} else if directiveHandlerHasBeenRun {
 		// ::: latest,last: fmt.Printf("%s%s : oldVar directiveHandlerHasBeenRun alt: new_kanjiChar is %s", prompt, colorCyan, new_kanjiChar)
-		fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		if field_to_prompt_from == "yomi" {
+			fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
+		} else {
+			fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		}
 		directiveHandlerHasBeenRun = false
 	} else {
-		fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		if field_to_prompt_from == "yomi" {
+			fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
+		} else {
+			fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		}
 	}
 
 	if current_deck == "all" {
@@ -185,7 +201,12 @@ func promptWithDirAtInception() { // - -
 		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	}
-	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+	if field_to_prompt_from == "yomi" {
+		fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
+	} else {
+		fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+	}
+	// fmt.Printf("%s%s", actual_prompt_string, colorCyan)
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
 			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
@@ -244,10 +265,18 @@ func promptWithDir() { // - -
 		setcHasBeenrunGlobal = false
 	} else if directiveHandlerHasBeenRun {
 		// ::: latest,last: fmt.Printf("%s%s : oldVar directiveHandlerHasBeenRun alt: new_kanjiChar is %s", prompt, colorCyan, new_kanjiChar)
-		fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		if field_to_prompt_from == "yomi" {
+			fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
+		} else {
+			fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		}
 		directiveHandlerHasBeenRun = false
 	} else {
-		fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		if field_to_prompt_from == "yomi" {
+			fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
+		} else {
+			fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		}
 	}
 
 	if current_deck == "all" {
@@ -257,7 +286,11 @@ func promptWithDir() { // - -
 		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	}
-	fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+	if field_to_prompt_from == "yomi" {
+		fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
+	} else {
+		fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+	}
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
 			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,

@@ -1,8 +1,4 @@
-touch this is a new project created from the copy that I made before I attempted to Cmd-z my way back to a functioning state.
-
-
-
-also tally lines of data_* files in countSLOC() func 
+tally lines of data_* files in countSLOC() func 
 
 Eliminate all remaining duplicate entries in data_* files
 re-group data files ?? 
@@ -23,7 +19,7 @@ splat [  :: to return to previous position||file  (multiple such commands will w
 splat ]  :: steps forward after you have stepped back. 
 
 option-return  :: spell correction 
-double-tap shift  :: key to search everywhere
+double-tap shift  :: to search everywhere
 
 splat F6  :: change/refactor signature (:::SUPER COOL!!!) 
 Shift splat U  :: toggle case
