@@ -54,6 +54,22 @@ func pick_RandomCard_Assign_fields() { // - -
 		}
 	}
 
+	// fileOf_Quiz
+	if current_deck == "quiz" {
+		for { // This for loop is only needed to check for empty cards
+			randIndex := rand.Intn(len(fileOf_Quiz))
+			aCard = fileOf_Quiz[randIndex]
+			actual_prompt_string = aCard.Kanji
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
+			if actual_prompt_string == "" || actual_prompt_string == " " {
+				fmt.Printf("%s--- An empty kanji card was skipped in nov!!!!%s\n", colorRed, colorReset) // Verified
+				continue
+			} else {
+				break // break out of local for loop and naturally fall-through to the return
+			}
+		}
+	}
 	if current_deck == "nov" {
 		for { // This for loop is only needed to check for empty cards
 			randIndex := rand.Intn(len(fileOfCardsNovice))
@@ -69,6 +85,7 @@ func pick_RandomCard_Assign_fields() { // - -
 			}
 		}
 	}
+
 	/*
 		if current_deck == "2098_lines_of_cards" {
 			for { // This for loop is only needed to check for empty cards

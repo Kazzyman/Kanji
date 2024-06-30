@@ -44,6 +44,8 @@ func switch_the_deck() {
 		fmt.Printf("    \"mast\"     %d cards in the Master deck\n", master_len)
 		// fmt.Println("    nov \n")
 		fmt.Printf("    \"nov\"      %d cards in the Novice deck\n\n", novice_len)
+		fmt.Printf("    \"quiz\"    %d cards in the Quiz deck\n\n", quiz_len)
+
 		fmt.Printf("    \"words\"    %d cards in the Words deck\n\n", words_len)
 
 		fmt.Printf(" Here%s:> %s", colorCyan, colorReset)
@@ -52,6 +54,11 @@ func switch_the_deck() {
 
 		if current_deck == "q" {
 			os.Exit(1)
+		}
+		if current_deck == "quiz" {
+			deck_len = quiz_len
+			resetAllLogs()
+			return
 		}
 		if current_deck != "all" &&
 			current_deck != "rs" &&
@@ -66,6 +73,7 @@ func switch_the_deck() {
 			current_deck != "init" &&
 			current_deck != "mast" &&
 			current_deck != "nov" &&
+			current_deck != "quiz" &&
 			current_deck != "words" {
 			fmt.Printf("%s\n  \"%s\" is was not a valid deck, you seem to be a novice at this so nov it will be:) \n%s",
 				colorRed, current_deck, colorReset)
@@ -124,6 +132,9 @@ func switch_the_deck() {
 					}
 					if current_deck == "nov" {
 						deck_len = novice_len
+					}
+					if current_deck == "quiz" {
+						deck_len = quiz_len
 					}
 					resetAllLogs()
 					return
