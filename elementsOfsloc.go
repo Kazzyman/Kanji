@@ -8,13 +8,291 @@ import (
 	"strings"
 )
 
+var commentsInter1, commentsInter2 int
+
+func CalcData() { // ::: - -
+	commentsInter2 = 0
+	// Run the CalcSLOC_new func which prints its own stats, then collect its totals here, to be added with the local totals.
+	allLinesAllFilesFromSlos, justTheCommentsFromSloc := CalcSLOC_new()
+	commentsInter1 = 0
+
+	var allLinesAllFiles, justTheComments, totalLinesT int
+
+	// option 2 : Create a regex to match the base file name
+	// option 2 : re := regexp.MustCompile(`[^/]+$`)
+	// option 2 : var fileNameShort string
+	var totalLines, blankLines, singleComments, commentBlock, runes, code, loopCounter int
+
+	listOfFilesToOpen := []string{
+		"data_fresh_85cards.go",
+		"data_Initiate_119cards.go",
+		"data_Master_46cards.go",
+		"data_Novice_23cards.go",
+		"data_beauty_10cards.go",
+		"data_claude_298_cards.go",
+		"data_current_24cards.go",
+		"data_data_184cards.go",
+		"data_Graduate_33cards.go",
+		"data_Guru_6cards.go",
+		"data_words.go",
+	}
+
+	for fileNumber, fileNameShort := range listOfFilesToOpen { // option 2 : for fileNumber, pathName := range listOf
+		// option 2 :
+		// fileNameShort = re.FindString(pathName)
+		// option 2 :
+
+		loopCounter++
+
+		// Peruse a file and collect stats
+		blankLines, singleComments, commentBlock, runes, totalLines, code = reportSLOCstatsNew("/Users/quasar/Kanji-new/" + fileNameShort) // /Users/quasar/Kanji-new/
+		// calc brief subtotal of comments
+		commentsInter1 = singleComments + blankLines
+
+		// Interim printing of single file stats
+		if runes > 20 {
+			fmt.Printf("\n%slinesInTypesConstRunes:%d in %s%s\n", colorRed, runes, fileNameShort, colorReset)
+		}
+		if commentBlock > 50 {
+			fmt.Printf("\n%snon-blank-lines-inside-CommentBlocks:%d in %s%s\n", colorRed, commentBlock, fileNameShort, colorReset)
+		}
+		fmt.Printf("\n%d-%s-%d = code:%d+blank:%d=%d \n", fileNumber+1, fileNameShort, totalLines, code, blankLines, code+blankLines) // option 2 : loopCounter
+
+		// Calculate (sum and accumulate) all lines in all files combined: it equals itself plus the new stuff.
+		allLinesAllFiles = allLinesAllFiles + blankLines + singleComments + commentBlock + runes + code
+		totalLines = totalLines
+		totalLinesT = totalLinesT + totalLines
+
+		// Calculate (sum and accumulate) only the comment lines in all files combined
+		justTheComments = justTheComments + singleComments + commentBlock + runes + blankLines
+	}
+
+	fmt.Printf("\n\nTotal data lines:%d=%d, commentsEtc:%d, loops:%d\n", allLinesAllFiles, totalLinesT, justTheComments, loopCounter)
+	GT := allLinesAllFilesFromSlos + allLinesAllFiles
+	TC := justTheCommentsFromSloc + justTheComments
+	fmt.Printf("GT:%d lines, of which %d are commentsEtc\n\n", GT, TC)
+}
+
+/*
+.
+.
+*/
+
+// CalcSLOC_new Was doing it the hard way, called below as option 2
+func CalcSLOC_new() (allLinesAllFiles, justTheComments int) { // ::: - -
+	var tblankLines, tsingleComments, tcommentBlock, trunes, tcode, allLinesAllFilesT, totalLinesT int
+
+	// option 2 : Create a regex to match the base file name
+	// option 2 : re := regexp.MustCompile(`[^/]+$`)
+	// option 2 : var fileNameShort string
+	var totalLines, blankLines, singleComments, commentBlock, runes, code, loopCounter, Tlines int
+
+	listOfFilesToOpen := []string{
+		"elementsOfsloc.go",
+		"findInFiles.go",
+		"formatter.go",
+		"functions.go",
+		"functionsFromMain.go",
+		"game_functions.go",
+		"globalVariables.go",
+		"line_parsing.go",
+		"list_all_chars_lff.go",
+		"locateCard.go",
+		"main.go",
+		"memoryFunctions.go",
+		"new_stats_functions.go",
+		"objectsAndMethods.go",
+		"pick_a_card.go",
+		"prompts&directions.go",
+		"prompts.go",
+		"statsFunctions.go"}
+
+	for fileNumber, fileNameShort := range listOfFilesToOpen { // option 2 : for fileNumber, pathName := range listOf
+		// option 2 :
+		// fileNameShort = re.FindString(pathName)
+		loopCounter++
+
+		// option 2 :
+		blankLines, singleComments, commentBlock, runes, totalLines, code = reportSLOCstatsNew("/Users/quasar/Kanji-new/" + fileNameShort) // /Users/quasar/Kanji-new/
+
+		// Longer method for accumulating totals (deprecated).
+		tblankLines = tblankLines + blankLines // These equal themselves plus new stuff.
+		tsingleComments = tsingleComments + singleComments
+		tcommentBlock = tcommentBlock + commentBlock
+		trunes = trunes + runes
+		tcode = tcode + code
+
+		// fmt.Printf("\n%d, %s :%d lines\n", fileNumber+1, fileNameShort, totalLines) // option 2 : loopCounter
+		commentsInter2 = singleComments + blankLines
+		/*
+			if fileNameShort == "elementsOfsloc.go" {
+				fmt.Printf("we have elements file\n")
+				fmt.Printf("\n%d, %s :%d lines, %d blanks\n", fileNumber+1, fileNameShort, totalLines, blankLines)             // option 2 : loopCounter
+				fmt.Printf("\n%d, %s :%d lines, %d singleComments\n", fileNumber+1, fileNameShort, totalLines, singleComments) // option 2 : loopCounter
+				fmt.Printf("\n%d, %s :%d lines, %d commentBlock\n", fileNumber+1, fileNameShort, totalLines, commentBlock)     // option 2 : loopCounter
+				fmt.Printf("\n%d, %s :%d lines, %d runes\n", fileNumber+1, fileNameShort, totalLines, runes)                   // option 2 : loopCounter
+			} else {
+				fmt.Printf("\n%d, %s :%d lines, %d comments and blanks\n", fileNumber+1, fileNameShort, totalLines, commentsInter2) // option 2 : loopCounter
+			}
+
+		*/
+
+		// fmt.Printf("\n%d, %s :%d lines, %d comments and blanks\n", fileNumber+1, fileNameShort, totalLines, commentsInter2) // option 2 : loopCounter
+		// Interim printing of single file stats
+		if runes > 20 {
+			fmt.Printf("\n%slinesInTypesConstRunes:%d in %s%s\n", colorRed, runes, fileNameShort, colorReset)
+		}
+		if commentBlock > 50 {
+			fmt.Printf("\n%snon-blank-lines-inside-CommentBlocks:%d in %s%s\n", colorRed, commentBlock, fileNameShort, colorReset)
+		}
+		// fmt.Printf("\n%d-%s-%d lines, and %d snglComntLines + blankLines\n", fileNumber+1, fileNameShort, totalLines, commentsInter2) // option 2 : loopCounter
+		fmt.Printf("\n%d-%s-%d = code:%d+blank:%d=%d \n", fileNumber+1, fileNameShort, totalLines, code, blankLines, code+blankLines) // option 2 : loopCounter
+		Tlines = Tlines + code + blankLines
+		// Calculate (sum and accumulate) all lines in all files combined: it equals itself plus the new stuff.
+		allLinesAllFiles = allLinesAllFiles + blankLines + singleComments + commentBlock + runes + code
+
+		// This line may be more concise but it requires several supporting lines and several new vars, (deprecated).
+		allLinesAllFilesT = tblankLines + tsingleComments + tcommentBlock + trunes + tcode
+
+		// Calculate (sum and accumulate) only the comment lines in all files combined
+		justTheComments = justTheComments + singleComments + commentBlock + runes + blankLines
+		totalLinesT = totalLinesT + totalLines
+	}
+	fmt.Printf("\nTotal lines:%d=%d, commentsEtc:%d, loops:%d, Tlines:%d, scanner:%d\n", allLinesAllFiles, totalLinesT, justTheComments, loopCounter, Tlines, tcode)
+	fmt.Printf("\nTotal linesT:%d=%d, commentsEtc:%d, loops:%d, Tlines:%d, scanner:%d\n", allLinesAllFilesT, totalLinesT, justTheComments, loopCounter, Tlines, tcode)
+	return allLinesAllFiles, justTheComments
+}
+
+/*
+.
+*/
+
+func reportSLOCstatsNew(filepath string) (blankLines, singleComments, commentBlock, runes, totalLines, nonEmptyLines int) { // ::: - -
+
+	// Patterns to identify comments, blank lines, and strings
+	singleLineCommentPattern := `^\s*//`
+	multiLineCommentPattern := `(?s)/\*.*?\*/`
+	blankLinePattern := `^\s*$`
+	stringLiteralPattern := `(?s)"(?:\\.|[^\\"])*?"|` + "`(?:\\.|[^`])*?`"
+
+	// Compile regular expressions
+	singleLineCommentRe := regexp.MustCompile(singleLineCommentPattern)
+	multiLineCommentRe := regexp.MustCompile(multiLineCommentPattern)
+	blankLineRe := regexp.MustCompile(blankLinePattern)
+	stringLiteralRe := regexp.MustCompile(stringLiteralPattern)
+
+	// Open the file
+	handleAsPointer, errorMessage := os.Open(filepath)
+	if errorMessage != nil {
+		fmt.Println()
+		fmt.Println(errorMessage)
+		fmt.Printf("\n%sRicks failed to open filepath: %s%s type:%T:%v\n", colorRed, filepath, colorReset, handleAsPointer, handleAsPointer)
+		return 0, 0, 0, 0, 0, 0
+	}
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			fmt.Printf("\n%sRicks fileClose error:%d\n", colorRed, err)
+			fmt.Println(err)
+			fmt.Printf(colorReset)
+		}
+	}(handleAsPointer)
+
+	// fmt.Printf("\n%s Attempted to open filepath: %s%s type:%T:%v\n", colorRed, filepath, colorReset, handleAsPointer, handleAsPointer)
+
+	scanner := bufio.NewScanner(handleAsPointer)
+	totalLines = 0
+	nonEmptyLines = 0
+	inMultiLineComment := false
+	inMultiLineString := false
+
+	for scanner.Scan() {
+		line := scanner.Text()
+		totalLines++
+
+		// ::: Check for blank lines
+		if blankLineRe.MatchString(line) {
+			blankLines++
+			continue
+		}
+
+		// ::: Check for single-line comments
+		if singleLineCommentRe.MatchString(line) {
+			singleComments++
+			continue
+		}
+
+		// ::: Check for multi-line comment blocks
+		if inMultiLineComment {
+			if strings.Contains(line, "*/") {
+				inMultiLineComment = false
+				line = multiLineCommentRe.ReplaceAllString(line, "")
+				if blankLineRe.MatchString(line) || singleLineCommentRe.MatchString(line) {
+					// commentBlock1++ // Does not normally accumulate anything.
+					continue
+				}
+			} else {
+				commentBlock++ // ::: This is where we find lines that match.
+				continue
+			}
+		}
+		if strings.Contains(line, "/*") {
+			inMultiLineComment = true
+			line = multiLineCommentRe.ReplaceAllString(line, "")
+			if blankLineRe.MatchString(line) || singleLineCommentRe.MatchString(line) {
+				// commentBlock3++ // Does not normally accumulate anything.
+				continue
+			}
+		}
+
+		// ::: Check for multi-line strings // string literals // Runes
+		if inMultiLineString {
+			if strings.Count(line, "`")%2 != 0 || strings.Count(line, "\"")%2 != 0 {
+				inMultiLineString = false
+				line = stringLiteralRe.ReplaceAllString(line, "")
+				if blankLineRe.MatchString(line) || singleLineCommentRe.MatchString(line) {
+					// prob runes 1
+					continue
+				}
+			} else {
+				runes++ // ::: This is where we find lines that match.
+				// fmt.Printf("\n%s line:%s %s\n", colorRed, line, colorReset)
+				continue
+			}
+		}
+		if strings.Count(line, "`")%2 != 0 || strings.Count(line, "\"")%2 != 0 {
+			inMultiLineString = true
+			line = stringLiteralRe.ReplaceAllString(line, "")
+			if blankLineRe.MatchString(line) || singleLineCommentRe.MatchString(line) {
+				// runes3++ // Does not normally accumulate anything.
+				continue
+			}
+		}
+		nonEmptyLines++
+	}
+
+	if err := scanner.Err(); err != nil {
+		fmt.Printf("\n%sRicks scanner error:%d\n", colorRed, err)
+		fmt.Println(err)
+		fmt.Printf(colorReset)
+		return 0, 0, 0, 0, 0, 0
+	}
+
+	return blankLines, singleComments, commentBlock, runes, totalLines, nonEmptyLines
+}
+
+/*
+.
+.
+*/
+
 func countSLOC() {
 	numberOfFilesExplored := 0
 	// Create a regex to match the base file name
 	re := regexp.MustCompile(`[^/]+$`)
 	var match string
 
-	fmt.Println("Expecting to process 18 files\n")
+	fmt.Printf("Expecting to process 18 files\n\n")
 
 	filenameOfThisFile5 := "/Users/quasar/Kanji-new/elementsOfsloc.go"
 	blankLines5, singleComments5, commentBlock15, commentBlock25, commentBlock35, runes15, runes25, runes35, totalLines5,
@@ -222,7 +500,7 @@ func countSLOC() {
 	// pick_a_card.go, prompts&directions.go, prompts.go, statsFunctions.go (18)
 
 	if runes3Total > 0 || runes1Total > 0 || commentBlock3Total > 0 || commentBlock1Total > 0 { // if any of these was > 0
-		fmt.Println("\n\n === hey we actually got something from where there should not have been anything === \n\n")
+		fmt.Printf("\n\n === hey we actually got something from where there should not have been anything === \n\n")
 	}
 
 }
@@ -245,9 +523,15 @@ func reportSLOCstats(filepath string) (blankLines, singleComments, commentBlock1
 	// Open the file
 	file, err := os.Open(filepath)
 	if err != nil {
-		// return 0, 0, err
+		fmt.Printf("failed to open %s\n", filepath)
+		return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			fmt.Println("failed to close file, 1")
+		}
+	}(file)
 
 	scanner := bufio.NewScanner(file)
 	totalLines = 0

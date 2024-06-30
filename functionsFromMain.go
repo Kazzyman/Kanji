@@ -121,7 +121,9 @@ func respond_to_UserSupplied_Directive(usersSubmission string) { // ::: - -
 		fmt.Printf("\"%s\" is the primaryMeaning of %s\n\"%s\" is the secondaryMeaning of %s\n%s\n%s\n%s\n%s\n\n",
 			aCard.Meaning, aCard.Kanji, aCard.Second_Meaning, aCard.Kanji, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 	case "abt":
-		countSLOC()
+		// countSLOC()
+		// CalcSLOC_new()
+		CalcData()
 	case "dir": // reDisplay the DIRECTORY OF DIRECTIVES (and instructions):
 		re_display_List_of_Directives()
 	case "sdk":
@@ -164,6 +166,7 @@ func initialize_stuff() {
 	current_len = len(fileOf_Current)
 	data_len = len(data_file)
 	claude_len = len(claude)
+	quiz_len = len(fileOf_Quiz)
 
 	gameOn = false
 	// current_deck = "claude" // The default deck, can be changed via the sdk Directive
