@@ -63,7 +63,7 @@ func pick_RandomCard_Assign_fields() { // - -
 			primary_meaning = aCard.Meaning
 			secondary_meaning = aCard.Second_Meaning
 			if actual_prompt_string == "" || actual_prompt_string == " " {
-				fmt.Printf("%s--- An empty kanji card was skipped in nov!!!!%s\n", colorRed, colorReset) // Verified
+				fmt.Printf("%s--- An empty kanji card was skipped in quiz!!!!%s\n", colorRed, colorReset) // Verified
 				continue
 			} else {
 				break // break out of local for loop and naturally fall-through to the return

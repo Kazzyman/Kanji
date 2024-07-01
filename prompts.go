@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func prompt_the_user_for_input() { // ::: - -
@@ -16,7 +18,20 @@ func prompt_the_user_for_input() { // ::: - -
 		gottenHonestly = true
 
 		// Obtain users input.
-		_, _ = fmt.Scan(&usersSubmission)
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		input := scanner.Text()
+
+		// Split the input into words
+		words := strings.Fields(input)
+
+		// Limit to 5 words
+		if len(words) > 5 {
+			words = words[:5]
+		}
+
+		// Join the words back into a single string
+		usersSubmission = strings.Join(words, " ")
 
 	} else if guessLevelCounter == 2 { // ::: ---------- 2 2 2 2 2 2 2 2  ---------------------
 		guessLevelCounter++
@@ -28,7 +43,20 @@ func prompt_the_user_for_input() { // ::: - -
 		gottenHonestly = true
 
 		// Obtain users input.
-		_, _ = fmt.Scan(&usersSubmission)
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		input := scanner.Text()
+
+		// Split the input into words
+		words := strings.Fields(input)
+
+		// Limit to 5 words
+		if len(words) > 5 {
+			words = words[:5]
+		}
+
+		// Join the words back into a single string
+		usersSubmission = strings.Join(words, " ")
 
 	} else if guessLevelCounter == 3 { // ::: --------------- 3 3 3 3 3 3 3 3 3 3 ----------------------------
 		guessLevelCounter++
@@ -40,7 +68,20 @@ func prompt_the_user_for_input() { // ::: - -
 		gottenHonestly = true
 
 		// Obtain users input.
-		_, _ = fmt.Scan(&usersSubmission)
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		input := scanner.Text()
+
+		// Split the input into words
+		words := strings.Fields(input)
+
+		// Limit to 5 words
+		if len(words) > 5 {
+			words = words[:5]
+		}
+
+		// Join the words back into a single string
+		usersSubmission = strings.Join(words, " ")
 
 	} else if guessLevelCounter == 4 { // ::: -------------------------- 4 4 4 4 4 4 4 4 4 4 4 4  --------------------
 
@@ -216,7 +257,23 @@ func promptWithDirAtInception() { // - -
 		fmt.Println()
 	}
 	fmt.Printf(" :> %s", colorReset)
-	_, _ = fmt.Scan(&usersSubmission)
+
+	// Obtain users input.
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	input := scanner.Text()
+
+	// Split the input into words
+	words := strings.Fields(input)
+
+	// Limit to 5 words
+	if len(words) > 5 {
+		words = words[:5]
+	}
+
+	// Join the words back into a single string
+	usersSubmission = strings.Join(words, " ")
+
 }
 
 /* 7 14
