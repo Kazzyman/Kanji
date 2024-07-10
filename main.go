@@ -99,15 +99,29 @@ func Process_users_input_as_a_guess() { // - -
 			gotLastCardRightSoGetFreshOne = true
 			log_right(usersSubmission, actual_prompt_string)
 
+			// Failing that, we'll strategically check for a sub-match WITHIN the secondary-meaning field.
+		} else if check_for_match_within_secondary_field(usersSubmission) {
+			// Display an appropriate response if a reasonable sub-match was found:
+			fmt.Printf("%s", colorReset)
+			fmt.Printf("    ^^%spartly-correct, within the secondary meaning: \"%s%s%s\" \n", colorGreen, colorReset, aCard.Second_Meaning, colorGreen)
+			fmt.Printf("   %s \n   %s \n%s%s\n", aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
+			fmt.Printf("  \"%s%s%s\" ",
+				colorReset, aCard.Meaning, colorGreen)
+			fmt.Printf("or \"%s%s%s\" \n\n%s",
+				colorReset, aCard.Second_Meaning, colorGreen, colorReset)
+
+			gotLastCardRightSoGetFreshOne = true
+			log_right(usersSubmission, actual_prompt_string)
+
 			// Failing the forgoing strategy, intelligently peruse the remaining fields of the card via a custom parsing algorithm.
-		} else if check_for_match_in_secondary_field(usersSubmission) {
+		} else if check_for_match_in_other_fields(usersSubmission) {
 			// Display an appropriate response if a "match" was found:
 			fmt.Printf("%s", colorGreen)
 			fmt.Printf("     %s^^%spossibly-correct, in another field\n", colorReset, colorGreen)
 			fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
 				colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
 				aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-			fmt.Printf("%sfound:%s \"%s%s%s\" in secondary meaning field\n\n%s",
+			fmt.Printf("%sfound:%s \"%s%s%s\" in an auxiliary field\n\n%s",
 				colorPurple, colorGreen, colorReset, usersSubmission, colorGreen, colorReset)
 
 			gotLastCardRightSoGetFreshOne = true
