@@ -54,11 +54,11 @@ func pick_RandomCard_Assign_fields() { // - -
 		}
 	}
 
-	// fileOf_Quiz
-	if current_deck == "quiz" {
+	// fileOf__Quiz
+	if current_deck == "quiz_novice" {
 		for { // This for loop is only needed to check for empty cards
-			randIndex := rand.Intn(len(fileOf_Quiz))
-			aCard = fileOf_Quiz[randIndex]
+			randIndex := rand.Intn(len(fileOf_Quiz_novice))
+			aCard = fileOf_Quiz_novice[randIndex]
 			actual_prompt_string = aCard.Kanji
 			primary_meaning = aCard.Meaning
 			secondary_meaning = aCard.Second_Meaning
@@ -70,6 +70,53 @@ func pick_RandomCard_Assign_fields() { // - -
 			}
 		}
 	}
+	// fileOf__Quiz
+	if current_deck == "quiz_comp" {
+		for { // This for loop is only needed to check for empty cards
+			randIndex := rand.Intn(len(fileOf_Quiz_comp))
+			aCard = fileOf_Quiz_comp[randIndex]
+			actual_prompt_string = aCard.Kanji
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
+			if actual_prompt_string == "" || actual_prompt_string == " " {
+				fmt.Printf("%s--- An empty kanji card was skipped in quiz!!!!%s\n", colorRed, colorReset) // Verified
+				continue
+			} else {
+				break // break out of local for loop and naturally fall-through to the return
+			}
+		}
+	} // fileOf__Quiz
+	if current_deck == "quiz_master" {
+		for { // This for loop is only needed to check for empty cards
+			randIndex := rand.Intn(len(fileOf_Quiz_master))
+			aCard = fileOf_Quiz_master[randIndex]
+			actual_prompt_string = aCard.Kanji
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
+			if actual_prompt_string == "" || actual_prompt_string == " " {
+				fmt.Printf("%s--- An empty kanji card was skipped in quiz!!!!%s\n", colorRed, colorReset) // Verified
+				continue
+			} else {
+				break // break out of local for loop and naturally fall-through to the return
+			}
+		}
+	} // fileOf__Quiz
+	if current_deck == "quiz_guru" {
+		for { // This for loop is only needed to check for empty cards
+			randIndex := rand.Intn(len(fileOf_Quiz_guru))
+			aCard = fileOf_Quiz_guru[randIndex]
+			actual_prompt_string = aCard.Kanji
+			primary_meaning = aCard.Meaning
+			secondary_meaning = aCard.Second_Meaning
+			if actual_prompt_string == "" || actual_prompt_string == " " {
+				fmt.Printf("%s--- An empty kanji card was skipped in quiz!!!!%s\n", colorRed, colorReset) // Verified
+				continue
+			} else {
+				break // break out of local for loop and naturally fall-through to the return
+			}
+		}
+	}
+
 	if current_deck == "nov" {
 		for { // This for loop is only needed to check for empty cards
 			randIndex := rand.Intn(len(fileOfCardsNovice))

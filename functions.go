@@ -44,7 +44,11 @@ func switch_the_deck() {
 		fmt.Printf("    \"mast\"     %d cards in the Master deck\n", master_len)
 		// fmt.Println("    nov \n")
 		fmt.Printf("    \"nov\"      %d cards in the Novice deck\n\n", novice_len)
-		fmt.Printf("    \"quiz\"    %d cards in the Quiz deck\n\n", quiz_len)
+
+		fmt.Printf("    \"quiz\"    %d cards in the Novice Quiz deck\n", quiz_novice_len)
+		fmt.Printf("    \"quiz\"    %d cards in the Competent Quiz deck\n", quiz_comp_len)
+		fmt.Printf("    \"quiz\"    %d cards in the Master Quiz deck\n", quiz_master_len)
+		fmt.Printf("    \"quiz\"    %d cards in the Guru Quiz deck\n\n", quiz_guru_len)
 
 		fmt.Printf("    \"words\"    %d cards in the Words deck\n\n", words_len)
 
@@ -56,10 +60,42 @@ func switch_the_deck() {
 			os.Exit(1)
 		}
 		if current_deck == "quiz" {
-			deck_len = quiz_len
-			resetAllLogs()
-			return
+			fmt.Printf("=Enter deck: nov, comp, mast, guru - Here%s:> %s", colorCyan, colorReset)
+			_, _ = fmt.Scan(&current_deck) // current_deck is a global var.
+
+			if current_deck == "q" {
+				os.Exit(1)
+			}
+
+			for {
+				if current_deck == "comp" {
+					current_deck = "quiz_comp"
+					deck_len = quiz_comp_len
+					resetAllLogs()
+					return
+				} else if current_deck == "nov" {
+					current_deck = "quiz_novice"
+					deck_len = quiz_novice_len
+					resetAllLogs()
+					return
+				} else if current_deck == "mast" {
+					current_deck = "quiz_master"
+					deck_len = quiz_master_len
+					resetAllLogs()
+					return
+				} else if current_deck == "guru" {
+					current_deck = "quiz_guru"
+					deck_len = quiz_guru_len
+					resetAllLogs()
+					return
+				} else {
+					fmt.Printf("%s that was not valid%s\n", colorRed, colorReset)
+					fmt.Printf("=Enter deck: nov, comp, mast, guru - Here%s:> %s", colorCyan, colorReset)
+					_, _ = fmt.Scan(&current_deck) // current_deck is a global var.
+				}
+			}
 		}
+
 		if current_deck != "all" &&
 			current_deck != "rs" &&
 			current_deck != "yomi" &&
@@ -133,9 +169,12 @@ func switch_the_deck() {
 					if current_deck == "nov" {
 						deck_len = novice_len
 					}
-					if current_deck == "quiz" {
-						deck_len = quiz_len
-					}
+					/*
+						if current_deck == "quiz" {
+								deck_len = quiz_len
+							}
+					*/
+
 					resetAllLogs()
 					return
 				}

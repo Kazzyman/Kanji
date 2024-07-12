@@ -105,20 +105,18 @@ func prompt_the_user_for_input() { // ::: - -
 . 5
 */
 func prompt_interim() { //  - -
-	// prompt string inherits prior color (white or red)
 	if field_to_prompt_from == "yomi" {
 		fmt.Printf("O:%s, K:%s", aCard.Onyomi, aCard.Kunyomi)
 	} else {
 		fmt.Printf("%s", actual_prompt_string)
 	}
-	// Meaning?... is always cyan
 	if current_deck == "all" {
 		fmt.Printf("%s Meaning? (deck:%s:%s) ", colorCyan, current_deck, current_deck_B) // todo ?
-		// Meaning?... is always cyan
+	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" {
+		fmt.Printf("%s Answer? (deck:%s) ", colorCyan, current_deck)
 	} else {
 		fmt.Printf("%s Meaning? (deck:%s) ", colorCyan, current_deck)
 	}
-	// you must guess! is in white
 	fmt.Printf("%sguess again!", colorReset)
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d\n",
@@ -146,11 +144,12 @@ func prompt_interim2() { //  - -
 		fmt.Printf("%s", actual_prompt_string)
 	}
 	if current_deck == "all" {
-		fmt.Printf("%s Meaning? (deck:%s:%s) you must guess, ", colorCyan, current_deck, current_deck_B)
+		fmt.Printf("%s Meaning? (deck:%s:%s) %sLast guess!!, ", colorCyan, current_deck, current_deck_B, colorRed)
+	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" {
+		fmt.Printf("%s Answer? (deck:%s) %sLast guess!!", colorCyan, current_deck, colorRed)
 	} else {
 		fmt.Printf("%s Meaning? (deck:%s) %sLast guess!!", colorCyan, current_deck, colorRed)
 	}
-	// fmt.Printf("just once more!!")
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d\n",
 			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
@@ -236,8 +235,11 @@ func promptWithDirAtInception() { // - -
 	}
 
 	if current_deck == "all" {
-		fmt.Printf(" Meaning?pwd1 (deck:%s:%s, cards in deck:%s%d%s,%d,%d), \n'dir' or '?' for help with %s",
+		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), \n'dir' or '?' for help with %s",
 			current_deck, current_deck_B, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
+	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" {
+		fmt.Printf(" Answer? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
+			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	} else {
 		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
@@ -337,8 +339,11 @@ func promptWithDir() { // - -
 	}
 
 	if current_deck == "all" {
-		fmt.Printf(" Meaning?pwd1 (deck:%s:%s, cards in deck:%s%d%s,%d,%d), \n'dir' or '?' for help with %s",
+		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), \n'dir' or '?' for help with %s",
 			current_deck, current_deck_B, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
+	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" {
+		fmt.Printf(" Answer? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
+			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	} else {
 		fmt.Printf(" Meaning? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)

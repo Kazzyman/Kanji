@@ -61,7 +61,10 @@ var current_len int
 var data_len int
 var claude_len int
 var words_len int
-var quiz_len int
+var quiz_comp_len int
+var quiz_novice_len int
+var quiz_master_len int
+var quiz_guru_len int
 
 var deck_len int
 

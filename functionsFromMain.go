@@ -166,7 +166,10 @@ func initialize_stuff() {
 	current_len = len(fileOf_Current)
 	data_len = len(data_file)
 	claude_len = len(claude)
-	quiz_len = len(fileOf_Quiz)
+	quiz_comp_len = len(fileOf_Quiz_comp)     //
+	quiz_novice_len = len(fileOf_Quiz_novice) //
+	quiz_master_len = len(fileOf_Quiz_master) //
+	quiz_guru_len = len(fileOf_Quiz_guru)     //
 
 	gameOn = false
 	// current_deck = "claude" // The default deck, can be changed via the sdk Directive
