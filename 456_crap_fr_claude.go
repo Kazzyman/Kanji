@@ -1,7 +1,6 @@
 package main
 
 var data_file3 = []charSetStructKanji{
-
 	{"後", "after", "later, behind",
 		"ony: ゴ(go)", "kun: あと(ato)",
 		"午後 (afternoon, P.M.)",

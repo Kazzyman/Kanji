@@ -6,25 +6,16 @@ import (
 
 func read_map_of_fineOn() { //     - -
 	if len(frequencyMapOf_IsFineOnChars) == 0 {
-		fmt.Printf(colorRed)
-		fmt.Printf("\nThe FineOn Map is empty\n")
-		fmt.Printf(colorReset)
+		fmt.Print(colorRed, "\nThe FineOn Map is empty\n", colorReset)
 	}
 	for s, f := range frequencyMapOf_IsFineOnChars {
-		fmt.Printf(" --- From MapOf_IsFineOn: string is:")
-		fmt.Printf(colorCyan)
-		fmt.Printf("%s", s)
-		fmt.Printf(colorReset)
-		fmt.Printf(", freq is:")
-		fmt.Printf(colorRed)
-		fmt.Printf("%d", f)
-		fmt.Printf(colorReset)
-		fmt.Printf(" ---\n")
+		fmt.Print(" --- From MapOf_IsFineOn: string is:", colorCyan, s, colorReset)
+		fmt.Print(", freq is:", colorRed, f, colorReset, " ---\n")
 	}
 	fmt.Println("")
 }
 
-func read_already_used_map() { //     - -
+func read_already_used_map() { // Intentionally unused
 	if len(already_used_map) == 0 {
 		fmt.Printf(colorRed)
 		fmt.Printf("\nalready_used_map is empty; probably it was reset after having already used every card in deck\n")
@@ -81,7 +72,8 @@ var freqInMap int // Used also in: [is_pick_novel2(kanji string) bool] - -
 
 func is_pick_novel(kanji string) bool {
 	// for stringFromMap, freqInMap = range already_used_map {
-	for stringFromMap, _ = range already_used_map {
+	// for stringFromMap, _ = range already_used_map { ... cursor sugested 
+	for stringFromMap = range already_used_map {
 		// fmt.Printf("in is_pick_novel str:%s, f:%d \n", stringFromMap, freqInMap)
 
 		if kanji == stringFromMap {

@@ -60,7 +60,7 @@ func CalcData() { // ::: - -
 
 		// Calculate (sum and accumulate) all lines in all files combined: it equals itself plus the new stuff.
 		allLinesAllFiles = allLinesAllFiles + blankLines + singleComments + commentBlock + runes + code
-		totalLines = totalLines
+		// totalLines = totalLines
 		totalLinesT = totalLinesT + totalLines
 
 		// Calculate (sum and accumulate) only the comment lines in all files combined

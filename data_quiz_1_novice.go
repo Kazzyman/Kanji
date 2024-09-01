@@ -20,13 +20,19 @@ var fileOf_Quiz_novice = []charSetStructKanji{
 		" ",
 		" (61 Cygni)"},
 
-	{"Antonie van Leeuwenhoek describe seeing microorganisms __s?", "1670", "sixteen seventy",
+	{"meaning \"not from here, outsider\"", "foreign", "foreigner",
 		" ",
 		" ",
 		" ",
 		" "},
 
-	{"year of realization that infectious diseases were caused by \"animalcules\" emerged post __?\n", "1865", "eighteen sixty five",
+	{"year Antonie van Leeuwenhoek describe seeing microorganisms?", "1670", "sixteen seventy",
+		" ",
+		" ",
+		" ",
+		" "},
+
+	{"year of realization that infectious diseases were caused by \"animalcules\" emerged post __?", "1865", "eighteen sixty five",
 		" ",
 		" ",
 		" ",

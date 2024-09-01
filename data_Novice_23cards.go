@@ -1,5 +1,6 @@
 package main
 
+
 var fileOfCardsNovice = []charSetStructKanji{
 	{"後", "after", "later, behind",
 		"ご, こう", "あと",

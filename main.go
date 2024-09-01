@@ -21,6 +21,10 @@ func begin_kanji_practice() {
 		if gotLastCardRightSoGetFreshOne {
 			pick_RandomCard_Assign_fields() // Cards (and Decks) may both be randomized.
 			is_that_card_really_fresh()
+			if emptyCardCounter > 0 {
+				fmt.Printf("%s--- %d times an empty card was skipped in %s%s\n", colorRed, emptyCardCounter, current_deck, colorReset) // Verified
+				emptyCardCounter = 0
+			}
 			guessLevelCounter = 1
 		}
 
@@ -37,7 +41,7 @@ func begin_kanji_practice() {
 
 		// Directive commands from the user can be tricky to handle elegantly.
 		// During gaming, entirely-disallow checking for standard Directive commands from the user.
-		if aGameIsRunning == false {
+		if !aGameIsRunning {
 			Recursive_Dir_Handler() // Trap and handle specific strings on the list of Directives.
 			// The forgoing func contains a method to re-prompt so as to allow for consecutive commands.
 		}
@@ -117,15 +121,24 @@ func Process_users_input_as_a_guess() { // - -
 		} else if check_for_match_in_other_fields(usersSubmission) {
 			// Display an appropriate response if a "match" was found:
 			fmt.Printf("%s", colorGreen)
-			fmt.Printf("     %s^^%spossibly-correct, in another field\n", colorReset, colorGreen)
-			fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
-				colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
+			/*
+				fmt.Printf("     %s^^%spossibly-correct, in another field\n", colorReset, colorGreen)
+					fmt.Printf("\"%s%s%s\" was its primary meaning\n\"%s%s%s\" was its secondary meaning\n%s\n%s\n%s\n%s\n\n%s",
+						colorReset, aCard.Meaning, colorGreen, colorReset, aCard.Second_Meaning, colorGreen,
+						aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
+
+			*/
+			fmt.Printf("\n%s%s\n%s\n%s\n%s\n%s", colorGreen,
 				aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2, colorReset)
-			fmt.Printf("%sfound:%s \"%s%s%s\" in an auxiliary field\n\n%s",
+			fmt.Printf("\n%sfound:%s \"%s%s%s\" in an auxiliary field\n\n%s",
 				colorPurple, colorGreen, colorReset, usersSubmission, colorGreen, colorReset)
 
-			gotLastCardRightSoGetFreshOne = true
-			log_right(usersSubmission, actual_prompt_string)
+			gotLastCardRightSoGetFreshOne = false
+
+			/*
+				gotLastCardRightSoGetFreshOne = true
+				log_right(usersSubmission, actual_prompt_string)
+			*/
 
 			// Having failed every-which-way to secure a reasonable "match", we concede with a simple Oops message ...
 		} else { // ... or not
