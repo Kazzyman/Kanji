@@ -39,7 +39,7 @@ func prompt_the_user_for_input() { // ::: - -
 		/* 2 18
 		2 in Jap2 we did our display-Right lines here, but they are done by the caller in this Kanji practice app.
 		*/
-		prompt_interim() // ::: Says: you must guess!
+		prompt_interim() // ::: Says: guess again!
 		gottenHonestly = true
 
 		// Obtain users input.
@@ -64,7 +64,7 @@ func prompt_the_user_for_input() { // ::: - -
 		/* 3 17
 		3 in Jap2 we did our display-Right lines here, but they are done in the caller here.
 		*/
-		prompt_interim2() // ::: Says: you must guess! just once more!!
+		prompt_interim2() // ::: Says: Last guess!!
 		gottenHonestly = true
 
 		// Obtain users input.
@@ -112,12 +112,12 @@ func prompt_interim() { //  - -
 	}
 	if current_deck == "all" {
 		fmt.Printf("%s Meaning? (deck:%s:%s) ", colorCyan, current_deck, current_deck_B) // todo ?
-	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" {
+	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" || current_deck == "quiz_japan" {
 		fmt.Printf("%s Answer? (deck:%s) ", colorCyan, current_deck)
 	} else {
 		fmt.Printf("%s Meaning? (deck:%s) ", colorCyan, current_deck)
 	}
-	fmt.Printf("%sguess again!", colorReset)
+	fmt.Printf("%sguess again!", colorReset) // ::: guess again!
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d\n",
 			colorCyan, nameOfPlayer, colorRed, colorReset, correctOnFirstAttemptAccumulator,
@@ -145,7 +145,7 @@ func prompt_interim2() { //  - -
 	}
 	if current_deck == "all" {
 		fmt.Printf("%s Meaning? (deck:%s:%s) %sLast guess!!, ", colorCyan, current_deck, current_deck_B, colorRed)
-	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" {
+	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" || current_deck == "quiz_japan" {
 		fmt.Printf("%s Answer? (deck:%s) %sLast guess!!", colorCyan, current_deck, colorRed)
 	} else {
 		fmt.Printf("%s Meaning? (deck:%s) %sLast guess!!", colorCyan, current_deck, colorRed)
@@ -237,7 +237,7 @@ func promptWithDirAtInception() { // - -
 	if current_deck == "all" {
 		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), \n'dir' or '?' for help with %s",
 			current_deck, current_deck_B, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
-	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" {
+	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" || current_deck == "quiz_japan" {
 		fmt.Printf(" Answer? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	} else {
@@ -341,7 +341,7 @@ func promptWithDir() { // - -
 	if current_deck == "all" {
 		fmt.Printf(" Meaning? (deck:%s:%s, cards in deck:%s%d%s,%d,%d), \n'dir' or '?' for help with %s",
 			current_deck, current_deck_B, colorReset, deck_len, colorCyan, numberOfUniqueKanjiCharsHit, total_prompts, colorReset)
-	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" {
+	} else if current_deck == "quiz_novice" || current_deck == "quiz_comp" || current_deck == "quiz_mast" || current_deck == "quiz_guru" || current_deck == "quiz_japan" {
 		fmt.Printf(" Answer? (deck:%s,len:%s%d%s; #unique:%s%d%s, #ofPrompts:%s%d%s), \n'dir' or '?' for help with %s",
 			current_deck, colorReset, deck_len, colorCyan, colorReset, numberOfUniqueKanjiCharsHit, colorCyan, colorReset, total_prompts, colorCyan, colorReset)
 	} else {
@@ -384,6 +384,7 @@ func display_failure_of_final_guess_message_etc(userInput string) { // ::: - -
 		"\n%s had a REAL ISSUE with==%s:%s:%s", nameOfPlayer, aCard.Meaning, aCard.Second_Meaning, aCard.Kanji)
 	check_error(err1)
 }
+
 func log_oops_andUpdateGame(prompt_it_was, field_it_was, guess string) { // - -
 	if aGameIsRunning {
 		failedOnThirdAttemptAccumulator++ // ::: update game.

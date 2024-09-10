@@ -68,7 +68,7 @@ func Process_users_input_as_a_guess() { // - -
 		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
 			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("  \"%s%s%s\" ",
-			colorReset, usersSubmission, colorGreen)
+			colorRed, usersSubmission, colorGreen)
 		fmt.Printf("or \"%s%s%s\" \n\n%s",
 			colorReset, aCard.Second_Meaning, colorGreen, colorReset)
 
@@ -81,7 +81,7 @@ func Process_users_input_as_a_guess() { // - -
 		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
 			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
 		fmt.Printf("  \"%s%s%s\" or \"%s%s%s\"\n\n%s",
-			colorReset, aCard.Second_Meaning, colorGreen, colorReset, aCard.Meaning, colorGreen, colorReset)
+			colorReset, aCard.Meaning, colorGreen, colorRed, aCard.Second_Meaning, colorGreen, colorReset)
 
 		gotLastCardRightSoGetFreshOne = true
 		log_right(usersSubmission, actual_prompt_string)
@@ -141,7 +141,7 @@ func Process_users_input_as_a_guess() { // - -
 			*/
 
 			// Having failed every-which-way to secure a reasonable "match", we concede with a simple Oops message ...
-		} else { // ... or not
+		} else {                // ... or not
 			if gottenHonestly { // there MAY be an Oops. // todo ??
 				if supress_one_oops_message {
 					// Suppress it. // ::: if a one-time request to suppress has been posted todo there will be NO Oops message
