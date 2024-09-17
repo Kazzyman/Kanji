@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -61,7 +62,7 @@ func begin_kanji_practice() {
 func Process_users_input_as_a_guess() { // - -
 
 	// The case of a simple and complete match of the primary meaning field is straight-forward.
-	if usersSubmission == aCard.Meaning {
+	if strings.EqualFold(usersSubmission, aCard.Meaning) { // was if usersSubmission == aCard.Meaning {
 
 		// (These Display "Right" messages -- Unlike those in Jap2 -- are kept here for this Kanji version).
 		// Display an appropriate response:
@@ -76,7 +77,7 @@ func Process_users_input_as_a_guess() { // - -
 		log_right(usersSubmission, actual_prompt_string)
 
 		// The case of a complete match of the second meaning field is similarly straight-forward.
-	} else if usersSubmission == aCard.Second_Meaning {
+	} else if strings.EqualFold(usersSubmission, aCard.Second_Meaning) { // was if usersSubmission == aCard.Second_Meaning {
 		// Display an appropriate response:
 		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
 			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
@@ -141,7 +142,7 @@ func Process_users_input_as_a_guess() { // - -
 			*/
 
 			// Having failed every-which-way to secure a reasonable "match", we concede with a simple Oops message ...
-		} else {                // ... or not
+		} else { // ... or not
 			if gottenHonestly { // there MAY be an Oops. // todo ??
 				if supress_one_oops_message {
 					// Suppress it. // ::: if a one-time request to suppress has been posted todo there will be NO Oops message
