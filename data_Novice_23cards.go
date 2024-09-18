@@ -1,18 +1,17 @@
 package main
 
-
 var fileOfCardsNovice = []charSetStructKanji{
 	{"後", "after", "later, behind",
 		"ご, こう", "あと",
 		"午後 (afternoon, P.M.)",
 		" "},
 
-	{"子", "child-1", "Child",
+	{"子", "child", "Child",
 		"し, す", "こ",
 		"子供 (child)",
 		" "},
 
-	{"子供", "child-2", "Child",
+	{"子供", "child", "Child",
 		"し, す", "こ",
 		"子 (child)",
 		" "},
@@ -37,42 +36,42 @@ var fileOfCardsNovice = []charSetStructKanji{
 		"三十分 (thirty minutes), 自分 (oneself)",
 		" "},
 
-	{"学", "school-1", "learning",
+	{"学", "school", "learning",
 		"がく, こう", "まな(ぶ)",
 		"大学 (university)",
 		" "},
 
-	{"校", "school-2", "learning",
+	{"校", "school", "learning",
 		"がく, こう", "まな(ぶ)",
 		"大学 (university)",
 		" "},
 
-	{"学校", "school-3", "learning",
+	{"学校", "school", "learning",
 		"がく, こう", "まな(ぶ)",
 		"大学 (university)",
 		" "},
 
-	{"大学", "university", "big-school",
+	{"大学", "university", "big school",
 		"がく, こう", "まな(ぶ)",
 		"大学 (university)",
 		" "},
 
-	{"千万", "10-million", "ten-million",
+	{"千万", "10 million", "ten million",
 		"せん", "ち",
 		"千万円 (10 million Yen)",
 		"Thousand Ten-thousand"},
 
-	{"間", "time", "span of time, Time-frame",
+	{"間", "time", "span of time, Time frame",
 		"かん, けん", "あいだ",
 		"時間 (time, hours)",
 		" "},
 
-	{"週", "week", "Week",
+	{"週", "week", "seven days",
 		"しゅう", "—",
 		"毎週 (every week)",
 		" "},
 
-	{"年", "year", "Year",
+	{"年", "year", "365.24",
 		"ねん", "とし",
 		"今年 (this year), 去年 (last year)",
 		" "},

@@ -14,13 +14,13 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"明日 (tomorrow)",
 		" "},
 
-	{"土", "earth-1", "soil, dirt, ground, mud, wet clay",
+	{"土", "earth", "soil, dirt, ground, mud, wet clay",
 		"ony: ド, ト  (ど, と) do, to",
 		"kun: つち (tsuchi)",
 		"土曜日 - Saturday",
 		" "},
 
-	{"地", "earth-2", "land, place, solid ground",
+	{"地", "earth", "land, place, solid ground",
 		"ony: チ (chi); ジ (ji)",
 		"kun: -",
 		"地震(jishin; earthquake), 地域(chiiki; region), 土地(tochi; land)",
@@ -39,7 +39,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"魚 (fish)",
 		"\ncompare bird:鳥"},
 
-	{"足", "foot", "add, to-add",
+	{"足", "foot", "add, to add",
 		"ソク (soku), そく (soku)",
 		"kun: あし (ashi), ta(su) た(す)",
 		"足 (foot)",
@@ -89,19 +89,19 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"母親(hahaoya; mother), 母上(hahaue; mother), 義母(gibou; mother-in-law)",
 		"お母さん(okaasan; mother), 母ちゃん(kachan; mom), ママ(mama; mom)"},
 
-	{"古", "old-1", "former, antiquity",
+	{"古", "old", "former, antiquity",
 		"ony: コ (ko)",
 		"kun: ふる (furu-i)",
 		"古典(koten; classic), 古代(kodai; ancient times), 古文(kobun; classical literature)",
 		"古ぼける(fubokeru; grow old), 古着(furugi; old clothes)"},
 
-	{"旧", "old-2", "former",
+	{"旧", "old", "former",
 		"ony: キュウ (kyuu); コ(ko)",
 		"kun: ふる (furui)",
 		"旧友(kyuuyuu; old friend), 旧姓(kyuusei; maiden name), 旧弊(kyuuhai; old practice)",
 		"昔(mukashi; in the past), 古い(furui; old), 用いられた(mochiirareru; used)"},
 
-	{"老", "old-3", "aged",
+	{"老", "old", "aged",
 		"ony: ロウ (rou)",
 		"kun: お (o)いる",
 		"老人(roujin), 高齢者(koureisha), 老齢(rouireki)",
@@ -138,7 +138,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"六日(muika; six days), 六人(rokunin; six people), 六回(rokkai; six times)",
 		"六角(rokkaku; hexagon), 六月(rokugatsu; June), 六十(rokujuu; sixty), 六日(6th day of the month)"},
 
-	{"駅", "station", "Train-Station",
+	{"駅", "station", "Train Station",
 		"ony: えき (eki)",
 		"kun: -",
 		"駅前 (in front of the station)",
@@ -156,13 +156,13 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"三日 3rd day of the month",
 		" "},
 
-	{"万", "ten-thousand", "Ten thousand",
+	{"万", "ten thousand", "10 thousand",
 		"ony: man まん, ban ばん",
 		"kun: -",
 		"万年筆 (fountain pen, ten thousand year brush)",
 		" "},
 
-	{"休", "rest", "vacation, to-rest, break, take a break, holiday",
+	{"休", "rest", "vacation, to rest, break, take a break, holiday",
 		"ony: キュウ(kyū)",
 		"kun: やす(む)(yasumu), やす(み)(yasumi)",
 		"休む (rest, to take a day off), 休暇を取る (take a break)",
@@ -204,7 +204,7 @@ var fileOfCardsMaster = []charSetStructKanji{
 		"多い(ooi; many), 多分(probably), 多数(tasuu), 多量(tairyo)",
 		"豊富(houfu), 沢山(takusan), たくさん(takusan)"},
 
-	{"飲", "to-drink", "drink",
+	{"飲", "to drink", "drink",
 		"ony: -",
 		"の　no(mu)",
 		"飲み物 (beverage)",
@@ -216,13 +216,13 @@ var fileOfCardsMaster = []charSetStructKanji{
 		" ",
 		"-\nMe likes to drink Drink/Beverage"},
 
-	{"出", "to-leave", "To go out",
+	{"出", "to leave", "To go out",
 		"ony: シュツ (shutsu)",
 		"kun: で de(ru), だ da(su)",
 		"出かける (to go out)",
 		" "},
 
-	{"入", "to-enter", "to put in",
+	{"入", "to enter", "to put in",
 		"ony: ニュウ (nyuu) ??",
 		"kun: はいる hai(ru), いれる i(reru) ???",
 		"入口 (entrance)",

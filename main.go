@@ -75,9 +75,10 @@ func Process_users_input_as_a_guess() { // - -
 
 		gotLastCardRightSoGetFreshOne = true
 		log_right(usersSubmission, actual_prompt_string)
+	} else
 
-		// The case of a complete match of the second meaning field is similarly straight-forward.
-	} else if strings.EqualFold(usersSubmission, aCard.Second_Meaning) { // was if usersSubmission == aCard.Second_Meaning {
+	// The case of a complete match of the second meaning field is similarly straight-forward.
+	if strings.EqualFold(usersSubmission, aCard.Second_Meaning) { // was if usersSubmission == aCard.Second_Meaning {
 		// Display an appropriate response:
 		fmt.Printf("%s    %s \n    %s \n%s\n%s \n", // Indented Ony & Kun, out-dented vocabs (all in green)
 			colorGreen, aCard.Onyomi, aCard.Kunyomi, aCard.Vocab, aCard.Vocab2)
@@ -88,7 +89,15 @@ func Process_users_input_as_a_guess() { // - -
 		log_right(usersSubmission, actual_prompt_string)
 
 	} else {
+		// if the user has guessed "to xxxx" or "the xxxx" we want to omit the first field before continuing
 
+		if len(words) > 1 {
+			fmt.Printf("length was greater than 1\nand so we now check for \"to\" or \"the\"\n")
+			if words[0] == "the" || words[0] == "to" {
+				usersSubmission = words[1]
+				fmt.Printf("after trimming we have %s as the new userSubmission\n", usersSubmission)
+			}
+		}
 		// Having failed to fully-match the users-Submission to one of the two meaning fields ...
 		// things will now have to get fancy. First, we'll strategically check for a sub-match WITHIN the primary-meaning field.
 		if check_for_match_within_primary_field(usersSubmission) {

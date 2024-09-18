@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+var words []string
+
 func prompt_the_user_for_input() { // ::: - -
 	if guessLevelCounter == 1 { // ::: ----------- 1 1 1 1 1 1 --------------------
 		guessLevelCounter++
@@ -23,7 +25,9 @@ func prompt_the_user_for_input() { // ::: - -
 		input := scanner.Text()
 
 		// Split the input into words
-		words := strings.Fields(input)
+		words = strings.Fields(input)
+
+		fmt.Printf("prompt1 len of guess is %d\n", len(words))
 
 		// Limit to 5 words
 		if len(words) > 5 {
@@ -48,7 +52,9 @@ func prompt_the_user_for_input() { // ::: - -
 		input := scanner.Text()
 
 		// Split the input into words
-		words := strings.Fields(input)
+		words = strings.Fields(input)
+
+		fmt.Printf("prompt2 len of guess is %d\n", len(words))
 
 		// Limit to 5 words
 		if len(words) > 5 {
@@ -73,7 +79,9 @@ func prompt_the_user_for_input() { // ::: - -
 		input := scanner.Text()
 
 		// Split the input into words
-		words := strings.Fields(input)
+		words = strings.Fields(input)
+
+		fmt.Printf("prompt3 len of guess is %d\n", len(words))
 
 		// Limit to 5 words
 		if len(words) > 5 {
@@ -266,7 +274,7 @@ func promptWithDirAtInception() { // - -
 	input := scanner.Text()
 
 	// Split the input into words
-	words := strings.Fields(input)
+	words = strings.Fields(input)
 
 	// Limit to 5 words
 	if len(words) > 5 {

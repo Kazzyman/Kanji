@@ -21,7 +21,7 @@ var fileOf_fresh = []charSetStructKanji{
 		"compare: bird とり、鳥, raven からす、烏, eagle わし、鷲",
 		"-\nThis bird dives down from a ledge Falcon or Hawk-like"},
 
-	{"鯛", "red-snapper", " ",
+	{"鯛", "red snapper", " ",
 		"ony: -", "たい、(tai)",
 		" ",
 		"-\nFish that ?"},
@@ -36,7 +36,7 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nFish packed side by side are Sardines"},
 
-	{"鮪", "tuna", " ",
+	{"鮪", "tuna", "tuna fish",
 		"ony: -", "まぐろ、(maguro)",
 		" ",
 		"-\nFish T over month is Tuna"},
@@ -51,7 +51,7 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nFish on a hot spike is a Pike"},
 
-	{"鰺", "horse-mackerel", " ",
+	{"鰺", "horse mackerel", " ",
 		"ony: -", "あじ、(aji)",
 		" ",
 		"\nFish with a mane is a Horse Mackerel"},
@@ -207,27 +207,27 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nTooth-colored flower: Chrysanthemum"},
 
-	{"桜", "cherry-blossom", " ",
+	{"桜", "cherry blossom", " ",
 		"ony: -", "さくら、 (sakura)",
 		" ",
 		"-\nTree that ladies sit under to admire flaming branches: Cherry-blossom"},
 
-	{"松", "pine-tree", " ",
+	{"松", "pine tree", " ",
 		"ony: -", "まつ、 (matsu)",
 		" ",
 		"-\nTree cone: Pine-tree"},
 
-	{"梅", "japanese-plum", "apricot",
+	{"梅", "japanese plum", "apricot",
 		"ony: -", "うめ、 (ume)",
 		" ",
 		"-\nTree that every woman likes the wine that its fruit makes: Japanese-Plum"},
 
-	{"米", "uncooked-rice", " ",
+	{"米", "uncooked rice", " ",
 		"ony: -", "こめ、 (kome)",
 		" ",
 		"-\nTree under-fire is uncooked rice ?"},
 
-	{"稲", "rice-growing-in-a-field", " ",
+	{"稲", "rice growing in a field", " ",
 		"ony: -", "いね、 (ine)",
 		" ",
 		"-\nTrees take a long time to grow, but Rice-growing-On-a-field takes only one day"},
@@ -242,7 +242,7 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nUncooked rice is considered a segmented Vegetable by my ma in japan"},
 
-	{"果物", "fruit-for-eating", " ",
+	{"果物", "fruit for eating", " ",
 		"ony: -", "くだもの、 (kudamono)",
 		" ",
 		"-\nAll those fruit atop that tree are Fruit-for-eating"},
@@ -257,7 +257,7 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nFlat on the mouth is what Beans or Peas taste like, and I will not stand for it!"},
 
-	{"大根", "Japanese white radish (daikon)", " ",
+	{"大根", "Japanese white radish", "daikon",
 		"ony: -", "だいこん",
 		" ",
 		"-\nBig Root = Japanese white radish (daikon)"},
@@ -272,7 +272,7 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nForests produce fruit to be stored up in a loft: Apple (ringo)"},
 
-	{"蜜柑", "mandarin-orange", " ",
+	{"蜜柑", "mandarin orange", " ",
 		"ミカン", "みかん (mikan)",
 		" ",
 		"-\nInsects cannot get up to eat these tree fruit that are stored in a basket: Mandarin orange, but (mikan)"},
@@ -287,7 +287,7 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nPair of trees here: Pear (nashi)"},
 
-	{"栗", "chestnut-tree", " ",
+	{"栗", "chestnut tree", " ",
 		"ony: -", "クリ (kuri)",
 		" ",
 		"-\n3 Chestnuts up in that tree"},
@@ -367,12 +367,12 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nTime to eat a Snack"},
 
-	{"アイスクリーム", "ice-cream", " ",
+	{"アイスクリーム", "ice cream", " ",
 		"アイスクリーム", "あいすくりーむ (aisukurīmu)",
 		" ",
 		" "},
 
-	{"たこ焼き", "octopus-dumpling", " ",
+	{"たこ焼き", "octopus dumpling", " ",
 		"ony: -", "たこやき (takoyaki)",
 		" ",
 		"-\n焼き is dumpling (yaki), たこ焼き is Octopus dumpling (takoyaki)"},
@@ -382,7 +382,7 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\ntea-house is a ten with leaves on top: Tea (cha)"},
 
-	{"お茶", "green-tea", " ",
+	{"お茶", "green tea", " ",
 		"ony: -", "おちゃ (ocha)",
 		" ",
 		"-\nOh I don't like Green Tea (ocha) おちゃ"},
@@ -417,7 +417,7 @@ var fileOf_fresh = []charSetStructKanji{
 		" ",
 		"-\nA mouth of blood tastes Salty: Salt"},
 
-	{"醤油", "soy-sauce", " ",
+	{"醤油", "soy sauce", " ",
 		"ony: -", "しょうゆ、(shōyu)",
 		" ",
 		"-\nRice paddies grow white rice sauce \"drink\" in-country: Soy-sauce"},

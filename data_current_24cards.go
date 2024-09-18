@@ -2,13 +2,13 @@ package main
 
 var fileOf_Current = []charSetStructKanji{
 
-	{"僕 、ぼく", "I-male", "male-I",
+	{"僕 、ぼく", "I male", "male I",
 		" -",
 		" -",
 		"僕は男です (I am a male)",
 		"I, myself (boku, mainly used by males)"},
 
-	{"俺 、おれ", "I-male-casual", "I-male-informal",
+	{"俺 、おれ", "I male casual", "I male informal",
 		" -",
 		" -",
 		"俺は男です (I am a male[between friends])",
@@ -26,13 +26,13 @@ var fileOf_Current = []charSetStructKanji{
 		" ",
 		" "},
 
-	{"看護婦 : かんごふ", "nurse-female", "Female-Nurse",
+	{"看護婦 : かんごふ", "nurse female", "Female Nurse",
 		" -",
 		" -",
 		" ",
 		" "},
 
-	{"警察官 : けいさつかん", "police-officer", "cop",
+	{"警察官 : けいさつかん", "police officer", "cop",
 		" -",
 		" -",
 		" ",
@@ -62,7 +62,7 @@ var fileOf_Current = []charSetStructKanji{
 		" ",
 		"Teacher (sensei) : せんせい"},
 
-	{"教師 : きょうし ", "teacher-academic", "academic-teacher",
+	{"教師 : きょうし ", "teacher academic", "academic teacher",
 		" -",
 		" -",
 		" ",
@@ -80,37 +80,37 @@ var fileOf_Current = []charSetStructKanji{
 		"時計 watch",
 		"time時 plus measure計 "},
 
-	{"唇 、くちびる", "lips", " ",
+	{"唇 、くちびる", "lips", "pucker",
 		" ",
 		" ",
 		" ",
 		" "},
 
-	{"脛 、すね", "shin", " ",
+	{"脛 、すね", "shin", "vulnerable leg bone",
 		" ",
 		" ",
 		" ",
 		" "},
 
-	{"膝 、ひざ", "knee", " ",
+	{"膝 、ひざ", "knee", "knee cap",
 		" ",
 		" ",
 		" ",
 		" "},
 
-	{"腿 、もも", "thigh", " ",
+	{"腿 、もも", "thigh", "upper leg mussel",
 		" ",
 		" ",
 		" ",
 		" "},
 
-	{"頭 、あたま", "head", " ",
+	{"頭 、あたま", "head", "noggin",
 		" ",
 		" ",
 		" ",
 		" "},
 
-	{"顔 、かお", "face", " ",
+	{"顔 、かお", "face", "mug",
 		" ",
 		" ",
 		" ",
@@ -122,13 +122,13 @@ var fileOf_Current = []charSetStructKanji{
 		"歯医者 : しかい、、はいしゃ, dentist",
 		" "},
 
-	{"鼻 、はな", "nose", "snozz, beak, proboscis",
+	{"鼻 、はな", "nose", "snoz, beak, proboscis",
 		" ",
 		" ",
 		" ",
 		" "},
 
-	{"め、目", "eye", " ",
+	{"め、目", "eye", "eyeball",
 		" ",
 		" ",
 		" ",

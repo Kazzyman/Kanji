@@ -122,6 +122,7 @@ func customMatch2digits(our_guess, str string) bool {
 	}
 	return false
 }
+
 func check_for_match_within_primary_field(users_guess string) bool {
 	// Look for a partial match within the primary meaning field
 	fields_from_aCard := []string{aCard.Meaning}
