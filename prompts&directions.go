@@ -32,6 +32,9 @@ func List_of_Directives() {
 		"setc" + colorReset +
 		"' (set) force the use of a specific card")
 	fmt.Println("        Enter '" + colorGreen +
+		"game" + colorReset +
+		"', to begin a session and log stats to a file")
+	fmt.Println("        Enter '" + colorGreen +
 		"q" + colorReset +
 		"', (quit) terminate the app")
 }
@@ -86,6 +89,9 @@ func display_List_of_Directives() { // (unique)     - -
 	fmt.Println("\n")
 	fmt.Printf("Game counter: %d, Game Duration: %d \n", game_loop_counter, game_duration+2)
 	fmt.Printf("Current Prompt Count Total: %d \n", total_prompts)
+	if current_deck == "" {
+		current_deck = "yet to be determined"
+	}
 	fmt.Printf("Current Deck is: %s \n", current_deck)
 }
 
