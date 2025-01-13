@@ -27,7 +27,7 @@ func prompt_the_user_for_input() { // ::: - -
 		// Split the input into words
 		words = strings.Fields(input)
 
-		fmt.Printf("prompt1 len of guess is %d\n", len(words))
+		// fmt.Printf("prompt1 len of guess is %d\n", len(words))
 
 		// Limit to 5 words
 		if len(words) > 5 {
@@ -54,7 +54,7 @@ func prompt_the_user_for_input() { // ::: - -
 		// Split the input into words
 		words = strings.Fields(input)
 
-		fmt.Printf("prompt2 len of guess is %d\n", len(words))
+		// fmt.Printf("prompt2 len of guess is %d\n", len(words))
 
 		// Limit to 5 words
 		if len(words) > 5 {
@@ -81,7 +81,7 @@ func prompt_the_user_for_input() { // ::: - -
 		// Split the input into words
 		words = strings.Fields(input)
 
-		fmt.Printf("prompt3 len of guess is %d\n", len(words))
+		// fmt.Printf("prompt3 len of guess is %d\n", len(words))
 
 		// Limit to 5 words
 		if len(words) > 5 {
@@ -116,7 +116,7 @@ func prompt_interim() { //  - -
 	if field_to_prompt_from == "yomi" {
 		fmt.Printf("O:%s, K:%s", aCard.Onyomi, aCard.Kunyomi)
 	} else {
-		fmt.Printf("%s", actual_prompt_string)
+		fmt.Printf("%s%s", colorYellow, actual_prompt_string)
 	}
 	if current_deck == "all" {
 		fmt.Printf("%s Meaning? (deck:%s:%s) ", colorCyan, current_deck, current_deck_B) // todo ?
@@ -137,7 +137,7 @@ func prompt_interim() { //  - -
 	if aGameIsRunning {
 		fmt.Printf("%s :game> %s", colorYellow, colorReset) // Always reset to white after :> so that users input displays consistent white.
 	} else {
-		fmt.Printf("%s :> %s", colorCyan, colorReset) // Always reset to white after :> so that users input displays consistent white.
+		fmt.Printf("%s :> %s", colorYellow, colorReset) // Always reset to white after :> so that users input displays consistent white.
 	}
 }
 
@@ -149,7 +149,7 @@ func prompt_interim2() { //  - -
 	if field_to_prompt_from == "yomi" {
 		fmt.Printf("O:%s, K:%s", aCard.Onyomi, aCard.Kunyomi)
 	} else {
-		fmt.Printf("%s", actual_prompt_string)
+		fmt.Printf("%s%s", colorRed, actual_prompt_string)
 	}
 	if current_deck == "all" {
 		fmt.Printf("%s Meaning? (deck:%s:%s) %sLast guess!!, ", colorCyan, current_deck, current_deck_B, colorRed)
@@ -169,7 +169,7 @@ func prompt_interim2() { //  - -
 	if aGameIsRunning {
 		fmt.Printf("%s :game> %s", colorRed, colorReset) // Always reset to white after :> so that users input displays consistent white.
 	} else {
-		fmt.Printf("%s :> %s", colorCyan, colorReset) // Always reset to white after :> so that users input displays consistent white.
+		fmt.Printf("%s :> %s", colorRed, colorReset) // Always reset to white after :> so that users input displays consistent white.
 	}
 }
 
@@ -238,7 +238,7 @@ func promptWithDirAtInception() { // - -
 		if field_to_prompt_from == "yomi" {
 			fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
 		} else {
-			fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+			fmt.Printf("%s%s%s", colorGreen, actual_prompt_string, colorCyan)
 		}
 	}
 
@@ -266,7 +266,7 @@ func promptWithDirAtInception() { // - -
 	} else {
 		fmt.Println()
 	}
-	fmt.Printf(" :> %s", colorReset)
+	fmt.Printf("%s :> %s", colorGreen, colorReset)
 
 	// Obtain users input.
 	scanner := bufio.NewScanner(os.Stdin)
@@ -342,7 +342,7 @@ func promptWithDir() { // - -
 		if field_to_prompt_from == "yomi" {
 			fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
 		} else {
-			fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+			fmt.Printf("%s%s%s", colorGreen, actual_prompt_string, colorCyan) // prior to "Meaning?"
 		}
 	}
 
@@ -359,7 +359,7 @@ func promptWithDir() { // - -
 	if field_to_prompt_from == "yomi" {
 		fmt.Printf("O:%s, K:%s%s", aCard.Onyomi, aCard.Kunyomi, colorCyan)
 	} else {
-		fmt.Printf("%s%s", actual_prompt_string, colorCyan)
+		fmt.Printf("%s%s%s", colorGreen, actual_prompt_string, colorCyan) // on the "for help with" line
 	}
 	if aGameIsRunning {
 		fmt.Printf(", %s%s is playing: %s1st:%s%d%s, 2nd:%s%d%s, 3rd:%s%d%s, fails:%s%d, %s%d/%d%s\n",
@@ -372,7 +372,7 @@ func promptWithDir() { // - -
 	if aGameIsRunning {
 		fmt.Printf("%s :game> %s", colorGreen, colorReset)
 	} else {
-		fmt.Printf("%s :> %s", colorCyan, colorReset)
+		fmt.Printf("%s :> %s", colorGreen, colorReset)
 	}
 }
 
