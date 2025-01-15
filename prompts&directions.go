@@ -30,7 +30,8 @@ func List_of_Directives() {
 		"' Read the current contents of the Maps")
 	fmt.Println("        Enter '" + colorGreen +
 		"setc" + colorReset +
-		"' (set) force the use of a specific card")
+		"' (set) force the use of a specific card ...")
+	fmt.Println("          ... via any English word; found in ANY deck :)")
 	fmt.Println("        Enter '" + colorGreen +
 		"game" + colorReset +
 		"', to begin a session and log stats to a file")
