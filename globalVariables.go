@@ -65,6 +65,8 @@ var quiz_comp_len int
 var quiz_novice_len int
 var quiz_master_len int
 var quiz_guru_len int
+var quiz_japan_len int
+var emptyCardCounter int
 
 var deck_len int
 
